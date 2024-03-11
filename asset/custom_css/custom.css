@@ -1,0 +1,76 @@
+body {
+    background-color: #ecf0ef !important;
+}
+
+@media only screen and (min-width:700px) {
+    body {
+        width: 700px;
+        margin-left: auto !important;
+        margin-right: auto !important;
+    }
+
+    #footer-bar {
+        width: 700px;
+        margin-left: auto !important;
+        margin-right: auto !important;
+    }
+
+    .header {
+        width: 700px;
+        margin-left: auto !important;
+        margin-right: auto !important;
+    }
+
+    .page-title {
+        width: 700px;
+        margin-left: auto !important;
+        margin-right: auto !important;
+    }
+
+    .card {
+        max-width: 700px;
+
+    }
+
+    .card-fixed {
+        margin-left: auto !important;
+        margin-right: auto !important;
+    }
+
+    .menu-active.menu {
+        width: 700px;
+        margin-left: auto !important;
+        margin-right: auto !important;
+    }
+
+    .menu {
+        width: 700px;
+        margin-left: auto !important;
+        margin-right: auto !important;
+    }
+
+    .img-payment {
+        width: 100px;
+    }
+
+    
+
+    .notification {
+        width: 700px;
+        margin-left: auto !important;
+        margin-right: auto !important;
+    }
+
+    .modal-content {
+        width: 700px;
+        margin-left: auto !important;
+        margin-right: auto !important;
+    }
+
+    iframe html body {
+        width: 700px !important;
+        background-color: #ecf0ef !important;
+        /* margin-left: auto !important;
+        margin-right: auto !important; */
+    }
+}

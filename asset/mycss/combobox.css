@@ -1,0 +1,23 @@
+.custom-combobox {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+}
+
+.custom-combobox-toggle {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin-left: -1px;
+    padding: 0;
+}
+
+.custom-combobox-input {
+    margin: 0;
+    padding: 3px 10px;
+    width: 100%;
+}
+
+.ui-button {
+    padding: 1.1em 1em !important;
+}
