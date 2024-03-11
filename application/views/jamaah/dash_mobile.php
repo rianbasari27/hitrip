@@ -294,6 +294,7 @@
                                 </div>
                                 <div class="card-overlay bg-gradient opacity-10"></div>
                                 <div class="card-overlay bg-gradient"></div>
+                                tes
                             </div>
                         </div>
                         <div class="splide__slide">
