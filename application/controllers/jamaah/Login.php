@@ -56,6 +56,13 @@ class Login extends CI_Controller
             redirect($_SERVER['HTTP_REFERER']);
         }
 
+        // check Email
+        $user = $this->registrasi->getUser(null, $_POST['Email']);
+        if (!empty($user)) {
+            $this->alert->setJamaah('red', 'Mohon Maaf', 'Email anda sudah digunakan !');
+            redirect($_SERVER['HTTP_REFERER']);
+        }
+
         $this->load->model('otp_model');
         $otp = $this->otp_model->send($_POST['no_telp']);
         if (!$otp) {
