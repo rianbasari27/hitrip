@@ -17,7 +17,7 @@
         <?php $this->load->view('jamaah/include/header_bar', ['noBackButton' => true]); ?>
         <div class="page-content pb-0">
 
-            <div data-card-height="cover-full" class="card mb-0" style="background-image:url(images/pictures/18l.jpg)">
+            <div data-card-height="cover-full" class="card mb-0" style="background-image:url(<?php echo base_url() . 'asset/appkit/images/background-3.jpg' ?>)">
                 <div class="card-center">
                     <div class="text-center">
                         <p class="font-600 color-highlight mb-1 font-16">Let's Get Started</p>

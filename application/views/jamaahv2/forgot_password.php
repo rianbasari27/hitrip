@@ -3,6 +3,11 @@
 
 <head>
     <?php $this->load->view('jamaah/include/header'); ?>
+    <style>
+        .bg-34 {
+            background-image: url(<?php echo base_url() . 'asset/appkit/images/background-3.jpg' ?>);
+        }
+    </style>
 </head>
 
 <body class="theme-light">

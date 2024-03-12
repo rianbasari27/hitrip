@@ -1,8 +1,8 @@
 <div class="page-title page-title-fixed">
     <!-- <h1>AppKit</h1> -->
     <div style="width: 70%;">
-        <a href="<?php echo base_url() ?>jamaah/home" class="header-title ms-3 show-on-theme-light"><img src="<?php echo base_url() . 'asset/appkit/images/ventour/LOGO-VENTOUR-Hitam.png'; ?>" alt="" style="max-width: 170px;"></a>
-        <a href="<?php echo base_url() ?>jamaah/home" class="header-title ms-3 show-on-theme-dark"><img src="<?php echo base_url() . 'asset/appkit/images/ventour/LOGO-VENTOUR-Putih.png'; ?>" alt="" style="max-width: 170px;"></a>
+        <a href="<?php echo base_url() ?>jamaah/home" class="header-title ms-3 show-on-theme-light"><img src="<?php echo base_url() . 'asset/appkit/images/hitrip/hitrip-logo.png'; ?>" alt="" style="max-width: 130px;"></a>
+        <a href="<?php echo base_url() ?>jamaah/home" class="header-title ms-3 show-on-theme-dark"><img src="<?php echo base_url() . 'asset/appkit/images/hitrip/hitrip-white.png'; ?>" alt="" style="max-width: 130px;"></a>
     </div>
     <!-- <a href="#" class="page-title-icon shadow-xl bg-theme color-theme" data-menu="menu-share"><i class="fa fa-share-alt"></i></a> -->
     <?php if (isset($menuBC)) { ?>

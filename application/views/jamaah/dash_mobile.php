@@ -160,6 +160,10 @@
                                     </div>
                                     <h4 class="font-17 pt-1 line-height-s pb-0 mb-n1">Dubai</h4>
                                     <span class="font-10 mb-0">7 Nights - All Inclusive</span>
+                                    <del style="text-decoration:line-through">
+                                        <span class="d-block mt-n1">Rp 9,299,000</span>
+                                    </del>
+                                    <h6 class="color-highlight">Rp 8,299,000</h6>
                                 </div>
                             </div>
                         </div>
@@ -176,6 +180,10 @@
                                     </div>
                                     <h4 class="font-17 pt-1 line-height-s pb-0 mb-n1">Tokyo</h4>
                                     <span class="font-10 mb-0">7 Nights - All Inclusive</span>
+                                    <del style="text-decoration:line-through">
+                                        <span class="d-block mt-n1">Rp 7,599,000</span>
+                                    </del>
+                                    <h6 class="color-highlight">Rp 6,999,000</h6>
                                 </div>
                             </div>
                         </div>
@@ -192,6 +200,10 @@
                                     </div>
                                     <h4 class="font-17 pt-1 line-height-s pb-0 mb-n1">Bali</h4>
                                     <span class="font-10 mb-0">7 Nights - All Inclusive</span>
+                                    <del style="text-decoration:line-through">
+                                        <span class="d-block mt-n1">Rp 5,999,000</span>
+                                    </del>
+                                    <h6 class="color-highlight">Rp 4,999,000</h6>
                                 </div>
                             </div>
                         </div>
