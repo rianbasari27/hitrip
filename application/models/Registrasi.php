@@ -547,7 +547,7 @@ class Registrasi extends CI_Model
         return $paket;
     }
 
-    public function getJamaahTableData($id, $username)
+    public function getJamaahTableData($id = null, $username = null, $email = null)
     {
         if ($id != null) {
             $this->db->where('id_user', $id);
@@ -555,18 +555,21 @@ class Registrasi extends CI_Model
         if ($username != null) {
             $this->db->where('username', $username);
         }
+        if ($email != null) {
+            $this->db->where('email', $email);
+        }
 
         $query = $this->db->get('user');
         $result = $query->row();
         return $result;
     }
 
-    public function getUser($id = null, $username = null, $idMember = null)
+    public function getUser($id = null, $username = null, $email = null)
     {
         $result = false;
         if ($id || $username) {
             //get data from jamaah table first
-            $result = $this->getJamaahTableData($id, $username);
+            $result = $this->getJamaahTableData($id, $username, $email);
             if (empty($result)) {
                 return false;
             }
