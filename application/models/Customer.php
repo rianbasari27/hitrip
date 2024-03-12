@@ -16,14 +16,70 @@ class Customer extends CI_Model
         return password_hash($password, PASSWORD_BCRYPT);
     }
 
-    public function registerUser($username, $nama, $email, $password) {
+    public function registerUser($username, $nama, $email, $password, $no_wa) {
         $data = array(
             'username' => $username,
             'password' => $this->hash_password($password),
             'name' => $nama,
-            'email' => $email
+            'email' => $email,
+            'no_wa' => $no_wa
         );
         return $this->db->insert('user', $data);
+    }
+
+    public function sendMail($email) {
+        $this->db->where('email', $email);
+        $user = $this->db->get('user')->row();
+        if($user) {
+            //$link="<a href='localhost:8080/phpmailer/reset_pass.php?key=".$email."&reset=".$pass."'>Click To Reset password</a>";
+            require_once APPPATH . 'third_party/phpmail/class.phpmailer.php';
+            require_once APPPATH . 'third_party/phpmail/class.smtp.php';
+            $mail = new PHPMailer();
+            $link = base_url("jamaah/login/reset_password");
+            $body = "Klik link berikut untuk reset Password, <a href='$link'>Klik untuk reset Password<a>"; //isi dari email
+            // $mail->CharSet =  "utf-8";
+            $mail->IsSMTP();
+            // enable SMTP authentication
+            $mail->SMTPDebug  = 1;
+            $mail->SMTPAuth = true;                  
+            // GMAIL username
+            $mail->Username = "fikri.rizky88@gmail.com";
+            // GMAIL password
+            $mail->Password = "zmpswxnbmzuhmopx";
+            $mail->SMTPSecure = "tls";  
+            // sets GMAIL as the SMTP server
+            $mail->Host = "smtp.gmail.com";
+            // set the SMTP port for the GMAIL server
+            $mail->Port = "587";
+            $mail->From='fikri.rizky88@gmail.com';
+            $mail->FromName='Admin Hi Trip';
+            
+            $mail->AddAddress($email, 'User Sistem');
+            $mail->Subject  =  'Reset Password';
+            $mail->IsHTML(true);
+            $mail->MsgHTML($body);
+            if($mail->Send()) {
+                return true;
+            } else
+            {
+              return $mail->ErrorInfo;
+            }
+        }
+        else {
+            return false; 
+        }
+    }
+
+    public function resetPassword($email, $password) {
+        $password = $this->hash_password($password);
+
+        $this->db->where('email', $email);
+        $this->db->set('password', $password);
+        if (!$this->db->update('user')) {
+            return false ;
+        }
+
+        return true;
     }
 
 
