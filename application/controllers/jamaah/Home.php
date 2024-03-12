@@ -17,6 +17,7 @@ class Home extends CI_Controller
         // if ($this->konsultanAuth->is_user_logged_in()) {
         //     redirect(base_url() . 'konsultan/home');
         // }
+        // Tes
     }
     
     public function index()
