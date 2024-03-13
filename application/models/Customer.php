@@ -1,7 +1,15 @@
 <?php
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+require 'vendor/phpmailer/phpmailer/src/Exception.php';
+require 'vendor/phpmailer/phpmailer/src/PHPMailer.php';
+require 'vendor/phpmailer/phpmailer/src/SMTP.php';
+require 'vendor/autoload.php';
 
 class Customer extends CI_Model
 {
+    
 
     public function checkSession()
     {
@@ -25,6 +33,43 @@ class Customer extends CI_Model
             'no_wa' => $no_wa
         );
         return $this->db->insert('user', $data);
+    }
+
+    public function sendEmail($email) {
+        $this->db->where('email', $email);
+        $user = $this->db->get('user')->row();
+        if (!$user) {
+            $this->alert->setJamaah('red', 'Oops', 'Email tidak terdaftar!');
+            return false;
+        }
+        $mail = new PHPMailer(true);
+        try {
+            // Konfigurasi SMTP
+            $mail->isSMTP();
+            $mail->Host       = 'smtp.gmail.com';
+            $mail->SMTPAuth   = true;
+            $mail->Username   = 'rianbasari27@gmail.com';
+            $mail->Password   = 'zwbzqlcibdrmifmd';
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
+            $mail->Port       = 465;
+
+            // Pengaturan email
+            $mail->setFrom('rianbasari27@gmail.com', 'Admin Hi-Trip');
+            $mail->addAddress($email, $user->name);
+            // Tambahkan penerima email lainnya jika diperlukan
+
+            $mail->isHTML(true);
+            $link = base_url("jamaah/login/reset_password?mail=$email");
+            $mail->Subject = 'Reset My Password';
+            $mail->Body    = "Klik link berikut untuk reset Password, <a href='$link'>Klik untuk reset Password<a>";
+            // $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+
+            // Kirim email
+            $mail->send();
+            return true;
+        } catch (Exception $e) {
+            return "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+        }
     }
 
     public function sendMail($email) {
