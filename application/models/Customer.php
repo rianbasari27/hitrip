@@ -42,35 +42,30 @@ class Customer extends CI_Model
             $this->alert->setJamaah('red', 'Oops', 'Email tidak terdaftar!');
             return false;
         }
-        echo '<pre>';
-        print_r($user);
-        exit();
         $mail = new PHPMailer(true);
         try {
-            // Konfigurasi SMTP
             $mail->isSMTP();
             $mail->Host       = 'smtp.gmail.com';
             $mail->SMTPAuth   = true;
             $mail->Username   = 'rianbasari27@gmail.com';
-            $mail->Password   = 'zwbzqlcibdrmifmd';
-            $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
-            $mail->Port       = 465;
+            $mail->Password   = 'tkhvsvcvsaebqpbn';
+            $mail->SMTPSecure = 'tls';
+            $mail->Port       = 587;
 
-            // Pengaturan email
             $mail->setFrom('rianbasari27@gmail.com', 'Admin Hi-Trip');
             $mail->addAddress($email, $user->name);
-            // Tambahkan penerima email lainnya jika diperlukan
-
+            
             $mail->isHTML(true);
             $link = base_url("jamaah/login/reset_password?mail=$email");
             $mail->Subject = 'Reset My Password';
             $mail->Body    = "Klik link berikut untuk reset Password, <a href='$link'>Klik untuk reset Password<a>";
-            // $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 
-            // Kirim email
             $mail->send();
             return true;
         } catch (Exception $e) {
+            // echo '<pre>';
+            // print_r($e);
+            // exit();
             return "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
         }
     }
