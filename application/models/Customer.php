@@ -42,6 +42,9 @@ class Customer extends CI_Model
             $this->alert->setJamaah('red', 'Oops', 'Email tidak terdaftar!');
             return false;
         }
+        echo '<pre>';
+        print_r($user);
+        exit();
         $mail = new PHPMailer(true);
         try {
             // Konfigurasi SMTP
@@ -66,14 +69,8 @@ class Customer extends CI_Model
 
             // Kirim email
             $mail->send();
-            echo '<pre>';
-            print_r($mail);
-            exit();
             return true;
         } catch (Exception $e) {
-            echo '<pre>';
-            print_r($mail);
-            exit();
             return "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
         }
     }
