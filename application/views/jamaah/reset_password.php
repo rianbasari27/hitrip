@@ -17,49 +17,41 @@
         <?php $this->load->view('jamaah/include/header_bar', ['noBackButton' => true]); ?>
         <div class="page-content pb-0">
 
-            <div data-card-height="cover-full" class="card mb-0" style="background-image:url(<?php echo base_url() . 'asset/appkit/images/background-1.jpg' ?>)">
+            <div data-card-height="cover-full" class="card mb-0"
+                style="background-image:url(<?php echo base_url() . 'asset/appkit/images/background-3.jpg' ?>)">
                 <div class="card-center">
 
                     <div class="text-center">
                         <p class="font-600 color-highlight mb-1 font-16">Let's Get Started</p>
-                        <h1 class="font-40 color-white">Sign In</h1>
+                        <h1 class="font-40 color-white">Reset Password</h1>
                     </div>
 
-                    <form action="<?php echo base_url() . 'jamaah/login/proses' ;?>" id="myForm" method="post">
+                    <form action="<?php echo base_url() . 'jamaah/login/proses_reset_pass' ;?>" id="myForm"
+                        method="post">
                         <div class="content px-4">
+                            <input type="hidden" name="email"
+                                value="<?php echo isset($_SESSION['form']['email']) ? $_SESSION['form']['email'] : $email ;?>">
                             <div class="input-style input-transparent no-borders has-icon validate-field mb-4">
                                 <i class="fa fa-user"></i>
-                                <input type="name" name="username" class="form-control validate-name" id="form1a"
-                                    placeholder="Username">
-                                <label for="form1a" class="color-highlight">Username</label>
+                                <input type="password" name="password" class="form-control validate-name" id="form1a"
+                                    placeholder="New Password">
+                                <label for="form1a" class="color-highlight">New Password</label>
                                 <i class="fa fa-times disabled invalid color-red-dark"></i>
                                 <i class="fa fa-check disabled valid color-green-dark"></i>
                                 <em>(required)</em>
                             </div>
                             <div class="input-style input-transparent no-borders has-icon validate-field mb-4">
                                 <i class="fa fa-lock"></i>
-                                <input type="password" name="password" class="form-control validate-password"
-                                    id="form1b" placeholder="Password">
-                                <label for="form1b" class="color-highlight">Password</label>
+                                <input type="password" name="confirmPassword" class="form-control validate-password"
+                                    id="form1b" placeholder="Confirm Password">
+                                <label for="form1b" class="color-highlight">Confirm Password</label>
                                 <i class="fa fa-times disabled invalid color-red-dark"></i>
                                 <i class="fa fa-check disabled valid color-green-dark"></i>
                                 <em>(required)</em>
                             </div>
 
-                            <a href="#" id="submitBtn" data-back-button
-                                class="btn btn-full btn-l font-600 font-13 gradient-highlight mt-4 rounded-s">Sign
-                                In</a>
-
-                            <div class="row pt-3 mb-3">
-                                <div class="col-6 text-start font-11">
-                                    <a class="color-white opacity-50"
-                                        href="<?php echo base_url() . 'jamaah/login/forgot' ;?>">Forgot Password?</a>
-                                </div>
-                                <div class="col-6 text-end font-11">
-                                    <a class="color-white opacity-50"
-                                        href="<?php echo base_url() . 'jamaah/login/sign_up' ;?>">Create Account</a>
-                                </div>
-                            </div>
+                            <a href="#" aria-label="For submit the form" id="submitBtn" data-back-button
+                                class="btn btn-full btn-l font-600 font-13 gradient-highlight mt-4 rounded-s">Continue</a>
                         </div>
                     </form>
 

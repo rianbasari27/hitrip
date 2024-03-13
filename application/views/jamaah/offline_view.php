@@ -2,7 +2,7 @@
 <html lang="en" translate="no">
 
 <head>
-    <?php $this->load->view('jamaahv2/include/header'); ?>
+    <?php $this->load->view('jamaah/include/header'); ?>
 
 </head>
 
@@ -15,14 +15,14 @@
     <div id="page">
 
         <!-- header-bar -->
-        <?php $this->load->view('jamaahv2/include/header_bar', ['noBackButton' => true]); ?>
+        <?php $this->load->view('jamaah/include/header_bar', ['noBackButton' => true]); ?>
 
 
         <!-- footer-menu -->
-        <?php $this->load->view('jamaahv2/include/footer_menu', ['home_nav' => true]); ?>
+        <?php $this->load->view('jamaah/include/footer_menu', ['home_nav' => true]); ?>
 
         <!-- header title -->
-        <?php $this->load->view('jamaahv2/include/header_menu'); ?>
+        <?php $this->load->view('jamaah/include/header_menu'); ?>
         <div class="page-title-clear"></div>
 
         <div class="page-content">
@@ -36,8 +36,8 @@
                 </p>
             </div>
             <!--  -->
-            <?php $this->load->view('jamaahv2/include/footer'); ?>
-            <?php $this->load->view('jamaahv2/include/alert'); ?>
+            <?php $this->load->view('jamaah/include/footer'); ?>
+            <?php $this->load->view('jamaah/include/alert'); ?>
         </div>
         <!-- Page content ends here-->
         <!-- Main Menu-->
