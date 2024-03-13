@@ -35,7 +35,7 @@ class Customer extends CI_Model
             require_once APPPATH . 'third_party/phpmail/class.phpmailer.php';
             require_once APPPATH . 'third_party/phpmail/class.smtp.php';
             $mail = new PHPMailer();
-            $link = base_url("jamaah/login/reset_password");
+            $link = base_url("jamaah/login/reset_password?mail=$email");
             $body = "Klik link berikut untuk reset Password, <a href='$link'>Klik untuk reset Password<a>"; //isi dari email
             // $mail->CharSet =  "utf-8";
             $mail->IsSMTP();
