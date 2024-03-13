@@ -9,12 +9,11 @@ class Splash extends CI_Controller
     {
         $this->load->view('jamaah/splash_view');
     }
-    public function end($redirect)
+    public function end()
     {
         // JIKA SUDAH MELIHAT SPLASH MAKA SET COOKIE SPLASH_SEEN (KALAU MAU LIHAT SPLASH LAGI CLEAR BROWSER DATA DULU)
         $this->load->model('customer');
         $this->customer->setSplashSeen();
-        // redirect(base_url() . 'jamaah/' . $redirect);
-        $this->load->view('jamaah/launcher', $data = [ "redirect" => $redirect]);
+        $this->load->view('jamaah/launcher');
     }
 }
