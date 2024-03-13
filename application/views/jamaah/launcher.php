@@ -10,7 +10,7 @@
 
 <body>
     <script>
-    window.location.href = '<?php echo base_url(); ?>jamaah/home';
+    window.location.href = '<?php echo base_url(); ?>jamaah/'.<?php echo $redirect ?>;
     </script>
 </body>
 

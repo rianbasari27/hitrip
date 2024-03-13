@@ -7,6 +7,6 @@ class Offline extends CI_Controller
 
     public function index()
     {
-        $this->load->view('jamaahv2/offline_view');
+        $this->load->view('jamaah/offline_view');
     }
 }
