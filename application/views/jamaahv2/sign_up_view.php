@@ -17,8 +17,7 @@
         <?php $this->load->view('jamaah/include/header_bar', ['noBackButton' => true]); ?>
         <div class="page-content pb-0">
 
-            <div data-card-height="cover-full" class="card mb-0"
-                style="background-image:url(<?php echo base_url() . 'asset/appkit/images/background-3.jpg' ?>)">
+            <div data-card-height="cover-full" class="card mb-0" style="background-image:url(<?php echo base_url() . 'asset/appkit/images/background-3.jpg' ?>)">
                 <div class="card-center">
                     <div class="text-center">
                         <p class="font-600 color-highlight mb-1 font-16">Let's Get Started</p>
@@ -87,18 +86,18 @@
                                 <em>(required)</em>
                             </div>
 
-                            <a href="#" id="submitBtn" aria-label="For submit the form" data-back-button
+                            <a href="#" id="submitBtn" data-back-button
                                 class="btn btn-full btn-l font-600 font-13 gradient-highlight mt-4 rounded-s">Sign
                                 Up</a>
 
                             <div class="row pt-3 mb-3">
                                 <div class="col-6 text-start font-11">
-                                    <a class="color-white opacity-50" aria-label="For go to page Forgor Password"
+                                    <a class="color-white opacity-50"
                                         href="<?php echo base_url() . 'jamaah/login/forgot' ;?>">Forgot
                                         Password?</a>
                                 </div>
                                 <div class="col-6 text-end font-11">
-                                    <a class="color-white opacity-50" aria-label="For go to page Sign In"
+                                    <a class="color-white opacity-50"
                                         href="<?php echo base_url() . 'jamaah/login' ;?>">Sign In</a>
                                 </div>
                             </div>

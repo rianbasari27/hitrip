@@ -49,11 +49,11 @@
                             </form>
                         </div>
 
-                        <p class="text-center my-4 font-11 color-white">Didn't get your code? <a href="#" id="resendBtn"
-                                aria-label="For Resend OTP Code">Resend
+                        <p class="text-center my-4 font-11 color-white">Didn't get your code? <a href="#"
+                                id="resendBtn">Resend
                                 Code</a></p>
 
-                        <a href="#" aria-label="For submit the form" id="submitBtn" data-back-button
+                        <a href="#" id="submitBtn" data-back-button
                             class="btn btn-full btn-l font-600 font-13 gradient-highlight mt-4 rounded-s">Verify
                             Account</a>
 

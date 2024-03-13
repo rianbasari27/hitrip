@@ -7,7 +7,7 @@ class Login extends CI_Controller
 
     public function index()
     {
-        $this->load->view('jamaah/login_view');
+        $this->load->view('jamaahv2/login_view');
     }
     public function proses()
     {
@@ -32,7 +32,7 @@ class Login extends CI_Controller
     }
 
     public function sign_up() {
-        $this->load->view('jamaah/sign_up_view');
+        $this->load->view('jamaahv2/sign_up_view');
     }
 
     public function proses_otp() {
@@ -75,7 +75,7 @@ class Login extends CI_Controller
     }
 
     public function otp() {
-        $this->load->view("jamaah/otp_verifikasi", $_SESSION['data']);
+        $this->load->view("jamaahv2/otp_verifikasi", $_SESSION['data']);
     }
 
     public function proses_sign_up() {
@@ -107,7 +107,7 @@ class Login extends CI_Controller
     }
 
     public function forgot() {
-        $this->load->view('jamaah/forgot_password');
+        $this->load->view('jamaahv2/forgot_password');
     }
 
     public function proses_verif_email() {
@@ -124,7 +124,7 @@ class Login extends CI_Controller
     }
 
     public function reset_password() {
-        $this->load->view('jamaah/reset_password', $data = ["email" => $_GET['mail']]);
+        $this->load->view('jamaahv2/reset_password', $data = ["email" => $_GET['mail']]);
     }
 
     public function proses_reset_pass() {

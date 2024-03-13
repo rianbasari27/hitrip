@@ -4,9 +4,9 @@
 <head>
     <?php $this->load->view('jamaah/include/header'); ?>
     <style>
-    .bg-34 {
-        background-image: url(<?php echo base_url() . 'asset/appkit/images/background-3.jpg'?>);
-    }
+        .bg-34 {
+            background-image: url(<?php echo base_url() . 'asset/appkit/images/background-3.jpg' ?>);
+        }
     </style>
 </head>
 
@@ -46,18 +46,18 @@
                                 <em>(required)</em>
                             </div>
 
-                            <a href="#" aria-label="For submit the form" id="submitBtn" data-back-button
+                            <a href="#" id="submitBtn" data-back-button
                                 class="btn btn-full btn-l font-600 font-13 gradient-highlight mt-4 rounded-s">Send Reset
                                 Instructions</a>
 
                             <div class="row pt-3 mb-3">
                                 <div class="col-6 text-start font-11">
-                                    <a class="color-white opacity-50" aria-label="For go to page Sign In"
+                                    <a class="color-white opacity-50"
                                         href="<?php echo base_url() . 'jamaah/login' ;?>">Sign
                                         In</a>
                                 </div>
                                 <div class="col-6 text-end font-11">
-                                    <a class="color-white opacity-50" aria-label="For go to page Create Account"
+                                    <a class="color-white opacity-50"
                                         href="<?php echo base_url() . 'jamaah/login/sign_up' ;?>">Create Account</a>
                                 </div>
                             </div>
