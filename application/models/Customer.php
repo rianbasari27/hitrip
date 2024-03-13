@@ -43,15 +43,15 @@ class Customer extends CI_Model
             $mail->SMTPDebug  = 1;
             $mail->SMTPAuth = true;                  
             // GMAIL username
-            $mail->Username = "fikri.rizky88@gmail.com";
+            $mail->Username = "rianbasari27@gmail.com";
             // GMAIL password
-            $mail->Password = "zmpswxnbmzuhmopx";
-            $mail->SMTPSecure = "tls";  
+            $mail->Password = "zwbzqlcibdrmifmd";
+            $mail->SMTPSecure = "ssl";  
             // sets GMAIL as the SMTP server
             $mail->Host = "smtp.gmail.com";
             // set the SMTP port for the GMAIL server
-            $mail->Port = "587";
-            $mail->From='fikri.rizky88@gmail.com';
+            $mail->Port = "465";
+            $mail->From='rianbasari27@gmail.com';
             $mail->FromName='Admin Hi Trip';
             
             $mail->AddAddress($email, 'User Sistem');
