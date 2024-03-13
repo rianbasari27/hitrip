@@ -89,7 +89,7 @@ class Login extends CI_Controller
         }
 
         $this->load->model('customer');
-        $result = $this->customer->registerUser($_POST['username'], $_POST['name'], $_POST['email'], $_POST['password']);
+        $result = $this->customer->registerUser($_POST['username'], $_POST['name'], $_POST['email'], $_POST['password'], $_POST['no_wa']);
         if ($result) {
             $this->alert->setJamaah('green', 'Selamat', 'Registrasi anda berhasil :)');
             redirect(base_url() . 'jamaah/login');
