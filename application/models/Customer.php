@@ -71,6 +71,9 @@ class Customer extends CI_Model
             exit();
             return true;
         } catch (Exception $e) {
+            echo '<pre>';
+            print_r($mail);
+            exit();
             return "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
         }
     }
