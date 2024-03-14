@@ -49,8 +49,8 @@ class Customer extends CI_Model
             $mail->SMTPAuth   = true;
             $mail->Username   = 'rianbasari27@gmail.com';
             $mail->Password   = 'tkhvsvcvsaebqpbn';
-            $mail->SMTPSecure = 'ssl';
-            $mail->Port       = 465;            
+            $mail->SMTPSecure = 'tls';
+            $mail->Port       = 587;            
             $mail->SMTPOptions = array(
                 'ssl' => array(
                     'verify_peer' => false,
