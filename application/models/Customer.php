@@ -45,12 +45,12 @@ class Customer extends CI_Model
         $mail = new PHPMailer(true);
         try {
             $mail->isSMTP();
-            $mail->Host       = 'smtp.indoserver.hosting';
+            $mail->Host       = 'smtp.gmail.com';
             $mail->SMTPAuth   = true;
             $mail->Username   = 'rianbasari27@gmail.com';
             $mail->Password   = 'tkhvsvcvsaebqpbn';
-            $mail->SMTPSecure = 'ssl';
-            $mail->Port       = 465;            
+            $mail->SMTPSecure = 'tls';
+            $mail->Port       = 587;            
             $mail->SMTPOptions = array(
                 'ssl' => array(
                     'verify_peer' => false,
