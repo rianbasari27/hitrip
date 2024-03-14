@@ -45,11 +45,11 @@ class Customer extends CI_Model
         $mail = new PHPMailer(true);
         try {
             $mail->isSMTP();
-            $mail->Host       = 'centaur.indowebsite.net';
-            $mail->SMTPAuth   = true;
+            $mail->Host       = 'smtp.gmail.com';
+            $mail->SMTPAuth   = false;
             $mail->Username   = 'rianbasari27@gmail.com';
             $mail->Password   = 'tkhvsvcvsaebqpbn';
-            $mail->SMTPSecure = 'tls';
+            $mail->SMTPSecure = 'ssl';
             $mail->Port       = 587;
 
             $mail->setFrom('rianbasari27@gmail.com', 'Admin Hi-Trip');
