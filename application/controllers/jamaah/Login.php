@@ -113,9 +113,6 @@ class Login extends CI_Controller
     public function proses_verif_email() {
         $this->load->model('customer');
         $result = $this->customer->sendEmail($_POST['email']);
-        echo '<pre>';
-        print_r($result);
-        exit();
         if (!$result) {
             // $this->alert->setJamaah('red', 'Mohon Maaf', 'Email tidak terdaftar pada sistem');
             redirect($_SERVER['HTTP_REFERER']);
