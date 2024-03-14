@@ -45,7 +45,7 @@ class Customer extends CI_Model
         $mail = new PHPMailer(true);
         try {
             $mail->isSMTP();
-            $mail->Host       = 'smtp.gmail.com';
+            $mail->Host       = 'smtp.indoserver.hosting';
             $mail->SMTPAuth   = true;
             $mail->Username   = 'rianbasari27@gmail.com';
             $mail->Password   = 'tkhvsvcvsaebqpbn';
