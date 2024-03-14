@@ -45,7 +45,7 @@ class Customer extends CI_Model
         $mail = new PHPMailer(true);
         try {
             $mail->isSMTP();
-            $mail->Host       = 'smtp.gmail.com';
+            $mail->Host       = 'centaur.indowebsite.net';
             $mail->SMTPAuth   = true;
             $mail->Username   = 'rianbasari27@gmail.com';
             $mail->Password   = 'tkhvsvcvsaebqpbn';
@@ -63,9 +63,9 @@ class Customer extends CI_Model
             $mail->send();
             return true;
         } catch (Exception $e) {
-            echo '<pre>';
-            print_r($e);
-            exit();
+            // echo '<pre>';
+            // print_r($e);
+            // exit();
             return "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
         }
     }
