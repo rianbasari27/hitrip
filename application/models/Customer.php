@@ -50,7 +50,14 @@ class Customer extends CI_Model
             $mail->Username   = 'rianbasari27@gmail.com';
             $mail->Password   = 'tkhvsvcvsaebqpbn';
             $mail->SMTPSecure = 'tls';
-            $mail->Port       = 587;
+            $mail->Port       = 587;            
+            $mail->SMTPOptions = array(
+                'ssl' => array(
+                    'verify_peer' => false,
+                    'verify_peer_name' => false,
+                    'allow_self_signed' => true
+                    )
+            );
 
             $mail->setFrom('rianbasari27@gmail.com', 'Admin Hi-Trip');
             $mail->addAddress($email, $user->name);
@@ -60,12 +67,13 @@ class Customer extends CI_Model
             $mail->Subject = 'Reset My Password';
             $mail->Body    = "Klik link berikut untuk reset Password, <a href='$link'>Klik untuk reset Password<a>";
 
+
             $mail->send();
             return true;
         } catch (Exception $e) {
-            // echo '<pre>';
-            // print_r($e);
-            // exit();
+            echo '<pre>';
+            print_r($e);
+            exit();
             return "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
         }
     }
