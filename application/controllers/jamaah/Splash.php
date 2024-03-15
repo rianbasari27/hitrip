@@ -7,7 +7,7 @@ class Splash extends CI_Controller
 
     public function index()
     {
-        $this->load->view('jamaahv2/splash_view');
+        $this->load->view('jamaah/splash_view');
     }
     public function end($redirect)
     {
