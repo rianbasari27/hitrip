@@ -26,6 +26,7 @@
 
         <div class="page-content mt-n1">
 
+            <!-- Search Section -->
             <div class="content mt-n4 mb-4">
                 <div class="search-box search-dark shadow-sm border-0 mt-4 bg-theme rounded-sm bottom-0">
                     <i class="fa fa-search ms-1"></i>
@@ -33,15 +34,18 @@
                 </div>
                 <div class="search-results disabled-search-list">
                     <div>
-                        <a href="#" aria-label="Read more about City Nights Dubai Parties" data-filter-item
-                            data-filter-name="all city night life dubai party neon ">
+                        <a href="#" aria-label="Dubai" data-filter-item
+                            data-filter-name="dubai uae arab">
                             <div class="d-flex mt-4">
                                 <div class="align-self-center">
-                                    <img src="images/travel/1s.jpg" alt="" class="rounded-m me-3" width="60">
+                                    <img src="<?php echo base_url() ?>asset/images/city/dubai-720x720.jpg" alt="" class="rounded-s me-3" width="80">
                                 </div>
                                 <div class="align-self-center">
-                                    <h2 class="font-15 font-600 mb-0 line-height-s mt-1">City Nights <br> Dubai Parties
-                                    </h2>
+                                    <h2 class="font-18 font-700 mb-1 line-height-s mt-1">Dubai</h2>
+                                    <del style="text-decoration:line-through" class="mb-0 color-theme">
+                                        <span class="d-block color-theme">Rp 9,299,000</span>
+                                    </del>
+                                    <h6 class="color-highlight mt-n1">Rp 8,299,000</h6>
                                 </div>
                                 <div class="ms-auto ps-3 align-self-center text-center">
                                     <span
@@ -50,15 +54,18 @@
                                 </div>
                             </div>
                         </a>
-                        <a href="#" aria-label="Read more about Yosemite Natural Park Expedition" data-filter-item
-                            data-filter-name="all yoesemite park natural nature waterfall">
+                        <a href="#" aria-label="Bali" data-filter-item
+                            data-filter-name="bali indonesia">
                             <div class="d-flex mt-4">
                                 <div class="align-self-center">
-                                    <img src="images/travel/6s.jpg" alt="" class="rounded-m me-3" width="60">
+                                    <img src="<?php echo base_url() ?>asset/images/city/bali-720x720.jpg" alt="" class="rounded-s me-3" width="80">
                                 </div>
                                 <div class="align-self-center">
-                                    <h2 class="font-15 font-600 mb-0 line-height-s mt-1">Yosemite Natural <br>Park
-                                        Expedition </h2>
+                                    <h2 class="font-18 font-700 mb-1 line-height-s mt-1">Bali</h2>
+                                    <del style="text-decoration:line-through" class="mb-0 color-theme">
+                                        <span class="d-block color-theme">Rp 5,999,000</span>
+                                    </del>
+                                    <h6 class="color-highlight mt-n1">Rp 4,299,000</h6>
                                 </div>
                                 <div class="ms-auto ps-3 align-self-center text-center">
                                     <span
@@ -67,15 +74,18 @@
                                 </div>
                             </div>
                         </a>
-                        <a href="#" aria-label="Read more about Bali's Natural Wonders Hike" data-filter-item
-                            data-filter-name="all bali nature beauty earth wonder hike">
+                        <a href="#" aria-label="Tokyo" data-filter-item
+                            data-filter-name="tokyo jepang">
                             <div class="d-flex mt-4">
                                 <div class="align-self-center">
-                                    <img src="images/travel/7s.jpg" alt="" class="rounded-m me-3" width="60">
+                                    <img src="<?php echo base_url() ?>asset/images/city/tokyo-720x720.jpg" alt="" class="rounded-s me-3" width="80">
                                 </div>
                                 <div class="align-self-center">
-                                    <h2 class="font-15 font-600 mb-0 line-height-s mt-1">Bali's Natural<br>Wonders Hike
-                                    </h2>
+                                    <h2 class="font-18 font-700 mb-1 line-height-s mt-1">Tokyo</h2>
+                                    <del style="text-decoration:line-through" class="mb-0 color-theme">
+                                        <span class="d-block color-theme">Rp 7,599,000</span>
+                                    </del>
+                                    <h6 class="color-highlight mt-n1">Rp 6,999,000</h6>
                                 </div>
                                 <div class="ms-auto ps-3 align-self-center text-center">
                                     <span
@@ -84,6 +94,67 @@
                                 </div>
                             </div>
                         </a>
+                        <a href="#" aria-label="Seoul" data-filter-item
+                            data-filter-name="seoul korea selatan">
+                            <div class="d-flex mt-4">
+                                <div class="align-self-center">
+                                    <img src="<?php echo base_url() ?>asset/images/city/seoul-720x720.jpg" alt="" class="rounded-s me-3" width="80">
+                                </div>
+                                <div class="align-self-center">
+                                    <h2 class="font-18 font-700 mb-1 line-height-s mt-1">Seoul</h2>
+                                    <del style="text-decoration:line-through" class="mb-0 color-theme">
+                                        <span class="d-block color-theme">Rp 7,999,000</span>
+                                    </del>
+                                    <h6 class="color-highlight mt-n1">Rp 6,999,000</h6>
+                                </div>
+                                <div class="ms-auto ps-3 align-self-center text-center">
+                                    <span
+                                        class="btn btn-xs gradient-blue text-uppercase font-600 rounded-s border-0">Book
+                                        Now</span>
+                                </div>
+                            </div>
+                        </a>
+                        <a href="#" aria-label="Istanbul" data-filter-item
+                            data-filter-name="istanbul turki turkey">
+                            <div class="d-flex mt-4">
+                                <div class="align-self-center">
+                                    <img src="<?php echo base_url() ?>asset/images/city/istanbul-720x720.jpg" alt="" class="rounded-s me-3" width="80">
+                                </div>
+                                <div class="align-self-center">
+                                    <h2 class="font-18 font-700 mb-1 line-height-s mt-1">Istanbul</h2>
+                                    <del style="text-decoration:line-through" class="mb-0 color-theme">
+                                        <span class="d-block color-theme">Rp 7,499,000</span>
+                                    </del>
+                                    <h6 class="color-highlight mt-n1">Rp 6,499,000</h6>
+                                </div>
+                                <div class="ms-auto ps-3 align-self-center text-center">
+                                    <span
+                                        class="btn btn-xs gradient-blue text-uppercase font-600 rounded-s border-0">Book
+                                        Now</span>
+                                </div>
+                            </div>
+                        </a>
+                        <a href="#" aria-label="London" data-filter-item
+                            data-filter-name="london inggris england">
+                            <div class="d-flex mt-4">
+                                <div class="align-self-center">
+                                    <img src="<?php echo base_url() ?>asset/images/city/london-720x720.jpg" alt="" class="rounded-s me-3" width="80">
+                                </div>
+                                <div class="align-self-center">
+                                    <h2 class="font-18 font-700 mb-1 line-height-s mt-1">London</h2>
+                                    <del style="text-decoration:line-through" class="mb-0 color-theme">
+                                        <span class="d-block color-theme">Rp 7,499,000</span>
+                                    </del>
+                                    <h6 class="color-highlight mt-n1">Rp 6,499,000</h6>
+                                </div>
+                                <div class="ms-auto ps-3 align-self-center text-center">
+                                    <span
+                                        class="btn btn-xs gradient-blue text-uppercase font-600 rounded-s border-0">Book
+                                        Now</span>
+                                </div>
+                            </div>
+                        </a>
+                        
                     </div>
                 </div>
             </div>
@@ -98,7 +169,50 @@
                     </div>
                 </div>
             </div>
+            <!-- End Search Section -->
 
+            <!-- Menu Section -->
+            <div class="card card-style">
+                <div class="content">
+                    <div class="row mb-0">
+                        <a href="#" class="col-3 py-2 mb-2 text-center color-highlight">
+                            <i class="fa-solid fa-hotel fa-2xl"></i><br>
+                            <div class="lh-sm mt-2 font-11 color-theme">Hotel</div>
+                        </a>
+                        <a href="#" class="col-3 py-2 mb-2 text-center color-highlight">
+                            <i class="fa-solid fa-plane-up fa-2xl"></i><br>
+                            <div class="lh-sm mt-2 font-11 color-theme">Tiket Pesawat</div>
+                        </a>
+                        <a href="#" class="col-3 py-2 mb-2 text-center color-highlight">
+                            <i class="fa-solid fa-train-subway fa-2xl"></i><br>
+                            <div class="lh-sm mt-2 font-11 color-theme">Tiket Kereta</div>
+                        </a>
+                        <a href="#" class="col-3 py-2 mb-2 text-center color-highlight">
+                            <i class="fa-solid fa-ticket fa-2xl"></i><br>
+                            <div class="lh-sm mt-2 font-11 color-theme">Promo</div>
+                        </a>
+                        <a href="#" class="col-3 py-2 mb-2 text-center color-highlight">
+                            <i class="fa-solid fa-pizza-slice fa-2xl"></i><br>
+                            <div class="lh-sm mt-2 font-11 color-theme">Restoran</div>
+                        </a>
+                        <a href="#" class="col-3 py-2 mb-2 text-center color-highlight">
+                            <i class="fa-solid fa-mosque fa-2xl"></i><br>
+                            <div class="lh-sm mt-2 font-11 color-theme">Tempat Ibadah</div>
+                        </a>
+                        <a href="#" class="col-3 py-2 mb-2 text-center color-highlight">
+                            <i class="fa-solid fa-money-bill-wave fa-2xl"></i><br>
+                            <div class="lh-sm mt-2 font-11 color-theme">Currency</div>
+                        </a>
+                        <a href="#" class="col-3 py-2 mb-2 text-center color-highlight">
+                            <i class="fa-solid fa-ellipsis fa-2xl"></i><br>
+                            <div class="lh-sm mt-2 font-11 color-theme">Lainnya</div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!-- End Menu Section -->
+
+            <!-- Hero Banner -->
             <div class="splide single-slider slider-no-arrows visible-slider slider-no-dots" id="single-slider-1">
                 <div class="splide__track">
                     <div class="splide__list">
@@ -159,6 +273,7 @@
                     </div>
                 </div>
             </div>
+            <!-- End Hero Banner -->
 
             <div class="content mt-0 mb-n1">
                 <div class="d-flex">

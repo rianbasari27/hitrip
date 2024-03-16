@@ -71,7 +71,7 @@
                 <a href="#"><i class="fa fa-headset font-14 rounded-sm bg-blue-dark color-white"></i><span>Help & Support</span><i class="fa fa-angle-right"></i></a>
                     <a href="#"><i class="fa fa-thumbs-up font-12 rounded-sm bg-blue-dark color-white"></i><span>Rate Our Apps</span><i class="fa fa-angle-right"></i></a>
                     <a href="#"><i class="fa fa-circle-question font-12 rounded-sm bg-blue-dark color-white"></i><span>FAQ</span><i class="fa fa-angle-right"></i></a>
-                    <a href="#" class="color-red-dark"><i class="fa fa-right-from-bracket font-12 rounded-sm bg-red-dark color-white"></i><span>Sign Out</span><i class="fa fa-angle-right"></i></a>
+                    <a href="<?php echo base_url() ?>jamaah/logout" class="color-red-dark"><i class="fa fa-right-from-bracket font-12 rounded-sm bg-red-dark color-white"></i><span>Sign Out</span><i class="fa fa-angle-right"></i></a>
                 </div>
             </div>
         </div>
