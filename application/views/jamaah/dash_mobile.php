@@ -3,6 +3,16 @@
 
 <head>
     <?php $this->load->view('jamaah/include/header'); ?>
+    <style>
+        .squircle-icon {
+            width: 40px; 
+            height: 40px; 
+            border-radius: 35%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
 </head>
 
 <body class="theme-light">
@@ -175,36 +185,52 @@
             <div class="card card-style">
                 <div class="content">
                     <div class="row mb-0">
-                        <a href="#" class="col-3 py-2 mb-2 text-center color-highlight">
-                            <i class="fa-solid fa-hotel fa-2xl"></i><br>
+                        <a href="#" class="col-3 py-2 mb-2 text-center">
+                            <div class="squircle-icon gradient-highlight mx-auto">
+                                <i class="fa-solid fa-hotel icon font-18 color-white"></i>
+                            </div>
                             <div class="lh-sm mt-2 font-11 color-theme">Hotel</div>
                         </a>
-                        <a href="#" class="col-3 py-2 mb-2 text-center color-highlight">
-                            <i class="fa-solid fa-plane-up fa-2xl"></i><br>
+                        <a href="#" class="col-3 py-2 mb-2 text-center">
+                            <div class="squircle-icon gradient-highlight mx-auto">
+                                <i class="fa-solid fa-plane-up icon font-18 color-white"></i>
+                            </div>
                             <div class="lh-sm mt-2 font-11 color-theme">Tiket Pesawat</div>
                         </a>
-                        <a href="#" class="col-3 py-2 mb-2 text-center color-highlight">
-                            <i class="fa-solid fa-train-subway fa-2xl"></i><br>
+                        <a href="#" class="col-3 py-2 mb-2 text-center">
+                            <div class="squircle-icon gradient-highlight mx-auto">
+                                <i class="fa-solid fa-train-subway icon font-18 color-white"></i>
+                            </div>
                             <div class="lh-sm mt-2 font-11 color-theme">Tiket Kereta</div>
                         </a>
-                        <a href="#" class="col-3 py-2 mb-2 text-center color-highlight">
-                            <i class="fa-solid fa-ticket fa-2xl"></i><br>
+                        <a href="#" class="col-3 py-2 mb-2 text-center">
+                            <div class="squircle-icon gradient-highlight mx-auto">
+                                <i class="fa-solid fa-ticket icon font-18 color-white"></i>
+                            </div>
                             <div class="lh-sm mt-2 font-11 color-theme">Promo</div>
                         </a>
-                        <a href="#" class="col-3 py-2 mb-2 text-center color-highlight">
-                            <i class="fa-solid fa-pizza-slice fa-2xl"></i><br>
+                        <a href="#" class="col-3 py-2 mb-2 text-center">
+                            <div class="squircle-icon gradient-highlight mx-auto">
+                                <i class="fa-solid fa-pizza-slice icon font-18 color-white"></i>
+                            </div>
                             <div class="lh-sm mt-2 font-11 color-theme">Restoran</div>
                         </a>
-                        <a href="#" class="col-3 py-2 mb-2 text-center color-highlight">
-                            <i class="fa-solid fa-mosque fa-2xl"></i><br>
+                        <a href="#" class="col-3 py-2 mb-2 text-center">
+                            <div class="squircle-icon gradient-highlight mx-auto">
+                                <i class="fa-solid fa-mosque icon font-18 color-white"></i>
+                            </div>
                             <div class="lh-sm mt-2 font-11 color-theme">Tempat Ibadah</div>
                         </a>
-                        <a href="#" class="col-3 py-2 mb-2 text-center color-highlight">
-                            <i class="fa-solid fa-money-bill-wave fa-2xl"></i><br>
+                        <a href="#" class="col-3 py-2 mb-2 text-center">
+                            <div class="squircle-icon gradient-highlight mx-auto">
+                                <i class="fa-solid fa-money-bill-wave icon font-18 color-white"></i>
+                            </div>
                             <div class="lh-sm mt-2 font-11 color-theme">Currency</div>
                         </a>
-                        <a href="#" class="col-3 py-2 mb-2 text-center color-highlight">
-                            <i class="fa-solid fa-ellipsis fa-2xl"></i><br>
+                        <a href="#" class="col-3 py-2 mb-2 text-center">
+                            <div class="squircle-icon gradient-highlight mx-auto">
+                                <i class="fa-solid fa-ellipsis icon font-18 color-white"></i>
+                            </div>
                             <div class="lh-sm mt-2 font-11 color-theme">Lainnya</div>
                         </a>
                     </div>
@@ -480,6 +506,11 @@
                 </div>
             </div>
 
+            <div class="floating-button gradient-highlight">
+                <a href="https://wa.me/628881224549?text=Halo,%20Hi-Trip!" target="_blank">
+                    <i class="fa-solid fa-headset"></i>
+                </a>
+            </div>
 
             <?php $this->load->view('jamaah/include/footer'); ?>
             <?php $this->load->view('jamaah/include/alert'); ?>
