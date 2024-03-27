@@ -26,58 +26,78 @@
         <link rel="stylesheet" type="text/css" href="../asset/login/css/util.css">
         <link rel="stylesheet" type="text/css" href="../asset/login/css/main.css">
         <!--===============================================================================================-->
+        <style>
+            .bg-login {
+                background-image: url(<?php echo base_url() . 'asset/appkit/images/bg-login.jpg' ?>);
+            }
+
+            .bg-login-image {
+                background-image: url(<?php echo base_url() . 'asset/appkit/images/bg-login-image.jpg' ?>);
+                background-size: cover;
+                border-radius: 0.25rem 0 0 0.25rem;
+            }
+        </style>
     </head>
-    <body>
+    <body class="bg-login">
 
-        <div class="limiter">
-            <div class="container-login100" style="background-image: url('../asset/login/images/bg-01.jpg');">
-                <div class="wrap-login100">
-                    <form action="<?php echo base_url(); ?>staff/login/login_process" method="post" class="login100-form validate-form">
+    <div class="container">
 
-                        <center>
-                            <img src="../asset/login/images/LOGO-VENTOUR.png" alt="LOGO" style="width:300px;">
-                        </center>
+        <!-- Outer Row -->
+        <div class="row justify-content-center">
 
+            <div class="col-xl-10 col-lg-12 col-md-9">
 
-                        <span class="login100-form-title p-b-34 p-t-27">
-
-                        </span>
-                        <span style="color:#ff9980;margin-bottom:19px;display:block;">
-                            <?php
-                            if (isset($_SESSION['error'])) {
-                                echo $_SESSION['error'];
-                            }
-                            ?>
-                            <?php echo validation_errors(); ?>
-                        </span>
-                        <div class="wrap-input100 validate-input" data-validate = "Masukkan Email">
-                            <input class="input100" type="text" name="email" placeholder="Email">
-                            <span class="focus-input100" data-placeholder="&#xf207;"></span>
+                <div class="card o-hidden border-0 shadow-lg" style="margin-top: 150px;">
+                    <div class="card-body p-0">
+                        <!-- Nested Row within Card Body -->
+                        <div class="row">
+                            <div class="col-lg-6 d-none d-lg-block bg-login-image"></div>
+                            <div class="col-lg-6">
+                                <div class="p-5 my-5">
+                                    <div class="text-center mb-4">
+                                        <img src="<?php echo base_url() . 'asset/appkit/images/hitrip/hitrip-logo.png' ?>" alt="HiTrip Logo" width="150px">
+                                    </div>
+                                    <form class="user" method="post" action="<?php echo base_url() ?>staff/login/login_process">
+                                        <div class="form-group">
+                                            <input type="email" name="email" class="form-control form-control-user"
+                                                id="exampleInputEmail" aria-describedby="emailHelp"
+                                                placeholder="Enter Email Address...">
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="password" name="pass" class="form-control form-control-user"
+                                                id="exampleInputPassword" placeholder="Password">
+                                        </div>
+                                        <button type="submit" class="btn btn-primary btn-user btn-block">
+                                            Login
+                                        </button>
+                                    </form>
+                                    <hr>
+                                    <div class="text-center">
+                                        <a class="small" href="forgot-password.html">Forgot Password?</a>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-
-                        <div class="wrap-input100 validate-input" data-validate="Masukkan Password">
-                            <input class="input100" type="password" name="pass" placeholder="Password">
-                            <span class="focus-input100" data-placeholder="&#xf191;"></span>
-                        </div>
-
-                        <div class="container-login100-form-btn">
-                            <button class="login100-form-btn" type="submit">
-                                Login
-                            </button>
-                        </div>
-
-                        <div class="text-center p-t-90">
-                            <a class="txt1" href="#">
-                                Forgot Password?
-                            </a>
-                        </div>
-                    </form>
+                    </div>
                 </div>
+
             </div>
+
         </div>
 
+    </div>
 
-        <div id="dropDownSelect1"></div>
+    <div id="dropDownSelect1"></div>
+    <!-- Bootstrap core JavaScript-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="js/sb-admin-2.min.js"></script>
+
 
         <!--===============================================================================================-->
         <script src="../asset/login/vendor/jquery/jquery-3.2.1.min.js"></script>
