@@ -4,14 +4,14 @@
 <head>
     <?php $this->load->view('jamaah/include/header'); ?>
     <style>
-        .squircle-icon {
-            width: 40px; 
-            height: 40px; 
-            border-radius: 35%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
+    .squircle-icon {
+        width: 40px;
+        height: 40px;
+        border-radius: 35%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
     </style>
 </head>
 
@@ -42,13 +42,17 @@
                     <i class="fa fa-search ms-1"></i>
                     <input type="text" class="border-0" placeholder="Searching for something? Try 'dubai'" data-search>
                 </div>
+                <div id="timeInfo">
+                    <p>Zona Waktu: <span id="zoneName"></span></p>
+                    <p>Waktu Terformat: <span id="formattedTime"></span></p>
+                </div>
                 <div class="search-results disabled-search-list">
                     <div>
-                        <a href="#" aria-label="Dubai" data-filter-item
-                            data-filter-name="dubai uae arab">
+                        <a href="#" aria-label="Dubai" data-filter-item data-filter-name="dubai uae arab">
                             <div class="d-flex mt-4">
                                 <div class="align-self-center">
-                                    <img src="<?php echo base_url() ?>asset/images/city/dubai-720x720.jpg" alt="" class="rounded-s me-3" width="80">
+                                    <img src="<?php echo base_url() ?>asset/images/city/dubai-720x720.jpg" alt=""
+                                        class="rounded-s me-3" width="80">
                                 </div>
                                 <div class="align-self-center">
                                     <h2 class="font-18 font-700 mb-1 line-height-s mt-1">Dubai</h2>
@@ -64,11 +68,11 @@
                                 </div>
                             </div>
                         </a>
-                        <a href="#" aria-label="Bali" data-filter-item
-                            data-filter-name="bali indonesia">
+                        <a href="#" aria-label="Bali" data-filter-item data-filter-name="bali indonesia">
                             <div class="d-flex mt-4">
                                 <div class="align-self-center">
-                                    <img src="<?php echo base_url() ?>asset/images/city/bali-720x720.jpg" alt="" class="rounded-s me-3" width="80">
+                                    <img src="<?php echo base_url() ?>asset/images/city/bali-720x720.jpg" alt=""
+                                        class="rounded-s me-3" width="80">
                                 </div>
                                 <div class="align-self-center">
                                     <h2 class="font-18 font-700 mb-1 line-height-s mt-1">Bali</h2>
@@ -84,11 +88,11 @@
                                 </div>
                             </div>
                         </a>
-                        <a href="#" aria-label="Tokyo" data-filter-item
-                            data-filter-name="tokyo jepang">
+                        <a href="#" aria-label="Tokyo" data-filter-item data-filter-name="tokyo jepang">
                             <div class="d-flex mt-4">
                                 <div class="align-self-center">
-                                    <img src="<?php echo base_url() ?>asset/images/city/tokyo-720x720.jpg" alt="" class="rounded-s me-3" width="80">
+                                    <img src="<?php echo base_url() ?>asset/images/city/tokyo-720x720.jpg" alt=""
+                                        class="rounded-s me-3" width="80">
                                 </div>
                                 <div class="align-self-center">
                                     <h2 class="font-18 font-700 mb-1 line-height-s mt-1">Tokyo</h2>
@@ -104,11 +108,11 @@
                                 </div>
                             </div>
                         </a>
-                        <a href="#" aria-label="Seoul" data-filter-item
-                            data-filter-name="seoul korea selatan">
+                        <a href="#" aria-label="Seoul" data-filter-item data-filter-name="seoul korea selatan">
                             <div class="d-flex mt-4">
                                 <div class="align-self-center">
-                                    <img src="<?php echo base_url() ?>asset/images/city/seoul-720x720.jpg" alt="" class="rounded-s me-3" width="80">
+                                    <img src="<?php echo base_url() ?>asset/images/city/seoul-720x720.jpg" alt=""
+                                        class="rounded-s me-3" width="80">
                                 </div>
                                 <div class="align-self-center">
                                     <h2 class="font-18 font-700 mb-1 line-height-s mt-1">Seoul</h2>
@@ -124,11 +128,11 @@
                                 </div>
                             </div>
                         </a>
-                        <a href="#" aria-label="Istanbul" data-filter-item
-                            data-filter-name="istanbul turki turkey">
+                        <a href="#" aria-label="Istanbul" data-filter-item data-filter-name="istanbul turki turkey">
                             <div class="d-flex mt-4">
                                 <div class="align-self-center">
-                                    <img src="<?php echo base_url() ?>asset/images/city/istanbul-720x720.jpg" alt="" class="rounded-s me-3" width="80">
+                                    <img src="<?php echo base_url() ?>asset/images/city/istanbul-720x720.jpg" alt=""
+                                        class="rounded-s me-3" width="80">
                                 </div>
                                 <div class="align-self-center">
                                     <h2 class="font-18 font-700 mb-1 line-height-s mt-1">Istanbul</h2>
@@ -144,11 +148,11 @@
                                 </div>
                             </div>
                         </a>
-                        <a href="#" aria-label="London" data-filter-item
-                            data-filter-name="london inggris england">
+                        <a href="#" aria-label="London" data-filter-item data-filter-name="london inggris england">
                             <div class="d-flex mt-4">
                                 <div class="align-self-center">
-                                    <img src="<?php echo base_url() ?>asset/images/city/london-720x720.jpg" alt="" class="rounded-s me-3" width="80">
+                                    <img src="<?php echo base_url() ?>asset/images/city/london-720x720.jpg" alt=""
+                                        class="rounded-s me-3" width="80">
                                 </div>
                                 <div class="align-self-center">
                                     <h2 class="font-18 font-700 mb-1 line-height-s mt-1">London</h2>
@@ -164,7 +168,7 @@
                                 </div>
                             </div>
                         </a>
-                        
+
                     </div>
                 </div>
             </div>
@@ -545,4 +549,65 @@
 
     <script src="<?php echo base_url(); ?>asset/sbadmin2/vendor/jquery/jquery.min.js"></script>
     <?php $this->load->view('jamaah/include/script_view'); ?>
+    <script type="text/javascript">
+    // Fungsi untuk memperbarui waktu dan mendapatkan latitude serta longitude
+    function updateTimeAndLocation() {
+        // Mendefinisikan URL API TimezoneDB
+        var timezoneApiUrl = "https://api.timezonedb.com/v2.1/get-time-zone?key=DQXN13W1GPIE&format=json";
+
+        // Memanggil navigator.geolocation.getCurrentPosition untuk mendapatkan lokasi pengguna
+        navigator.geolocation.getCurrentPosition(function(position) {
+            var latitude = position.coords.latitude;
+            var longitude = position.coords.longitude;
+
+            // Mengirim permintaan ke API TimezoneDB dengan latitude dan longitude pengguna
+            fetch(timezoneApiUrl + "&by=position&lat=" + latitude + "&lng=" + longitude)
+                .then(response => response.json())
+                .then(data => {
+                    // Memeriksa apakah permintaan berhasil
+                    if (data.status === "OK") {
+                        var zoneName = data.zoneName;
+                        var formattedTime = data.formatted;
+                        // var currentTime = new Date(data.timestamp * 1000); // Konversi detik ke milidetik
+                        // var hours = currentTime.getHours();
+                        // var minutes = currentTime.getMinutes();
+
+                        // // Memperbarui jam jika detik mencapai 60
+                        // if (currentTime.getSeconds() === 0) {
+                        //     hours = (hours + 1) %
+                        //     24; // Meningkatkan jam, mengatur kembali ke 0 jika mencapai 24
+                        // }
+                        // // Memformat waktu
+                        // var formattedTime = padZero(hours) + ":" + padZero(
+                        // minutes); // Menggunakan fungsi padZero untuk memastikan dua digit
+
+                        // Memperbarui tampilan zona waktu dan waktu terformat
+                        document.getElementById("zoneName").textContent = zoneName;
+                        document.getElementById("formattedTime").textContent = formattedTime;
+                    } else {
+                        // Jika terjadi kesalahan dalam permintaan
+                        document.getElementById("timeInfo").textContent =
+                            "Gagal mendapatkan informasi zona waktu.";
+                    }
+                })
+                .catch(error => {
+                    console.error('Terjadi kesalahan:', error);
+                    // Menampilkan pesan kesalahan jika terjadi masalah dalam mengambil data waktu
+                    document.getElementById("timeInfo").textContent =
+                        "Gagal mendapatkan informasi zona waktu.";
+                });
+        }, function(error) {
+            // Penanganan kesalahan jika mendapatkan lokasi gagal
+            console.error("Error getting location: ", error);
+            document.getElementById("timeInfo").textContent = "Gagal mendapatkan lokasi pengguna.";
+        });
+    }
+
+    // Memanggil fungsi updateTimeAndLocation saat halaman dimuat
+    window.onload = function() {
+        updateTimeAndLocation();
+        // Menetapkan pembaruan waktu setiap detik (1000 milidetik)
+        setInterval(updateTimeAndLocation, 1000);
+    };
+    </script>
 </body>
