@@ -4,6 +4,28 @@
 <head>
     <?php $this->load->view('jamaah/include/header'); ?>
     <style>
+        .floating-button {
+    position: fixed;
+    bottom: 80px;
+    right: 20px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+  }
+  
+  .floating-button a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    color: #fff;
+    font-size: 24px;
+    text-decoration: none;
+  }
     .squircle-icon {
         width: 40px;
         height: 40px;
@@ -510,15 +532,14 @@
                 </div>
             </div>
 
-            
+            <div class="floating-button gradient-highlight">
+                <a href="https://wa.me/628881224549?text=Halo,%20Hi-Trip!" target="_blank">
+                    <i class="fa-solid fa-headset"></i>
+                </a>
+            </div>
+
             <?php $this->load->view('jamaah/include/footer'); ?>
             <?php $this->load->view('jamaah/include/alert'); ?>
-        </div>
-        
-        <div class="floating-button gradient-highlight">
-            <a href="https://wa.me/628881224549?text=Halo,%20Hi-Trip!" target="_blank">
-                <i class="fa-solid fa-headset"></i>
-            </a>
         </div>
         <!-- Page content ends here-->
 
