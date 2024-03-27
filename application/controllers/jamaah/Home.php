@@ -27,4 +27,9 @@ class Home extends CI_Controller
         }
         $this->load->view('jamaah/dash_mobile');
     }
+
+    public function konversi()
+    {
+        $this->load->view('jamaah/konversi');
+    }
 }

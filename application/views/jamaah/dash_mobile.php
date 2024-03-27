@@ -553,42 +553,28 @@
     // Fungsi untuk memperbarui waktu dan mendapatkan latitude serta longitude
     function updateTimeAndLocation() {
         // Mendefinisikan URL API TimezoneDB
-        var timezoneApiUrl = "https://api.timezonedb.com/v2.1/get-time-zone?key=DQXN13W1GPIE&format=json";
-
-        // Memanggil navigator.geolocation.getCurrentPosition untuk mendapatkan lokasi pengguna
         navigator.geolocation.getCurrentPosition(function(position) {
             var latitude = position.coords.latitude;
             var longitude = position.coords.longitude;
+            var timezoneApiUrl =
+                `http://api.geonames.org/timezoneJSON?lat=${latitude}&lng=${longitude}&username=hitrip`;
+
+            // Memanggil navigator.geolocation.getCurrentPosition untuk mendapatkan lokasi pengguna
 
             // Mengirim permintaan ke API TimezoneDB dengan latitude dan longitude pengguna
-            fetch(timezoneApiUrl + "&by=position&lat=" + latitude + "&lng=" + longitude)
+            fetch(timezoneApiUrl)
                 .then(response => response.json())
                 .then(data => {
+                    console.log(data);
                     // Memeriksa apakah permintaan berhasil
-                    if (data.status === "OK") {
-                        var zoneName = data.zoneName;
-                        var formattedTime = data.formatted;
-                        // var currentTime = new Date(data.timestamp * 1000); // Konversi detik ke milidetik
-                        // var hours = currentTime.getHours();
-                        // var minutes = currentTime.getMinutes();
+                    var zoneName = data.timezoneId;
+                    var Time = data.time;
+                    formattedTime = Time.split(" ");
 
-                        // // Memperbarui jam jika detik mencapai 60
-                        // if (currentTime.getSeconds() === 0) {
-                        //     hours = (hours + 1) %
-                        //     24; // Meningkatkan jam, mengatur kembali ke 0 jika mencapai 24
-                        // }
-                        // // Memformat waktu
-                        // var formattedTime = padZero(hours) + ":" + padZero(
-                        // minutes); // Menggunakan fungsi padZero untuk memastikan dua digit
 
-                        // Memperbarui tampilan zona waktu dan waktu terformat
-                        document.getElementById("zoneName").textContent = zoneName;
-                        document.getElementById("formattedTime").textContent = formattedTime;
-                    } else {
-                        // Jika terjadi kesalahan dalam permintaan
-                        document.getElementById("timeInfo").textContent =
-                            "Gagal mendapatkan informasi zona waktu.";
-                    }
+                    // Memperbarui tampilan zona waktu dan waktu terformat
+                    document.getElementById("zoneName").textContent = zoneName;
+                    document.getElementById("formattedTime").textContent = formattedTime[1];
                 })
                 .catch(error => {
                     console.error('Terjadi kesalahan:', error);
