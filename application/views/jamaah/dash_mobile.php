@@ -510,14 +510,15 @@
                 </div>
             </div>
 
-            <div class="floating-button gradient-highlight">
-                <a href="https://wa.me/628881224549?text=Halo,%20Hi-Trip!" target="_blank">
-                    <i class="fa-solid fa-headset"></i>
-                </a>
-            </div>
-
+            
             <?php $this->load->view('jamaah/include/footer'); ?>
             <?php $this->load->view('jamaah/include/alert'); ?>
+        </div>
+        
+        <div class="floating-button gradient-highlight">
+            <a href="https://wa.me/628881224549?text=Halo,%20Hi-Trip!" target="_blank">
+                <i class="fa-solid fa-headset"></i>
+            </a>
         </div>
         <!-- Page content ends here-->
 
