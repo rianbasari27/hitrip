@@ -7,8 +7,7 @@
         .floating-button {
             position: fixed;
             bottom: 80px;
-            /* right: 20px; */
-            right: calc((100% - 600px) / 2 + 20px);
+            right: 20px;
             width: 60px;
             height: 60px;
             border-radius: 50%;
@@ -35,6 +34,12 @@
             display: flex;
             justify-content: center;
             align-items: center;
+        }
+
+        @media only screen and (min-width:600px) {
+            .floating-button {
+                right: calc((100% - 600px) / 2 + 20px);
+            }
         }
     </style>
 </head>
