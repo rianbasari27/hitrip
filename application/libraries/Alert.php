@@ -41,6 +41,9 @@ class Alert
             'icon' => $icon,
             'message' => $message,
         ];
+        // echo '<pre>';
+        // print_r($alert);
+        // exit();
         $this->CI->session->set_flashdata('alert', $alert);
     }
 }

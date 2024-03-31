@@ -3,6 +3,11 @@
 
 <head>
     <?php $this->load->view('jamaah/include/header'); ?>
+    <style>
+        p {
+            color: red !important;
+        }
+    </style>
 </head>
 
 <body class="theme-light">
@@ -28,28 +33,32 @@
 
                     </div>
 
-                    <form action="<?php echo base_url() . 'jamaah/login/proses_otp' ;?>" id="myForm" method="post">
+                    <form action="<?php echo base_url() . 'jamaah/login/sign_up' ;?>" id="myForm" method="post">
                         <div class="content px-4">
-                            <div class="input-style input-transparent no-borders has-icon validate-field mb-4">
+                            <div class="input-style input-transparent no-borders has-icon validate-field">
                                 <i class="fa fa-user"></i>
                                 <input type="name" class="form-control validate-text" name="username" id="form1ab"
-                                    placeholder="Username">
+                                    placeholder="Username" value="<?php echo set_value('username') ?>">
                                 <label for="form1ab" class="color-highlight">Username</label>
                                 <i class="fa fa-times disabled invalid color-red-dark"></i>
                                 <i class="fa fa-check disabled valid color-green-dark"></i>
                                 <em>(required)</em>
                             </div>
-                            <div class="input-style input-transparent no-borders has-icon validate-field mb-4">
+                            <div class="mt-n2 mb-3"><?php echo form_error('username') ?></div>
+
+                            <div class="input-style input-transparent no-borders has-icon validate-field">
                                 <i class="fa fa-user"></i>
                                 <input type="name" class="form-control validate-text" name="name" id="form1ac"
                                     placeholder="Full Name"
-                                    value="<?php echo isset($_SESSION['form']['name']) ? $_SESSION['form']['name'] : '';?>">
+                                    value="<?php echo set_value('name') ?>">
                                 <label for="form1ac" class="color-highlight">Full Name</label>
                                 <i class="fa fa-times disabled invalid color-red-dark"></i>
                                 <i class="fa fa-check disabled valid color-green-dark"></i>
                                 <em>(required)</em>
                             </div>
-                            <div class="input-style input-transparent no-borders has-icon validate-field mb-4">
+                            <div class="mt-n2 mb-3"><?php echo form_error('name') ?></div>
+
+                            <div class="input-style input-transparent no-borders has-icon validate-field">
                                 <i class="fa fa-at"></i>
                                 <input type="email" name="email" class="form-control validate-email" id="form1ad"
                                     placeholder="Email Address">
@@ -58,7 +67,9 @@
                                 <i class="fa fa-check disabled valid color-green-dark"></i>
                                 <em>(required)</em>
                             </div>
-                            <div class="input-style input-transparent no-borders has-icon validate-field mb-4">
+                            <div class="mt-n2 mb-3"><?php echo form_error('email') ?></div>
+
+                            <div class="input-style input-transparent no-borders has-icon validate-field">
                                 <i class="fa fa-phone"></i>
                                 <input type="number" name="no_telp" class="form-control validate-email" id="form1ae"
                                     placeholder="No. Telp">
@@ -67,7 +78,9 @@
                                 <i class="fa fa-check disabled valid color-green-dark"></i>
                                 <em>(required)</em>
                             </div>
-                            <div class="input-style input-transparent no-borders has-icon validate-field mb-4">
+                            <div class="mt-n2 mb-3"><?php echo form_error('no_telp') ?></div>
+
+                            <div class="input-style input-transparent no-borders has-icon validate-field">
                                 <i class="fa fa-lock"></i>
                                 <input type="password" name="password" class="form-control validate-password"
                                     id="form1af" placeholder="Password">
@@ -76,7 +89,9 @@
                                 <i class="fa fa-check disabled valid color-green-dark"></i>
                                 <em>(required)</em>
                             </div>
-                            <div class="input-style input-transparent no-borders has-icon validate-field mb-4">
+                            <div class="mt-n2 mb-3"><?php echo form_error('password') ?></div>
+
+                            <div class="input-style input-transparent no-borders has-icon validate-field">
                                 <i class="fa fa-lock"></i>
                                 <input type="password" name="confirmPassword" class="form-control validate-password"
                                     id="form1ag" placeholder="Confirm Password">
@@ -85,6 +100,7 @@
                                 <i class="fa fa-check disabled valid color-green-dark"></i>
                                 <em>(required)</em>
                             </div>
+                            <div class="mt-n2 mb-3"><?php echo form_error('confirmPassword') ?></div>
 
                             <a href="#" id="submitBtn" data-back-button
                                 class="btn btn-full btn-l font-600 font-13 gradient-highlight mt-4 rounded-s">Sign

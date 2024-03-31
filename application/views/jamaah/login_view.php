@@ -3,6 +3,11 @@
 
 <head>
     <?php $this->load->view('jamaah/include/header'); ?>
+    <style>
+        p {
+            color: red !important;
+        }
+    </style>
 </head>
 
 <body class="theme-light">
@@ -25,8 +30,9 @@
                         <h1 class="font-40 color-white">Sign In</h1>
                     </div>
 
-                    <form action="<?php echo base_url() . 'jamaah/login/proses' ;?>" id="myForm" method="post">
+                    <form action="<?php echo base_url() . 'jamaah/login' ;?>" id="myForm" method="post">
                         <div class="content px-4">
+
                             <div class="input-style input-transparent no-borders has-icon validate-field mb-4">
                                 <i class="fa fa-user"></i>
                                 <input type="name" name="username" class="form-control validate-name" id="form1a"
@@ -36,7 +42,9 @@
                                 <i class="fa fa-check disabled valid color-green-dark"></i>
                                 <em>(required)</em>
                             </div>
-                            <div class="input-style input-transparent no-borders has-icon validate-field mb-4">
+                            <div class="mt-n3 mb-3"><?php echo form_error('username') ?></div>
+                            
+                            <div class="input-style input-transparent no-borders has-icon validate-field mb-4 mt-4">
                                 <i class="fa fa-lock"></i>
                                 <input type="password" name="password" class="form-control validate-password"
                                     id="form1b" placeholder="Password">
@@ -45,6 +53,7 @@
                                 <i class="fa fa-check disabled valid color-green-dark"></i>
                                 <em>(required)</em>
                             </div>
+                            <div class="mt-n3 mb-5"><?php echo form_error('password') ?></div>
 
                             <a href="#" id="submitBtn" data-back-button
                                 class="btn btn-full btn-l font-600 font-13 gradient-highlight mt-4 rounded-s">Sign

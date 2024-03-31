@@ -7,18 +7,28 @@ class Login extends CI_Controller
 
     public function index()
     {
-        $this->load->view('jamaah/login_view');
+        $this->form_validation->set_rules('username', 'username', 'required|trim');
+        $this->form_validation->set_rules('password', 'password', 'required|trim');
+
+        if ($this->form_validation->run() == FALSE) {
+            // $this->session->set_flashdata(['form' => $_POST]);
+            // $this->alert->setJamaah('red', 'Ups...', validation_errors('<li>', '</li>'));
+            // redirect($_SERVER['HTTP_REFERER']);
+            $this->load->view('jamaah/login_view');
+        } else {
+            $this->proses();
+        }
     }
     public function proses()
     {
-        $this->form_validation->set_rules('username', 'Username', 'required|trim');
-        $this->form_validation->set_rules('password', 'Password', 'required|trim');
+        // $this->form_validation->set_rules('username', 'Username', 'required|trim');
+        // $this->form_validation->set_rules('password', 'Password', 'required|trim');
 
-        if ($this->form_validation->run() == FALSE) {
-            $this->session->set_flashdata(['form' => $_POST]);
-            $this->alert->setJamaah('red', 'Ups...', validation_errors('<li>', '</li>'));
-            redirect($_SERVER['HTTP_REFERER']);
-        }
+        // if ($this->form_validation->run() == FALSE) {
+        //     $this->session->set_flashdata(['form' => $_POST]);
+        //     $this->alert->setJamaah('red', 'Ups...', validation_errors('<li>', '</li>'));
+        //     redirect($_SERVER['HTTP_REFERER']);
+        // }
 
         $this->load->model('customer');
         $result = $this->customer->verifyLoginUser($_POST['username'], $_POST['password']);
@@ -32,21 +42,32 @@ class Login extends CI_Controller
     }
 
     public function sign_up() {
-        $this->load->view('jamaah/sign_up_view');
+        $this->form_validation->set_rules('username', 'username', 'required|trim');
+        $this->form_validation->set_rules('name', 'fullname', 'required|trim');
+        $this->form_validation->set_rules('no_telp', 'nomor telepon', 'required|trim');
+        $this->form_validation->set_rules('email', 'email', 'required|trim');
+        $this->form_validation->set_rules('password', 'password', 'required|trim');
+        $this->form_validation->set_rules('confirmPassword', 'confirm password', 'required|trim|matches[password]');
+        if ($this->form_validation->run() == FALSE) {
+            $this->load->view('jamaah/sign_up_view');
+        } else {
+            $this->proses_otp();
+        }
+
     }
 
     public function proses_otp() {
-        $this->form_validation->set_rules('username', 'Username', 'required|trim');
-        $this->form_validation->set_rules('name', 'Name', 'required|trim');
-        $this->form_validation->set_rules('no_telp', 'No. Telp', 'required|trim');
-        $this->form_validation->set_rules('email', 'Email', 'required|trim');
-        $this->form_validation->set_rules('password', 'Password', 'required|trim');
-        $this->form_validation->set_rules('confirmPassword', 'Confirm Password', 'required|trim|matches[password]');
-        if ($this->form_validation->run() == FALSE) {
-            $this->session->set_flashdata(['form' => $_POST]);
-            $this->alert->setJamaah('red', 'Mohon Maaf', validation_errors());
-            redirect($_SERVER['HTTP_REFERER']);
-        }
+        // $this->form_validation->set_rules('username', 'Username', 'required|trim');
+        // $this->form_validation->set_rules('name', 'Name', 'required|trim');
+        // $this->form_validation->set_rules('no_telp', 'No. Telp', 'required|trim');
+        // $this->form_validation->set_rules('email', 'Email', 'required|trim');
+        // $this->form_validation->set_rules('password', 'Password', 'required|trim');
+        // $this->form_validation->set_rules('confirmPassword', 'Confirm Password', 'required|trim|matches[password]');
+        // if ($this->form_validation->run() == FALSE) {
+        //     $this->session->set_flashdata(['form' => $_POST]);
+        //     $this->alert->setJamaah('red', 'Mohon Maaf', validation_errors());
+        //     redirect($_SERVER['HTTP_REFERER']);
+        // }
 
         $this->load->model('registrasi');
         // check username

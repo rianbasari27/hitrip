@@ -66,14 +66,16 @@
         <div class="page-content mt-n1">
 
             <!-- Search Section -->
-            <div class="content mt-n4 mb-4">
-                <div class="search-box search-dark shadow-sm border-0 mt-4 bg-theme rounded-sm bottom-0">
+            <div class="content mt-0 mb-4">
+                <div id="timeInfo" class="text-center d-flex justify-content-between mb-2">
+                    <p class="mb-0">Zona waktu Anda: </p>
+                    <div class="font-700">
+                        <i class="fa-solid fa-clock me-1 color-highlight"></i><span id="formattedTime" class="color-highlight"></span> | <span id="zoneName" class="font-500"></span>
+                    </div>
+                </div>
+                <div class="search-box search-dark shadow-sm border-0 bg-theme rounded-sm bottom-0">
                     <i class="fa fa-search ms-1"></i>
                     <input type="text" class="border-0" placeholder="Searching for something? Try 'dubai'" data-search>
-                </div>
-                <div id="timeInfo">
-                    <p>Zona Waktu: <span id="zoneName"></span></p>
-                    <p>Waktu Terformat: <span id="formattedTime"></span></p>
                 </div>
                 <div class="search-results disabled-search-list">
                     <div>
