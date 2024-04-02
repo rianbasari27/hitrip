@@ -622,7 +622,7 @@
 
     // Memanggil fungsi updateTimeAndLocation saat halaman dimuat
     // window.onload = function() {
-    updateTimeAndLocation();
+    // updateTimeAndLocation();
     //     // Menetapkan pembaruan waktu setiap detik (1000 milidetik)
     //     setInterval(updateTimeAndLocation, 1000);
     // };
