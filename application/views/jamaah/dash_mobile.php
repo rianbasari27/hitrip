@@ -4,43 +4,43 @@
 <head>
     <?php $this->load->view('jamaah/include/header'); ?>
     <style>
+    .floating-button {
+        position: fixed;
+        bottom: 80px;
+        right: 20px;
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        text-align: center;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        z-index: 1000;
+    }
+
+    .floating-button a {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+        color: #fff;
+        font-size: 24px;
+        text-decoration: none;
+    }
+
+    .squircle-icon {
+        width: 40px;
+        height: 40px;
+        border-radius: 35%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    @media only screen and (min-width:600px) {
         .floating-button {
-            position: fixed;
-            bottom: 80px;
-            right: 20px;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            text-align: center;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-            z-index: 1000;
+            right: calc((100% - 600px) / 2 + 20px);
         }
-        
-        .floating-button a {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 100%;
-            height: 100%;
-            color: #fff;
-            font-size: 24px;
-            text-decoration: none;
-        }
-
-        .squircle-icon {
-            width: 40px;
-            height: 40px;
-            border-radius: 35%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        @media only screen and (min-width:600px) {
-            .floating-button {
-                right: calc((100% - 600px) / 2 + 20px);
-            }
-        }
+    }
     </style>
 </head>
 
@@ -70,7 +70,8 @@
                 <div id="timeInfo" class="text-center d-flex justify-content-between mb-2">
                     <p class="mb-0">Zona waktu Anda: </p>
                     <div class="font-700">
-                        <i class="fa-solid fa-clock me-1 color-highlight"></i><span id="formattedTime" class="color-highlight"></span> | <span id="zoneName" class="font-500"></span>
+                        <i class="fa-solid fa-clock me-1 color-highlight"></i><span id="formattedTime"
+                            class="color-highlight"></span> | <span id="zoneName" class="font-500"></span>
                     </div>
                 </div>
                 <div class="search-box search-dark shadow-sm border-0 bg-theme rounded-sm bottom-0">
@@ -588,7 +589,7 @@
             var latitude = position.coords.latitude;
             var longitude = position.coords.longitude;
             var timezoneApiUrl =
-                `http://api.geonames.org/timezoneJSON?lat=${latitude}&lng=${longitude}&username=hitrip`;
+                `https://timeapi.io/api/Time/current/coordinate?latitude=${latitude}&longitude=${longitude}`;
 
             // Memanggil navigator.geolocation.getCurrentPosition untuk mendapatkan lokasi pengguna
 
@@ -598,14 +599,13 @@
                 .then(data => {
                     console.log(data);
                     // Memeriksa apakah permintaan berhasil
-                    var zoneName = data.timezoneId;
-                    var Time = data.time;
-                    formattedTime = Time.split(" ");
+                    var zoneName = data.timeZone;
+                    var timeNow = data.time;
 
 
                     // Memperbarui tampilan zona waktu dan waktu terformat
                     document.getElementById("zoneName").textContent = zoneName;
-                    document.getElementById("formattedTime").textContent = formattedTime[1];
+                    document.getElementById("formattedTime").textContent = timeNow;
                 })
                 .catch(error => {
                     console.error('Terjadi kesalahan:', error);
@@ -621,10 +621,10 @@
     }
 
     // Memanggil fungsi updateTimeAndLocation saat halaman dimuat
-    window.onload = function() {
-        updateTimeAndLocation();
-        // Menetapkan pembaruan waktu setiap detik (1000 milidetik)
-        setInterval(updateTimeAndLocation, 1000);
-    };
+    // window.onload = function() {
+    updateTimeAndLocation();
+    //     // Menetapkan pembaruan waktu setiap detik (1000 milidetik)
+    //     setInterval(updateTimeAndLocation, 1000);
+    // };
     </script>
 </body>

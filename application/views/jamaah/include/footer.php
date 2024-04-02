@@ -4,10 +4,16 @@
         Cobalah untuk mengerti
     </p>
     <div class="text-center mb-3">
-        <a href="https://www.facebook.com/ventourtravelofficial" target="_blank" class="icon icon-xs rounded-sm shadow-l mr-1 bg-facebook"><i class="fab fa-facebook-f"></i></a>
-        <a href="https://www.instagram.com/ventour_travel/" target="_blank" class="icon icon-xs rounded-sm shadow-l mr-1 bg-instagram"><i class="fab fa-instagram"></i></a>
-        <a href="https://www.youtube.com/channel/UCH-T_OLrpIkn7ftru-ADzXw?" target="_blank" class="icon icon-xs rounded-sm shadow-l mr-1 bg-red-dark"><i class="fab fa-youtube"></i></a>
-        <a href="https://www.tiktok.com/@ventour_travel?_t=8cxrNSstJLt&_r=1" target="_blank" class="icon icon-xs rounded-sm shadow-l mr-1 bg-dark-dark"><i class="fa-brands fa-tiktok"></i></a>
+        <!-- <a href="#" target="_blank" class="icon icon-xs rounded-sm shadow-l mr-1 bg-facebook"><i
+                class="fab fa-facebook-f"></i></a> -->
+        <a href="https://www.instagram.com/hitrip.official/?igsh=NG1weGl1ZHFjaHlp" target="_blank"
+            class="icon icon-xs rounded-sm shadow-l mr-1 bg-instagram"><i class="fab fa-instagram"></i></a>
+        <!-- <a href="#" target="_blank" class="icon icon-xs rounded-sm shadow-l mr-1 bg-red-dark"><i
+                class="fab fa-youtube"></i></a>
+        <a href="#" target="_blank" class="icon icon-xs rounded-sm shadow-l mr-1 bg-dark-dark"><i
+                class="fa-brands fa-tiktok"></i></a> -->
+        <a href="#" class="back-to-top icon icon-xs rounded-sm shadow-l bg-highlight color-white"><i
+                class="fa fa-arrow-up"></i></a>
     </div>
     <div class="divider mb-3"></div>
     <div class="row text-center mb-3 pl-3 pr-3">
