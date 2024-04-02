@@ -5,6 +5,8 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="viewport"
     content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, viewport-fit=cover" />
+<meta content='yes' name='apple-mobile-web-app-capable' />
+<meta content='yes' name='mobile-web-app-capable' />
 <link rel="icon" href="<?php echo base_url() . 'asset/icons/android/icon-title.png';?>" type="image/x-icon">
 <title>Hi Trip</title>
 
@@ -15,7 +17,7 @@
 <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>asset/appkit/styles/bootstrap.css">
 <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>asset/appkit/styles/style.css">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
-rel="stylesheet">
+    rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>asset/appkit/fonts/css/fontawesome-all.min.css">
 <link rel="manifest" href="<?php echo base_url(); ?>asset/appkit/_manifest.json" data-pwa-version="3.15">
 <link rel="stylesheet" href="<?php echo base_url(); ?>asset/jqueryui/jquery-ui.css">
