@@ -14,11 +14,13 @@
 <div class="page-content pb-0">
         <div class="card mb-0 rounded-0" data-card-height="cover-full">
             <div class="card-center text-center ps-3">
-                <h1 class="font-40 font-800 pb-3">App<span class="gradient-highlight p-2 mx-1 color-white scale-box d-inline-block rounded-s border-0">Kit</span></h1>
-                <h5 class="mt-n3 opacity-30">Powered by Enabled.</h5>
-                <h4 class="boxed-text-xl pt-4 font-24 line-height-l"> Explore the World with HiTrip</h4>
+                <!-- <h1 class="font-40 font-800 pb-3">App<span class="gradient-highlight p-2 mx-1 color-white scale-box d-inline-block rounded-s border-0">Kit</span></h1>
+                <h5 class="mt-n3 opacity-30">Powered by Enabled.</h5> -->
+                <img src="<?php echo base_url() ?>asset/appkit/images/hitrip/hitrip-logo.png" alt="hitrip-logo" width="200">
+                <h5 class="opacity-30">Explore the World with HiTrip</h5>
+                <h4 class="boxed-text-xl pt-4 line-height-l">Explore new horizons and make lasting memories with HiTrip's seamless global adventures.</h4>
                 
-                <a href="<?php echo base_url() ?>jamaah/splash/end/home" class="btn btn-center-l gradient-highlight rounded-sm btn-l font-13 font-600 mt-5 scale-box">Get Started</a>
+                <a href="<?php echo base_url() ?>jamaah/splash/end/home" class="btn btn-center-l gradient-highlight rounded-sm btn-l font-13 font-600 mt-5 scale-box" style="margin-top: 100px;">Get Started</a>
             </div>
         </div>
     </div>
