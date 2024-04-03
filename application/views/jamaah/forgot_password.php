@@ -7,6 +7,42 @@
         .bg-34 {
             background-image: url(<?php echo base_url() . 'asset/appkit/images/background-3.jpg' ?>);
         }
+        .back-button {
+            position: fixed;
+            top: 30px;
+            left: 30px;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+        }
+
+        .back-button a {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+            font-size: 20px;
+            text-decoration: none;
+        }
+
+        .squircle-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 35%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        @media only screen and (min-width:600px) {
+            .back-button {
+                left: calc((100% - 600px) / 2 + 30px);
+            }
+        }
     </style>
 </head>
 
@@ -21,6 +57,13 @@
         <!-- header-bar -->
         <?php $this->load->view('jamaah/include/header_bar', ['noBackButton' => true]); ?>
         <div class="page-content pb-0">
+
+            <!-- back button -->
+            <div class="back-button bg-white">
+                <a href="#" data-back-button class="color-highlight">
+                    <i class="fa-solid fa-arrow-left"></i>
+                </a>
+            </div>
 
             <div data-card-height="cover-full" class="card mb-0 bg-34">
                 <div class="card-center">

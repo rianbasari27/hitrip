@@ -11,11 +11,7 @@ class Home extends CI_Controller
         $this->load->model('customer');
         // if (!$this->customer->is_user_logged_in()) {
         //     $this->alert->setJamaah('yellow', 'asdasd', 'Anda harus login terlebih dahulu');
-        //     redirect(base_url() . 'jamaah/login');
-        // }
-        // $this->load->model('konsultanAuth');
-        // if ($this->konsultanAuth->is_user_logged_in()) {
-        //     redirect(base_url() . 'konsultan/home');
+        //     redirect(base_url() . 'jamaah/home');
         // }
     }
     

@@ -550,6 +550,7 @@
 
             <?php $this->load->view('jamaah/include/footer'); ?>
             <?php $this->load->view('jamaah/include/alert'); ?>
+            <?php $this->load->view('jamaah/include/toast'); ?>
         </div>
         <!-- Page content ends here-->
 
@@ -578,10 +579,13 @@
             data-menu-load="<?php echo base_url() . 'jamaah/menu/colors'; ?>" data-menu-height="480"></div>
     </div>
 
-
     <script src="<?php echo base_url(); ?>asset/sbadmin2/vendor/jquery/jquery.min.js"></script>
     <?php $this->load->view('jamaah/include/script_view'); ?>
     <script type="text/javascript">
+        var toastID = document.getElementById('toast-2');
+        toastID = new bootstrap.Toast(toastID);
+        toastID.show();
+
     // Fungsi untuk memperbarui waktu dan mendapatkan latitude serta longitude
     function updateTimeAndLocation() {
         // Mendefinisikan URL API TimezoneDB

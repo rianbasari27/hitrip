@@ -46,4 +46,24 @@ class Alert
         // exit();
         $this->CI->session->set_flashdata('alert', $alert);
     }
+
+    public function toastAlert($color, $message)
+    {
+        if ($color == 'green') {
+            $icon = '<i class="fa fa-circle-check me-2"></i>'; 
+        } else if ($color == 'red') {
+            $icon = '<i class="fa fa-circle-exclamation me-2"></i>';
+        } else {
+            $icon = '<i class="fa fa-times-circle me-2"></i>';
+        }
+        $toast = [
+            'color' => $color,
+            'icon' => $icon,
+            'message' => $message,
+        ];
+        // echo '<pre>';
+        // print_r($alert);
+        // exit();
+        $this->CI->session->set_flashdata('toast', $toast);
+    }
 }
