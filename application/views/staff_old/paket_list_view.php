@@ -13,8 +13,6 @@
 
         <!-- Sidebar -->
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-
-
             <?php $this->load->view('staff/include/side_menu',['paket_umroh' => true]); ?>
 
             <!-- Content Wrapper -->
@@ -53,10 +51,11 @@
                                     <div class="card-body">
                                         <form role="form" method="get" action="<?php echo base_url(); ?>staff/paket">
                                             <div class="form-group">
-                                            <select name="month" class="form-control">
+                                                <select name="month" class="form-control">
                                                     <option value="0">Lihat Semua</option>
                                                     <?php foreach ($monthPackage as $m) { ?>
-                                                    <option value="<?php echo date('m', strtotime($m->tanggal_berangkat))?>"
+                                                    <option
+                                                        value="<?php echo date('m', strtotime($m->tanggal_berangkat))?>"
                                                         <?php echo date('m', strtotime($m->tanggal_berangkat)) == $month ? 'selected' : ''; ?>>
                                                         <?php echo $this->date->convert('F', $m->tanggal_berangkat); ?>
                                                     </option>
@@ -85,7 +84,8 @@
                                     </div>
                                     <div class="card-body">
                                         <div class="d-flex">
-                                            <div style="width: 20px; height: 20px; background-color: lightgreen; margin-right: 5px;" class="rounded border border-dark"></div>
+                                            <div style="width: 20px; height: 20px; background-color: lightgreen; margin-right: 5px;"
+                                                class="rounded border border-dark"></div>
                                             <p class="text-dark">Broadcast Aktif</p>
                                         </div>
                                         <div class="table-responsive">
@@ -133,11 +133,11 @@
     $(document).ready(function() {
         $('#dataTable').DataTable({
             'rowCallback': function(row, data, index) {
-                    if (data['status_bcast'] == '1') {
-                        $(row).css('background-color', 'lightgreen');
-                        $(row).css('color', 'black');
-                    }
-                },
+                if (data['status_bcast'] == '1') {
+                    $(row).css('background-color', 'lightgreen');
+                    $(row).css('color', 'black');
+                }
+            },
             "processing": true,
             "serverSide": true,
             "ajax": {
@@ -159,7 +159,7 @@
                                             <a href="javascript:void(0);" class="btn btn-success btn-sm log_btn mt-1">Log</a>'
                 },
                 {
-                    "targets": [ 1, 7 ],
+                    "targets": [1, 7],
                     "render": function(data, type, row) {
                         if (data != null) {
                             var from = data.split("-");

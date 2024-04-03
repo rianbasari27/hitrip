@@ -8,10 +8,10 @@ class Dashboard extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        // $this->load->library('login_lib');
-        // if ($this->login_lib->checkSession() == false) {
-        //     redirect(base_url() . 'staff/login');
-        // }
+        $this->load->library('login_lib');
+        if ($this->login_lib->checkSession() == false) {
+            redirect(base_url() . 'staff/login');
+        }
     }
     
     public function index()
@@ -97,7 +97,7 @@ class Dashboard extends CI_Controller
         //     'detail_perl' => $detail_perl,
         //     // 'perlengkapan' =>$perlengkapan
         // );
-        $this->load->view('staff2/dash_view');
+        $this->load->view('staff/dash_view');
     }
 
     public function load_jamaah() {

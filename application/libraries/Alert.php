@@ -47,7 +47,7 @@ class Alert
         $this->CI->session->set_flashdata('alert', $alert);
     }
 
-    public function toastAlert($color, $message)
+    public function toastJamaah($color, $message)
     {
         if ($color == 'green') {
             $icon = '<i class="fa fa-circle-check me-2"></i>'; 
@@ -64,6 +64,16 @@ class Alert
         // echo '<pre>';
         // print_r($alert);
         // exit();
+        $this->CI->session->set_flashdata('toast', $toast);
+    }
+
+    public function toast($color, $header, $body)
+    {
+        $toast = [
+            'color' => $color,
+            'header' => $header,
+            'body' => $body,
+        ];
         $this->CI->session->set_flashdata('toast', $toast);
     }
 }

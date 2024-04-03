@@ -13,8 +13,8 @@ class Paket extends CI_Controller
             redirect(base_url() . 'staff/login');
         }
         //this page only for admin
-        if (!($_SESSION['bagian'] == 'Admin' || $_SESSION['bagian'] == 'Master Admin' || $_SESSION['bagian'] == 'Finance' || $_SESSION['bagian'] == 'Manifest')) {
-            $this->alert->set('danger', 'Anda tidak memiliki akses untuk halaman tersebut');
+        if (!($_SESSION['bagian'] == 'Master Admin')) {
+            $this->alert->toast('danger', 'Mohon Maaf', 'Anda tidak memiliki akses');
             redirect(base_url() . 'staff/dashboard');
         }
     }
@@ -119,19 +119,11 @@ class Paket extends CI_Controller
 
     public function tambah()
     {
-        if (!($_SESSION['bagian'] == 'Admin' || $_SESSION['bagian'] == 'Master Admin' || $_SESSION['bagian'] == 'Finance')) {
-            $this->alert->set('danger', 'Anda tidak memiliki akses untuk halaman tersebut');
-            redirect(base_url() . 'staff/dashboard');
-        }
         $this->load->view('staff/paket_tambah_view');
     }
 
     public function proses_tambah()
     {
-        if (!($_SESSION['bagian'] == 'Admin' || $_SESSION['bagian'] == 'Master Admin' || $_SESSION['bagian'] == 'Finance')) {
-            $this->alert->set('danger', 'Anda tidak memiliki akses untuk halaman tersebut');
-            redirect(base_url() . 'staff/dashboard');
-        }
         $this->form_validation->set_rules('nama_paket', 'Nama Paket', 'trim|required|alpha_numeric_spaces');
         $this->form_validation->set_rules('tanggal_berangkat', 'Tanggal Keberangkatan', 'trim|required');
         $this->form_validation->set_rules('isi_kamar', 'Isi Kamar', 'trim|required|numeric');
@@ -141,7 +133,7 @@ class Paket extends CI_Controller
         $this->form_validation->set_rules('maskapai', 'Maskapai', 'trim|required');
 
         if ($this->form_validation->run() == FALSE) {
-            $this->alert->set('danger', validation_errors());
+            $this->session->set_flashdata('nama_paket_error', form_error('nama_paket'));
             redirect(base_url() . 'staff/paket/tambah');
         }
 
