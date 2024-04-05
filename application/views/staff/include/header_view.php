@@ -56,4 +56,9 @@
 .toast.show {
     animation: show-toast 1s ease forwards;
 }
+
+
+.fixed-button .btn {
+    display: none !important;
+}
 </style>
