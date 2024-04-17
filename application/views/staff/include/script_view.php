@@ -20,6 +20,10 @@
 <script src="<?php echo base_url() ?>asset/bhumlu/js/demo.js"></script>
 <script src="<?php echo base_url() ?>asset/bhumlu/js/analytics.js"></script>
 <script src="<?php echo base_url() ?>asset/bhumlu/js/pages/dashboards_index.js"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+<script src="https://cdn.datatables.net/2.0.4/js/dataTables.js"></script>
+<!-- <script src="<?php echo base_url(); ?>asset/sbadmin2/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.5.6/js/dataTables.buttons.min.js"></script> -->
 <?php if (isset($_SESSION['toast'])) { ?>
 <script>
 $('.toast').toast('show');

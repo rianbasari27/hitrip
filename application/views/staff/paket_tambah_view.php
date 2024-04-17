@@ -16,7 +16,7 @@
     <!-- [ Layout wrapper ] Start -->
     <div class="layout-wrapper layout-2">
         <div class="layout-inner">
-            <?php $this->load->view('staff/include/side_menu', ["produk" => true]) ?>
+            <?php $this->load->view('staff/include/side_menu', ["produk" => true, "tambah_produk" => true]) ?>
             <!-- [ Layout container ] Start -->
             <div class="layout-container">
                 <?php $this->load->view('staff/include/nav_menu') ?>
@@ -30,12 +30,6 @@
                         <div class="row">
                             <!-- 1st row Start -->
                             <div class="col-lg-12">
-                                <?php if (!empty($_SESSION['alert_type'])) { ?>
-                                <div class="alert alert-<?php echo $_SESSION['alert_type']; ?>">
-                                    <i class="<?php echo $_SESSION['alert_icon']; ?>"></i>
-                                    <?php echo $_SESSION['alert_message']; ?>
-                                </div>
-                                <?php } ?>
                                 <div class="card mb-4">
                                     <div class="card-header with-elements">
                                         <h6 class="card-header-title mb-0 text primary">Isi data dengan benar</h6>
@@ -51,7 +45,75 @@
                                                         Name</span>)</label>
                                                 <input class="form-control" type="text" name="nama_paket" required>
                                             </div>
-                                            <button class="btn btn-primary btn-icon-split rounded-s">
+                                            <div class="form-group">
+                                                <label class="col-form-label">Tanggal Berangkat</label>
+                                                <input class="form-control" type="date" name="tanggal_berangkat"
+                                                    required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-form-label">Tanggal Pulang</label>
+                                                <input class="form-control" type="date" name="tanggal_pulang">
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-form-label">Jumlah Pax</label>
+                                                <input class="form-control format_harga" type="text" name="jumlah_seat">
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-form-label">Harga Quad</label>
+                                                <input class="form-control format_harga" type="text" name="harga"
+                                                    required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-form-label">Harga Triple</label>
+                                                <input class="form-control format_harga" type="text"
+                                                    name="harga_triple">
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-form-label">Harga Double</label>
+                                                <input class="form-control format_harga" type="text"
+                                                    name="harga_double">
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-form-label">Diskon</label>
+                                                <input class="form-control format_harga" type="text"
+                                                    name="default_diskon" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-form-label">Deskripsi Diskon</label>
+                                                <input class="form-control" type="text" name="deskripsi_default_diskon"
+                                                    required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-form-label">Upload Gambar Banner - rekomendasi ukuran
+                                                    700x700
+                                                    px (<span
+                                                        class="text-primary font-italic font-weight-lighter">Gambar yang
+                                                        muncul di aplikasi</span>)</label>
+                                                <input class="form-control" type="file" name="banner_image">
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-form-label">Upload Gambar Flyer (<span
+                                                        class="text-primary font-italic font-weight-lighter">Gambar
+                                                        Untuk download Flyer</span>)</label>
+                                                <input class="form-control" type="file" name="paket_flyer">
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-form-label">Upload Itinerary</label>
+                                                <input class="form-control" type="file" name="itinerary">
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-form-label">Deskripsi Singkat</label>
+                                                <textarea class="form-control wysiwyg" rows="6"
+                                                    name="detail_promo"></textarea>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="checkbox">
+                                                    <label>
+                                                        <input type="checkbox" name="publish" value="1" checked> Publish
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <button class="btn btn-xs btn-primary btn-icon-split rounded-s">
                                                 <span class="icon text-white-50">
                                                     <i class="fas fa-check"></i>
                                                 </span>
@@ -75,8 +137,23 @@
         <div class="layout-overlay layout-sidenav-toggle"></div>
     </div>
     <!-- [ Layout wrapper] End -->
-    <script src="<?php echo base_url(); ?>asset/sbadmin2/vendor/jquery/jquery.min.js"></script>
     <?php $this->load->view('staff/include/script_view') ?>
+    <!-- <script src="<?php echo base_url(); ?>asset/sbadmin2/vendor/jquery/jquery.min.js"></script> -->
+    <script>
+    $(document).ready(function() {
+        $(".format_harga").on("input", function() {
+            var inputValue = $(this).val();
+
+            inputValue = inputValue.replace(/[^\d.]/g, '');
+            if (inputValue !== '') {
+                inputValue = parseFloat(inputValue).toLocaleString('en-US');
+                $(this).val(inputValue);
+            } else {
+                $(this).val('');
+            }
+        });
+    });
+    </script>
 </body>
 
 </html>

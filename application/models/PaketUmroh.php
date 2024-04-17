@@ -7,7 +7,6 @@ class PaketUmroh extends CI_Model
     {
 
         if (isset($data['files']['banner_image'])) {
-
             $this->load->library('scan');
             $hasil = $this->scan->check($data['files']['banner_image'], 'banner_image', null);
             if ($hasil !== false) {
@@ -15,9 +14,27 @@ class PaketUmroh extends CI_Model
             } else {
                 $data['banner_image'] = null;
             }
-            unset($data['files']);
+        }
+        if (isset($data['files']['paket_flyer'])) {
+            $this->load->library('scan');
+            $hasil = $this->scan->check($data['files']['paket_flyer'], 'paket_flyer', null);
+            if ($hasil !== false) {
+                $data['paket_flyer'] = $hasil;
+            } else {
+                $data['paket_flyer'] = null;
+            }
+        }
+        if (isset($data['files']['itinerary'])) {
+            $this->load->library('scan');
+            $hasil = $this->scan->check($data['files']['itinerary'], 'itinerary', null);
+            if ($hasil !== false) {
+                $data['itinerary'] = $hasil;
+            } else {
+                $data['itinerary'] = null;
+            }
         }
 
+        unset($data['files']);
         //check publish
         if (!isset($data['publish'])) {
             $publish = 0;
@@ -51,28 +68,15 @@ class PaketUmroh extends CI_Model
             'nama_paket' => $data['nama_paket'],
             'tanggal_berangkat' => $newDate,
             'tanggal_pulang' => $datePulang,
-            'jam_terbang' => $data['jam_terbang'],
             'jumlah_seat' => $jumlahSeat,
-            'extra_fee' => $data['extra_fee'],
-            'deskripsi_extra_fee' => $data['deskripsi_extra_fee'],
-            'star' => $data['star'],
             'banner_image' => $data['banner_image'],
-            'isi_kamar' => $data['isi_kamar'],
             'detail_promo' => $detail,
-            'flight_schedule' => $data['flight_schedule'],
-            'minimal_dp' => $data['minimal_dp'],
-            'dp_display' => $data['dp_display'],
             'harga' => $data['harga'],
             'harga_triple' => $data['harga_triple'],
             'harga_double' => $data['harga_double'],
-            'denda_kurang_3' => $data['denda'],
-            'komisi_langsung_fee' => $data['komisi_langsung_fee'],
-            'komisi_poin' => $data['komisi_poin'],
             'publish' => $publish,
-            'published_at' => $data['published_at'],
             'default_diskon' => $data['default_diskon'],
             'deskripsi_default_diskon' => $data['deskripsi_default_diskon'],
-            'maskapai'=>$data['maskapai'],
 
         );
 
@@ -86,16 +90,6 @@ class PaketUmroh extends CI_Model
         // insert id
         $insert_id = $this->db->insert_id();
         
-        $insert_discount = [
-            'id_paket' => $insert_id,
-            'deskripsi_diskon' => $data['deskripsi_default_diskon'],
-            'discount' => $data['default_diskon'],
-            'tanggal_mulai' => $data['waktu_diskon_start'],
-            'tanggal_berakhir' => $data['waktu_diskon_end'] 
-        ];
-        $this->db->insert('discount_log', $insert_discount);
-
-
         // ambil data sesudahnya
         $this->db->where('id_paket', $insert_id);
         $after = $this->db->get('paket_umroh')->row();
@@ -104,12 +98,12 @@ class PaketUmroh extends CI_Model
         $this->logs->addLogTable($insert_id, 'pu' ,null, $after);
 
         // send notif aplikasi
-        $this->load->model('paketUmroh');
-        $paket = $this->paketUmroh->getPackage($insert_id);
-        if ($publish == 1) {
-            $this->load->model('Notification');
-            $this->Notification->sendPackageNotif($paket->id_paket, $paket->default_diskon);
-        }
+        // $this->load->model('paketUmroh');
+        // $paket = $this->paketUmroh->getPackage($insert_id);
+        // if ($publish == 1) {
+        //     $this->load->model('Notification');
+        //     $this->Notification->sendPackageNotif($paket->id_paket, $paket->default_diskon);
+        // }
         //
         return $insert_id;
     }
@@ -494,10 +488,10 @@ class PaketUmroh extends CI_Model
                 // get tanggal pelunasan
                 $data[$key]->tanggal_pelunasan = date('d F Y', strtotime($d->tanggal_berangkat . ' -45 day'));
                 //get hotel
-                $this->db->where('id_paket', $d->id_paket);
-                $query = $this->db->get('hotel_info');
-                $dataHotel = $query->result();
-                $data[$key]->hotel = $dataHotel;
+                // $this->db->where('id_paket', $d->id_paket);
+                // $query = $this->db->get('hotel_info');
+                // $dataHotel = $query->result();
+                // $data[$key]->hotel = $dataHotel;
                 //reorder
                 $tripDate = strtotime($d->tanggal_berangkat);
                 $currentDate = strtotime('now');

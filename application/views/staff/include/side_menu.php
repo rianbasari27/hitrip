@@ -17,8 +17,9 @@
     <ul class="sidenav-inner py-1">
 
         <!-- Dashboards -->
-        <li class="sidenav-item <?php echo isset($dash) ? 'active' : '' ;?>">
-            <a href="<?php echo base_url() . 'staff/dashboard' ;?>" class="sidenav-link">
+        <li class="sidenav-item">
+            <a href="<?php echo base_url() . 'staff/dashboard' ;?>"
+                class="sidenav-link <?php echo isset($dash) ? 'active' : '' ;?>">
                 <i class="sidenav-icon feather icon-home"></i>
                 <div>Dashboards</div>
                 <div class="pl-1 ml-auto">
@@ -33,19 +34,68 @@
         <li class="sidenav-header small font-weight-semibold">Product</li>
         <!-- Product elements -->
         <li class="sidenav-item">
-            <a href="javascript:" class="sidenav-link sidenav-toggle">
+            <a href="javascript:" class="sidenav-link sidenav-toggle <?php echo isset($produk) ? 'active' : '' ;?>">
                 <i class="sidenav-icon feather icon-box"></i>
                 <div>Paket</div>
             </a>
             <ul class="sidenav-menu">
-                <li class="sidenav-item">
+                <li class="sidenav-item <?php echo isset($tambah_produk) ? 'active' : '' ;?>">
                     <a href="<?php echo base_url() . 'staff/paket/tambah' ;?>" class="sidenav-link">
                         <div>Tambah Paket / Produk</div>
                     </a>
                 </li>
-                <li class="sidenav-item">
+                <li class="sidenav-item <?php echo isset($list_produk) ? 'active' : '' ;?>">
                     <a href="<?php echo base_url() . 'staff/paket' ;?>" class="sidenav-link">
                         <div>List Paket / Produk</div>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <?php } ?>
+
+        <?php if ($_SESSION['bagian'] == "Master Admin") { ?>
+        <!-- Layouts -->
+        <li class="sidenav-divider mb-1"></li>
+        <li class="sidenav-header small font-weight-semibold">Manifest</li>
+        <!-- Product elements -->
+        <li class="sidenav-item">
+            <a href="javascript:" class="sidenav-link sidenav-toggle <?php echo isset($produk) ? 'active' : '' ;?>">
+                <i class="sidenav-icon feather icon-box"></i>
+                <div>Data</div>
+            </a>
+            <ul class="sidenav-menu">
+                <li class="sidenav-item <?php echo isset($tambah_produk) ? 'active' : '' ;?>">
+                    <a href="<?php echo base_url() . 'staff/paket/tambah' ;?>" class="sidenav-link">
+                        <div>Data User</div>
+                    </a>
+                </li>
+                <li class="sidenav-item <?php echo isset($list_produk) ? 'active' : '' ;?>">
+                    <a href="<?php echo base_url() . 'staff/paket' ;?>" class="sidenav-link">
+                        <div>Registrasi User</div>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <?php } ?>
+        <?php if ($_SESSION['bagian'] == "Master Admin") { ?>
+        <!-- Layouts -->
+        <li class="sidenav-divider mb-1"></li>
+        <li class="sidenav-header small font-weight-semibold">Finance</li>
+        <!-- Product elements -->
+        <li class="sidenav-item">
+            <a href="javascript:" class="sidenav-link sidenav-toggle <?php echo isset($produk) ? 'active' : '' ;?>">
+                <i class="sidenav-icon feather icon-box"></i>
+                <div>Pembayaran</div>
+            </a>
+            <ul class="sidenav-menu">
+                <li class="sidenav-item <?php echo isset($tambah_produk) ? 'active' : '' ;?>">
+                    <a href="<?php echo base_url() . 'staff/paket/tambah' ;?>" class="sidenav-link">
+                        <div>Input Pembayaran</div>
+                    </a>
+                </li>
+                <li class="sidenav-item <?php echo isset($list_produk) ? 'active' : '' ;?>">
+                    <a href="<?php echo base_url() . 'staff/paket' ;?>" class="sidenav-link">
+                        <div>Verifikasi Pembayaran</div>
                     </a>
                 </li>
             </ul>

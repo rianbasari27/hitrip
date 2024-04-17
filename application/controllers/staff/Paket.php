@@ -83,7 +83,6 @@ class Paket extends CI_Controller
                     }
                 }
             ),
-            array('db' => 'published_at', 'dt' => 7),
         );
         $month = $_GET['month'];
         $sql_details = array(
@@ -103,17 +102,6 @@ class Paket extends CI_Controller
         }
 
         $data = SSP::simple($_GET, $sql_details, $table, $primaryKey, $columns, null, $extraCondition);
-
-        $this->load->model('bcast');
-        foreach ($data['data'] as $key => $item) {
-            $broadcast = $this->bcast->getPesan(null, $data['data'][$key]['DT_RowId']);
-            if ($broadcast != null) {
-                $data['data'][$key]['status_bcast'] = 1;
-            } else {
-                $data['data'][$key]['status_bcast'] = 0;
-            }
-        }
-
         echo json_encode($data);
     }
 
@@ -126,29 +114,27 @@ class Paket extends CI_Controller
     {
         $this->form_validation->set_rules('nama_paket', 'Nama Paket', 'trim|required|alpha_numeric_spaces');
         $this->form_validation->set_rules('tanggal_berangkat', 'Tanggal Keberangkatan', 'trim|required');
-        $this->form_validation->set_rules('isi_kamar', 'Isi Kamar', 'trim|required|numeric');
-        $this->form_validation->set_rules('minimal_dp', 'Minimal DP', 'trim|required');
         $this->form_validation->set_rules('harga', 'Harga', 'trim|required');
-        $this->form_validation->set_rules('denda', 'Nominal Denda', 'trim|required');
-        $this->form_validation->set_rules('maskapai', 'Maskapai', 'trim|required');
 
         if ($this->form_validation->run() == FALSE) {
-            $this->session->set_flashdata('nama_paket_error', form_error('nama_paket'));
             redirect(base_url() . 'staff/paket/tambah');
         }
 
         $data = $_POST;
 
-        $data['minimal_dp'] = str_replace(",", "", $data['minimal_dp']);
-        $data['dp_display'] = str_replace(",", "", $data['dp_display']);
         $data['harga'] = str_replace(",", "", $data['harga']);
         $data['harga_triple'] = str_replace(",", "", $data['harga_triple']);
         $data['harga_double'] = str_replace(",", "", $data['harga_double']);
         $data['default_diskon'] = str_replace(",", "", $data['default_diskon']);
-        $data['komisi_langsung_fee'] = str_replace(",", "", $data['komisi_langsung_fee']);
-        $data['denda'] = str_replace(",", "", $data['denda']);
+        $data['jumlah_seat'] = str_replace(",", "", $data['jumlah_seat']);
         if (!empty($_FILES['banner_image']['name'])) {
             $data['files']['banner_image'] = $_FILES['banner_image'];
+        }
+        if (!empty($_FILES['paket_flyer']['name'])) {
+            $data['files']['paket_flyer'] = $_FILES['paket_flyer'];
+        }
+        if (!empty($_FILES['itinerary']['name'])) {
+            $data['files']['itinerary'] = $_FILES['itinerary'];
         }
         //add new package
         $this->load->model('paketUmroh');
@@ -176,18 +162,6 @@ class Paket extends CI_Controller
         $this->load->library('date');
         $this->load->model('paketUmroh');
         $data = $this->paketUmroh->getPackage($_GET['id'], false);
-        $this->db->where('id_paket', $_GET['id']);
-        $this->db->order_by('id_log', 'desc');
-        $discount_log = $this->db->get('discount_log')->row();
-        if ($discount_log) {
-            $data->waktu_diskon_start = $discount_log->tanggal_mulai != "0000-00-00" ? $this->date->convert_date_indo($discount_log->tanggal_mulai) : '';
-            $data->waktu_diskon_end = $discount_log->tanggal_berakhir != "0000-00-00" ? $this->date->convert_date_indo($discount_log->tanggal_berakhir) : '';
-            $data->deskripsi_diskon = $discount_log->deskripsi_diskon;
-        } else {
-            $data->waktu_diskon_start = '';
-            $data->waktu_diskon_end = '';
-            $data->deskripsi_diskon = '';
-        }
         if (empty($data)) {
             $this->alert->set('danger', 'Paket tidak ditemukan');
             redirect(base_url() . 'staff/paket');
