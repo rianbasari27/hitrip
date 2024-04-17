@@ -118,8 +118,8 @@
         <div class="layout-overlay layout-sidenav-toggle"></div>
     </div>
     <!-- [ Layout wrapper] End -->
-    <?php $this->load->view('staff/include/script_view') ?>
     <!-- <script src="<?php echo base_url(); ?>asset/sbadmin2/vendor/jquery/jquery.min.js"></script> -->
+    <?php $this->load->view('staff/include/script_view') ?>
     <script>
     // Call the dataTables jQuery plugin
     $(document).ready(function() {
@@ -145,11 +145,9 @@
             columnDefs: [{
                 targets: -1,
                 data: null,
-                defaultContent: '<a href="javascript:void(0);" class="btn btn-primary btn-xxs lihat_btn">Lihat</a> \n\
-                                <a href="javascript:void(0);" class="btn btn-warning btn-sm bc_btn">Broadcast</a> \n\
-                                <a href="javascript:void(0);" class="btn btn-warning btn-sm manasik_btn">BC Manasik</a> \n\
-                                <a href="javascript:void(0);" class="btn btn-danger btn-sm hapus_btn mt-1">Hapus</a> \n\
-                                <a href="javascript:void(0);" class="btn btn-success btn-sm log_btn mt-1">Log</a>'
+                defaultContent: '<a href="javascript:void(0);" class="btn btn-primary btn-xs rounded-xs lihat_btn mt-1">Lihat</a> \n\
+                                <a href="javascript:void(0);" class="btn btn-danger btn-xs rounded-xs hapus_btn mt-1">Hapus</a> \n\
+                                <a href="javascript:void(0);" class="btn btn-success btn-xs rounded-xs log_btn mt-1">Log</a>'
             }]
         });
 

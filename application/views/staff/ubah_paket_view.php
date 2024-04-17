@@ -37,78 +37,65 @@
                                         </div>
                                     </div>
                                     <div class="card-body">
-                                        <form action="<?php echo base_url() . 'staff/paket/proses_tambah' ;?>"
+                                        <form action="<?php echo base_url() . 'staff/paket/proses_ubah' ;?>"
                                             method="post">
+                                            <input type="hidden" name="id" value="<?php echo $id_paket;?>">
                                             <div class="form-group">
                                                 <label class="col-form-label">Nama Paket (<span
                                                         class="text-primary font-italic font-weight-lighter">Advertising
                                                         Name</span>)</label>
-                                                <input class="form-control" type="text" name="nama_paket" required>
+                                                <input class="form-control" type="text" name="nama_paket"
+                                                    value="<?php echo $nama_paket ;?>" required>
                                             </div>
                                             <div class="form-group">
                                                 <label class="col-form-label">Tanggal Berangkat</label>
                                                 <input class="form-control" type="date" name="tanggal_berangkat"
-                                                    required>
+                                                    value="<?php echo $tanggal_berangkat ;?>" required>
                                             </div>
                                             <div class="form-group">
                                                 <label class="col-form-label">Tanggal Pulang</label>
-                                                <input class="form-control" type="date" name="tanggal_pulang">
+                                                <input class="form-control" type="date" name="tanggal_pulang"
+                                                    value="<?php echo $tanggal_pulang ;?>">
                                             </div>
                                             <div class="form-group">
                                                 <label class="col-form-label">Jumlah Pax</label>
-                                                <input class="form-control format_harga" type="text" name="jumlah_seat">
+                                                <input class="form-control format_harga" type="text" name="jumlah_seat"
+                                                    value="<?php echo $jumlah_seat ;?>">
                                             </div>
                                             <div class="form-group">
                                                 <label class="col-form-label">Harga Quad</label>
                                                 <input class="form-control format_harga" type="text" name="harga"
-                                                    required>
+                                                    value="<?php echo $harga ;?>" required>
                                             </div>
                                             <div class="form-group">
                                                 <label class="col-form-label">Harga Triple</label>
-                                                <input class="form-control format_harga" type="text"
-                                                    name="harga_triple">
+                                                <input class="form-control format_harga" type="text" name="harga_triple"
+                                                    value="<?php echo $harga_triple ;?>">
                                             </div>
                                             <div class="form-group">
                                                 <label class="col-form-label">Harga Double</label>
-                                                <input class="form-control format_harga" type="text"
-                                                    name="harga_double">
+                                                <input class="form-control format_harga" type="text" name="harga_double"
+                                                    value="<?php echo $harga_double ;?>">
                                             </div>
                                             <div class="form-group">
                                                 <label class="col-form-label">Diskon</label>
                                                 <input class="form-control format_harga" type="text"
-                                                    name="default_diskon" required>
+                                                    name="default_diskon" value="<?php echo $default_diskon ;?>"
+                                                    required>
                                             </div>
                                             <div class="form-group">
                                                 <label class="col-form-label">Deskripsi Diskon</label>
                                                 <input class="form-control" type="text" name="deskripsi_default_diskon"
-                                                    required>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="col-form-label">Upload Gambar Banner - rekomendasi ukuran
-                                                    700x700
-                                                    px (<span
-                                                        class="text-primary font-italic font-weight-lighter">Gambar yang
-                                                        muncul di aplikasi</span>)</label>
-                                                <input class="form-control" type="file" name="banner_image">
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="col-form-label">Upload Gambar Flyer (<span
-                                                        class="text-primary font-italic font-weight-lighter">Gambar
-                                                        Untuk download Flyer</span>)</label>
-                                                <input class="form-control" type="file" name="paket_flyer">
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="col-form-label">Upload Itinerary</label>
-                                                <input class="form-control" type="file" name="itinerary">
+                                                    value="<?php echo $deskripsi_default_diskon ;?>" required>
                                             </div>
                                             <div class="form-group">
                                                 <label class="col-form-label">Deskripsi Singkat</label>
                                                 <textarea class="form-control wysiwyg" rows="6"
-                                                    name="detail_promo"></textarea>
+                                                    name="detail_promo"><?php echo $detail_promo ;?></textarea>
                                             </div>
                                             <div class="form-check">
                                                 <input class="form-check-input" name="publish" type="checkbox" value="1"
-                                                    id="flexCheckChecked" checked>
+                                                    id="flexCheckChecked" <?php echo $publish == 1 ? 'checked' : '' ;?>>
                                                 <label class="form-check-label" for="flexCheckChecked">
                                                     Publish
                                                 </label>

@@ -147,15 +147,11 @@ class Paket extends CI_Controller
 
     public function lihat()
     {
-        if (!($_SESSION['bagian'] == 'Admin' || $_SESSION['bagian'] == 'Master Admin' || $_SESSION['bagian'] == 'Finance')) {
-            $this->alert->set('danger', 'Anda tidak memiliki akses untuk halaman tersebut');
-            redirect(base_url() . 'staff/dashboard');
-        }
         $this->form_validation->set_data($this->input->get());
         $this->form_validation->set_rules('id', 'id', 'trim|required|integer');
 
         if ($this->form_validation->run() == FALSE) {
-            $this->alert->set('danger', 'Access Denied');
+            $this->alert->toast('danger', 'Mohon Maaf', 'Anda tidak memiliki akses');
             redirect(base_url() . 'staff/paket');
         }
 
@@ -163,7 +159,7 @@ class Paket extends CI_Controller
         $this->load->model('paketUmroh');
         $data = $this->paketUmroh->getPackage($_GET['id'], false);
         if (empty($data)) {
-            $this->alert->set('danger', 'Paket tidak ditemukan');
+            $this->alert->toast('danger', 'Mohon Maaf', 'Paket tidak ditemukan');
             redirect(base_url() . 'staff/paket');
         }
         $this->load->view('staff/paket_view', $data);
@@ -171,15 +167,10 @@ class Paket extends CI_Controller
 
     public function upload()
     {
-
-        if (!($_SESSION['bagian'] == 'Admin' || $_SESSION['bagian'] == 'Master Admin' || $_SESSION['bagian'] == 'Finance')) {
-            $this->alert->set('danger', 'Anda tidak memiliki akses untuk halaman tersebut');
-            redirect(base_url() . 'staff/dashboard');
-        }
         $this->form_validation->set_rules('id', 'id', 'trim|required|integer');
 
         if ($this->form_validation->run() == FALSE) {
-            $this->alert->set('danger', 'Access Denied');
+            $this->alert->toast('danger', 'Mohon Maaf', 'Anda tidak memiliki akses');
             redirect(base_url() . 'staff/paket');
         }
         $this->load->model('paketUmroh');
@@ -193,31 +184,27 @@ class Paket extends CI_Controller
         $this->form_validation->set_rules('id', 'id', 'trim|required|integer');
         $this->form_validation->set_rules('field', 'field', 'trim|required');
         if ($this->form_validation->run() == FALSE) {
-            $this->alert->set('danger', 'Access Denied');
+            $this->alert->toast('danger', 'Mohon Maaf', 'Anda tidak memiliki akses');
             redirect(base_url() . 'staff/paket');
         }
 
         $this->load->model('paketUmroh');
         $result = $this->paketUmroh->deleteDokumen($_GET['id'], $_GET['field']);
         if ($result) {
-            $this->alert->set('success', "Data berhasil dihapus");
+            $this->alert->toast('success', 'Selamat', $_GET['field'] . ' berhasil dihapus');
         } else {
-            $this->alert->set('danger', "Data gagal dihapus");
+            $this->alert->toast('danger', 'Mohon Maaf', $_GET['field'] . ' gagal dihapus');
         }
         redirect(base_url() . 'staff/paket/lihat?id=' . $_GET['id']);
     }
 
     public function hapus()
     {
-        if (!($_SESSION['bagian'] == 'Master Admin')) {
-            $this->alert->set('danger', 'Anda tidak memiliki akses untuk halaman tersebut');
-            redirect(base_url() . 'staff/dashboard');
-        }
         $this->form_validation->set_data($this->input->get());
         $this->form_validation->set_rules('id', 'id', 'trim|required|integer');
 
         if ($this->form_validation->run() == FALSE) {
-            $this->alert->set('danger', 'Access Denied');
+            $this->alert->toast('danger', 'Mohon Maaf', 'Anda tidak memiliki akses');
             redirect(base_url() . 'staff/paket');
         }
 
@@ -232,7 +219,7 @@ class Paket extends CI_Controller
         $this->form_validation->set_rules('id', 'id', 'trim|required|integer');
 
         if ($this->form_validation->run() == FALSE) {
-            $this->alert->set('danger', 'Access Denied');
+            $this->alert->toast('danger', 'Mohon Maaf', 'Anda tidak memiliki akses');
             redirect(base_url() . 'staff/paket');
         }
         $this->load->model('paketUmroh');
@@ -246,7 +233,7 @@ class Paket extends CI_Controller
         $this->form_validation->set_rules('nama_hotel', 'Nama Hotel', 'trim|required|alpha_numeric_spaces');
 
         if ($this->form_validation->run() == FALSE) {
-            $this->alert->set('danger', validation_errors());
+            $this->alert->toast('danger', 'Mohon Maaf', 'Anda tidak memiliki akses');
             redirect(base_url() . 'staff/paket');
         }
 
@@ -266,7 +253,7 @@ class Paket extends CI_Controller
         $this->form_validation->set_rules('id', 'id', 'trim|required|integer');
 
         if ($this->form_validation->run() == FALSE) {
-            $this->alert->set('danger', validation_errors());
+            $this->alert->toast('danger', 'Mohon Maaf', 'Anda tidak memiliki akses');
             redirect(base_url() . 'staff/paket');
         }
 
@@ -281,34 +268,15 @@ class Paket extends CI_Controller
 
     public function ubah_paket()
     {
-        if (!($_SESSION['bagian'] == 'Admin' || $_SESSION['bagian'] == 'Master Admin' || $_SESSION['bagian'] == 'Finance')) {
-            $this->alert->set('danger', 'Anda tidak memiliki akses untuk halaman tersebut');
-            redirect(base_url() . 'staff/dashboard');
-        }
         $this->form_validation->set_data($this->input->get());
         $this->form_validation->set_rules('id', 'id', 'trim|required|integer');
 
         if ($this->form_validation->run() == FALSE) {
-            $this->alert->set('danger', validation_errors());
+            $this->alert->toast('danger', 'Mohon Maaf', 'Anda tidak memiliki akses');
             redirect(base_url() . 'staff/paket');
         }
         $this->load->model('paketUmroh');
         $data = $this->paketUmroh->getPackage($_GET['id'], false);
-        $this->db->where('id_paket', $_GET['id']);
-        $this->db->order_by('id_log', 'desc');
-        $discount = $this->db->get('discount_log')->row();
-        if ($discount) {
-            $data->waktu_diskon_start = $discount->tanggal_mulai;
-            $data->waktu_diskon_end = $discount->tanggal_berakhir;
-            $data->deskripsi_diskon = $discount->deskripsi_diskon;
-        } else {
-            $data->waktu_diskon_start = '';
-            $data->waktu_diskon_end = '';
-            $data->deskripsi_diskon = '';
-        }
-        // echo '<pre>';
-        // print_r($data);
-        // exit();
         $this->load->view('staff/ubah_paket_view', $data);
     }
 
@@ -317,13 +285,10 @@ class Paket extends CI_Controller
         $this->form_validation->set_rules('id', 'ID Paket', 'trim|required|numeric');
         $this->form_validation->set_rules('nama_paket', 'Nama Paket', 'trim|required|alpha_numeric_spaces');
         $this->form_validation->set_rules('tanggal_berangkat', 'Tanggal Keberangkatan', 'trim|required');
-        $this->form_validation->set_rules('isi_kamar', 'Isi Kamar', 'trim|required|numeric');
         $this->form_validation->set_rules('harga', 'Harga', 'trim|required');
-        $this->form_validation->set_rules('denda', 'Nominal Denda', 'trim|required');
-        $this->form_validation->set_rules('maskapai', 'Maskapai', 'trim|required|in_list[BELUM TERSEDIA,SAUDIA,QATAR,OMAN,EMIRATES,LION AIR,SRILANKAN,GARUDA INDONESIA,ETIHAD,TURKISH AIRLINE]');
 
         if ($this->form_validation->run() == FALSE) {
-            $this->alert->set('danger', validation_errors());
+            $this->alert->toast('danger', 'Mohon Maaf', 'Anda tidak memiliki akses');
             redirect(base_url() . 'staff/paket');
         }
 
@@ -331,21 +296,16 @@ class Paket extends CI_Controller
         $this->load->model('paketUmroh');
         $data = $_POST;
 
-        $data['minimal_dp'] = str_replace(",", "", $data['minimal_dp']);
-        $data['dp_display'] = str_replace(",", "", $data['dp_display']);
         $data['harga'] = str_replace(",", "", $data['harga']);
         $data['harga_triple'] = str_replace(",", "", $data['harga_triple']);
         $data['harga_double'] = str_replace(",", "", $data['harga_double']);
         $data['default_diskon'] = str_replace(",", "", $data['default_diskon']);
-        $data['komisi_langsung_fee'] = str_replace(",", "", $data['komisi_langsung_fee']);
-        $data['denda'] = str_replace(",", "", $data['denda']);
-
-        if (!empty($_FILES['banner_image']['name'])) {
-            $data['files']['banner_image'] = $_FILES['banner_image'];
-        }
+        $data['jumlah_seat'] = str_replace(",", "", $data['jumlah_seat']);
         if (!($id = $this->paketUmroh->editPackage($data['id'], $data))) {
+            $this->alert->toast('danger', 'Mohon Maaf', 'Paket gagal di ubah');
             redirect(base_url() . 'staff/paket/tambah');
         } else {
+            $this->alert->toast('success', 'Selamat', 'Paket berhasil di ubah');
             redirect(base_url() . 'staff/paket/lihat?id=' . $id);
         }
     }

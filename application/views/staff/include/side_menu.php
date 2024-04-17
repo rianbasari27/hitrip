@@ -59,19 +59,24 @@
         <li class="sidenav-header small font-weight-semibold">Manifest</li>
         <!-- Product elements -->
         <li class="sidenav-item">
-            <a href="javascript:" class="sidenav-link sidenav-toggle <?php echo isset($produk) ? 'active' : '' ;?>">
+            <a href="javascript:" class="sidenav-link sidenav-toggle <?php echo isset($manifest) ? 'active' : '' ;?>">
                 <i class="sidenav-icon feather icon-box"></i>
                 <div>Data</div>
             </a>
             <ul class="sidenav-menu">
-                <li class="sidenav-item <?php echo isset($tambah_produk) ? 'active' : '' ;?>">
+                <li class="sidenav-item <?php echo isset($regist_user) ? 'active' : '' ;?>">
+                    <a href="<?php echo base_url() . 'staff/paket' ;?>" class="sidenav-link">
+                        <div>Registrasi User</div>
+                    </a>
+                </li>
+                <li class="sidenav-item <?php echo isset($data_user) ? 'active' : '' ;?>">
                     <a href="<?php echo base_url() . 'staff/paket/tambah' ;?>" class="sidenav-link">
                         <div>Data User</div>
                     </a>
                 </li>
-                <li class="sidenav-item <?php echo isset($list_produk) ? 'active' : '' ;?>">
-                    <a href="<?php echo base_url() . 'staff/paket' ;?>" class="sidenav-link">
-                        <div>Registrasi User</div>
+                <li class="sidenav-item <?php echo isset($data_peserta) ? 'active' : '' ;?>">
+                    <a href="<?php echo base_url() . 'staff/paket/tambah' ;?>" class="sidenav-link">
+                        <div>Data Peserta</div>
                     </a>
                 </li>
             </ul>
@@ -83,17 +88,17 @@
         <li class="sidenav-header small font-weight-semibold">Finance</li>
         <!-- Product elements -->
         <li class="sidenav-item">
-            <a href="javascript:" class="sidenav-link sidenav-toggle <?php echo isset($produk) ? 'active' : '' ;?>">
+            <a href="javascript:" class="sidenav-link sidenav-toggle <?php echo isset($finance) ? 'active' : '' ;?>">
                 <i class="sidenav-icon feather icon-box"></i>
                 <div>Pembayaran</div>
             </a>
             <ul class="sidenav-menu">
-                <li class="sidenav-item <?php echo isset($tambah_produk) ? 'active' : '' ;?>">
+                <li class="sidenav-item <?php echo isset($input_bayar) ? 'active' : '' ;?>">
                     <a href="<?php echo base_url() . 'staff/paket/tambah' ;?>" class="sidenav-link">
                         <div>Input Pembayaran</div>
                     </a>
                 </li>
-                <li class="sidenav-item <?php echo isset($list_produk) ? 'active' : '' ;?>">
+                <li class="sidenav-item <?php echo isset($verif_bayar) ? 'active' : '' ;?>">
                     <a href="<?php echo base_url() . 'staff/paket' ;?>" class="sidenav-link">
                         <div>Verifikasi Pembayaran</div>
                     </a>
