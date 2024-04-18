@@ -114,15 +114,15 @@ class PaketUmroh extends CI_Model
         //delete paket
         $this->db->where('id_paket', $id);
         if ($this->db->delete('paket_umroh')) {
-            $this->alert->set('success', 'Paket berhasil dihapus');
+            $this->alert->toast('success', 'Selamat', 'Paket berhasil dihapus');
         } else {
-            $this->alert->set('danger', 'System Error, silakan coba kembali');
+            $this->alert->toast('danger', 'Mohon Maaf', 'Paket gagal dihapus');
             return false;
         }
 
         //delete hotel
-        $this->db->where('id_paket', $id);
-        $this->db->delete('hotel_info');
+        // $this->db->where('id_paket', $id);
+        // $this->db->delete('hotel_info');
 
         return true;
     }
@@ -132,19 +132,8 @@ class PaketUmroh extends CI_Model
         // ambil data sebelumnya
         $this->db->where('id_paket', $id);
         $before = $this->db->get('paket_umroh')->row();
-        $beforePublish = $before->publish ;
         //////////////////////////////////
-        if (isset($data['files']['banner_image'])) {
-
-            $this->load->library('scan');
-            $hasil = $this->scan->check($data['files']['banner_image'], 'banner_image', null);
-            if ($hasil !== false) {
-                $data['banner_image'] = $hasil;
-            } else {
-                $data['banner_image'] = null;
-            }
-            unset($data['files']);
-        }
+        
         //check publish
         if (!isset($data['publish'])) {
             $publish = 0;
@@ -177,74 +166,33 @@ class PaketUmroh extends CI_Model
             'nama_paket' => $data['nama_paket'],
             'tanggal_berangkat' => $newDate,
             'tanggal_pulang' => $datePulang,
-            'jam_terbang' => $data['jam_terbang'],
             'jumlah_seat' => $jumlahSeat,
-            'extra_fee' => $data['extra_fee'],
-            'deskripsi_extra_fee' => $data['deskripsi_extra_fee'],
-            'isi_kamar' => $data['isi_kamar'],
-            'star' => $data['star'],
             'detail_promo' => $detail,
-            'flight_schedule' => $data['flight_schedule'],
-            'minimal_dp' => $data['minimal_dp'],
-            'dp_display' => $data['dp_display'],
             'harga' => $data['harga'],
             'harga_triple' => $data['harga_triple'],
             'harga_double' => $data['harga_double'],
-            'denda_kurang_3' => $data['denda'],
-            'komisi_langsung_fee' => $data['komisi_langsung_fee'],
-            'komisi_poin' => $data['komisi_poin'],
             'publish' => $publish,
-            'published_at' => $data['published_at'],
             'default_diskon' => $data['default_diskon'],
             'deskripsi_default_diskon' => $data['deskripsi_default_diskon'],
-            'maskapai' => $data['maskapai'],
             
         );
-        if ($data['banner_image']) {
-            $insData['banner_image'] = $data['banner_image'];
-        }
 
         
-        // get data discount_log before
         $this->db->where('id_paket', $id);
-        $this->db->order_by('id_log', 'desc');
-        $before_disc = $this->db->get('discount_log')->row();
-        
-        $this->db->where('id_paket', $id);
-        if ($this->db->update('paket_umroh', $insData)) {
-            $this->alert->set('success', 'Paket Umroh berhasil diubah');
-        } else {
-            $this->alert->set('danger', 'System Error, silakan coba kembali');
+        if (!$this->db->update('paket_umroh', $insData)) {
             return false;
         }
-        
-        $update_discount = [
-            'id_paket' => $id,
-            'deskripsi_diskon' => $data['deskripsi_default_diskon'],
-            'discount' => $data['default_diskon'],
-            'tanggal_mulai' => $data['waktu_diskon_start'],
-            'tanggal_berakhir' => $data['waktu_diskon_end'] 
-        ];
+
         
         
         // ambil data sesudahnya
         $this->db->where('id_paket', $id);
         $after = $this->db->get('paket_umroh')->row();
-        $afterPublish = $after->publish ;
-        //////////////////////////////////
-        if ($before_disc->discount !== $after->default_diskon) {
-            $this->db->insert('discount_log', $update_discount);
-        } else {
-            $this->db->where('id_log', $before_disc->id_log);
-            $this->db->update('discount_log', $update_discount);
-        }
+
         //add log
         $this->load->model('logs');
         $this->logs->addLogTable($id, 'pu', $before, $after);
-        if ($beforePublish == 0 && $afterPublish == 1) {
-            $this->load->model('Notification');
-            $this->Notification->sendEditPackageNotif($id);
-        }
+
         return $id;
     }
 
@@ -269,6 +217,12 @@ class PaketUmroh extends CI_Model
             $jenis = 'paket_flyer';
             if ($paket->paket_flyer != null) {
                 unlink(SITE_ROOT . $paket->paket_flyer);
+            }
+        } elseif (isset($file['banner_image'])) {
+            $fileins = $file['banner_image'];
+            $jenis = 'banner_image';
+            if ($paket->banner_image != null) {
+                unlink(SITE_ROOT . $paket->banner_image);
             }
         } else {
             return false;
