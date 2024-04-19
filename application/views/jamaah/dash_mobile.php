@@ -13,7 +13,7 @@
         border-radius: 50%;
         text-align: center;
         box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-        z-index: 1000;
+        z-index: 10;
     }
 
     .floating-button a {
@@ -34,6 +34,10 @@
         display: flex;
         justify-content: center;
         align-items: center;
+    }
+
+    .page-content {
+        transform: none !important;
     }
 
     @media only screen and (min-width:600px) {
@@ -223,39 +227,21 @@
                     <div class="row mb-0">
                         <a href="#" class="col-3 py-2 mb-2 text-center">
                             <div class="squircle-icon gradient-highlight mx-auto">
-                                <i class="fa-solid fa-hotel icon font-18 color-white"></i>
+                                <i class="fa-solid fa-umbrella-beach icon font-18 color-white"></i>
                             </div>
-                            <div class="lh-sm mt-2 font-11 color-theme">Hotel</div>
+                            <div class="lh-sm mt-2 font-11 color-theme">Trip</div>
                         </a>
                         <a href="#" class="col-3 py-2 mb-2 text-center">
                             <div class="squircle-icon gradient-highlight mx-auto">
-                                <i class="fa-solid fa-plane-up icon font-18 color-white"></i>
-                            </div>
-                            <div class="lh-sm mt-2 font-11 color-theme">Tiket Pesawat</div>
-                        </a>
-                        <a href="#" class="col-3 py-2 mb-2 text-center">
-                            <div class="squircle-icon gradient-highlight mx-auto">
-                                <i class="fa-solid fa-train-subway icon font-18 color-white"></i>
-                            </div>
-                            <div class="lh-sm mt-2 font-11 color-theme">Tiket Kereta</div>
-                        </a>
-                        <a href="#" class="col-3 py-2 mb-2 text-center">
-                            <div class="squircle-icon gradient-highlight mx-auto">
-                                <i class="fa-solid fa-ticket icon font-18 color-white"></i>
+                                <i class="fa-solid fa-percent icon font-18 color-white"></i>
                             </div>
                             <div class="lh-sm mt-2 font-11 color-theme">Promo</div>
                         </a>
                         <a href="#" class="col-3 py-2 mb-2 text-center">
                             <div class="squircle-icon gradient-highlight mx-auto">
-                                <i class="fa-solid fa-pizza-slice icon font-18 color-white"></i>
+                                <i class="fa-solid fa-ticket icon font-18 color-white"></i>
                             </div>
-                            <div class="lh-sm mt-2 font-11 color-theme">Restoran</div>
-                        </a>
-                        <a href="#" class="col-3 py-2 mb-2 text-center">
-                            <div class="squircle-icon gradient-highlight mx-auto">
-                                <i class="fa-solid fa-mosque icon font-18 color-white"></i>
-                            </div>
-                            <div class="lh-sm mt-2 font-11 color-theme">Tempat Ibadah</div>
+                            <div class="lh-sm mt-2 font-11 color-theme">Voucher</div>
                         </a>
                         <a href="#" class="col-3 py-2 mb-2 text-center">
                             <div class="squircle-icon gradient-highlight mx-auto">
@@ -264,6 +250,24 @@
                             <div class="lh-sm mt-2 font-11 color-theme">Currency</div>
                         </a>
                         <a href="#" class="col-3 py-2 mb-2 text-center">
+                            <div class="squircle-icon gradient-highlight mx-auto">
+                                <i class="fa-solid fa-utensils icon font-18 color-white"></i>
+                            </div>
+                            <div class="lh-sm mt-2 font-11 color-theme">Restoran Terdekat</div>
+                        </a>
+                        <a href="#" class="col-3 py-2 mb-2 text-center">
+                            <div class="squircle-icon gradient-highlight mx-auto">
+                                <i class="fa-solid fa-hotel icon font-18 color-white"></i>
+                            </div>
+                            <div class="lh-sm mt-2 font-11 color-theme">Hotel Terdekat</div>
+                        </a>
+                        <a href="#" class="col-3 py-2 mb-2 text-center">
+                            <div class="squircle-icon gradient-highlight mx-auto">
+                                <i class="fa-solid fa-compass icon font-18 color-white"></i>
+                            </div>
+                            <div class="lh-sm mt-2 font-11 color-theme">Discover</div>
+                        </a>
+                        <a href="#" class="col-3 py-2 mb-2 text-center" data-menu="menu-other">
                             <div class="squircle-icon gradient-highlight mx-auto">
                                 <i class="fa-solid fa-ellipsis icon font-18 color-white"></i>
                             </div>
@@ -282,15 +286,9 @@
                             <div class="card card-style ms-3"
                                 style="background-image:url(<?php echo base_url() ?>asset/images/city/dubai-1280x720.jpg);"
                                 data-card-height="300">
-                                <div class="card-top px-3 py-3">
-                                    <a href="#" aria-label="Click for Add To Favorites" data-menu="menu-heart"
-                                        class="bg-white rounded-sm icon icon-xs float-end"><i
-                                            class="fa fa-heart color-red-dark"></i></a>
-                                    <a href="#" aria-label="Click for Explore"
-                                        class="bg-white color-black rounded-sm btn btn-xs float-start font-700 font-12">Explore</a>
-                                </div>
                                 <div class="card-bottom px-3 py-3">
-                                    <h1 class="color-white" style="width: 250px;">City Nights Dubai Parties</h1>
+                                    <a href="#" aria-label="Click for Explore"
+                                            class="bg-white color-black rounded-sm btn btn-xs float-start font-700 font-12">Ambil Promo</a>
                                 </div>
                                 <div class="card-overlay bg-gradient opacity-10"></div>
                                 <div class="card-overlay bg-gradient"></div>
@@ -300,15 +298,9 @@
                             <div class="card card-style ms-3"
                                 style="background-image:url(<?php echo base_url() ?>asset/images/city/seoul-1280x720.jpg);"
                                 data-card-height="300">
-                                <div class="card-top px-3 py-3">
-                                    <a href="#" aria-label="Click for Add To Favorites" data-menu="menu-heart"
-                                        class="bg-white rounded-sm icon icon-xs float-end"><i
-                                            class="fa fa-heart color-red-dark"></i></a>
-                                    <a href="#" aria-label="Click for Explore"
-                                        class="bg-white color-black rounded-sm btn btn-xs float-start font-700 font-12">Explore</a>
-                                </div>
                                 <div class="card-bottom px-3 py-3">
-                                    <h1 class="color-white" style="width: 250px;">Seoul's Vibrant Cultural Tapestry</h1>
+                                    <a href="#" aria-label="Click for Explore"
+                                            class="bg-white color-black rounded-sm btn btn-xs float-start font-700 font-12">Ambil Promo</a>
                                 </div>
                                 <div class="card-overlay bg-gradient opacity-10"></div>
                                 <div class="card-overlay bg-gradient"></div>
@@ -318,15 +310,9 @@
                             <div class="card card-style ms-3"
                                 style="background-image:url(<?php echo base_url() ?>asset/images/city/istanbul-1280x720.jpg);"
                                 data-card-height="300">
-                                <div class="card-top px-3 py-3">
-                                    <a href="#" aria-label="Click for Add To Favorites" data-menu="menu-heart"
-                                        class="bg-white rounded-sm icon icon-xs float-end"><i
-                                            class="fa fa-heart color-red-dark"></i></a>
-                                    <a href="#" aria-label="Click for Explore"
-                                        class="bg-white color-black rounded-sm btn btn-xs float-start font-700 font-12">Explore</a>
-                                </div>
                                 <div class="card-bottom px-3 py-3">
-                                    <h1 class="color-white" style="width: 250px;">Istanbul's Historic East Meets</h1>
+                                    <a href="#" aria-label="Click for Explore"
+                                            class="bg-white color-black rounded-sm btn btn-xs float-start font-700 font-12">Ambil Promo</a>
                                 </div>
                                 <div class="card-overlay bg-gradient opacity-10"></div>
                                 <div class="card-overlay bg-gradient"></div>
@@ -340,11 +326,10 @@
             <div class="content mt-0 mb-n1">
                 <div class="d-flex">
                     <div class="align-self-center">
-                        <h1 class="mb-0 font-16">Suggested Travel Sposts</h1>
+                        <h1 class="mb-0 font-16">Paket Terbaru</h1>
                     </div>
                     <div class="ms-auto align-self-center">
-                        <a href="#" aria-label="Click for See All Products" class="float-end font-12 font-400">See
-                            All</a>
+                        <a href="#" aria-label="Click for See All Products" class="float-end font-12 font-400">Lihat semua</a>
                     </div>
                 </div>
             </div>
@@ -422,11 +407,10 @@
             <div class="content mb-n1">
                 <div class="d-flex">
                     <div class="align-self-center">
-                        <h1 class="mb-0 font-16">Where we're going</h1>
+                        <h1 class="mb-0 font-16">Discover</h1>
                     </div>
                     <div class="ms-auto align-self-center">
-                        <a href="#" aria-label="Click for See All Products" class="float-end font-12 font-400">See
-                            All</a>
+                        <a href="#" aria-label="Click for See All Products" class="float-end font-12 font-400">Lihat semua</a>
                     </div>
                 </div>
                 <div class="row mb-n4">
@@ -476,11 +460,10 @@
             <div class="content mb-n1">
                 <div class="d-flex">
                     <div class="align-self-center">
-                        <h1 class="mb-0 font-16">Visit it Again</h1>
+                        <h1 class="mb-0 font-16">Kunjungi lagi</h1>
                     </div>
                     <div class="ms-auto align-self-center">
-                        <a href="#" aria-label="Click for See All Products" class="float-end font-12 font-400">See
-                            All</a>
+                        <a href="#" aria-label="Click for See All Products" class="float-end font-12 font-400">Lihat semua</a>
                     </div>
                 </div>
             </div>
@@ -563,6 +546,35 @@
             </h1>
             <h3 class="text-center pt-2">Saved to Favorites</h3>
         </div>
+
+        <div id="menu-other" class="menu menu-box-bottom rounded-m bg-theme" 
+                data-menu-height="300" 
+                data-menu-effect="menu-over">
+            <div class="menu-title">
+                <p class="color-highlight">Menu</p>
+                <h1>Lainnya</h1>
+                <a href="#" class="close-menu"><i class="fa fa-times-circle"></i></a>
+            </div>
+            <div class="content">
+                <div class="list-group list-custom-small list-menu ms-0 me-2">  
+                    <a href="#">
+                        <i class="fa fa-star-and-crescent gradient-highlight color-white"></i>
+                        <span>Jadwal Sholat</span>
+                        <i class="fa fa-angle-right"></i>
+                    </a>        
+                    <a href="#">
+                        <i class="fa fa-location-arrow gradient-highlight color-white"></i>
+                        <span>Arah Kiblat</span>
+                        <i class="fa fa-angle-right"></i>
+                    </a>        
+                    <a href="#">
+                        <i class="fa fa-mosque gradient-highlight color-white"></i>
+                        <span>Tempat Ibadah</span>
+                        <i class="fa fa-angle-right"></i>
+                    </a>  
+                </div>
+            </div>
+        </div>    
 
 
         <!-- Main Menu-->
