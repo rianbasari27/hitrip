@@ -13,8 +13,8 @@
         <?php } ?>
     </a>
     <?php } ?>
-    <a href="#" class="page-title-icon shadow-xl bg-theme color-theme show-on-theme-light" data-toggle-theme><i class="fa fa-moon"></i></a>
-    <a href="#" class="page-title-icon shadow-xl bg-theme color-theme show-on-theme-dark" data-toggle-theme><i class="fa fa-sun color-yellow-dark"></i></a>
+    <a href="#" class="page-title-icon shadow bg-theme color-theme show-on-theme-light" data-toggle-theme><i class="fa fa-moon"></i></a>
+    <a href="#" class="page-title-icon shadow bg-theme color-theme show-on-theme-dark" data-toggle-theme><i class="fa fa-sun color-yellow-dark"></i></a>
     <!-- <a href="#" class="page-title-icon shadow-xl bg-theme color-theme" data-menu="menu-main" data-bs-toggle="card" data-bs-target="fixed"><i class="fa fa-bars"></i></a> -->
     <!-- <button id="openBtn" class="btn btn-primary">Buka Sidebar</button> -->
 </div>

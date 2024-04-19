@@ -28,4 +28,8 @@ class Home extends CI_Controller
     {
         $this->load->view('jamaah/konversi');
     }
+
+    public function promo() {
+        $this->load->view('jamaah/detail_promo');
+    }
 }
