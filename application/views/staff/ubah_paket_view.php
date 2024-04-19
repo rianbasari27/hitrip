@@ -3,6 +3,22 @@
 
 <head>
     <?php $this->load->view('staff/include/header_view'); ?>
+    <style>
+    /* Style untuk input form */
+    .form-control {
+        border: none;
+        border-radius: 0;
+        border-bottom: 1px solid #ced4da;
+        /* warna garis bawah */
+    }
+
+    /* Style untuk input form yang aktif/fokus */
+    .form-control:focus {
+        box-shadow: none;
+        border-color: #80bdff;
+        /* warna garis bawah saat aktif */
+    }
+    </style>
 
 </head>
 
@@ -80,13 +96,12 @@
                                             <div class="form-group">
                                                 <label class="col-form-label">Diskon</label>
                                                 <input class="form-control format_harga" type="text"
-                                                    name="default_diskon" value="<?php echo $default_diskon ;?>"
-                                                    required>
+                                                    name="default_diskon" value="<?php echo $default_diskon ;?>">
                                             </div>
                                             <div class="form-group">
                                                 <label class="col-form-label">Deskripsi Diskon</label>
                                                 <input class="form-control" type="text" name="deskripsi_default_diskon"
-                                                    value="<?php echo $deskripsi_default_diskon ;?>" required>
+                                                    value="<?php echo $deskripsi_default_diskon ;?>">
                                             </div>
                                             <div class="form-group">
                                                 <label class="col-form-label">Deskripsi Singkat</label>

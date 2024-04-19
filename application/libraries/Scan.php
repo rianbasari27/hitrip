@@ -62,50 +62,50 @@ class Scan
         $this->CI->load->model('store');
         switch ($doc) {
             case 'paspor':
-                $jamaah = $this->CI->registrasi->getJamaah($id);
+                $jamaah = $this->CI->registrasi->getUser($id);
                 $targetDir = "/uploads/paspor/";
-                $target_file = $targetDir . $jamaah->first_name . '_' . $jamaah->second_name . '_' . $jamaah->last_name . '_' . $jamaah->ktp_no . '_' . time() . '_';
+                $target_file = $targetDir . $jamaah->name. '_' . $jamaah->no_ktp . '_' . time() . '_';
                 break;
             case 'paspor2':
-                $jamaah = $this->CI->registrasi->getJamaah($id);
+                $jamaah = $this->CI->registrasi->getUser($id);
                 $targetDir = "/uploads/paspor/";
-                $target_file = $targetDir . $jamaah->first_name . '_' . $jamaah->second_name . '_' . $jamaah->last_name . '_' . $jamaah->ktp_no . '_paspor_2_' . time() . '_';
+                $target_file = $targetDir . $jamaah->name. '_' . $jamaah->no_ktp . '_paspor_2_' . time() . '_';
                 break;
             case 'ktp':
-                $jamaah = $this->CI->registrasi->getJamaah($id);
+                $jamaah = $this->CI->registrasi->getUser($id);
                 $targetDir = "/uploads/ktp/";
-                $target_file = $targetDir . $jamaah->first_name . '_' . $jamaah->second_name . '_' . $jamaah->last_name . '_' . $jamaah->ktp_no . '_' . time() . '_';
+                $target_file = $targetDir . $jamaah->name. '_' . $jamaah->no_ktp . '_' . time() . '_';
                 break;
             case 'foto':
-                $jamaah = $this->CI->registrasi->getJamaah($id);
+                $jamaah = $this->CI->registrasi->getUser($id);
                 $targetDir = "/uploads/foto/";
-                $target_file = $targetDir . $jamaah->first_name . '_' . $jamaah->second_name . '_' . $jamaah->last_name . '_' . $jamaah->ktp_no . '_' . time() . '_';
+                $target_file = $targetDir . $jamaah->name. '_' . $jamaah->no_ktp . '_' . time() . '_';
                 break;
             case 'bayar':
-                $jamaah = $this->CI->registrasi->getJamaah($id);
+                $jamaah = $this->CI->registrasi->getUser($id);
                 $targetDir = "/uploads/bayar/";
-                $target_file = $targetDir . $jamaah->first_name . '_' . $jamaah->second_name . '_' . $jamaah->last_name . '_' . $jamaah->ktp_no . '_' . time() . '_';
+                $target_file = $targetDir . $jamaah->name. '_' . $jamaah->no_ktp . '_' . time() . '_';
                 $target_file = $target_file . time() . '_';
                 break;
             case 'visa':
-                $jamaah = $this->CI->registrasi->getJamaah($id);
+                $jamaah = $this->CI->registrasi->getUser($id);
                 $targetDir = "/uploads/visa/";
-                $target_file = $targetDir . $jamaah->first_name . '_' . $jamaah->second_name . '_' . $jamaah->last_name . '_' . $jamaah->ktp_no . '_' . time() . '_';
+                $target_file = $targetDir . $jamaah->name. '_' . $jamaah->no_ktp . '_' . time() . '_';
                 break;
             case 'kk':
-                $jamaah = $this->CI->registrasi->getJamaah($id);
+                $jamaah = $this->CI->registrasi->getUser($id);
                 $targetDir = "/uploads/kk/";
-                $target_file = $targetDir . $jamaah->first_name . '_' . $jamaah->second_name . '_' . $jamaah->last_name . '_' . $jamaah->ktp_no . '_' . time() . '_';
+                $target_file = $targetDir . $jamaah->name. '_' . $jamaah->no_ktp . '_' . time() . '_';
                 break;
             case 'tiket':
-                $jamaah = $this->CI->registrasi->getJamaah($id);
+                $jamaah = $this->CI->registrasi->getUser($id);
                 $targetDir = "/uploads/tiket/";
-                $target_file = $targetDir . $jamaah->first_name . '_' . $jamaah->second_name . '_' . $jamaah->last_name . '_' . $jamaah->ktp_no . '_' . time() . '_';
+                $target_file = $targetDir . $jamaah->name. '_' . $jamaah->no_ktp . '_' . time() . '_';
                 break;
             case 'vaksin':
-                $jamaah = $this->CI->registrasi->getJamaah($id);
+                $jamaah = $this->CI->registrasi->getUser($id);
                 $targetDir = "/uploads/vaksin/";
-                $target_file = $targetDir . $jamaah->first_name . '_' . $jamaah->second_name . '_' . $jamaah->last_name . '_' . $jamaah->ktp_no . '_' . time() . '_';
+                $target_file = $targetDir . $jamaah->name. '_' . $jamaah->no_ktp . '_' . time() . '_';
                 break;
             case 'paket_info':
                 $paket = $this->CI->paketUmroh->getPackage($id);
@@ -207,7 +207,7 @@ class Scan
                 $customer = $this->CI->store->getCustomer($order[0]->customer_id);
                 $customer = $customer[0];
                 if ($customer->jenis == "j") {
-                    $jamaah = $this->CI->registrasi->getJamaah(null, null, $customer->id_user);
+                    $jamaah = $this->CI->registrasi->getUser(null, null, $customer->id_user);
                     $nama = implode(' ', array_filter([$jamaah->first_name, $jamaah->second_name, $jamaah->last_name]));
                 } else {
                     $agen = $this->CI->agen->getAgen($customer->id_user);

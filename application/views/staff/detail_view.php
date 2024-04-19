@@ -80,7 +80,15 @@
                                                 <span class="icon text-white-50">
                                                     <i class="fas fa-edit"></i>
                                                 </span>
-                                                <span class="text">Update Data</span>
+                                                <span class="text">Input Program</span>
+                                            </a>
+                                            <?php } else if ($member[0]->paket_info->tanggal_berangkat < date('Y-m-d'))  { ?>
+                                            <a href="<?php echo base_url(); ?>staff/jamaah/add_member?id=<?php echo $id_user; ?>"
+                                                class="btn btn-warning btn-icon-split btn-xs rounded-xs">
+                                                <span class="icon text-white-50">
+                                                    <i class="fas fa-edit"></i>
+                                                </span>
+                                                <span class="text">Input Program</span>
                                             </a>
                                             <?php } ?>
                                         </span>

@@ -3,6 +3,22 @@
 
 <head>
     <?php $this->load->view('staff/include/header_view'); ?>
+    <style>
+    /* Style untuk input form */
+    .form-control {
+        border: none;
+        border-radius: 0;
+        border-bottom: 1px solid #ced4da;
+        /* warna garis bawah */
+    }
+
+    /* Style untuk input form yang aktif/fokus */
+    .form-control:focus {
+        box-shadow: none;
+        border-color: #80bdff;
+        /* warna garis bawah saat aktif */
+    }
+    </style>
 
 </head>
 
@@ -76,12 +92,11 @@
                                             <div class="form-group">
                                                 <label class="col-form-label">Diskon</label>
                                                 <input class="form-control format_harga" type="text"
-                                                    name="default_diskon" required>
+                                                    name="default_diskon">
                                             </div>
                                             <div class="form-group">
                                                 <label class="col-form-label">Deskripsi Diskon</label>
-                                                <input class="form-control" type="text" name="deskripsi_default_diskon"
-                                                    required>
+                                                <input class="form-control" type="text" name="deskripsi_default_diskon">
                                             </div>
                                             <div class="form-group">
                                                 <label class="col-form-label">Upload Gambar Banner - rekomendasi ukuran
@@ -89,18 +104,42 @@
                                                     px (<span
                                                         class="text-primary font-italic font-weight-lighter">Gambar yang
                                                         muncul di aplikasi</span>)</label>
-                                                <input class="form-control" type="file" name="banner_image">
+                                                <div class="input-group mb-3">
+                                                    <div class="custom-file">
+                                                        <input type="file" class="custom-file-input"
+                                                            id="inputGroupFile01"
+                                                            aria-describedby="inputGroupFileAddon01"
+                                                            name="banner_image">
+                                                        <label class="custom-file-label" for="inputGroupFile01">Choose
+                                                            file</label>
+                                                    </div>
+                                                </div>
                                             </div>
                                             <div class="form-group">
-                                                <label class="col-form-label">Upload Gambar Flyer (<span
-                                                        class="text-primary font-italic font-weight-lighter">Gambar
-                                                        Untuk download Flyer</span>)</label>
-                                                <input class="form-control" type="file" name="paket_flyer">
+                                                <label class="col-form-label">Upload Paket Flyer</label>
+                                                <div class="input-group mb-3">
+                                                    <div class="custom-file">
+                                                        <input type="file" class="custom-file-input"
+                                                            id="inputGroupFile01"
+                                                            aria-describedby="inputGroupFileAddon01" name="paket_flyer">
+                                                        <label class="custom-file-label" for="inputGroupFile01">Choose
+                                                            file</label>
+                                                    </div>
+                                                </div>
                                             </div>
                                             <div class="form-group">
                                                 <label class="col-form-label">Upload Itinerary</label>
-                                                <input class="form-control" type="file" name="itinerary">
+                                                <div class="input-group mb-3">
+                                                    <div class="custom-file">
+                                                        <input type="file" class="custom-file-input"
+                                                            id="inputGroupFile01"
+                                                            aria-describedby="inputGroupFileAddon01" name="itinerary">
+                                                        <label class="custom-file-label" for="inputGroupFile01">Choose
+                                                            file</label>
+                                                    </div>
+                                                </div>
                                             </div>
+
                                             <div class="form-group">
                                                 <label class="col-form-label">Deskripsi Singkat</label>
                                                 <textarea class="form-control wysiwyg" rows="6"

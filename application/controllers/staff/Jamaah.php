@@ -14,14 +14,13 @@ class Jamaah extends CI_Controller
         }
         //this page only for admin
         if (!($_SESSION['bagian'] == 'Manifest' || $_SESSION['bagian'] == 'Master Admin' || $_SESSION['bagian'] == 'Finance' || $_SESSION['bagian'] == 'Logistik' || (preg_match("/bandung/i", $_SESSION['email'])))) {
-            $this->alert->set('danger', 'Anda tidak memiliki akses untuk halaman tersebut');
+            $this->alert->toast('danger', 'Mohon Maaf', 'Anda tidak memiliki akses');
             redirect(base_url() . 'staff/dashboard');
         }
     }
 
     public function index()
     {
-
         $this->load->view('staff/jamaah_view');
     }
 
@@ -69,25 +68,22 @@ class Jamaah extends CI_Controller
         $this->form_validation->set_rules('id', 'id', 'trim|required|integer');
 
         if ($this->form_validation->run() == FALSE) {
-            $this->alert->set('danger', 'Access Denied');
-            redirect(base_url() . 'staff/jamaah');
+            $this->alert->toast('danger', 'Mohon Maaf', 'Anda tidak memiliki akses');
+            redirect($_SERVER['HTTP_REFERER']);
         }
 
         $this->load->model('paketUmroh');
         $this->load->model('registrasi');
-        $paket = $this->paketUmroh->getPackage(null, true, true);
-        $jamaah = $this->registrasi->getJamaah($_GET['id']);
-        $this->load->model('agen');
-        $agenList = $this->agen->getAgen();
+        $paket = $this->paketUmroh->getPackage(null, false, false);
+        $user = $this->registrasi->getuser($_GET['id']);
         $data = array(
             'paket' => $paket,
-            'jamaah' => $jamaah,
-            'agenList' => $agenList
+            'user' => $user
         );
-        if (!empty($jamaah->member)) {
+        if (!empty($user->member)) {
             foreach ($paket as $key => $p) {
                 $id_paket = $p->id_paket;
-                foreach ($jamaah->member as $p) {
+                foreach ($user->member as $p) {
                     if ($id_paket == $p->id_paket) {
                         unset($data['paket'][$key]);
                         break;
@@ -195,30 +191,29 @@ class Jamaah extends CI_Controller
         $this->form_validation->set_rules('idm', 'idm', 'trim|required|integer');
 
         if ($this->form_validation->run() == FALSE) {
-            $this->alert->set('danger', 'Access Denied');
-            redirect(base_url() . 'staff/jamaah');
+            $this->alert->toast('danger', 'Mohon Maaf', 'Anda tidak memiliki akses');
+            redirect($_SERVER['HTTP_REFERER']);
             return false;
         }
         $this->load->model('registrasi');
-        $data_jamaah = $this->registrasi->getJamaah(null, null, $_GET['idm']);
-
+        $data_jamaah = $this->registrasi->getUser(null, null, null, $_GET['idm']);
         if (empty($data_jamaah)) {
-            $this->alert->set('danger', 'Data Tidak Ditemukan');
-            redirect(base_url() . 'staff/jamaah');
+            $$this->alert->toast('danger', 'Mohon Maaf', 'Data tidak ditemukan');
+            redirect($_SERVER['HTTP_REFERER']);
             return false;
         }
         $data_member = $data_jamaah->member;
         if (empty($data_member)) {
-            $this->alert->set('danger', 'Data Tidak Ditemukan');
-            redirect(base_url() . 'staff/jamaah');
+            $$this->alert->toast('danger', 'Mohon Maaf', 'Data tidak ditemukan');
+            redirect($_SERVER['HTTP_REFERER']);
             return false;
         }
         $idPaket = $data_member[0]->id_paket;
         $this->load->model('paketUmroh');
         $paketInfo = $this->paketUmroh->getPackage($idPaket, false, false, false);
         if (empty($paketInfo)) {
-            $this->alert->set('danger', 'Data Tidak Ditemukan');
-            redirect(base_url() . 'staff/jamaah');
+            $$this->alert->toast('danger', 'Mohon Maaf', 'Data tidak ditemukan');
+            redirect($_SERVER['HTTP_REFERER']);
             return false;
         }
         //option for pilihan kamar
@@ -233,17 +228,9 @@ class Jamaah extends CI_Controller
             $kamarOption[] = 'Double';
         }
 
-
-        $this->load->model('agen');
-        $agenList = $this->agen->getAgen();
-
-
-
-
         $this->load->view('staff/update_peserta', $data = array(
             'jamaah' => $data_jamaah,
             'member' => $data_member[0],
-            'agenList' => $agenList,
             'kamarOption' => $kamarOption
         ));
     }
@@ -320,7 +307,7 @@ class Jamaah extends CI_Controller
 
         $this->load->model('registrasi');
         $result = $this->registrasi->updateMember($data);
-        $redir_string = base_url() . 'staff/info/detail_jamaah?id=' . $_POST['id_jamaah'];
+        $redir_string = base_url() . 'staff/info/detail_user?id=' . $_POST['id_user'];
         if (isset($_POST['id_member'])) {
             $redir_string = $redir_string . '&id_member=' . $_POST['id_member'];
         }
@@ -479,6 +466,64 @@ class Jamaah extends CI_Controller
         $term = $_GET['r']['term'];
         $this->load->model('agen');
         $data = $this->agen->getAgen($term, 10);
+        echo json_encode($data);
+    }
+
+    public function data_peserta() {
+        $this->load->model('paketUmroh');
+        $paket = $this->paketUmroh->getPackage(null, false, false);
+        if (isset($_GET['id_paket'])) {
+            $id_paket = $_GET['id_paket'];
+        } else {
+            $id_paket = $paket[0]->id_paket;
+        }
+
+        $selectedPaket = $this->paketUmroh->getPackage($id_paket, false, false, false);
+
+        $nama_paket = $selectedPaket->nama_paket . ' (' . date_format(date_create($selectedPaket->tanggal_berangkat), "d F Y") . ')';
+
+        $data = array(
+            'paket' => $paket,
+            'id_paket' => $id_paket,
+            'nama_paket' => $nama_paket
+        );
+        $this->load->view('staff/peserta_paket', $data);
+    }
+
+    public function load_peserta()
+    {
+        include APPPATH . 'third_party/ssp.class.php';
+        $table = 'program_member';
+        // Primary key of table
+        $primaryKey = 'id_member';
+
+        $columns = array(
+            array('db' => 'pm.id_member', 'dt' => 'DT_RowId', 'field' => 'id_member'),
+            array('db' => 'pm.id_user', 'dt' => 'id_user', 'field' => 'id_user'),
+            array('db' => 'pm.id_paket', 'dt' => 'id_paket', 'field' => 'id_paket'),
+            array('db' => 'u.name', 'dt' => 'name', 'field' => 'name'),
+            array('db' => 'u.email', 'dt' => 'email', 'field' => 'email'),
+            array('db' => 'u.no_wa', 'dt' => 'no_wa', 'field' => 'no_wa'),
+            array('db' => 'pu.nama_paket', 'dt' => 'nama_paket', 'field' => 'nama_paket'),
+            array('db' => 'register_from', 'dt' => 'register_from', 'field' => 'register_from'),
+            array('db' => 'tgl_regist', 'dt' => 'tgl_regist', 'field' => 'tgl_regist')
+        );
+        $sql_details = array(
+            'user' => $this->db->username,
+            'pass' => $this->db->password,
+            'db' => $this->db->database,
+            'host' => $this->db->hostname
+        );
+        $joinQuery = "FROM {$table} AS pm LEFT JOIN user as u ON (pm.id_user = u.id_user)"
+        . " LEFT JOIN paket_umroh as pu ON (pm.id_paket = pu.id_paket)";
+        $id_paket = $_GET['id_paket'];
+        $extraCondition = "pm.id_paket = $id_paket";
+        $data = SSP::simple($_GET, $sql_details, $table, $primaryKey, $columns, $joinQuery, $extraCondition);
+        foreach ($data['data'] as $key => $d) {
+            $data['data'][$key]['DT_RowAttr'] = array(
+                'id_paket' => $d['id_paket'] 
+            );
+        }
         echo json_encode($data);
     }
 }

@@ -16,7 +16,7 @@
     <!-- [ Layout wrapper ] Start -->
     <div class="layout-wrapper layout-2">
         <div class="layout-inner">
-            <?php $this->load->view('staff/include/side_menu', ["manifest" => true, "data_user" => true]) ?>
+            <?php $this->load->view('staff/include/side_menu', ["manifest" => true, "data_peserta" => true]) ?>
             <!-- [ Layout container ] Start -->
             <div class="layout-container">
                 <?php $this->load->view('staff/include/nav_menu') ?>
@@ -28,6 +28,49 @@
                     <div class="container-fluid flex-grow-1 container-p-y">
                         <!-- Page Heading -->
                         <h4 class="font-weight-bold py-3 mb-0">List User yang terdaftar di Sistem</h4>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="card shadow mb-2 border-left-primary">
+                                    <div class="card-header py-3">
+                                        <h6 class="m-0 font-weight-bold text-primary">Pilih Program</h6>
+                                    </div>
+                                    <div class="card-body">
+                                        <select name="id_paket" id="id_paket" class="form-control">
+                                            <!-- <option value="all">SEMUA PAKET</option> -->
+                                            <?php
+                                                    $flagNextSchedule = 1;
+                                                    $flagFuture = 1;
+                                                    $flagLast = 1;
+                                                    ?>
+                                            <?php foreach ($paket as $pkt) { ?>
+                                            <?php
+                                                        $futureTrue = strtotime($pkt->tanggal_berangkat) > strtotime('now');
+                                                        if ($flagNextSchedule == 1) {
+                                                            echo "<optgroup label='Next Trip'>";
+                                                            $prepareClose = 1;
+                                                            $flagNextSchedule = 0;
+                                                        } elseif ($flagFuture == 1 && $futureTrue == true) {
+                                                            echo "</optgroup>";
+                                                            echo "<optgroup label='Future Trips'>";
+                                                            $flagFuture = 0;
+                                                        } elseif ($flagLast == 1 && $futureTrue == false) {
+                                                            $flagLast = 0;
+                                                            echo "</optgroup>";
+                                                            echo "<optgroup label='Last Trips'>";
+                                                        }
+                                                        ?>
+                                            <option value="<?php echo $pkt->id_paket; ?>"
+                                                <?php echo $pkt->id_paket == $id_paket ? 'selected' : ''; ?>>
+                                                <?php echo $pkt->nama_paket; ?>
+                                                (<?php echo date_format(date_create($pkt->tanggal_berangkat), "d F Y"); ?>)
+                                            </option>
+                                            <?php } ?>
+                                            <?php echo "</optgroup>"; ?>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <div class="row">
                             <div class="col-lg-12">
                                 <!-- Basic Card Example -->
@@ -43,7 +86,7 @@
                                                     <th style="width: 200px">Nama</th>
                                                     <th>Email</th>
                                                     <th>No WA</th>
-                                                    <th>Program</th>
+                                                    <!-- <th>Program</th> -->
                                                     <th style="width: 300px">Aksi</th>
                                                 </tr>
                                             </thead>
@@ -88,7 +131,7 @@
         loadDatatables();
 
         function loadDatatables() {
-            var idPaket = !$("#id_paket").val() ? '' : $("#id_paket").val();
+            var idPaket = !$("#id_paket").val() ? <?php echo $id_paket ;?> : $("#id_paket").val();
             console.log(idPaket);
             var dataTable = new DataTable('#dataTable', {
                 layout: {
@@ -101,7 +144,10 @@
                 processing: true,
                 serverSide: true,
                 ajax: {
-                    url: "<?php echo base_url(); ?>staff/jamaah/load_jamaah"
+                    url: "<?php echo base_url(); ?>staff/jamaah/load_peserta",
+                    data: {
+                        id_paket: idPaket
+                    }
                 },
                 order: [
                     [1, "desc"]
@@ -128,20 +174,9 @@
                         }
                     },
                     {
-                        targets: 3,
-                        data: 'all_paket',
-                        render: function(data, type, row) {
-                            if (data == null || data == '') {
-                                return 'user belum terdaftar'
-                            } else {
-                                return data
-                            }
-                        }
-                    },
-                    {
                         targets: -1,
                         data: null,
-                        defaultContent: '<a href="javascript:void(0);" class="btn btn-primary btn-xs rounded-xs lihat_btn mt-1">Lihat</a> \n\
+                        defaultContent: '<a href="javascript:void(0);" class="btn btn-primary btn-xs rounded-xs lihat_btn mt-1">Detail</a> \n\
                                 <a href="javascript:void(0);" class="btn btn-danger btn-xs rounded-xs hapus_btn mt-1">Hapus</a> \n\
                                 <a href="javascript:void(0);" class="btn btn-success btn-xs rounded-xs log_btn mt-1">Log</a>'
                     }
@@ -151,7 +186,7 @@
 
         $("#dataTable tbody").on("click", ".lihat_btn", function() {
             var trid = $(this).closest('tr').attr('id'); // table row ID 
-            window.open("<?php echo base_url(); ?>staff/info/detail_user?id=" + trid, '_blank');
+            window.open("<?php echo base_url(); ?>staff/info/detail_peserta?id=" + trid, '_blank');
         });
 
         $("#dataTable tbody").on("click", ".bc_btn", function() {

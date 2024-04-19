@@ -110,14 +110,14 @@ class Info extends CI_Controller
         $this->form_validation->set_rules('id', 'id', 'trim|required|integer');
 
         if ($this->form_validation->run() == FALSE) {
-            $this->alert->set('danger', 'Access Denied');
+            $this->alert->toast('danger', 'Mohon Maaf', 'Anda tidak memiliki akses');
             redirect(base_url() . 'staff/jamaah');
         }
 
         $this->load->model('registrasi');
         $data = $this->registrasi->getUser($_GET['id']);
         if (empty($data)) {
-            $this->alert->set('danger', 'Data Tidak Ditemukan');
+            $this->alert->toast('danger', 'Mohon Maaf', 'Data tidak ditemukan');
             redirect(base_url() . 'staff/jamaah');
         }
 
@@ -134,6 +134,35 @@ class Info extends CI_Controller
             $data->child = $this->registrasi->getGroupMembers($data->member[$data->member_select]->parent_id);
         }
         $this->load->view('staff/detail_view', $data);
+    }
+
+    public function detail_peserta()
+    {
+        $this->form_validation->set_data($this->input->get());
+        $this->form_validation->set_rules('id', 'id', 'trim|required|integer');
+
+        if ($this->form_validation->run() == FALSE) {
+            $this->alert->toast('danger', 'Mohon Maaf', 'Anda tidak memiliki akses');
+            redirect(base_url() . 'staff/jamaah');
+        }
+
+        $this->load->model('registrasi');
+        $member = $this->registrasi->getMember($_GET['id']);
+        if (empty($member)) {
+            $this->alert->toast('danger', 'Mohon Maaf', 'Data tidak ditemukan');
+            redirect(base_url() . 'staff/jamaah');
+        }
+        
+        $user = $this->registrasi->getUser($member[0]->id_user);
+        if (empty($user)) {
+            $this->alert->toast('danger', 'Mohon Maaf', 'Data tidak ditemukan');
+            redirect(base_url() . 'staff/jamaah');
+        }
+        $data = array (
+            'user' => $user,
+            'member' => $member[0],
+        );
+        $this->load->view('staff/peserta_view', $data);
     }
 
     public function pdf()

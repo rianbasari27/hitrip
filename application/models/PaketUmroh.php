@@ -343,7 +343,7 @@ class PaketUmroh extends CI_Model
         return $data;
     }
 
-    public function getPackage($id = null, $notExpired = TRUE, $active = false, $curSeasonOnly = false, $month = null, $available = false, $isLcu=null, $season = null)
+    public function getPackage($id = null, $notExpired = TRUE, $active = false, $curSeasonOnly = false, $month = null, $available = false, $season = null)
     {
         if ($id != null) {
             $this->db->where('id_paket', $id);
@@ -370,12 +370,6 @@ class PaketUmroh extends CI_Model
         }
         if ($month) {
             $this->db->where('MONTH(tanggal_berangkat)', $month);
-        }
-        if(isset($isLcu)){
-            if($isLcu == true) {
-                $this->db->like('LOWER(nama_paket)','low cost');
-                $this->db->or_like('LOWER(nama_paket)','lcu');
-            }
         }
 
         $this->db->order_by('tanggal_berangkat', 'ASC');

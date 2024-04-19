@@ -69,11 +69,6 @@
                                             didalam Sistem</h6>
                                     </div>
                                     <div class="card-body">
-                                        <div class="d-flex">
-                                            <div style="width: 20px; height: 20px; background-color: lightgreen; margin-right: 5px;"
-                                                class="rounded border border-dark"></div>
-                                            <p class="text-dark">Broadcast Aktif</p>
-                                        </div>
                                         <table id="dataTable" class="display" style="width:100%">
                                             <thead>
                                                 <tr>

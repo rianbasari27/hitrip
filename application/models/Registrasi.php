@@ -214,7 +214,7 @@ class Registrasi extends CI_Model
         //TABEL PROGRAM MEMBER
         $this->load->library('scan');
         if (isset($member['files']['paspor_scan'])) {
-            $hasil = $this->scan->check($member['files']['paspor_scan'], 'paspor', $member['id_jamaah']);
+            $hasil = $this->scan->check($member['files']['paspor_scan'], 'paspor', $member['id_user']);
             if ($hasil !== false) {
                 $member['paspor_scan'] = $hasil;
                 $uploadSuccess = true;
@@ -223,7 +223,7 @@ class Registrasi extends CI_Model
             }
         }
         if (isset($member['files']['paspor_scan2'])) {
-            $hasil = $this->scan->check($member['files']['paspor_scan2'], 'paspor2', $member['id_jamaah']);
+            $hasil = $this->scan->check($member['files']['paspor_scan2'], 'paspor2', $member['id_user']);
             if ($hasil !== false) {
                 $member['paspor_scan2'] = $hasil;
                 $uploadSuccess = true;
@@ -232,7 +232,7 @@ class Registrasi extends CI_Model
             }
         }
         if (isset($member['files']['ktp_scan'])) {
-            $hasil = $this->scan->check($member['files']['ktp_scan'], 'ktp', $member['id_jamaah']);
+            $hasil = $this->scan->check($member['files']['ktp_scan'], 'ktp', $member['id_user']);
             if ($hasil !== false) {
                 $member['ktp_scan'] = $hasil;
                 $uploadSuccess = true;
@@ -241,7 +241,7 @@ class Registrasi extends CI_Model
             }
         }
         if (isset($member['files']['foto_scan'])) {
-            $hasil = $this->scan->check($member['files']['foto_scan'], 'foto', $member['id_jamaah']);
+            $hasil = $this->scan->check($member['files']['foto_scan'], 'foto', $member['id_user']);
             if ($hasil !== false) {
                 $member['foto_scan'] = $hasil;
                 $uploadSuccess = true;
@@ -250,7 +250,7 @@ class Registrasi extends CI_Model
             }
         }
         if (isset($member['files']['kk_scan'])) {
-            $hasil = $this->scan->check($member['files']['kk_scan'], 'kk', $member['id_jamaah']);
+            $hasil = $this->scan->check($member['files']['kk_scan'], 'kk', $member['id_user']);
             if ($hasil !== false) {
                 $member['kk_scan'] = $hasil;
                 $uploadSuccess = true;
@@ -259,7 +259,7 @@ class Registrasi extends CI_Model
             }
         }
         if (isset($member['files']['visa_scan'])) {
-            $hasil = $this->scan->check($member['files']['visa_scan'], 'visa', $member['id_jamaah']);
+            $hasil = $this->scan->check($member['files']['visa_scan'], 'visa', $member['id_user']);
             if ($hasil !== false) {
                 $member['visa_scan'] = $hasil;
                 $uploadSuccess = true;
@@ -268,7 +268,7 @@ class Registrasi extends CI_Model
             }
         }
         // if (isset($member['files']['tiket_scan'])) {
-        //     $hasil = $this->scan->check($member['files']['tiket_scan'], 'tiket', $member['id_jamaah']);
+        //     $hasil = $this->scan->check($member['files']['tiket_scan'], 'tiket', $member['id_user']);
         //     if ($hasil !== false) {
         //         $member['tiket_scan'] = $hasil;
         //         $uploadSuccess = true;
@@ -277,7 +277,7 @@ class Registrasi extends CI_Model
         //     }
         // }
         if (isset($member['files']['vaksin_scan'])) {
-            $hasil = $this->scan->check($member['files']['vaksin_scan'], 'vaksin', $member['id_jamaah']);
+            $hasil = $this->scan->check($member['files']['vaksin_scan'], 'vaksin', $member['id_user']);
             if ($hasil !== false) {
                 $member['vaksin_scan'] = $hasil;
                 $uploadSuccess = true;
@@ -382,17 +382,17 @@ class Registrasi extends CI_Model
             $before = null;
             $this->load->model('paketUmroh');
             //jika ada diskon event
-            $diskon_event = $this->paketUmroh->getDiskonEventPaket($member['id_paket']);
-            if ($diskon_event) {
-                $dateNow = date('Y-m-d');
-                if ($dateNow >= $diskon_event->tgl_mulai && $dateNow <= $diskon_event->tgl_berakhir  && $diskon_event->aktif == 1) {
-                    if ($diskon_event->nominal != 0 && $diskon_event->nominal != null) {
-                        // set extra fee
-                        $this->load->model('tarif');
-                        $this->tarif->setExtraFee($id_member, $diskon_event->nominal * -1, $diskon_event->keterangan_diskon);
-                    }
-                }
-            }
+            // $diskon_event = $this->paketUmroh->getDiskonEventPaket($member['id_paket']);
+            // if ($diskon_event) {
+            //     $dateNow = date('Y-m-d');
+            //     if ($dateNow >= $diskon_event->tgl_mulai && $dateNow <= $diskon_event->tgl_berakhir  && $diskon_event->aktif == 1) {
+            //         if ($diskon_event->nominal != 0 && $diskon_event->nominal != null) {
+            //             // set extra fee
+            //             $this->load->model('tarif');
+            //             $this->tarif->setExtraFee($id_member, $diskon_event->nominal * -1, $diskon_event->keterangan_diskon);
+            //         }
+            //     }
+            // }
             //jika ada diskon
             $paket = $this->paketUmroh->getPackage($member['id_paket']);
             $diskon = $paket->default_diskon;
@@ -408,8 +408,8 @@ class Registrasi extends CI_Model
                 $this->tarif->setExtraFee($id_member, $diskon, $deskripsiDiskon);
 
                 //generate va_open
-                $this->load->model('va_model');
-                $this->va_model->createVAOpen($id_member);
+                // $this->load->model('va_model');
+                // $this->va_model->createVAOpen($id_member);
             }
         }
 
@@ -426,9 +426,9 @@ class Registrasi extends CI_Model
         $this->calcTariff($id_member);
         $this->registrasi->cekVerified($id_member);
         if ($uploadSuccess == true) {
-            $this->alert->set('success', 'Data Berhasil di Input');
+            $this->alert->toast('success', 'Selamat', 'Data Berhasil di Input');
         } else {
-            $this->alert->set('success', 'Data Berhasil di Input');
+            $this->alert->toast('success', 'Selamat', 'Data Berhasil di Input');
         }
         return $id_member;
     }
@@ -1446,15 +1446,15 @@ class Registrasi extends CI_Model
         // end proses
 
         // ambil data jamaah
-        $this->db->where('id_jamaah', $data_member->id_jamaah);
-        $data_jamaah = $this->db->get('jamaah')->row();
+        $this->db->where('id_user', $data_member->id_user);
+        $data_jamaah = $this->db->get('user')->row();
         if (empty($data_jamaah)){
             return false;
         }
 
         // proses verified
-        $jamaah['first_name'] = $data_jamaah->first_name;
-        $jamaah['ktp_no'] = $data_jamaah->ktp_no;
+        $jamaah['name'] = $data_jamaah->name;
+        $jamaah['no_ktp'] = $data_jamaah->no_ktp;
         $jamaah['jenis_kelamin'] = $data_jamaah->jenis_kelamin;
         $jamaah['tanggal_lahir'] = $data_jamaah->tanggal_lahir;
 
@@ -1467,9 +1467,9 @@ class Registrasi extends CI_Model
             }
         }
 
-        $this->db->where('id_jamaah', $data_jamaah->id_jamaah);
+        $this->db->where('id_user', $data_jamaah->id_user);
         $this->db->set('verified', $jamaah['verified']);
-        if (!$this->db->update('jamaah')){
+        if (!$this->db->update('user')){
             return false;
         }
         // end proses

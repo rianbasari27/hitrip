@@ -75,7 +75,7 @@
                     </a>
                 </li>
                 <li class="sidenav-item <?php echo isset($data_peserta) ? 'active' : '' ;?>">
-                    <a href="<?php echo base_url() . 'staff/paket/tambah' ;?>" class="sidenav-link">
+                    <a href="<?php echo base_url() . 'staff/jamaah/data_peserta' ;?>" class="sidenav-link">
                         <div>Data Peserta</div>
                     </a>
                 </li>
