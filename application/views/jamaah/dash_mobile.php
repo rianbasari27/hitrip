@@ -28,8 +28,8 @@
     }
 
     .squircle-icon {
-        width: 40px;
-        height: 40px;
+        width: 50px;
+        height: 50px;
         border-radius: 35%;
         display: flex;
         justify-content: center;
@@ -78,7 +78,7 @@
                             class="color-highlight"></span> | <span id="zoneName" class="font-500"></span>
                     </div>
                 </div>
-                <div class="search-box search-dark shadow-sm border-0 bg-theme rounded-sm bottom-0">
+                <div class="search-box search-dark bg-theme rounded-sm bottom-0">
                     <i class="fa fa-search ms-1"></i>
                     <input type="text" class="border-0" placeholder="Searching for something? Try 'dubai'" data-search>
                 </div>
@@ -211,10 +211,9 @@
             <div class="search-no-results disabled mt-4">
                 <div class="card card-style">
                     <div class="content">
-                        <h1>No Results</h1>
+                        <h1>Oops!</h1>
                         <p>
-                            Your search brought up no results. Try using a different keyword. Or try typying all
-                            to see all items in the demo. These can be linked to anything you want.
+                            Paket yang Anda cari tidak ditemukan. Coba untuk menggunakan keyword lain.
                         </p>
                     </div>
                 </div>
@@ -222,58 +221,56 @@
             <!-- End Search Section -->
 
             <!-- Menu Section -->
-            <div class="card card-style">
-                <div class="content">
-                    <div class="row mb-0">
-                        <a href="#" class="col-3 py-2 mb-2 text-center">
-                            <div class="squircle-icon gradient-highlight mx-auto">
-                                <i class="fa-solid fa-umbrella-beach icon font-18 color-white"></i>
-                            </div>
-                            <div class="lh-sm mt-2 font-11 color-theme">Trip</div>
-                        </a>
-                        <a href="#" class="col-3 py-2 mb-2 text-center">
-                            <div class="squircle-icon gradient-highlight mx-auto">
-                                <i class="fa-solid fa-percent icon font-18 color-white"></i>
-                            </div>
-                            <div class="lh-sm mt-2 font-11 color-theme">Promo</div>
-                        </a>
-                        <a href="#" class="col-3 py-2 mb-2 text-center">
-                            <div class="squircle-icon gradient-highlight mx-auto">
-                                <i class="fa-solid fa-ticket icon font-18 color-white"></i>
-                            </div>
-                            <div class="lh-sm mt-2 font-11 color-theme">Voucher</div>
-                        </a>
-                        <a href="#" class="col-3 py-2 mb-2 text-center">
-                            <div class="squircle-icon gradient-highlight mx-auto">
-                                <i class="fa-solid fa-money-bill-wave icon font-18 color-white"></i>
-                            </div>
-                            <div class="lh-sm mt-2 font-11 color-theme">Currency</div>
-                        </a>
-                        <a href="#" class="col-3 py-2 mb-2 text-center">
-                            <div class="squircle-icon gradient-highlight mx-auto">
-                                <i class="fa-solid fa-utensils icon font-18 color-white"></i>
-                            </div>
-                            <div class="lh-sm mt-2 font-11 color-theme">Restoran Terdekat</div>
-                        </a>
-                        <a href="#" class="col-3 py-2 mb-2 text-center">
-                            <div class="squircle-icon gradient-highlight mx-auto">
-                                <i class="fa-solid fa-hotel icon font-18 color-white"></i>
-                            </div>
-                            <div class="lh-sm mt-2 font-11 color-theme">Hotel Terdekat</div>
-                        </a>
-                        <a href="#" class="col-3 py-2 mb-2 text-center">
-                            <div class="squircle-icon gradient-highlight mx-auto">
-                                <i class="fa-solid fa-compass icon font-18 color-white"></i>
-                            </div>
-                            <div class="lh-sm mt-2 font-11 color-theme">Discover</div>
-                        </a>
-                        <a href="#" class="col-3 py-2 mb-2 text-center" data-menu="menu-other">
-                            <div class="squircle-icon gradient-highlight mx-auto">
-                                <i class="fa-solid fa-ellipsis icon font-18 color-white"></i>
-                            </div>
-                            <div class="lh-sm mt-2 font-11 color-theme">Lainnya</div>
-                        </a>
-                    </div>
+            <div class="content">
+                <div class="row mb-0">
+                    <a href="#" class="col-3 py-2 mb-2 text-center">
+                        <div class="squircle-icon gradient-highlight shadow mx-auto">
+                            <i class="fa-solid fa-umbrella-beach icon font-20 color-white"></i>
+                        </div>
+                        <div class="lh-sm mt-2 font-11 color-theme">Trip</div>
+                    </a>
+                    <a href="#" class="col-3 py-2 mb-2 text-center">
+                        <div class="squircle-icon gradient-highlight shadow mx-auto">
+                            <i class="fa-solid fa-percent icon font-20 color-white"></i>
+                        </div>
+                        <div class="lh-sm mt-2 font-11 color-theme">Promo</div>
+                    </a>
+                    <a href="#" class="col-3 py-2 mb-2 text-center">
+                        <div class="squircle-icon gradient-highlight shadow mx-auto">
+                            <i class="fa-solid fa-ticket icon font-20 color-white"></i>
+                        </div>
+                        <div class="lh-sm mt-2 font-11 color-theme">Voucher</div>
+                    </a>
+                    <a href="#" class="col-3 py-2 mb-2 text-center">
+                        <div class="squircle-icon gradient-highlight shadow mx-auto">
+                            <i class="fa-solid fa-money-bill-wave icon font-20 color-white"></i>
+                        </div>
+                        <div class="lh-sm mt-2 font-11 color-theme">Currency</div>
+                    </a>
+                    <a href="#" class="col-3 py-2 mb-2 text-center">
+                        <div class="squircle-icon gradient-highlight shadow mx-auto">
+                            <i class="fa-solid fa-utensils icon font-20 color-white"></i>
+                        </div>
+                        <div class="lh-sm mt-2 font-11 color-theme">Restoran Terdekat</div>
+                    </a>
+                    <a href="#" class="col-3 py-2 mb-2 text-center">
+                        <div class="squircle-icon gradient-highlight shadow mx-auto">
+                            <i class="fa-solid fa-hotel icon font-20 color-white"></i>
+                        </div>
+                        <div class="lh-sm mt-2 font-11 color-theme">Hotel Terdekat</div>
+                    </a>
+                    <a href="#" class="col-3 py-2 mb-2 text-center">
+                        <div class="squircle-icon gradient-highlight shadow mx-auto">
+                            <i class="fa-solid fa-compass icon font-20 color-white"></i>
+                        </div>
+                        <div class="lh-sm mt-2 font-11 color-theme">Discover</div>
+                    </a>
+                    <a href="#" class="col-3 py-2 mb-2 text-center" data-menu="menu-other">
+                        <div class="squircle-icon gradient-highlight shadow mx-auto">
+                            <i class="fa-solid fa-ellipsis icon font-20 color-white"></i>
+                        </div>
+                        <div class="lh-sm mt-2 font-11 color-theme">Lainnya</div>
+                    </a>
                 </div>
             </div>
             <!-- End Menu Section -->
@@ -285,37 +282,31 @@
                         <div class="splide__slide">
                             <div class="card card-style ms-3"
                                 style="background-image:url(<?php echo base_url() ?>asset/images/city/dubai-1280x720.jpg);"
-                                data-card-height="300">
+                                data-card-height="200">
                                 <div class="card-bottom px-3 py-3">
-                                    <a href="#" aria-label="Click for Explore"
+                                    <a href="<?php echo base_url() ?>jamaah/home/promo" aria-label="Click for Explore"
                                             class="bg-white color-black rounded-sm btn btn-xs float-start font-700 font-12">Ambil Promo</a>
                                 </div>
-                                <div class="card-overlay bg-gradient opacity-10"></div>
-                                <div class="card-overlay bg-gradient"></div>
                             </div>
                         </div>
                         <div class="splide__slide">
                             <div class="card card-style ms-3"
                                 style="background-image:url(<?php echo base_url() ?>asset/images/city/seoul-1280x720.jpg);"
-                                data-card-height="300">
+                                data-card-height="200">
                                 <div class="card-bottom px-3 py-3">
-                                    <a href="#" aria-label="Click for Explore"
+                                    <a href="<?php echo base_url() ?>jamaah/home/promo" aria-label="Click for Explore"
                                             class="bg-white color-black rounded-sm btn btn-xs float-start font-700 font-12">Ambil Promo</a>
                                 </div>
-                                <div class="card-overlay bg-gradient opacity-10"></div>
-                                <div class="card-overlay bg-gradient"></div>
                             </div>
                         </div>
                         <div class="splide__slide">
                             <div class="card card-style ms-3"
                                 style="background-image:url(<?php echo base_url() ?>asset/images/city/istanbul-1280x720.jpg);"
-                                data-card-height="300">
+                                data-card-height="200">
                                 <div class="card-bottom px-3 py-3">
-                                    <a href="#" aria-label="Click for Explore"
+                                    <a href="<?php echo base_url() ?>jamaah/home/promo" aria-label="Click for Explore"
                                             class="bg-white color-black rounded-sm btn btn-xs float-start font-700 font-12">Ambil Promo</a>
                                 </div>
-                                <div class="card-overlay bg-gradient opacity-10"></div>
-                                <div class="card-overlay bg-gradient"></div>
                             </div>
                         </div>
                     </div>

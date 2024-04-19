@@ -3,6 +3,35 @@
 
 <head>
     <?php $this->load->view('jamaah/include/header'); ?>
+    <style>
+        .back-button {
+            position: fixed;
+            top: 30px;
+            left: 30px;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+            z-index: 10;
+        }
+
+        .back-button a {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+            font-size: 20px;
+            text-decoration: none;
+        }
+
+        @media only screen and (min-width:600px) {
+            .back-button {
+                left: calc((100% - 600px) / 2 + 30px);
+            }
+        }
+    </style>
 </head>
 
 <body class="theme-light">
@@ -17,12 +46,20 @@
         <?php $this->load->view('jamaah/include/header_bar', ['noBackButton' => true]); ?>
         <div class="page-content pb-0">
 
-            <div data-card-height="cover-full" class="card mb-0" style="background-image:url(images/pictures/1l.jpg)">
+            <!-- back button -->
+            <div class="back-button bg-white">
+                <a href="#" data-back-button class="color-highlight">
+                    <i class="fa-solid fa-arrow-left"></i>
+                </a>
+            </div>
+
+            <div data-card-height="cover-full" class="card mb-0" style="background-image:url(<?php echo base_url() . 'asset/appkit/images/background-3.jpg' ?>)">
                 <div class="card-center">
 
                     <div class="text-center">
-                        <p class="font-600 color-highlight mb-1 font-16">Verify your Identity</p>
-                        <h1 class="font-26 color-white">One Time Passcode</h1>
+                        <p class="font-600 color-highlight mb-1 font-16">Verifikasi identitas Anda</p>
+                        <h1 class="font-26 color-white">Masukkan kode OTP</h1>
+                        <p class="px-4 color-white">Silahkan periksa pesan WhatsApp Anda untuk melihat kode OTP yang telah kami kirim.</p>
                     </div>
 
                     <div class="content px-4">
@@ -49,13 +86,11 @@
                             </form>
                         </div>
 
-                        <p class="text-center my-4 font-11 color-white">Didn't get your code? <a href="#"
-                                id="resendBtn">Resend
-                                Code</a></p>
+                        <p class="text-center my-4 font-11 color-white">Tidak mendapatkan kode? <a href="#"
+                                id="resendBtn">Kirim ulang</a></p>
 
                         <a href="#" id="submitBtn" data-back-button
-                            class="btn btn-full btn-l font-600 font-13 gradient-highlight mt-4 rounded-s">Verify
-                            Account</a>
+                            class="btn btn-full btn-l font-600 font-13 gradient-highlight mt-4 rounded-s">Verifikasi Akun</a>
 
                     </div>
 

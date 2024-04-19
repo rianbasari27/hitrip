@@ -79,7 +79,7 @@
 
 
 
-            <!-- <?php $this->load->view('jamaah/include/footer'); ?> -->
+            <?php $this->load->view('jamaah/include/footer'); ?>
             <?php $this->load->view('jamaah/include/alert'); ?>
         </div>
         <!-- Page content ends here-->
