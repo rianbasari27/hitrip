@@ -104,7 +104,7 @@ class Info extends CI_Controller
         $this->load->view('staff/riwayat_bayar_new', $data);
     }
 
-    public function detail_jamaah()
+    public function detail_user()
     {
         $this->form_validation->set_data($this->input->get());
         $this->form_validation->set_rules('id', 'id', 'trim|required|integer');
@@ -115,7 +115,7 @@ class Info extends CI_Controller
         }
 
         $this->load->model('registrasi');
-        $data = $this->registrasi->getJamaah($_GET['id']);
+        $data = $this->registrasi->getUser($_GET['id']);
         if (empty($data)) {
             $this->alert->set('danger', 'Data Tidak Ditemukan');
             redirect(base_url() . 'staff/jamaah');

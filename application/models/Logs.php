@@ -7,6 +7,9 @@ class Logs extends CI_Model {
             case 's':
                 return 'staff';
                 break;
+            case 'u':
+                return 'user';
+                break;
             case 'pu':
                 return 'paket_umroh';
                 break;
@@ -212,12 +215,12 @@ class Logs extends CI_Model {
         $tbl_name = $this->getTableName($tbl);
         $id = '';
         $user = '';
-        if (isset($_SESSION['id_jamaah'])) {
-            $id = $_SESSION['id_jamaah'];
-            $user = 'j';
+        if (isset($_SESSION['id_user'])) {
+            $id = $_SESSION['id_user'];
+            $user = 'u';
         } else {
             $id = '' ;
-            $user = 'j';
+            $user = 'u';
         }
 
         if (isset($_SESSION['id_agen'])) {

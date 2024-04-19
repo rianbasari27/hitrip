@@ -168,25 +168,25 @@ class Jamaah extends CI_Controller
         $this->form_validation->set_rules('id', 'id', 'trim|required|integer');
 
         if ($this->form_validation->run() == FALSE) {
-            $this->alert->set('danger', 'Access Denied');
+            $this->alert->toast('danger', 'Mohon Maaf', 'Anda tidak memiliki akses');
             redirect(base_url() . 'staff/jamaah');
         }
 
         $this->load->model('registrasi');
-        $data = $this->registrasi->getJamaah($_GET['id']);
+        $data = $this->registrasi->getUser($_GET['id']);
         if (empty($data)) {
-            $this->alert->set('danger', 'Data Tidak Ditemukan');
+            $this->alert->toast('danger', 'Mohon Maaf', 'Data tidak ditemukan');
             redirect(base_url() . 'staff/jamaah');
         }
-        $this->load->model('region');
-        $province = $this->region->getProvince();
-        $data->provinceList = $province;
+        // $this->load->model('region');
+        // $province = $this->region->getProvince();
+        // $data->provinceList = $province;
 
-        $this->load->model('agen');
-        $agenList = $this->agen->getAgen();
-        $data->agenList = $agenList;
+        // $this->load->model('agen');
+        // $agenList = $this->agen->getAgen();
+        // $data->agenList = $agenList;
 
-        $this->load->view('staff/update_jamaah', $data);
+        $this->load->view('staff/update_user', $data);
     }
 
     public function update_member()
@@ -251,20 +251,20 @@ class Jamaah extends CI_Controller
     public function hapus()
     {
         if (!($_SESSION['bagian'] == 'Master Admin')) {
-            $this->alert->set('danger', 'Anda tidak memiliki akses untuk halaman tersebut');
-            redirect(base_url() . 'staff/dashboard');
+            $this->alert->toast('danger', 'Mohon Maaf', 'Anda tidak memiliki akses');
+            redirect($_SERVER['HTTP_REFERER']);
         }
         $this->form_validation->set_data($this->input->get());
         $this->form_validation->set_rules('id', 'id', 'trim|required|integer');
 
         if ($this->form_validation->run() == FALSE) {
-            $this->alert->set('danger', 'Access Denied');
-            redirect(base_url() . 'staff/jamaah');
+            $this->alert->toast('danger', 'Mohon Maaf', 'Anda tidak memiliki akses');
+            redirect($_SERVER['HTTP_REFERER']);
         }
 
         $this->load->model('registrasi');
-        $data = $this->registrasi->deleteJamaah($_GET['id']);
-        redirect(base_url() . 'staff/jamaah');
+        $data = $this->registrasi->deleteUser($_GET['id']);
+        redirect($_SERVER['HTTP_REFERER']);
     }
 
     public function proses_tambah()
@@ -279,28 +279,10 @@ class Jamaah extends CI_Controller
 
     public function proses_update()
     {
-        if ($_POST['referensi'] == 'Agen') {
-            $this->db->where('id_jamaah', $_POST['id_jamaah']);
-            $this->db->set('id_agen', $_POST['id_agen']);
-            $this->db->update('program_member');
 
-            unset($_POST['id_agen']);
-        }
-
-        if ($_POST['referensi'] != 'Agen') {
-            $this->db->where('id_jamaah', $_POST['id_jamaah']);
-            $this->db->set('id_agen', null);
-            $this->db->update('program_member');
-
-            unset($_POST['id_agen']);
-        }
-
-        $id_jamaah = $_POST['id_jamaah'];
-        if (!empty($_FILES['upload_penyakit']['name'])) {
-            $_POST['files']['upload_penyakit'] = $_FILES['upload_penyakit'];
-        }
+        $id_user = $_POST['id_user'];
         $this->load->model('registrasi');
-        $member = $this->registrasi->getMember(null, $_POST['id_jamaah']);
+        $member = $this->registrasi->getMember(null, $id_user);
         $this->load->model('registrasi');
         if (empty($member)) {
             $registerFrom = null;
@@ -308,7 +290,7 @@ class Jamaah extends CI_Controller
             $registerFrom = $member[0]->register_from;
         }
         $result = $this->registrasi->daftar($_POST, $registerFrom, true);
-        redirect(base_url() . 'staff/info/detail_jamaah?id=' . $id_jamaah);
+        redirect(base_url() . 'staff/info/detail_user?id=' . $id_user);
     }
 
     public function proses_update_peserta()
@@ -406,22 +388,15 @@ class Jamaah extends CI_Controller
     public function load_jamaah()
     {
         include APPPATH . 'third_party/ssp.class.php';
-        $table = 'jamaah';
+        $table = 'user';
         // Primary key of table
-        $primaryKey = 'id_jamaah';
+        $primaryKey = 'id_user';
 
         $columns = array(
-            array('db' => '`j`.`id_jamaah`', 'dt' => 'DT_RowId', 'field' => 'id_jamaah'),
-            array('db' => '`j`.`first_name`', 'dt' => 'first_name', 'field' => 'first_name'),
-            array('db' => '`j`.`second_name`', 'dt' => 'second_name', 'field' => 'second_name'),
-            array('db' => '`j`.`last_name`', 'dt' => 'last_name', 'field' => 'last_name'),
-            array('db' => "CONCAT(`j`.`first_name`,' ',`j`.`second_name`,' ',`j`.`last_name`) AS `whole_name`", 'dt' => "whole_name", 'field' => "whole_name"),
-            array('db' => "CONCAT(`j`.`first_name`,' ',`j`.`last_name`) AS `two_name`", 'dt' => "two_name", 'field' => "two_name"),
-            array('db' => '`j`.`referensi`', 'dt' => 'referensi', 'field' => 'referensi'),
-            array('db' => '`j`.`no_wa`', 'dt' => 'no_wa', 'field' => 'no_wa'),
-            array('db' => '`j`.`kabupaten_kota`', 'dt' => 'kabupaten_kota', 'field' => 'kabupaten_kota'),
-            array('db' => '`j`.`nama_ahli_waris`', 'dt' => 'nama_ahli_waris', 'field' => 'nama_ahli_waris'),
-            array('db' => '`j`.`no_ahli_waris`', 'dt' => 'no_ahli_waris', 'field' => 'no_ahli_waris'),
+            array('db' => '`u`.`id_user`', 'dt' => 'DT_RowId', 'field' => 'id_user'),
+            array('db' => '`u`.`name`', 'dt' => 'name', 'field' => 'name'),
+            array('db' => '`u`.`email`', 'dt' => 'email', 'field' => 'email'),
+            array('db' => '`u`.`no_wa`', 'dt' => 'no_wa', 'field' => 'no_wa'),
             array('db' => 'GROUP_CONCAT(CONCAT("- ",`pu`.`nama_paket`,"<br>(",DATE_FORMAT(`pu`.`tanggal_berangkat`,"%e %b %Y"),")") SEPARATOR ",<br>") AS all_paket', 'dt' => 'all_paket', 'field' => 'all_paket'),
             array('db' => '`pu`.`nama_paket`', 'dt' => 'nama_paket', 'field' => 'nama_paket'),
             array('db' => '`pu`.`id_paket`', 'dt' => 'id_paket', 'field' => 'id_paket'),
@@ -434,38 +409,14 @@ class Jamaah extends CI_Controller
             'db' => $this->db->database,
             'host' => $this->db->hostname
         );
-        $joinQuery = "FROM `{$table}` AS `j` LEFT JOIN `program_member` AS `pm` ON (`j`.`id_jamaah` = `pm`.`id_jamaah`)"
+        $joinQuery = "FROM `{$table}` AS `u` LEFT JOIN `program_member` AS `pm` ON (`u`.`id_user` = `pm`.`id_user`)"
             . "LEFT JOIN `paket_umroh` AS `pu` ON (`pu`.`id_paket` = `pm`.`id_paket`)";
-        $groupBy = "`j`.`id_jamaah`";
+        $groupBy = "`u`.`id_user`";
         $data = SSP::simple($_GET, $sql_details, $table, $primaryKey, $columns, $joinQuery, null, $groupBy);
         foreach ($data['data'] as $key => $d) {
             $data['data'][$key]['DT_RowAttr'] = array(
                 'id_paket' => $d['id_paket'] 
             );
-            if (!empty($d['tgl_regist'])) {
-                $tanggal = explode(" ", $d['tgl_regist']);
-                $bulan = array(
-                    1 =>   'Januari',
-                    'Februari',
-                    'Maret',
-                    'April',
-                    'Mei',
-                    'Juni',
-                    'Juli',
-                    'Agustus',
-                    'September',
-                    'Oktober',
-                    'November',
-                    'Desember'
-                );
-
-                $pecahkan = explode('-', $tanggal[0]);
-
-                $hasil = $pecahkan[2] . ' ' . $bulan[(int)$pecahkan[1]] . ' ' . $pecahkan[0];
-                $data['data'][$key]['tanggal'] = $hasil;
-            } else {
-                $data['data'][$key]['tanggal'] = $d['tgl_regist'];
-            }
         }
         echo json_encode($data);
     }

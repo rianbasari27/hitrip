@@ -38,7 +38,7 @@
                                     </div>
                                     <div class="card-body">
                                         <form action="<?php echo base_url() . 'staff/paket/proses_tambah' ;?>"
-                                            method="post">
+                                            method="post" enctype="multipart/form-data">
                                             <div class="form-group">
                                                 <label class="col-form-label">Nama Paket (<span
                                                         class="text-primary font-italic font-weight-lighter">Advertising
