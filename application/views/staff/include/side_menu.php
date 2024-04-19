@@ -60,17 +60,17 @@
         <!-- Product elements -->
         <li class="sidenav-item">
             <a href="javascript:" class="sidenav-link sidenav-toggle <?php echo isset($manifest) ? 'active' : '' ;?>">
-                <i class="sidenav-icon feather icon-box"></i>
+                <i class="sidenav-icon feather icon-layers"></i>
                 <div>Data</div>
             </a>
             <ul class="sidenav-menu">
-                <li class="sidenav-item <?php echo isset($regist_user) ? 'active' : '' ;?>">
+                <!-- <li class="sidenav-item <?php echo isset($regist_user) ? 'active' : '' ;?>">
                     <a href="<?php echo base_url() . 'staff/paket' ;?>" class="sidenav-link">
                         <div>Registrasi User</div>
                     </a>
-                </li>
+                </li> -->
                 <li class="sidenav-item <?php echo isset($data_user) ? 'active' : '' ;?>">
-                    <a href="<?php echo base_url() . 'staff/paket/tambah' ;?>" class="sidenav-link">
+                    <a href="<?php echo base_url() . 'staff/jamaah' ;?>" class="sidenav-link">
                         <div>Data User</div>
                     </a>
                 </li>
@@ -88,8 +88,14 @@
         <li class="sidenav-header small font-weight-semibold">Finance</li>
         <!-- Product elements -->
         <li class="sidenav-item">
+            <a href="tables_bootstrap.html" class="sidenav-link">
+                <i class="sidenav-icon feather icon-tag"></i>
+                <div>Voucher / Promo</div>
+            </a>
+        </li>
+        <li class="sidenav-item">
             <a href="javascript:" class="sidenav-link sidenav-toggle <?php echo isset($finance) ? 'active' : '' ;?>">
-                <i class="sidenav-icon feather icon-box"></i>
+                <i class="sidenav-icon feather icon-credit-card"></i>
                 <div>Pembayaran</div>
             </a>
             <ul class="sidenav-menu">
@@ -106,78 +112,6 @@
             </ul>
         </li>
         <?php } ?>
-
-        <!-- Forms & Tables -->
-        <li class="sidenav-divider mb-1"></li>
-        <li class="sidenav-header small font-weight-semibold">Forms & Tables</li>
-        <li class="sidenav-item">
-            <a href="javascript:" class="sidenav-link sidenav-toggle">
-                <i class="sidenav-icon feather icon-clipboard"></i>
-                <div>Forms</div>
-            </a>
-            <ul class="sidenav-menu">
-                <li class="sidenav-item">
-                    <a href="forms_layouts.html" class="sidenav-link">
-                        <div>Layouts and elements</div>
-                    </a>
-                </li>
-                <li class="sidenav-item">
-                    <a href="forms_input-groups.html" class="sidenav-link">
-                        <div>Input groups</div>
-                    </a>
-                </li>
-            </ul>
-        </li>
-        <li class="sidenav-item">
-            <a href="tables_bootstrap.html" class="sidenav-link">
-                <i class="sidenav-icon feather icon-grid"></i>
-                <div>Tables</div>
-            </a>
-        </li>
-
-        <!--  Icons -->
-        <li class="sidenav-divider mb-1"></li>
-        <li class="sidenav-header small font-weight-semibold">Icons</li>
-        <li class="sidenav-item">
-            <a href="javascript:" class="sidenav-link sidenav-toggle">
-                <i class="sidenav-icon feather icon-feather"></i>
-                <div>Icons</div>
-            </a>
-            <ul class="sidenav-menu">
-                <li class="sidenav-item">
-                    <a href="icons_feather.html" class="sidenav-link">
-                        <div>Feather</div>
-                    </a>
-                </li>
-                <li class="sidenav-item">
-                    <a href="icons_linearicons.html" class="sidenav-link">
-                        <div>Linearicons</div>
-                    </a>
-                </li>
-            </ul>
-        </li>
-
-        <!-- Pages -->
-        <li class="sidenav-divider mb-1"></li>
-        <li class="sidenav-header small font-weight-semibold">Pages</li>
-        <li class="sidenav-item">
-            <a href="pages_authentication_login-v1.html" class="sidenav-link">
-                <i class="sidenav-icon feather icon-lock"></i>
-                <div>Login</div>
-            </a>
-        </li>
-        <li class="sidenav-item">
-            <a href="pages_authentication_register-v1.html" class="sidenav-link">
-                <i class="sidenav-icon feather icon-user"></i>
-                <div>Signup</div>
-            </a>
-        </li>
-        <li class="sidenav-item">
-            <a href="pages_faq.html" class="sidenav-link">
-                <i class="sidenav-icon feather icon-anchor"></i>
-                <div>FAQ</div>
-            </a>
-        </li>
     </ul>
 </div>
 <!-- [ Layout sidenav ] End -->

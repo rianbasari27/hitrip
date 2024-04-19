@@ -16,7 +16,7 @@
     <!-- [ Layout wrapper ] Start -->
     <div class="layout-wrapper layout-2">
         <div class="layout-inner">
-            <?php $this->load->view('staff/include/side_menu', ["produk" => true, "list_produk" => true]) ?>
+            <?php $this->load->view('staff/include/side_menu', ["manifest" => true, "data_user" => true]) ?>
             <!-- [ Layout container ] Start -->
             <div class="layout-container">
                 <?php $this->load->view('staff/include/nav_menu') ?>
@@ -27,39 +27,7 @@
                     <!-- [ content ] Start -->
                     <div class="container-fluid flex-grow-1 container-p-y">
                         <!-- Page Heading -->
-                        <h4 class="font-weight-bold py-3 mb-0">Daftar Paket / Produk</h4>
-                        <!-- <div class='row'>
-                            <div class="col-lg-12">
-                                <div class="card shadow mb-4 border-left-primary">
-                                    <div class="card-header py-3">
-                                        <h6 class="m-0 font-weight-bold text-primary">Pilih Paket Umroh</h6>
-                                    </div>
-                                    <div class="card-body">
-                                        <form role="form" method="get" action="<?php echo base_url(); ?>staff/paket">
-                                            <div class="form-group">
-                                                <select name="month" class="form-control">
-                                                    <option value="0">Lihat Semua</option>
-                                                    <?php foreach ($monthPackage as $m) { ?>
-                                                    <option
-                                                        value="<?php echo date('m', strtotime($m->tanggal_berangkat))?>"
-                                                        <?php echo date('m', strtotime($m->tanggal_berangkat)) == $month ? 'selected' : ''; ?>>
-                                                        <?php echo $this->date->convert('F', $m->tanggal_berangkat); ?>
-                                                    </option>
-                                                    <?php } ?>
-                                                </select>
-                                            </div>
-                                            <button class="btn btn-success btn-icon-split">
-                                                <span class="icon text-white-50">
-                                                    <i class="fas fa-check"></i>
-                                                </span>
-                                                <span class="text">Submit</span>
-                                            </button>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div> -->
+                        <h4 class="font-weight-bold py-3 mb-0">List User yang terdaftar di Sistem</h4>
                         <div class="row">
                             <div class="col-lg-12">
                                 <!-- Basic Card Example -->
@@ -77,13 +45,10 @@
                                         <table id="dataTable" class="display" style="width:100%">
                                             <thead>
                                                 <tr>
-                                                    <th style="width: 200px">Nama Paket</th>
-                                                    <th>Tanggal Keberangkatan</th>
-                                                    <th>Jumlah Pax</th>
-                                                    <th>Harga Quad</th>
-                                                    <th>Harga Triple</th>
-                                                    <th>Harga Double</th>
-                                                    <th>Publish</th>
+                                                    <th style="width: 200px">Nama</th>
+                                                    <th>Email</th>
+                                                    <th>No WA</th>
+                                                    <th>Program</th>
                                                     <th style="width: 300px">Aksi</th>
                                                 </tr>
                                             </thead>
@@ -122,28 +87,59 @@
             processing: true,
             serverSide: true,
             ajax: {
-                url: "<?php echo base_url(); ?>staff/paket/load_paket",
-                data: {
-                    month: "<?php echo $month; ?>"
-                }
+                url: "<?php echo base_url(); ?>staff/jamaah/load_jamaah"
             },
             order: [
                 [1, "desc"]
             ],
             columnDefs: [{
-                targets: -1,
-                data: null,
-                defaultContent: '<a href="javascript:void(0);" class="btn btn-primary btn-xs rounded-xs lihat_btn mt-1">Lihat</a> \n\
+                    targets: 0,
+                    data: 'name',
+                    render: function(data, type, row) {
+                        return data
+                    }
+                },
+                {
+                    targets: 1,
+                    data: 'email',
+                    render: function(data, type, row) {
+                        return data
+                    }
+                },
+                {
+                    targets: 2,
+                    data: 'no_wa',
+                    render: function(data, type, row) {
+                        return data
+                    }
+                },
+                {
+                    targets: 3,
+                    data: 'all_paket',
+                    render: function(data, type, row) {
+                        if (data == null || data == '') {
+                            return 'user belum terdaftar'
+                        } else {
+                            return data
+                        }
+                    }
+                },
+                {
+                    targets: -1,
+                    data: null,
+                    defaultContent: '<a href="javascript:void(0);" class="btn btn-primary btn-xs rounded-xs lihat_btn mt-1">Lihat</a> \n\
                                 <a href="javascript:void(0);" class="btn btn-danger btn-xs rounded-xs hapus_btn mt-1">Hapus</a> \n\
                                 <a href="javascript:void(0);" class="btn btn-success btn-xs rounded-xs log_btn mt-1">Log</a>'
-            }]
+                }
+            ]
         });
+
 
 
 
         $("#dataTable tbody").on("click", ".lihat_btn", function() {
             var trid = $(this).closest('tr').attr('id'); // table row ID 
-            window.open("<?php echo base_url(); ?>staff/paket/lihat?id=" + trid, '_blank');
+            window.open("<?php echo base_url(); ?>staff/info/detail_user?id=" + trid, '_blank');
         });
 
         $("#dataTable tbody").on("click", ".bc_btn", function() {
@@ -155,7 +151,7 @@
             var trid = $(this).closest('tr').attr('id'); // table row ID 
             var r = confirm("Yakin untuk menghapus?");
             if (r == true) {
-                window.location.href = "<?php echo base_url(); ?>staff/paket/hapus?id=" + trid;
+                window.location.href = "<?php echo base_url(); ?>staff/jamaah/hapus?id=" + trid;
             }
         });
 

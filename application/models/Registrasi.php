@@ -15,7 +15,7 @@ class Registrasi extends CI_Model
             }
         }
 
-        if (empty($inputs['ktp_no'])) {
+        if (empty($inputs['no_ktp'])) {
             $this->alert->set('danger', 'Nomor KTP wajib diisi');
             return false;
         }
@@ -23,7 +23,7 @@ class Registrasi extends CI_Model
 
 
         //already NIK
-        $isMember = $this->getJamaah(null, $inputs['ktp_no'], null);
+        $isMember = $this->getUser(null, $inputs['no_ktp'], null);
         if (isset($isMember->member[0]) && $update == false) {
             $memberExistPaket = $isMember->member[0]->paket_info->tanggal_berangkat;
             if ($memberExistPaket > date('Y-m-d')) {
@@ -67,43 +67,43 @@ class Registrasi extends CI_Model
         unset($inputs['files']);
         //check if no_ktp exist in db
         //notes kalau mau ganti nomor KTP harus ngirim id_jamaah dalam $inputs
-        if (isset($inputs['id_jamaah'])) {
-            $existPerson = $this->getJamaah($inputs['id_jamaah']);
+        if (isset($inputs['id_user'])) {
+            $existPerson = $this->getUser($inputs['id_user']);
         } else {
-            $existPerson = $this->getJamaah(null, $inputs['ktp_no']);
+            $existPerson = $this->getUser(null, $inputs['no_ktp']);
         }
         if ($existPerson) {
             //update
-            $id_jamaah = $existPerson->id_jamaah;
+            $id_user = $existPerson->id_user;
             // ambil data sebelumnya
-            $this->db->where('id_jamaah', $id_jamaah);
-            $before = $this->db->get('jamaah')->row();
+            $this->db->where('id_user', $id_user);
+            $before = $this->db->get('user')->row();
             //////////////////////////////////
 
-            $this->db->where('id_jamaah', $id_jamaah);
-            $this->db->update('jamaah', $inputs);
+            $this->db->where('id_user', $id_user);
+            $this->db->update('user', $inputs);
         } else {
             //input database
-            $this->db->insert('jamaah', $inputs);
-            $id_jamaah = $this->db->insert_id();
+            $this->db->insert('user', $inputs);
+            $id_user = $this->db->insert_id();
             $before = null;
         }
 
 
-        $member['id_jamaah'] = $id_jamaah;
+        $member['id_user'] = $id_user;
         if ($fromApp) {
             $member['register_from'] = 'app';
             $member['dp_expiry_time'] = date("Y-m-d H:i:s", strtotime('+' . $this->config->item('dp_expiry_hours') . ' hours'));
         }
 
         // ambil data sesudahnya
-        $this->db->where('id_jamaah', $id_jamaah);
-        $after = $this->db->get('jamaah')->row();
+        $this->db->where('id_user', $id_user);
+        $after = $this->db->get('user')->row();
         //////////////////////////////////
 
         ////add log
         $this->load->model('logs');
-        $this->logs->addLogTable($id_jamaah, 'ja', $before, $after);
+        $this->logs->addLogTable($id_user, 'u', $before, $after);
         $id_member = null;
         if (isset($member['id_paket'])) {
             $id_member = $this->updateMember($member);
@@ -304,7 +304,7 @@ class Registrasi extends CI_Model
 
 
 
-        $existMember = $this->getMember(null,$member['id_jamaah'] ,$member['id_paket']);
+        $existMember = $this->getMember(null,$member['id_user'] ,$member['id_paket']);
         if ($existMember) {
             if (isset($member['id_agen'])) {
                 if ($member['id_agen'] != null || $member['id_agen'] != 0 || $member['id_agen'] != '') {
@@ -564,7 +564,7 @@ class Registrasi extends CI_Model
         return $result;
     }
 
-    public function getUser($id = null, $username = null, $email = null)
+    public function getUser($id = null, $username = null, $email = null, $idMember = null)
     {
         $result = false;
         if ($id || $username) {
@@ -575,24 +575,24 @@ class Registrasi extends CI_Model
             }
             //then get member data
             $id = $result->id_user;
-            // $result->member = $this->getMember($idMember, $id, null);
+            $result->member = $this->getMember($idMember, $id, null);
         } 
-        // elseif ($idMember) {
-        //     //get member data first
-        //     $member = $this->getMember($idMember);
-        //     if (empty($member)) {
-        //         return false;
-        //     }
-        //     //then get jamaah table data
-        //     $id = $member[0]->id_jamaah;
-        //     $result = $this->getJamaahTableData($id, $username);
-        //     if (empty($result)) {
-        //         return false;
-        //     }
-        //     $result->member = $member;
-        // } else {
-        //     return false;
-        // }
+        elseif ($idMember) {
+            //get member data first
+            $member = $this->getMember($idMember);
+            if (empty($member)) {
+                return false;
+            }
+            //then get jamaah table data
+            $id = $member[0]->id_user;
+            $result = $this->getJamaahTableData($id, $username);
+            if (empty($result)) {
+                return false;
+            }
+            $result->member = $member;
+        } else {
+            return false;
+        }
         return $result;
     }
 
@@ -639,13 +639,13 @@ class Registrasi extends CI_Model
         return $query->result();
     }
 
-    public function getMember($id_member = null, $id_jamaah = null, $id_paket = null)
+    public function getMember($id_member = null, $id_user = null, $id_paket = null)
     {
         if ($id_member != null) {
             $this->db->where('id_member', $id_member);
         }
-        if ($id_jamaah != null) {
-            $this->db->where('id_jamaah', $id_jamaah);
+        if ($id_user != null) {
+            $this->db->where('id_user', $id_user);
         }
         if ($id_paket != null) {
             $this->db->where('id_paket', $id_paket);
@@ -798,19 +798,19 @@ class Registrasi extends CI_Model
         return true;
     }
 
-    public function deleteJamaah($id)
+    public function deleteUser($id)
     {
         //delete jamaah
-        $this->db->where('id_jamaah', $id);
-        if ($this->db->delete('jamaah')) {
-            $this->alert->set('success', 'Jamaah berhasil dihapus');
+        $this->db->where('id_user', $id);
+        if ($this->db->delete('user')) {
+            $this->alert->toast('success', 'Selamat', 'User Berhasil Dihapus');
         } else {
-            $this->alert->set('danger', 'System Error, silakan coba kembali');
+            $this->alert->toast('danger', 'Mohon Maaf', 'System Error, silakan coba kembali');
             return false;
         }
 
         //delete from Program Member
-        $this->db->where('id_jamaah', $id);
+        $this->db->where('id_user', $id);
         $this->db->delete('program_member');
 
         return true;
