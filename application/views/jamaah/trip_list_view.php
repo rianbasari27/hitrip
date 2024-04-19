@@ -26,18 +26,13 @@
 
         <div class="page-content mt-n1">
 
-        <div class="content my-0">
-            <h1>Trips</h1>
-        </div>
-        <div class="card card-style">
+            <div class="content my-0">
+                <h1>Trips</h1>
+            </div>
             <div class="content">
-                <div class="card card-style m-0 mb-3">
-                    <div class="content">
-                        <div class="d-flex">
-                            <i class="fa-solid fa-magnifying-glass me-2 my-auto"></i>
-                            <input id="search" type="text" class="border-0" style="width: 100%;" placeholder="Find your dream trips" value="">
-                        </div>
-                    </div>
+                <div class="search-box search-dark bg-theme rounded-sm mb-3 bottom-0">
+                    <i class="fa fa-search ms-1"></i>
+                    <input type="text" id="search" class="border-0" placeholder="Find your dream trips" data-search>
                 </div>
 
                 <div class="row mb-0 mx-0">
@@ -163,10 +158,9 @@
                     </div>
                 </div>
             </div>
-        </div>
 
 
-            <!-- <?php $this->load->view('jamaah/include/footer'); ?> -->
+            <?php $this->load->view('jamaah/include/footer'); ?>
             <?php $this->load->view('jamaah/include/alert'); ?>
         </div>
         <!-- Page content ends here-->

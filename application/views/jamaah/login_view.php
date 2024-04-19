@@ -17,7 +17,7 @@
             border-radius: 50%;
             text-align: center;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-            z-index: 1000;
+            z-index: 10;
         }
 
         .back-button a {
@@ -28,15 +28,6 @@
             height: 100%;
             font-size: 20px;
             text-decoration: none;
-        }
-
-        .squircle-icon {
-            width: 40px;
-            height: 40px;
-            border-radius: 35%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
         }
 
         @media only screen and (min-width:600px) {

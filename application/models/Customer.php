@@ -360,6 +360,7 @@ class Customer extends CI_Model
         // $family = $this->registrasi->getGroupMembers($member->parent_id);
 
         $this->session->set_userdata(array(
+            'id_user' => $result->id_user,
             'username' => $result->username,
             'email' => $result->email,
             'name' => $result->name,

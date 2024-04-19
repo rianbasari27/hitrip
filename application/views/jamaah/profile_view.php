@@ -33,10 +33,10 @@
                     class="rounded-xl" width="60">
                 </div>
                 <div class="my-auto ms-3">
-                    <h2 class="mb-n1">John Doe</h2>
-                    <span class="d-block">johndoe007</span>
-                    <!-- <a href="#" class="btn btn-xs gradient-highlight p-0">Edit profile</a> -->
+                    <h2 class="mb-n1"><?php echo $name ?></h2>
+                    <span class="d-block"><?php echo $username ?></span>
                 </div>
+                <a href="<?php echo base_url()?>jamaah/profile/edit_profile" class="ms-auto my-auto font-22 color-highlight pb-1 border-bottom border-highlight border-2"><i class="fa-regular fa-pen-to-square"></i></a>
             </div>
         </div>
 
@@ -58,10 +58,10 @@
         <div class="card card-style mb-3">
             <div class="content">
                 <div class="list-group list-custom-small list-icon-0">
-                    <a href=""><i class="fa fa-envelope rounded-sm bg-blue-dark color-white"></i><span>johndoe007@gmail.com</span></a>
-                    <a href=""><i class="fa fa-cake-candles font-14 rounded-sm bg-blue-dark color-white"></i><span>18 Jan 1990</span></a>
-                    <a href=""><i class="fa fa-mobile font-14 rounded-sm bg-blue-dark color-white"></i><span>+62 812-1299-0992</span></a>
-                    <a href=""><i class="fa fa-location-dot font-14 rounded-sm bg-blue-dark color-white"></i><span>Jakarta, Indonesia</span></a>
+                    <a href=""><i class="fa fa-envelope rounded-sm bg-blue-dark color-white"></i><span><?php echo $email ?></span></a>
+                    <a href=""><i class="fa fa-cake-candles font-14 rounded-sm bg-blue-dark color-white"></i><span><?php echo $tanggal_lahir ? $tanggal_lahir : '-' ?></span></a>
+                    <a href=""><i class="fa fa-mobile font-14 rounded-sm bg-blue-dark color-white"></i><span><?php echo $no_wa ? $no_wa : '-' ?></span></a>
+                    <a href=""><i class="fa fa-person font-14 rounded-sm bg-blue-dark color-white"></i><span><?php echo $jenis_kelamin ? $jenis_kelamin : '-' ?></span></a>
                 </div>
             </div>
         </div>
@@ -78,7 +78,7 @@
 
 
 
-            <!-- <?php $this->load->view('jamaah/include/footer'); ?> -->
+            <?php $this->load->view('jamaah/include/footer'); ?>
             <?php $this->load->view('jamaah/include/alert'); ?>
         </div>
         <!-- Page content ends here-->

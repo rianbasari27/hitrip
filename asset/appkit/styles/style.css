@@ -2,7 +2,7 @@
 /*Typography Settings*/
 body {
   font-size: 13px;
-  font-family: "Roboto", sans-serif !important;
+  font-family: "Poppins", sans-serif !important;
   line-height: 24px !important;
   color: #727272 !important;
   background-color: #eef2f1;
@@ -16,9 +16,9 @@ h5,
 h6 {
   font-weight: 700;
   color: #1f1f1f;
-  font-family: "Inter", sans-serif !important;
+  font-family: "Poppins", sans-serif !important;
   margin-bottom: 5px;
-  letter-spacing: -0.8px;
+  letter-spacing: -0.3px;
 }
 
 h1 {
