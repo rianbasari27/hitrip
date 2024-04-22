@@ -207,7 +207,7 @@
                                             <?php } else { ?>
                                             <input type="hidden" name="verified" value="0">
                                             <?php } ?>
-                                            <button class="btn btn-success btn-icon-split">
+                                            <button class="btn btn-success btn-xs rounded-xs mt-4 btn-icon-split">
                                                 <span class="icon text-white-50">
                                                     <i class="fas fa-check"></i>
                                                 </span>
