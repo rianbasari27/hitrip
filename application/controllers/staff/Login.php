@@ -44,8 +44,8 @@ class Login extends CI_Controller {
 
     public function register_master() {
         $this->load->library('login_lib');
-        $email = 'master@ventour.co.id';
-        $password = 'masteradminpass';
+        $email = 'master@hitrip.co.id';
+        $password = 'masterhitrip';
         $nama = 'Master Admin';
         $bagian = 'Master Admin';
         $this->login_lib->registerUser($email, $nama, $bagian, $password);

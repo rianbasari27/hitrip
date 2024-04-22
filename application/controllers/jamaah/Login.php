@@ -33,10 +33,10 @@ class Login extends CI_Controller
         $this->load->model('customer');
         $result = $this->customer->verifyLoginUser($_POST['username'], $_POST['password']);
         if ($result['type'] == 'green') {
-            $this->alert->setJamaah($result['type'], $result['title'], $result['message']);
+            $this->alert->toastAlert($result['type'], $result['message']);
             redirect(base_url() . 'jamaah/home');
         } else {
-            $this->alert->setJamaah($result['type'], $result['title'], $result['message']);
+            $this->alert->toastAlert($result['type'], $result['message']);
             redirect($_SERVER['HTTP_REFERER']);
         }
     }

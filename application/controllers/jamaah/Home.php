@@ -21,7 +21,19 @@ class Home extends CI_Controller
         if (!$this->customer->isSplashSeen()) {
             redirect(base_url() . "jamaah/splash");
         }
-        $this->load->view('jamaah/dash_mobile');
+        $this->load->model('paketUmroh');
+        $paket = $this->paketUmroh->getPackage();
+        $paket_terbaru = null;
+        if ($paket != null) {
+            for ($i = 0; $i < 3; $i++) {
+                $paket_terbaru = $paket;
+            }
+        }
+        $data = [
+            'paket' => $paket,
+            'paket_terbaru' => $paket_terbaru,
+        ];
+        $this->load->view('jamaah/dash_mobile', $data);
     }
 
     public function konversi()

@@ -9,9 +9,9 @@ class Detail_paket extends CI_Controller
         parent::__construct();
         //check if logged in redirect to user page
         $this->load->model('customer');
-        if ($this->customer->is_user_logged_in()) {
-            redirect(base_url() . 'jamaah/home_user');
-        }
+        // if ($this->customer->is_user_logged_in()) {
+        //     redirect(base_url() . 'jamaah/home');
+        // }
     }
 
     public function index()
@@ -20,23 +20,27 @@ class Detail_paket extends CI_Controller
         $this->form_validation->set_rules('id', 'id', 'trim|required|integer');
 
         if ($this->form_validation->run() == FALSE) {
-            $this->alert->setJamaah('red', 'Ups...', 'Paket tidak ditemukan');
+            $this->alert->toastAlert('red', 'Paket tidak ditemukan');
             redirect(base_url() . 'jamaah/home');
         }
         $this->load->model('paketUmroh');
+        $this->load->model('registrasi');
+        // check if user already registered
+        if (isset($_SESSION['id_member'])) {
+            $member = $this->registrasi->getMember($_SESSION['id_member']);
+            foreach ($member as $m) {
+                if ($m->id_paket == $_GET['id']) {
+                    redirect(base_url() . 'jamaah/daftar/dp_notice');
+                }
+            }
+        }
+        
         $paket = $this->paketUmroh->getPackage($_GET['id']);
         if (!$paket) {
-            $this->alert->setJamaah('red', 'Ups...', 'Paket tidak ditemukan');
+            $this->alert->toastAlert('red', 'Paket tidak ditemukan');
             redirect(base_url() . 'jamaah/home');
         }
-
-        // cek id agen
-        if (isset($_GET['idg'])) {
-            $paket->id_agen = $_GET['idg'];
-        } else {
-            $paket->id_agen = null;
-        }
-        $this->load->view('jamaahv2/detail_paket_view', $paket);
+        $this->load->view('jamaah/detail_paket_view', $paket);
     }
 }
         

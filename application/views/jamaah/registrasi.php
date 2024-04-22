@@ -19,7 +19,7 @@
     <script src="<?php echo base_url(); ?>asset/datepicker/lib/drum.js"></script>
     <style>
         .bg-home {
-            background-image: url("<?php echo base_url(); ?>/appkit/images/veassetntour/register.png");
+            background-image: url("<?php echo base_url() . $paket->banner_image; ?>");
         }
 
         /* CSS for datepicker */
@@ -208,7 +208,7 @@
                     <p class="color-white opacity-60"><i class="fa fa-plane-departure me-2"></i><?php echo date_format(date_create($paket->tanggal_berangkat), 'l, j F Y'); ?>
                     </p>
                     <p class="color-white opacity-80 font-15">
-                        Daftarkan diri Anda, cukup 1 menit sebagai langkah awal menuju Baitullah.
+                    Siapkan dirimu untuk petualangan tak terlupakan. Mulailah menjelajahi dunia yang menakjubkan!
                     </p>
                 </div>
                 <div class="card-overlay bg-gradient"></div>
@@ -339,59 +339,12 @@
 
                 <div class="card card-style">
                     <div class="content">
-                        <h4>Isi data Jamaah</h4>
+                        <h4>Isi data diri Anda</h4>
                         <div class="mt-1 mb-3">
                             <?php //if (isset($parent_id)) : 
                             ?>
                             <label class="text-danger mb-4">Notes : Jika ada tanda ( * ) diwajibkan</label>
-                            <?php if (!isset($parent_id)) : ?>
-                                <div class="form-group">
-                                    <label class="color-highlight">Referensi (<span class="text-primary font-italic font-weight-lighter"> Darimana Anda mendaftar
-                                        </span>) <strong class="text-danger"> *</strong></label>
-                                    <div class="input-style has-borders no-icon input-style-always-active validate-field mb-4">
-                                        <select name="referensi" class="form-control" id="slct" onchange="showOnChange(event)">
-                                            <option class="color-dark-dark" value="<?php echo isset($_SESSION['form']['referensi']) ? $_SESSION['form']['referensi'] : ''; ?>" disabled selected>Pilih salah satu ... </option>
-                                            <option value="Agen" class="color-dark-dark" <?php echo ($agen == null) ? '' : 'selected'; ?>>KONSULTAN
-                                            </option>
-                                            <option value="Walk_in" class="color-dark-dark">WALK IN</option>
-                                            <option value="Socmed" class="color-dark-dark">SOCIAL MEDIA</option>
-                                            <option value="Iklan" class="color-dark-dark">IKLAN</option>
-                                        </select>
-                                        <em><strong>(wajib diisi)</strong></em>
-                                    </div>
-                                </div>
-                                <div class="form-group" id="selectOffice" style="display: none;">
-                                    <label class="color-highlight" for="form10">Pilih Kantor</label>
-                                    <div class="input-style has-borders no-icon input-style-always-active validate-field mb-4">
-                                        <select name="office" class="form-control" id="form10">
-                                            <option value="<?php echo isset($_SESSION['form']['referensi']) ? $_SESSION['form']['referensi'] : ''; ?>" disabled selected>
-                                                Pilih salah satu ... </option>
-                                            <option value="Head" class="color-dark-dark">HEAD OFFICE</option>
-                                            <option value="Cabang" class="color-dark-dark">CABANG BANDUNG</option>
-                                        </select>
-                                        <em><strong>(wajib diisi)</strong></em>
-                                    </div>
-                                </div>
-                                <div class="form-group mb-4" id="Agen" style="<?php echo ($agen == null) ? 'display: none;' : 'display: block;'; ?>">
-                                    <div class="ui-widget">
-                                        <label class="color-highlight">Nama Konsultan</label><br>
-                                        <select id="combobox" name="id_agen">
-                                            <?php if ($agen == null) { ?>
-                                                <option class="color-dark-dark" value="">Pilih Salah Satu...</option>
-                                                <?php foreach ($agenList as $ag) { ?>
-                                                    <option class="color-dark-dark" value="<?php echo $ag->id_agen; ?>"><?php echo $ag->nama_agen . " - " . $ag->no_agen; ?></option>
-                                                <?php } ?>
-                                            <?php } else { ?>
-                                                <option class="color-dark-dark" value="<?php echo $agen[0]->id_agen; ?>"><?php echo $agen[0]->nama_agen . " - " . $agen[0]->no_agen; ?></option>
-                                            <?php } ?>
-
-                                        </select>
-                                    </div>
-                                    <div class="divider mt-4"></div>
-                                </div>
-                            <?php endif; ?>
-
-
+                    
                             <!-- <div class="form-group" id="selectOffice" style="display: none;">
                                     <label class="color-highlight" for="form10">Pilih Kantor</label>
                                     <div
@@ -424,21 +377,21 @@
                                     <div class="divider mt-4"></div>
                                 </div> -->
                             <div class="input-style has-borders no-icon input-style-always-active validate-field mb-4">
-                                <input name="first_name" type="name" class="form-control validate-name upper" id="form1" placeholder="" value="<?php echo isset($_SESSION['form']['first_name']) ? $_SESSION['form']['first_name'] : ''; ?>">
-                                <label for="form1" class="color-highlight">Nama Depan <strong class="text-danger">
+                                <input name="name" type="name" class="form-control validate-name upper" id="form1" placeholder="" value="<?php echo $user->name ?>">
+                                <label for="form1" class="color-highlight">Nama Lengkap <strong class="text-danger">
                                         *</strong></label>
                                 <i class="fa fa-times disabled invalid color-red-dark"></i>
                                 <i class="fa fa-check disabled valid color-green-dark"></i>
                                 <em><strong>(wajib diisi)</strong></em>
                             </div>
-                            <div class="input-style has-borders no-icon input-style-always-active validate-field mb-4">
+                            <!-- <div class="input-style has-borders no-icon input-style-always-active validate-field mb-4">
                                 <input name="last_name" type="name" class="form-control validate-name upper" id="form3" placeholder="" value="<?php echo isset($_SESSION['form']['last_name']) ? $_SESSION['form']['last_name'] : ''; ?>">
                                 <label for="form3" class="color-highlight">Nama Belakang</label>
                                 <i class="fa fa-times disabled invalid color-red-dark"></i>
                                 <i class="fa fa-check disabled valid color-green-dark"></i>
-                            </div>
+                            </div> -->
                             <div class="input-style has-borders no-icon input-style-always-active validate-field mb-4">
-                                <input name="ktp_no" type="number" class="form-control validate-name upper" id="form4" placeholder="" value="<?php echo isset($_SESSION['form']['ktp_no']) ? $_SESSION['form']['ktp_no'] : ''; ?>">
+                                <input name="no_ktp" type="text" class="form-control validate-name upper" id="form4" placeholder="" value="<?php echo $user->no_ktp != null ? $user->no_ktp : ''; ?>">
                                 <label for="form4" class="color-highlight">Nomor KTP <strong class="text-danger">
                                         *</strong></label>
                                 <i class="fa fa-times disabled invalid color-red-dark"></i>
@@ -447,7 +400,7 @@
                             </div>
                             <div class="input-style has-borders no-icon input-style-always-active validate-field mb-4">
                                 <a href="#" data-menu="datepicker2" class="text-dark">
-                                    <input name="tanggal_lahir" type="date" class="form-control validate-name upper" id="form7" readonly value="<?php echo isset($_SESSION['form']['tanggal_lahir']) ? $_SESSION['form']['tanggal_lahir'] : ''; ?>">
+                                    <input name="tanggal_lahir" type="date" class="form-control validate-name upper" id="form7" readonly value="<?php echo $user->tanggal_lahir != null ? $user->tanggal_lahir : ''; ?>">
                                     <label for="form7" class="color-highlight">Tanggal Lahir <strong class="text-danger">*</strong></label>
                                 </a>
                             </div>
@@ -475,125 +428,57 @@
                                         *</strong></label>
                                 <select name="jenis_kelamin" id="form-9">
                                     <option class="color-dark-dark" value="" disabled selected>-- Pilih Jenis Kelamin --</option>
-                                    <option class="color-dark-dark" value="L">LAKI-LAKI</option>
-                                    <option class="color-dark-dark" value="P">PEREMPUAN</option>
+                                    <option class="color-dark-dark" <?php echo $user->jenis_kelamin == 'L' ? 'selected' : ''; ?> value="L">LAKI-LAKI</option>
+                                    <option class="color-dark-dark" <?php echo $user->jenis_kelamin == 'P' ? 'selected' : ''; ?> value="P">PEREMPUAN</option>
                                 </select>
                                 <span><i class="fa fa-chevron-down"></i></span>
                                 <i class="fa fa-check disabled valid color-green-dark"></i>
                                 <i class="fa fa-check disabled invalid color-red-dark"></i>
                                 <em></em>
                             </div>
-                            <!-- <?php //else : 
-                                    ?>
-                            <label class="text-danger mb-4">Notes : Jika ada tanda ( * ) diwajibkan</label>
-                            <div class="input-style has-borders no-icon input-style-always-active validate-field mb-4">
-                                <input name="first_name" type="name" class="form-control validate-name upper" id="form1"
-                                    placeholder=""
-                                    value="<?php echo isset($_SESSION['form']['first_name']) ? $_SESSION['form']['first_name'] : ''; ?>">
-                                <label for="form1" class="color-highlight">Nama Depan <strong class="text-danger">
-                                        *</strong></label>
-                                <i class="fa fa-times disabled invalid color-red-dark"></i>
-                                <i class="fa fa-check disabled valid color-green-dark"></i>
-                                <em><strong>(wajib diisi)</strong></em>
-                            </div>
-                            <div class="input-style has-borders no-icon input-style-always-active validate-field mb-4">
-                                <input name="second_name" type="name" class="form-control validate-name upper"
-                                    id="form2" placeholder=""
-                                    value="<?php echo isset($_SESSION['form']['second_name']) ? $_SESSION['form']['second_name'] : ''; ?>">
-                                <label for="form2" class="color-highlight">Nama Tengah</label>
-                                <i class="fa fa-times disabled invalid color-red-dark"></i>
-                                <i class="fa fa-check disabled valid color-green-dark"></i>
-                            </div>
-                            <div class="input-style has-borders no-icon input-style-always-active validate-field mb-4">
-                                <input name="last_name" type="name" class="form-control validate-name upper" id="form3"
-                                    placeholder=""
-                                    value="<?php echo isset($_SESSION['form']['last_name']) ? $_SESSION['form']['last_name'] : ''; ?>">
-                                <label for="form3" class="color-highlight">Nama Belakang</label>
-                                <i class="fa fa-times disabled invalid color-red-dark"></i>
-                                <i class="fa fa-check disabled valid color-green-dark"></i>
-                            </div>
-                            <div class="input-style has-borders no-icon input-style-always-active validate-field mb-4">
-                                <input name="ktp_no" type="number" class="form-control validate-name upper" id="form4"
-                                    placeholder=""
-                                    value="<?php echo isset($_SESSION['form']['ktp_no']) ? $_SESSION['form']['ktp_no'] : ''; ?>">
-                                <label for="form4" class="color-highlight">Nomor KTP <strong class="text-danger">
-                                        *</strong></label>
-                                <i class="fa fa-times disabled invalid color-red-dark"></i>
-                                <i class="fa fa-check disabled valid color-green-dark"></i>
-                                <em><strong>(wajib diisi)</strong></em>
-                            </div>
-                            <div class="input-style has-borders no-icon input-style-always-active validate-field mb-4">
-                                <input name="no_wa" type="tel" class="form-control validate-name upper" id="form6"
-                                    placeholder="contoh +6281631631" value="+62" required>
-                                <label for="form6" class="color-highlight">Nomor Telepon (Aktif WhatsApp) <strong
-                                        class="text-danger"> *</strong></label>
-                                <i class="fa fa-times disabled invalid color-red-dark"></i>
-                                <i class="fa fa-check disabled valid color-green-dark"></i>
-                                <em><strong>(wajib diisi)</strong></em>
-                            </div>
-                            <div class="input-style has-borders no-icon input-style-always-active validate-field mb-4">
-                                <a href="#" data-menu="datepicker" class="text-dark">
-                                    <input name="tanggal_lahir" type="date" class="form-control validate-name upper" id="form7" readonly value="<?php echo isset($_SESSION['form']['tanggal_lahir']) ? $_SESSION['form']['tanggal_lahir'] : ''; ?>">
-                                    <label for="form7" class="color-highlight">Tanggal Lahir <strong class="text-danger">*</strong></label>
-                                </a>
-                            </div>
-                            <div class="input-style has-borders no-icon input-style-always-active validate-field mb-4">
-                                <input name="tempat_lahir" type="text" class="form-control validate-name upper"
-                                    id="form8"
-                                    value="<?php echo isset($_SESSION['form']['tempat_lahir']) ? $_SESSION['form']['tempat_lahir'] : ''; ?>">
-                                <label for="form8" class="color-highlight">Tempat Lahir <strong class="text-danger">
-                                        *</strong></label>
-                                <i class="fa fa-times disabled invalid color-red-dark"></i>
-                                <i class="fa fa-check disabled valid color-green-dark"></i>
-                                <em><strong>(wajib diisi)</strong></em>
-                            </div>
-                            <div class="input-style has-borders input-style-always-active validate-field mb-4">
-                                <label for="select" class="color-highlight">Jenis Kelamin<strong class="text-danger">
-                                        *</strong></label>
-                                <select name="jenis_kelamin" id="form-9">
-                                    <option value="" disabled selected>-- Pilih Jenis Kelamin --</option>
-                                    <option value="L">LAKI-LAKI</option>
-                                    <option value="P">PEREMPUAN</option>
-                                </select>
-                                <span><i class="fa fa-chevron-down"></i></span>
-                                <i class="fa fa-check disabled valid color-green-dark"></i>
-                                <i class="fa fa-check disabled invalid color-red-dark"></i>
-                                <em></em>
-                            </div>
-                            <?php //endif; 
-                            ?> -->
 
-                            <!-- Ahli waris -->
-                            <!-- <h3 class="mb-3">Data Ahli Waris / Keluarga terdekat</h3>
                             <div class="input-style has-borders no-icon input-style-always-active validate-field mb-4">
-                                <input name="nama_ahli_waris" type="name" class="form-control validate-name upper" id="form9"
-                                    placeholder=""
-                                    value="<?php echo isset($_SESSION['form']['nama_ahli_waris']) ? $_SESSION['form']['nama_ahli_waris'] : ''; ?>">
-                                <label for="form9" class="color-highlight">Nama Lengkap <strong class="text-danger">
-                                        *</strong></label>
-                                <i class="fa fa-times disabled invalid color-red-dark"></i>
-                                <i class="fa fa-check disabled valid color-green-dark"></i>
+                                <label class="color-highlight">Referensi <strong class="text-danger"> *</strong></label>
+                                <select name="referensi" class="form-control" id="slct" onchange="showOnChange(event)">
+                                    <option class="color-dark-dark" value="<?php echo isset($_SESSION['form']['referensi']) ? $_SESSION['form']['referensi'] : ''; ?>" disabled selected>Pilih salah satu ... </option>
+                                    <!-- <option value="Agen" class="color-dark-dark" <?php echo ($agen == null) ? '' : 'selected'; ?>>KONSULTAN
+                                    </option> -->
+                                    <option value="Walk_in" <?php echo $user->referensi == 'Walk_in' ? 'selected' : ''; ?> class="color-dark-dark">WALK IN</option>
+                                    <option value="Teman" <?php echo $user->referensi == 'Teman' ? 'selected' : ''; ?> class="color-dark-dark">TEMAN/SAUDARA</option>
+                                    <option value="Socmed" <?php echo $user->referensi == 'Socmed' ? 'selected' : ''; ?> class="color-dark-dark">SOCIAL MEDIA</option>
+                                    <option value="Iklan" <?php echo $user->referensi == 'Iklan' ? 'selected' : ''; ?> class="color-dark-dark">IKLAN</option>
+                                </select>
                                 <em><strong>(wajib diisi)</strong></em>
                             </div>
-                            <div class="input-style has-borders no-icon input-style-always-active validate-field mb-4">
-                                <input name="no_ahli_waris" type="tel" class="form-control validate-name upper" id="form10"
-                                placeholder="contoh +6281631631" value="+62">
-                                <label for="form10" class="color-highlight">Nomor Telp <strong class="text-danger">
-                                        *</strong></label>
-                                <i class="fa fa-times disabled invalid color-red-dark"></i>
-                                <i class="fa fa-check disabled valid color-green-dark"></i>
-                                <em><strong>(wajib diisi)</strong></em>
-                            </div>
-                            <div class="input-style has-borders no-icon mb-4 input-style-always-active validate-field mb-4">
-                                <textarea id="form11" name="alamat_ahli_waris" class="form-control validate-name upper"></textarea>
-                                <label for="form11" class="color-highlight">Alamat <strong class="text-danger">
-                                        *</strong></label>
-                                <i class="fa fa-times disabled invalid color-red-dark"></i>
-                                <i class="fa fa-check disabled valid color-green-dark"></i>
-                                <em><strong></strong></em>
-                            </div>                       -->
-                            <!-- <a href="#" onclick="submit();"
-                                class="btn btn-full btn-m gradient-highlight rounded-s font-13 font-600 mt-4">Simpan</a> -->
+                                <!-- <div class="form-group" id="selectOffice" style="display: none;">
+                                    <label class="color-highlight" for="form10">Pilih Kantor</label>
+                                    <div class="input-style has-borders no-icon input-style-always-active validate-field mb-4">
+                                        <select name="office" class="form-control" id="form10">
+                                            <option value="<?php echo isset($_SESSION['form']['referensi']) ? $_SESSION['form']['referensi'] : ''; ?>" disabled selected>
+                                                Pilih salah satu ... </option>
+                                            <option value="Head" class="color-dark-dark">HEAD OFFICE</option>
+                                            <option value="Cabang" class="color-dark-dark">CABANG BANDUNG</option>
+                                        </select>
+                                        <em><strong>(wajib diisi)</strong></em>
+                                    </div>
+                                </div> -->
+                                <!-- <div class="form-group mb-4" id="Agen" style="<?php echo ($agen == null) ? 'display: none;' : 'display: block;'; ?>">
+                                    <div class="ui-widget">
+                                        <label class="color-highlight">Nama Konsultan</label><br>
+                                        <select id="combobox" name="id_agen">
+                                            <?php if ($agen == null) { ?>
+                                                <option class="color-dark-dark" value="">Pilih Salah Satu...</option>
+                                                <?php foreach ($agenList as $ag) { ?>
+                                                    <option class="color-dark-dark" value="<?php echo $ag->id_agen; ?>"><?php echo $ag->nama_agen . " - " . $ag->no_agen; ?></option>
+                                                <?php } ?>
+                                            <?php } else { ?>
+                                                <option class="color-dark-dark" value="<?php echo $agen[0]->id_agen; ?>"><?php echo $agen[0]->nama_agen . " - " . $agen[0]->no_agen; ?></option>
+                                            <?php } ?>
+
+                                        </select>
+                                    </div>
+                                    <div class="divider mt-4"></div>
+                                </div> -->
                         </div>
 
                         <?php if (isset($parent_id)) : ?>
@@ -752,7 +637,7 @@
         function submit() {
             Swal.fire({
                     title: 'Apa anda sudah yakin?',
-                    text: "Jika ada kesalahan data bukan tanggung jawab kami",
+                    text: 'Kami tidak bertanggung jawab atas ketidakakuratan data yang mungkin terjadi',
                     icon: 'warning',
                     showCancelButton: true,
                     confirmButtonColor: '#F7C255',

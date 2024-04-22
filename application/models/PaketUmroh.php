@@ -372,7 +372,8 @@ class PaketUmroh extends CI_Model
             $this->db->where('MONTH(tanggal_berangkat)', $month);
         }
 
-        $this->db->order_by('tanggal_berangkat', 'ASC');
+        // $this->db->order_by('tanggal_berangkat', 'ASC');
+        $this->db->order_by('created_at', 'DESC');
         $query = $this->db->get('paket_umroh');
         $data = $query->result();
 

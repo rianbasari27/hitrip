@@ -36,126 +36,33 @@
                 </div>
 
                 <div class="row mb-0 mx-0">
-                    <div class="col-6 p-0 mb-2">
+                    <?php foreach ($paket as $p) { ?>
+                    <a href="<?php echo base_url() . 'jamaah/detail_paket?id=' . $p->id_paket ?>" class="col-6 p-0 mb-2">
                         <div class="card m-2 mb-1 card-style">
-                            <img src="<?php echo base_url() ?>asset/images/city/dubai-720x720.jpg" class="img-fluid">
+                            <img src="<?php echo base_url() . $p->banner_image ?>" class="img-fluid">
                             <div class="p-2 bg-theme rounded-sm">
                                 <div class="mb-n1">
-                                    <i class="fa-solid fa-star color-yellow-dark"></i>
-                                    <i class="fa-solid fa-star color-yellow-dark"></i>
-                                    <i class="fa-solid fa-star color-yellow-dark"></i>
-                                    <i class="fa-solid fa-star color-yellow-dark"></i>
-                                    <i class="fa-solid fa-star color-yellow-dark"></i>
+                                    <?php for ($i = 1; $i <= $p->star; $i++) { ?>
+                                        <i class="fa-solid fa-star color-yellow-dark"></i>
+                                    <?php } ?>
+                                    <?php for ($i = 1; $i <= (5 - $p->star); $i++) { ?>
+                                        <i class="fa-solid fa-star color-gray-dark"></i>
+                                    <?php } ?>
                                 </div>
-                                <h4 class="font-17 pt-1 line-height-s pb-0 mb-n1">Dubai</h4>
-                                <span class="font-10 mb-0">7 Nights - All Inclusive</span>
-                                <del style="text-decoration:line-through">
-                                    <span class="d-block mt-n1">Rp 9,299,000</span>
-                                </del>
-                                <h6 class="color-highlight">Rp 8,299,000</h6>
+                                <h4 class="font-17 pt-1 line-height-s pb-0 mb-n1"><?php echo $p->nama_paket ?></h4>
+                                <!-- <span class="font-10 mb-0">7 Nights - All Inclusive</span> -->
+                                <?php if ($p->default_diskon != 0) { ?>
+                                    <del style="text-decoration:line-through; color: grey;">
+                                        <span class="d-block mt-1"><?php echo $p->hargaPretty ?></span>
+                                    </del>
+                                    <h6 class="color-highlight"><?php echo $p->hargaPrettyDiskon ?></h6>
+                                <?php } else { ?>
+                                    <h6 class="color-highlight mt-2"><?php echo $p->hargaPretty ?></h6>
+                                <?php } ?>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-6 p-0 mb-2">
-                        <div class="card m-2 mb-1 card-style">
-                            <img src="<?php echo base_url() ?>asset/images/city/tokyo-720x720.jpg" class="img-fluid">
-                            <div class="p-2 bg-theme rounded-sm">
-                                <div class="mb-n1">
-                                    <i class="fa-solid fa-star color-yellow-dark"></i>
-                                    <i class="fa-solid fa-star color-yellow-dark"></i>
-                                    <i class="fa-solid fa-star color-yellow-dark"></i>
-                                    <i class="fa-solid fa-star color-yellow-dark"></i>
-                                    <i class="fa-solid fa-star color-yellow-dark"></i>
-                                </div>
-                                <h4 class="font-17 pt-1 line-height-s pb-0 mb-n1">Tokyo</h4>
-                                <span class="font-10 mb-0">7 Nights - All Inclusive</span>
-                                <del style="text-decoration:line-through">
-                                    <span class="d-block mt-n1">Rp 7,599,000</span>
-                                </del>
-                                <h6 class="color-highlight">Rp 6,999,000</h6>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-6 p-0 mb-2">
-                        <div class="card m-2 mb-1 card-style">
-                            <img src="<?php echo base_url() ?>asset/images/city/bali-720x720.jpg" class="img-fluid">
-                            <div class="p-2 bg-theme rounded-sm">
-                                <div class="mb-n1">
-                                    <i class="fa-solid fa-star color-yellow-dark"></i>
-                                    <i class="fa-solid fa-star color-yellow-dark"></i>
-                                    <i class="fa-solid fa-star color-yellow-dark"></i>
-                                    <i class="fa-solid fa-star color-yellow-dark"></i>
-                                    <i class="fa-solid fa-star color-yellow-dark"></i>
-                                </div>
-                                <h4 class="font-17 pt-1 line-height-s pb-0 mb-n1">Bali</h4>
-                                <span class="font-10 mb-0">7 Nights - All Inclusive</span>
-                                <del style="text-decoration:line-through">
-                                    <span class="d-block mt-n1">Rp 5,999,000</span>
-                                </del>
-                                <h6 class="color-highlight">Rp 4,999,000</h6>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-6 p-0 mb-2">
-                        <div class="card m-2 mb-1 card-style">
-                            <img src="<?php echo base_url() ?>asset/images/city/seoul-720x720.jpg" class="img-fluid">
-                            <div class="p-2 bg-theme rounded-sm">
-                                <div class="mb-n1">
-                                    <i class="fa-solid fa-star color-yellow-dark"></i>
-                                    <i class="fa-solid fa-star color-yellow-dark"></i>
-                                    <i class="fa-solid fa-star color-yellow-dark"></i>
-                                    <i class="fa-solid fa-star color-yellow-dark"></i>
-                                    <i class="fa-solid fa-star color-yellow-dark"></i>
-                                </div>
-                                <h4 class="font-17 pt-1 line-height-s pb-0 mb-n1">Seoul</h4>
-                                <span class="font-10 mb-0">7 Nights - All Inclusive</span>
-                                <del style="text-decoration:line-through">
-                                    <span class="d-block mt-n1">Rp 7,999,000</span>
-                                </del>
-                                <h6 class="color-highlight">Rp 6,999,000</h6>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-6 p-0 mb-2">
-                        <div class="card m-2 mb-1 card-style">
-                            <img src="<?php echo base_url() ?>asset/images/city/london-720x720.jpg" class="img-fluid">
-                            <div class="p-2 bg-theme rounded-sm">
-                                <div class="mb-n1">
-                                    <i class="fa-solid fa-star color-yellow-dark"></i>
-                                    <i class="fa-solid fa-star color-yellow-dark"></i>
-                                    <i class="fa-solid fa-star color-yellow-dark"></i>
-                                    <i class="fa-solid fa-star color-yellow-dark"></i>
-                                    <i class="fa-solid fa-star color-yellow-dark"></i>
-                                </div>
-                                <h4 class="font-17 pt-1 line-height-s pb-0 mb-n1">London</h4>
-                                <span class="font-10 mb-0">7 Nights - All Inclusive</span>
-                                <del style="text-decoration:line-through">
-                                    <span class="d-block mt-n1">Rp 7,499,000</span>
-                                </del>
-                                <h6 class="color-highlight">Rp 6,499,000</h6>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-6 p-0 mb-2">
-                        <div class="card m-2 mb-1 card-style">
-                            <img src="<?php echo base_url() ?>asset/images/city/istanbul-720x720.jpg" class="img-fluid">
-                            <div class="p-2 bg-theme rounded-sm">
-                                <div class="mb-n1">
-                                    <i class="fa-solid fa-star color-yellow-dark"></i>
-                                    <i class="fa-solid fa-star color-yellow-dark"></i>
-                                    <i class="fa-solid fa-star color-yellow-dark"></i>
-                                    <i class="fa-solid fa-star color-yellow-dark"></i>
-                                    <i class="fa-solid fa-star color-yellow-dark"></i>
-                                </div>
-                                <h4 class="font-17 pt-1 line-height-s pb-0 mb-n1">Istanbul</h4>
-                                <span class="font-10 mb-0">7 Nights - All Inclusive</span>
-                                <del style="text-decoration:line-through">
-                                    <span class="d-block mt-n1">Rp 7,499,000</span>
-                                </del>
-                                <h6 class="color-highlight">Rp 6,499,000</h6>
-                            </div>
-                        </div>
-                    </div>
+                    </a>
+                    <?php } ?>
                 </div>
             </div>
 

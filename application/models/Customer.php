@@ -304,7 +304,7 @@ class Customer extends CI_Model
 
         $this->load->model('registrasi');
 
-        $result = $this->registrasi->getJamaah(null, $ktp_no);
+        $result = $this->registrasi->getUser(null, null, null, null, $ktp_no);
         $idMember = null;
         $paket = [];
         $family = [];
@@ -323,13 +323,14 @@ class Customer extends CI_Model
             'id_user' => $result->id_user,
             'email' => $result->email,
             'name' => $result->name,
-            // 'id_member' => $idMember,
+            'no_ktp' => $result->no_ktp,
+            'id_member' => $idMember,
             // 'paket' => $paket,
             // 'ktp_no' => $ktp_no,
             // 'first_name' => $result->first_name,
             // 'second_name' => $result->second_name,
             // 'last_name' => $result->last_name,
-            // 'family' => $family,
+            'family' => $family,
         ));
         return $result;
     }

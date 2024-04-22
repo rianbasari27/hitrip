@@ -112,13 +112,13 @@ class Tarif extends CI_Model
             }
 
             // get Jamaah
-            $this->db->where('id_jamaah', $member->id_jamaah);
-            $jamaah = $this->db->get('jamaah')->row();
+            $this->db->where('id_user', $member->id_user);
+            $user = $this->db->get('user')->row();
 
             //get usia
-            if ($jamaah->tanggal_lahir != null && $jamaah->tanggal_lahir != '' && $jamaah->tanggal_lahir != '0000-00-00') {
+            if ($user->tanggal_lahir != null && $user->tanggal_lahir != '' && $user->tanggal_lahir != '0000-00-00') {
             $this->load->library('calculate');
-            $age = $this->calculate->ageDiff($jamaah->tanggal_lahir, $data_paket->tanggal_berangkat);
+            $age = $this->calculate->ageDiff($user->tanggal_lahir, $data_paket->tanggal_berangkat);
                 if ($age !== null) {
                     if ($age < 2) {
                         $harga = $harga * 35 / 100;
@@ -434,7 +434,7 @@ class Tarif extends CI_Model
 
         $this->load->model('registrasi');
         foreach ($tarif['dataMember'] as $key => $dm) {
-            $tarif['dataMember'][$key]['detailJamaah'] = $this->registrasi->getJamaah(null, null, $dm['id_member']);
+            $tarif['dataMember'][$key]['detailJamaah'] = $this->registrasi->getUser(null, null, null, $dm['id_member']);
         }
 
 

@@ -23,11 +23,20 @@ class Registrasi extends CI_Model
 
 
         //already NIK
-        $isMember = $this->getUser(null, $inputs['no_ktp'], null);
-        if (isset($isMember->member[0]) && $update == false) {
-            $memberExistPaket = $isMember->member[0]->paket_info->tanggal_berangkat;
+        // $isMember = $this->getUser(null, null, null, null, $inputs['no_ktp']);
+        // if (isset($isMember->member[0]) && $update == false) {
+        //     $memberExistPaket = $isMember->member[0]->paket_info->tanggal_berangkat;
+        //     if ($memberExistPaket > date('Y-m-d')) {
+        //         $this->alert->set('danger', 'Nomor KTP sudah terdaftar');
+        //         return false;
+        //     }
+        // }
+        // already member (by ID)
+        $alreadyMember = $this->getUser($inputs['id_user']);
+        if (isset($alreadyMember->member[0]) && $update == false) {
+            $memberExistPaket = $alreadyMember->member[0]->paket_info->tanggal_berangkat;
             if ($memberExistPaket > date('Y-m-d')) {
-                $this->alert->set('danger', 'Nomor KTP sudah terdaftar');
+                $this->alert->set('danger', 'Akun sudah terdaftar');
                 return false;
             }
         }
@@ -70,7 +79,7 @@ class Registrasi extends CI_Model
         if (isset($inputs['id_user'])) {
             $existPerson = $this->getUser($inputs['id_user']);
         } else {
-            $existPerson = $this->getUser(null, $inputs['no_ktp']);
+            $existPerson = $this->getUser(null, null, null, null, $inputs['no_ktp']);
         }
         if ($existPerson) {
             //update
@@ -212,6 +221,7 @@ class Registrasi extends CI_Model
     public function updateMember($member)
     {
         //TABEL PROGRAM MEMBER
+        $uploadSuccess = false;
         $this->load->library('scan');
         if (isset($member['files']['paspor_scan'])) {
             $hasil = $this->scan->check($member['files']['paspor_scan'], 'paspor', $member['id_user']);
@@ -547,7 +557,7 @@ class Registrasi extends CI_Model
         return $paket;
     }
 
-    public function getJamaahTableData($id = null, $username = null, $email = null)
+    public function getJamaahTableData($id = null, $username = null, $email = null, $no_ktp = null)
     {
         if ($id != null) {
             $this->db->where('id_user', $id);
@@ -558,18 +568,21 @@ class Registrasi extends CI_Model
         if ($email != null) {
             $this->db->where('email', $email);
         }
+        if ($no_ktp != null) {
+            $this->db->where('no_ktp', $no_ktp);
+        }
 
         $query = $this->db->get('user');
         $result = $query->row();
         return $result;
     }
 
-    public function getUser($id = null, $username = null, $email = null, $idMember = null)
+    public function getUser($id = null, $username = null, $email = null, $idMember = null, $no_ktp = null)
     {
         $result = false;
-        if ($id || $username) {
+        if ($id || $username || $no_ktp) {
             //get data from jamaah table first
-            $result = $this->getJamaahTableData($id, $username, $email);
+            $result = $this->getJamaahTableData($id, $username, $email, $no_ktp);
             if (empty($result)) {
                 return false;
             }

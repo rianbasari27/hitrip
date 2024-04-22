@@ -10,7 +10,7 @@ class Money
 
     public function format($num)
     {
-        return "Rp. " . number_format($num, 0, ',', '.') . ",-";
+        return "Rp. " . number_format($num, 0, ',', '.');
     }
     public function hargaHomeFormat($num)
     {

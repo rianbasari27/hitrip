@@ -24,25 +24,26 @@ class Daftar extends CI_Controller
         $parent_id = null;
         $id = null;
         $ktp_no = null;
-        $jamaah = null;
+        $userGroup = null;
         $parentMembers = null;
-        $this->load->model('agen');
-        if ($_GET['idg'] != null) {
-            $this->load->library('secret_key');
-            $idAgen = $this->secret_key->validate($_GET['idg']);
-            $agen = $this->agen->getAgen($idAgen);
-        } else {
-            $agen = null;
-        }
+        // $this->load->model('agen');
+        // if ($_GET['idg'] != null) {
+        //     $this->load->library('secret_key');
+        //     $idAgen = $this->secret_key->validate($_GET['idg']);
+        //     $agen = $this->agen->getAgen($idAgen);
+        // } else {
+        //     $agen = null;
+        // }
 
         $this->load->model('registrasi');
+        $user = $this->registrasi->getUser($_SESSION['id_user']);
         if (isset($_GET['parent'])) {
             $parent = $this->registrasi->getMember($_GET['parent']);
             if (empty($parent)) {
-                $this->alert->setJamaah('red', 'Ups...', 'Akun Induk Tidak Ditemukan');
+                $this->alert->toastAlert('red', 'Akun Induk Tidak Ditemukan');
                 redirect(base_url() . 'jamaah/home');
             }
-            $jamaah = $this->registrasi->getJamaah(null, null, $_GET['parent']);
+            $user = $this->registrasi->getUser(null, null, $_GET['parent']);
             $parentMem = $this->registrasi->getGroupMembers($_GET['parent']);
             if ($parentMem != null) {
                 $parentMembers = array_values($parentMem);
@@ -50,14 +51,18 @@ class Daftar extends CI_Controller
             $parent = $parent[0];
             $parent_id = $parent->id_member;
             $id = $parent->id_paket;
-            $ktp_no = $jamaah->ktp_no;
+            $ktp_no = $user->ktp_no;
             if ($parent->id_agen != null) {
                 $agen = $this->agen->getAgen($parent->id_agen);
             } else {
                 $agen = null;
             }
         } else if (!isset($_GET['id'])) {
-            $this->alert->setJamaah('red', 'Ups...', 'Paket tidak ditemukan');
+            $this->alert->toastAlert('red', 'Paket tidak ditemukan');
+            redirect(base_url() . 'jamaah/home');
+        }
+        if (!isset($_GET['id'])) {
+            $this->alert->toastAlert('red', 'Paket tidak ditemukan');
             redirect(base_url() . 'jamaah/home');
         }
         if ($id == null) {
@@ -73,18 +78,18 @@ class Daftar extends CI_Controller
         $this->load->model('registrasi');
         $paket->availableKamar = $this->registrasi->getAvailableKamar($id);
         $this->load->model('agen');
-        $agenList = $this->agen->getAgen(null, false, false, false, true);
+        // $agenList = $this->agen->getAgen(null, false, false, false, true);
 
         $data = array(
             'paket' => $paket,
-            'agenList' => $agenList,
+            // 'agenList' => $agenList,
             'parent_id' => $parent_id,
-            'agen' => $agen,
+            // 'agen' => $agen,
             'ktp_no' => $ktp_no,
             'parentMembers' => $parentMembers,
-            'jamaah' => $jamaah,
+            'user' => $user,
         );
-        $this->load->view('jamaahv2/registrasi', $data);
+        $this->load->view('jamaah/registrasi', $data);
     }
 
     public function getTempatLahir()
@@ -101,7 +106,7 @@ class Daftar extends CI_Controller
         unset($_POST['agen']);
         //cek paket
         if (empty($_POST['id_paket'])) {
-            $this->alert->setJamaah('red', 'Ups...', 'Paket tidak ditemukan');
+            $this->alert->toastAlert('red', 'Paket tidak ditemukan');
             redirect($_SERVER['HTTP_REFERER']);
         }
 
@@ -117,7 +122,7 @@ class Daftar extends CI_Controller
         $age = $this->calculate->age($_POST['tanggal_lahir']);
         if ($_POST['sharing_bed']) {
             if ($age > 6 || $age < 2) {
-                $this->alert->setJamaah('red', 'Ups...', 'Umur tidak sesuai untuk sharing bed');
+                $this->alert->toastAlert('red', 'Umur tidak sesuai untuk sharing bed');
                 redirect($_SERVER['HTTP_REFERER']);
             }
         }
@@ -126,22 +131,22 @@ class Daftar extends CI_Controller
         $this->load->model('PaketUmroh');
         $paket = $this->PaketUmroh->getPackage($id, true, true);
         if (empty($paket)) {
-            $this->alert->setJamaah('red', 'Ups...', 'Paket tidak ditemukan');
+            $this->alert->toastAlert('red', 'Paket tidak ditemukan');
             redirect($_SERVER['HTTP_REFERER']);
         }
-        $this->form_validation->set_rules('first_name', 'Nama Depan', 'trim|required|alpha_numeric_spaces', array(
+        $this->form_validation->set_rules('name', 'Nama Depan', 'trim|required|alpha_numeric_spaces', array(
             'alpha_numeric_spaces' => 'Nama depan tidak boleh mengandung simbol atau karakter khusus'
         ));
-        $this->form_validation->set_rules('ktp_no', 'Nomor KTP', 'required|numeric');
+        $this->form_validation->set_rules('no_ktp', 'Nomor KTP', 'required');
         $this->form_validation->set_rules('referensi', 'Referensi', 'required');
         $this->form_validation->set_rules('jenis_kelamin', 'Jenis Kelamin', 'required');
         $this->form_validation->set_rules('tanggal_lahir', 'Tanggal Lahir', 'required');
-        if ($_POST['referensi'] == 'Agen') {
-            $this->form_validation->set_rules('id_agen', 'Konsultan', 'required');
-        }
-        if ($_POST['referensi'] == 'Walk_in' || $_POST['referensi'] == 'Socmed' || $_POST['referensi'] == 'Iklan') {
-            $this->form_validation->set_rules('office', 'Referensi Kantor', 'required');
-        }
+        // if ($_POST['referensi'] == 'Agen') {
+        //     $this->form_validation->set_rules('id_agen', 'Konsultan', 'required');
+        // }
+        // if ($_POST['referensi'] == 'Walk_in' || $_POST['referensi'] == 'Socmed' || $_POST['referensi'] == 'Iklan') {
+        //     $this->form_validation->set_rules('office', 'Referensi Kantor', 'required');
+        // }
         // if (!isset($_POST['parent_id'])) {
         //     $this->form_validation->set_rules('no_wa', 'Nomor WA', 'trim|required');
         //     $this->form_validation->set_rules('referensi', 'Referensi', 'trim|required');
@@ -164,17 +169,17 @@ class Daftar extends CI_Controller
         $this->load->model('registrasi');
 
         //check if ktp_no already in an active package
-        $isMember = $this->registrasi->getJamaah(null, $_POST['ktp_no'], null);
-        if (isset($isMember->member[0])) {
-            $member = $isMember->member[0];
-            //check date
-            $curDate = date('Y-m-d');
-            $tglBerangkat = $member->paket_info->tanggal_berangkat;
-            if ($tglBerangkat > $curDate) {
-                $this->load->view('jamaahv2/already_member', $isMember);
-                return false;
-            }
-        }
+        // $isMember = $this->registrasi->getUser($_POST['id_user']);
+        // if (isset($isMember->member[0])) {
+        //     $member = $isMember->member[0];
+        //     //check date
+        //     $curDate = date('Y-m-d');
+        //     $tglBerangkat = $member->paket_info->tanggal_berangkat;
+        //     if ($tglBerangkat > $curDate) {
+        //         $this->load->view('jamaahv2/already_member', $isMember);
+        //         return false;
+        //     }
+        // }
 
         $parent_id = null;
         if (isset($_POST['parent_id'])) {
@@ -204,17 +209,17 @@ class Daftar extends CI_Controller
 
         $this->load->model('customer');
         if ($parent_id == null) {
-            $sessKtp = $_POST['ktp_no'];
+            $sessKtp = $_POST['no_ktp'];
         } else {
-            $sessKtp = $_SESSION['ktp_no'];
+            $sessKtp = $_SESSION['no_ktp'];
         }
         $this->customer->setSession($sessKtp);
-        $this->load->library('secret_key');
-        $idAgen = $this->secret_key->generate($_POST['id_agen']);
+        // $this->load->library('secret_key');
+        // $idAgen = $this->secret_key->generate($_POST['id_agen']);
         // if ($parent_id != null) {
         //     redirect(base_url() . 'jamaah/daftar/start?parent='. $parent_id . '&idg=' . $idAgen);
         // } else {
-        redirect(base_url() . "jamaah/daftar/next?idg=$idAgen");
+        redirect(base_url() . "jamaah/daftar/next?id=" . $paket->id_paket );
         // }
         // redirect(base_url() . "jamaah/daftar/next?idg=$_POST[id_agen]");
     }
@@ -232,17 +237,22 @@ class Daftar extends CI_Controller
     public function next()
     {
         if (!isset($_SESSION['id_member'])) {
-            $this->alert->setJamaah('red', 'Ups...', 'Maaf, Anda belum terdaftar.');
+            $this->alert->toastAlert('red', 'Maaf, Anda belum terdaftar.');
             redirect(base_url() . 'jamaah/home');
         }
-        if (isset($_GET['idg'])) {
-            $id_agen = $_GET['idg'];
-        } else {
-            $id_agen = null;
-        }
-        $data = $_SESSION;
-        $data['id_agen'] = $id_agen;
-        $this->load->view('jamaahv2/register_step2', $data);
+        // if (isset($_GET['idg'])) {
+        //     $id_agen = $_GET['idg'];
+        // } else {
+        //     $id_agen = null;
+        // }
+        $this->load->model('paketUmroh');
+        $paket = $this->paketUmroh->getPackage($_GET['id']);
+        $data = [
+            'userData' => $_SESSION,
+            'paket' => $paket
+        ];
+        // $data['id_agen'] = $id_agen;
+        $this->load->view('jamaahv/register_step2', $data);
     }
 
     public function registrasi_next()
@@ -250,29 +260,29 @@ class Daftar extends CI_Controller
         $this->load->model('registrasi');
         $this->load->model('Whatsapp');
         $member = $this->registrasi->getMember($_SESSION['id_member']);
-        if ($member[0]->parent_id != null) {
-            if ($member[0]->id_agen != null || $member[0]->id_agen != '' || $member[0]->id_agen != 0) {
-                $noHp = $member[0]->agen->no_wa;
-                if ($noHp != null || $noHp != '') {
-                    $this->Whatsapp->otomatisSendDP($member[0]->parent_id, 'belum_dp_new', $noHp);
-                } else {
-                    $this->Whatsapp->otomatisSendDP($member[0]->parent_id, 'belum_dp_new');
-                }
-            } else {
-                $this->Whatsapp->otomatisSendDP($member[0]->parent_id, 'belum_dp_new');
-            }
-        } else {
-            if ($member[0]->id_agen != null || $member[0]->id_agen != '' || $member[0]->id_agen != 0) {
-                $noHp = $member[0]->agen->no_wa;
-                if ($noHp != null || $noHp != '') {
-                    $this->Whatsapp->otomatisSendDP($member[0]->id_member, 'belum_dp_new', $noHp);
-                } else {
-                    $this->Whatsapp->otomatisSendDP($member[0]->id_member, 'belum_dp_new');
-                }
-            } else {
-                $this->Whatsapp->otomatisSendDP($member[0]->id_member, 'belum_dp_new');
-            }
-        }
+        // if ($member[0]->parent_id != null) {
+        //     if ($member[0]->id_agen != null || $member[0]->id_agen != '' || $member[0]->id_agen != 0) {
+        //         $noHp = $member[0]->agen->no_wa;
+        //         if ($noHp != null || $noHp != '') {
+        //             $this->Whatsapp->otomatisSendDP($member[0]->parent_id, 'belum_dp_new', $noHp);
+        //         } else {
+        //             $this->Whatsapp->otomatisSendDP($member[0]->parent_id, 'belum_dp_new');
+        //         }
+        //     } else {
+        //         $this->Whatsapp->otomatisSendDP($member[0]->parent_id, 'belum_dp_new');
+        //     }
+        // } else {
+        //     if ($member[0]->id_agen != null || $member[0]->id_agen != '' || $member[0]->id_agen != 0) {
+        //         $noHp = $member[0]->agen->no_wa;
+        //         if ($noHp != null || $noHp != '') {
+        //             $this->Whatsapp->otomatisSendDP($member[0]->id_member, 'belum_dp_new', $noHp);
+        //         } else {
+        //             $this->Whatsapp->otomatisSendDP($member[0]->id_member, 'belum_dp_new');
+        //         }
+        //     } else {
+        //         $this->Whatsapp->otomatisSendDP($member[0]->id_member, 'belum_dp_new');
+        //     }
+        // }
         redirect(base_url() . 'jamaah/daftar/dp_notice');
     }
 
@@ -294,10 +304,7 @@ class Daftar extends CI_Controller
         // $data['nama'] = implode(' ', array_filter([$r->first_name, $r->second_name, $r->last_name]));
         $data['countDown'] = date("M d, Y H:i:s", strtotime($member[0]->dp_expiry_time));
         $data['currentPaket'] = $paket;
-        // echo '<pre>';
-        // print_r($data);
-        // exit();
-        $this->load->view('jamaahv2/metode_bayar_dp', $data);
+        $this->load->view('jamaah/metode_bayar_dp', $data);
     }
 
     public function dp_notice_old()
