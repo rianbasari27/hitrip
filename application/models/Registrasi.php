@@ -718,9 +718,9 @@ class Registrasi extends CI_Model
             return false;
         $data = array();
         foreach ($result as $key => $r) {
-            $jamaah = $this->getJamaah($r->id_jamaah);
+            $user = $this->getUser($r->id_user);
             $data[$r->id_member] = new stdClass();
-            $data[$r->id_member]->jamaahData = $jamaah;
+            $data[$r->id_member]->userData = $user;
             $data[$r->id_member]->memberData = $r;
 
             // generate id secret
@@ -858,13 +858,13 @@ class Registrasi extends CI_Model
         }
 
         $member = $member[0];
-        $idj = $member->id_jamaah;
-        $jamaah = $this->getJamaah($idj);
-        if (empty($jamaah)) {
+        $idj = $member->id_user;
+        $user = $this->getUser($idj);
+        if (empty($user)) {
             return false;
         }
-        $age = $this->calculate->age($jamaah->tanggal_lahir);
-        $sex = $jamaah->jenis_kelamin;
+        $age = $this->calculate->age($user->tanggal_lahir);
+        $sex = $user->jenis_kelamin;
         $parent = $member->parent_id;
 
         if ($age < 45 && $sex == 'P' && empty($parent)) {

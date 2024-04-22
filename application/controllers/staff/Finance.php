@@ -1,5 +1,6 @@
 <?php
 
+use Google\Service\Sheets\NumberFormat;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
@@ -16,10 +17,31 @@ class Finance extends CI_Controller
             redirect(base_url() . 'staff/login');
         }
         //this page for master admin, manifest and finance
-        if (!($_SESSION['bagian'] == 'Master Admin' || $_SESSION['bagian'] == 'Finance' || $_SESSION['email'] == 'mala@ventour.co.id')) {
-            $this->alert->set('danger', 'Anda tidak memiliki akses untuk halaman tersebut');
+        if (!($_SESSION['bagian'] == 'Master Admin' || $_SESSION['bagian'] == 'Finance')) {
+            $this->alert->toast('danger', 'Mohon Maaf', 'Anda tidak memiliki akses');
             redirect(base_url() . 'staff/dashboard');
         }
+    }
+
+    public function index() {
+        $this->load->model('paketUmroh');
+        $paket = $this->paketUmroh->getPackage(null, false, false);
+        if (isset($_GET['id_paket'])) {
+            $id_paket = $_GET['id_paket'];
+        } else {
+            $id_paket = $paket[0]->id_paket;
+        }
+
+        $selectedPaket = $this->paketUmroh->getPackage($id_paket, false, false, false);
+
+        $nama_paket = $selectedPaket->nama_paket . ' (' . date_format(date_create($selectedPaket->tanggal_berangkat), "d F Y") . ')';
+
+        $data = array(
+            'paket' => $paket,
+            'id_paket' => $id_paket,
+            'nama_paket' => $nama_paket
+        );
+        $this->load->view('staff/list_bayar', $data);
     }
 
     public function bayar()
@@ -137,7 +159,7 @@ class Finance extends CI_Controller
         $this->form_validation->set_rules('idm', 'idm', 'trim|required|integer');
         $this->form_validation->set_rules('idb', 'idb', 'trim|required|integer');
         if ($this->form_validation->run() == FALSE) {
-            $this->alert->set('danger', 'Access Denied');
+            $this->alert->toast('danger', 'Mohon Maaf', 'Akses ditolak');
             redirect(base_url() . 'staff/finance/verifikasi');
         }
         $refund = null;
@@ -145,16 +167,16 @@ class Finance extends CI_Controller
             $refund = $_GET['refund'];
         }
         $this->load->model('registrasi');
-        $jamaah = $this->registrasi->getJamaah($_GET['idj']);
-        if (empty($jamaah)) {
-            $this->alert->set('danger', 'Data Tidak Ditemukan');
+        $user = $this->registrasi->getUser($_GET['idj']);
+        if (empty($user)) {
+            $this->alert->toast('danger', 'Mohon Maaf', 'Data tidak ditemukan');
             redirect(base_url() . 'staff/finance/verifikasi');
         }
         $member = $this->registrasi->getMember($_GET['idm']);
         $this->load->model('tarif');
         $dataBayar = $this->tarif->getPembayaran($_GET['idm'], false, $_GET['idb']);
         if (empty($dataBayar['data'])) {
-            $this->alert->set('danger', 'Data Tidak Ditemukan');
+            $this->alert->toast('danger', 'Mohon Maaf', 'Data tidak ditemukan');
             redirect(base_url() . 'staff/finance/verifikasi');
         }
         $this->load->model('paketUmroh');
@@ -162,7 +184,7 @@ class Finance extends CI_Controller
         $data = array(
             'member' => $member[0],
             'refund' => $refund,
-            'jamaah' => $jamaah,
+            'user' => $user,
             'paket' => $paket,
             'dataBayar' => $dataBayar
         );
@@ -181,14 +203,10 @@ class Finance extends CI_Controller
 
         $ver = $this->tarif->verifikasi($_POST['id_pembayaran'], $_POST['verified']);
         if (!$ver) {
-            $this->alert->set('danger', 'Data Pembayaran Tidak Ada');
+            $this->alert->toast('danger', 'Mohon Maaf', 'Data tidak ditemukan');
         } else {
-            $this->alert->set('success', 'Data Pembayaran Berhasil diverifikasi');
+            $this->alert->toast('success', 'Selamat', 'Data Pembayaran Berhasil diverifikasi');
         }
-        
-        // $this->load->library('user_agent');
-        // redirect($this->agent->referrer());
-        // redirect($_SERVER['HTTP_REFERER']);
         if ($_GET['refund'] != null) {
             redirect(base_url() . 'staff/finance/verifikasi_refund');
         } else {
@@ -312,18 +330,15 @@ class Finance extends CI_Controller
         $primaryKey = 'id_member';
 
         $columns = array(
-            array('db' => '`pm`.`id_member`', 'dt' => 'DT_RowId', 'field' => 'id_member'),
-            array('db' => '`pm`.`id_jamaah`', 'dt' => 'id_jamaah', 'field' => 'id_jamaah'),
-            array('db' => '`j`.`first_name`', 'dt' => 'first_name', 'field' => 'first_name'),
-            array('db' => '`j`.`second_name`', 'dt' => 'second_name', 'field' => 'second_name'),
-            array('db' => '`j`.`last_name`', 'dt' => 'last_name', 'field' => 'last_name'),
-            array('db' => "CONCAT(`j`.`first_name`,' ',`j`.`second_name`,' ',`j`.`last_name`) AS `whole_name`", 'dt' => "whole_name", 'field' => "whole_name"),
-            array('db' => "CONCAT(`j`.`first_name`,' ',`j`.`last_name`) AS `two_name`", 'dt' => "two_name", 'field' => "two_name"),
-            array('db' => '`pm`.`paspor_no`', 'dt' => 'paspor_no', 'field' => 'paspor_no'),
-            array('db' => '`pm`.`total_harga`', 'dt' => 'total_harga', 'field' => 'total_harga'),
-            array('db' => '`pm`.`lunas`', 'dt' => 'lunas', 'field' => 'lunas'),
-            array('db' => '`pm`.`pilihan_kamar`', 'dt' => 'pilihan_kamar', 'field' => 'pilihan_kamar'),
-            array('db' => '`pm`.`parent_id`', 'dt' => 'parent_id', 'field' => 'parent_id')
+            array('db' => 'pm.id_member', 'dt' => 'DT_RowId', 'field' => 'id_member'),
+            array('db' => 'pm.id_user', 'dt' => 'id_user', 'field' => 'id_user'),
+            array('db' => 'pm.id_paket', 'dt' => 'id_paket', 'field' => 'id_paket'),
+            array('db' => 'u.name', 'dt' => 'name', 'field' => 'name'),
+            array('db' => 'u.email', 'dt' => 'email', 'field' => 'email'),
+            array('db' => 'u.no_wa', 'dt' => 'no_wa', 'field' => 'no_wa'),
+            array('db' => 'pu.nama_paket', 'dt' => 'nama_paket', 'field' => 'nama_paket'),
+            array('db' => 'register_from', 'dt' => 'register_from', 'field' => 'register_from'),
+            array('db' => 'tgl_regist', 'dt' => 'tgl_regist', 'field' => 'tgl_regist')
         );
         $sql_details = array(
             'user' => $this->db->username,
@@ -331,51 +346,23 @@ class Finance extends CI_Controller
             'db' => $this->db->database,
             'host' => $this->db->hostname
         );
+        $joinQuery = "FROM {$table} AS pm LEFT JOIN user as u ON (pm.id_user = u.id_user)"
+        . " LEFT JOIN paket_umroh as pu ON (pm.id_paket = pu.id_paket)";
         $id_paket = $_GET['id_paket'];
-        $joinQuery = "FROM `{$table}` AS `pm` LEFT JOIN `jamaah` AS `j` ON (`j`.`id_jamaah` = `pm`.`id_jamaah`)";
-        $extraCondition = "`id_paket`=" . $id_paket;
+        $extraCondition = "pm.id_paket = $id_paket";
         $data = SSP::simple($_GET, $sql_details, $table, $primaryKey, $columns, $joinQuery, $extraCondition);
-
-        //prepare extra data
-        $this->load->model('registrasi');
-        $groupCtr = 0;
-        $groupArr = array();
         foreach ($data['data'] as $key => $d) {
             $data['data'][$key]['DT_RowAttr'] = array(
-                'id_jamaah' => $d['id_jamaah']
+                'id_paket' => $d['id_paket'] 
             );
 
-            //determine WG status
-            $wg = $this->registrasi->getWG($d['DT_RowId']);
-            $data['data'][$key]['wg'] = $wg;
+            $this->load->model('tarif');
+            $pembayaran = $this->tarif->getRiwayatBayar($d['DT_RowId']);
 
-            //set group class
-            $parent_id = $d['parent_id'];
-            if (!empty($parent_id)) {
-                //check in array
-                if (!isset($groupArr[$parent_id])) {
-                    $groupCtr = $groupCtr + 1;
-                    $groupArr[$parent_id] = $groupCtr;
-                }
-                $data['data'][$key]['DT_RowClass'] = 'group-color-' . $groupArr[$parent_id];
-            }
+            $data['data'][$key]['total_harga'] = number_format($pembayaran['totalBayar'] + $pembayaran['sisaTagihan']);
+            $data['data'][$key]['total_bayar'] = number_format($pembayaran['totalBayar']);
+            $data['data'][$key]['sisa_tagihan'] = number_format($pembayaran['sisaTagihan']);
 
-            //format money
-            if (!empty($d['total_harga'])) {
-                $data['data'][$key]['total_harga'] = 'Rp. ' . number_format($d['total_harga'], 0, ',', '.') . ',-';
-            }
-
-            //format lunas
-            if ($d['lunas'] == 1) {
-                $lns = 'Lunas';
-            } else if ($d['lunas'] == 2) {
-                $lns = 'Sudah Cicil';
-            } else if ($d['lunas'] == 3) {
-                $lns = 'Kelebihan Bayar';
-            } else {
-                $lns = 'Belum Bayar';
-            }
-            $data['data'][$key]['lunas'] = $lns;
         }
         echo json_encode($data);
     }
@@ -390,13 +377,8 @@ class Finance extends CI_Controller
         $columns = array(
             array('db' => '`pm`.`id_member`', 'dt' => 'DT_RowId', 'field' => 'id_member'),
             array('db' => '`byr`.`id_pembayaran`', 'dt' => 'id_pembayaran', 'field' => 'id_pembayaran'),
-            array('db' => '`pm`.`id_jamaah`', 'dt' => 'id_jamaah', 'field' => 'id_jamaah'),
-            array('db' => '`j`.`first_name`', 'dt' => 'first_name', 'field' => 'first_name'),
-            array('db' => '`j`.`second_name`', 'dt' => 'second_name', 'field' => 'second_name'),
-            array('db' => '`j`.`last_name`', 'dt' => 'last_name', 'field' => 'last_name'),
-            array('db' => '`j`.`referensi`', 'dt' => 'referensi', 'field' => 'referensi'),
-            array('db' => "CONCAT(`j`.`first_name`,' ',`j`.`second_name`,' ',`j`.`last_name`) AS `whole_name`", 'dt' => "whole_name", 'field' => "whole_name"),
-            array('db' => "CONCAT(`j`.`first_name`,' ',`j`.`last_name`) AS `two_name`", 'dt' => "two_name", 'field' => "two_name"),
+            array('db' => '`pm`.`id_user`', 'dt' => 'id_user', 'field' => 'id_user'),
+            array('db' => '`u`.`name`', 'dt' => 'name', 'field' => 'name'),
             array('db' => '`pm`.`paspor_no`', 'dt' => 'paspor_no', 'field' => 'paspor_no'),
             array('db' => '`byr`.`jumlah_bayar`', 'dt' => 'jumlah_bayar', 'field' => 'jumlah_bayar'),
             array('db' => '`byr`.`tanggal_bayar`', 'dt' => 'tanggal_bayar', 'field' => 'tanggal_bayar'),
@@ -410,8 +392,6 @@ class Finance extends CI_Controller
             array('db' => '`pm`.`parent_id`', 'dt' => 'parent_id', 'field' => 'parent_id'),
             array('db' => '`pkt`.`harga`', 'dt' => 'harga', 'field' => 'harga'),
             array('db' => '`pkt`.`id_paket`', 'dt' => 'id_paket', 'field' => 'id_paket'),
-            array('db' => '`a`.`id_agen`', 'dt' => 'id_agen', 'field' => 'id_agen'),
-            array('db' => '`a`.`nama_agen`', 'dt' => 'nama_agen', 'field' => 'nama_agen'),
         );
         $sql_details = array(
             'user' => $this->db->username,
@@ -422,51 +402,11 @@ class Finance extends CI_Controller
         $id_paket = $_GET['id_paket'];
         $joinQuery = "FROM `{$table}` AS `byr`"
             . "JOIN `program_member` AS `pm` ON (`byr`.`id_member` = `pm`.`id_member`)"
-            . " JOIN `jamaah` AS `j` ON (`j`.`id_jamaah` = `pm`.`id_jamaah`)"
-            . " JOIN `paket_umroh` AS `pkt` ON(`pkt`.`id_paket` = `pm`.`id_paket`)"
-            . " LEFT JOIN `agen` AS `a` ON(`a`.`id_agen` = `pm`.`id_agen`)";
+            . " JOIN `user` AS `u` ON (`u`.`id_user` = `pm`.`id_user`)"
+            . " JOIN `paket_umroh` AS `pkt` ON(`pkt`.`id_paket` = `pm`.`id_paket`)";
         $extraCondition = "`byr`.`jenis` = 'bayar'";
-        // $extraCondition = $_GET['id_paket'] != 0 ? " AND `pkt`. `id_paket`=" . $id_paket : "";
         if ($_GET['id_paket'] != 0) {
             $condition = " AND pkt.id_paket = '$id_paket'";
-            $extraCondition = $extraCondition . $condition;
-        }
-        // $extraCondition = "`pkt`. `id_paket`=" . $id_paket;
-        
-        // echo '<pre>';
-        // print_r($_GET);
-        // exit();
-        if ($_GET['date_start'] != '') {
-            $date_start = $_GET['date_start'];
-            if ($extraCondition != "") {
-                $condition = " AND byr.tanggal_bayar >= '$date_start 00:00:00'";
-            } else {
-                $condition = " byr.tanggal_bayar >= '$date_start 00:00:00'";
-            }
-            $extraCondition = $extraCondition . $condition;
-        }
-        if ($_GET['date_end'] != '') {
-            $date_end = $_GET['date_end'];
-            if ($extraCondition != "") {
-                $condition = " AND byr.tanggal_bayar <= '$date_end 00:00:00'";
-            } else {
-                $condition = " byr.tanggal_bayar <= '$date_end 00:00:00'";
-            }
-            $extraCondition = $extraCondition . $condition;
-        }
-        // if ($_GET['date_start'] != '' && $_GET['date_end'] != '') {
-        //     $date_start = $_GET['date_start'];
-        //     $date_end = $_GET['date_end'];
-        //     $condition = " AND byr.tanggal_bayar >= $date_start AND byr.tanggal_bayar <= $date_end";
-        //     $extraCondition = $extraCondition . $condition;
-        // }
-        if ($_GET['payments_method'] != '') {
-            $payments_method = $_GET['payments_method'];
-            if ($extraCondition != "") {
-                $condition = " AND byr.cara_pembayaran LIKE '$payments_method%'";
-            } else {
-                $condition = " byr.cara_pembayaran LIKE '$payments_method%'";
-            }
             $extraCondition = $extraCondition . $condition;
         }
         $data = SSP::simple($_GET, $sql_details, $table, $primaryKey, $columns, $joinQuery, $extraCondition);
@@ -478,7 +418,7 @@ class Finance extends CI_Controller
         foreach ($data['data'] as $key => $d) {
             $data['data'][$key]['harga'] = 'Rp. ' . number_format($data['data'][$key]['harga'], 0, ',', '.') . ',-';
             $data['data'][$key]['DT_RowAttr'] = array(
-                'id_jamaah' => $d['id_jamaah'],
+                'id_user' => $d['id_user'],
                 'id_pembayaran' => $d['id_pembayaran'],
                 'verified' => $d['verified']
             );
@@ -542,7 +482,7 @@ class Finance extends CI_Controller
         $columns = array(
             array('db' => '`pm`.`id_member`', 'dt' => 'DT_RowId', 'field' => 'id_member'),
             array('db' => '`byr`.`id_pembayaran`', 'dt' => 'id_pembayaran', 'field' => 'id_pembayaran'),
-            array('db' => '`pm`.`id_jamaah`', 'dt' => 'id_jamaah', 'field' => 'id_jamaah'),
+            array('db' => '`pm`.`id_user`', 'dt' => 'id_user', 'field' => 'id_user'),
             array('db' => '`j`.`first_name`', 'dt' => 'first_name', 'field' => 'first_name'),
             array('db' => '`j`.`second_name`', 'dt' => 'second_name', 'field' => 'second_name'),
             array('db' => '`j`.`last_name`', 'dt' => 'last_name', 'field' => 'last_name'),
@@ -572,7 +512,7 @@ class Finance extends CI_Controller
         $idPaket = $_GET['id_paket'];
         $joinQuery = "FROM `{$table}` AS `byr`"
             . "JOIN `program_member` AS `pm` ON (`byr`.`id_member` = `pm`.`id_member`)"
-            . " JOIN `jamaah` AS `j` ON (`j`.`id_jamaah` = `pm`.`id_jamaah`)"
+            . " JOIN `user` AS `u` ON (`u`.`id_user` = `pm`.`id_user`)"
             . " JOIN `paket_umroh` AS `pkt` ON(`pkt`.`id_paket` = `pm`.`id_paket`)";
         $extraCondition = "`byr`.`jenis` = 'refund'";
         // $extraCondition = $_GET['id_paket'] != 0 ? " AND `pkt`. `id_paket`=" . $id_paket : "";
@@ -843,10 +783,10 @@ class Finance extends CI_Controller
             'db' => $this->db->database,
             'host' => $this->db->hostname
         );
-        $month = explode("_", $_GET['month']);
+        $id_paket = $_GET['id_paket'];
 
-        if ($month[0] != 0 && $month[1] != 0000) {
-            $extraCondition = "MONTH(tanggal_berangkat) = " . $month[0] . " AND YEAR(tanggal_berangkat) = " . $month[1];
+        if ($id_paket != 'all') {
+            $extraCondition = "id_paket = " . $id_paket;
         } else {
             $extraCondition = "";
         }
@@ -871,26 +811,26 @@ class Finance extends CI_Controller
         //     $extraCondition = $extraCondition;
         // }
 
-        if ($_GET['ket'] != '') {
-            $ket = $_GET['ket'];
-            if ($ket == 1) {
-                if ($extraCondition != "") {
-                    $condition = " AND tanggal_berangkat <='" . date('Y-m-d') . "'";
-                } else {
-                    $condition = "tanggal_berangkat <= '" . date('Y-m-d'). "'";;
-                }
-                $extraCondition = $extraCondition . $condition;
-            }
+        // if ($_GET['ket'] != '') {
+        //     $ket = $_GET['ket'];
+        //     if ($ket == 1) {
+        //         if ($extraCondition != "") {
+        //             $condition = " AND tanggal_berangkat <='" . date('Y-m-d') . "'";
+        //         } else {
+        //             $condition = "tanggal_berangkat <= '" . date('Y-m-d'). "'";;
+        //         }
+        //         $extraCondition = $extraCondition . $condition;
+        //     }
 
-            if ($ket == 0) {
-                if ($extraCondition != "") {
-                    $condition = " AND tanggal_berangkat >='" . date('Y-m-d') . "'";
-                } else {
-                    $condition = "tanggal_berangkat >= '" . date('Y-m-d'). "'";;
-                }
-                $extraCondition = $extraCondition . $condition;
-            }
-        }
+        //     if ($ket == 0) {
+        //         if ($extraCondition != "") {
+        //             $condition = " AND tanggal_berangkat >='" . date('Y-m-d') . "'";
+        //         } else {
+        //             $condition = "tanggal_berangkat >= '" . date('Y-m-d'). "'";;
+        //         }
+        //         $extraCondition = $extraCondition . $condition;
+        //     }
+        // }
 
         // if($id == 2 && $month[0] == 0) {
         //     if ($extraCondition == "") {
@@ -913,24 +853,24 @@ class Finance extends CI_Controller
         // }
 
         //new filter
-        if ($_GET['date_start'] != '') {
-            $date_start = $_GET['date_start'];
-            if ($extraCondition != "") {
-                $condition = " AND tanggal_berangkat >= '$date_start'";
-            } else {
-                $condition = " tanggal_berangkat >= '$date_start'";
-            }
-            $extraCondition = $extraCondition . $condition;
-        }
-        if ($_GET['date_end'] != '') {
-            $date_end = $_GET['date_end'];
-            if ($extraCondition != "") {
-                $condition = " AND tanggal_berangkat <= '$date_end'";
-            } else {
-                $condition = " tanggal_berangkat <= '$date_end'";
-            }
-            $extraCondition = $extraCondition . $condition;
-        }
+        // if ($_GET['date_start'] != '') {
+        //     $date_start = $_GET['date_start'];
+        //     if ($extraCondition != "") {
+        //         $condition = " AND tanggal_berangkat >= '$date_start'";
+        //     } else {
+        //         $condition = " tanggal_berangkat >= '$date_start'";
+        //     }
+        //     $extraCondition = $extraCondition . $condition;
+        // }
+        // if ($_GET['date_end'] != '') {
+        //     $date_end = $_GET['date_end'];
+        //     if ($extraCondition != "") {
+        //         $condition = " AND tanggal_berangkat <= '$date_end'";
+        //     } else {
+        //         $condition = " tanggal_berangkat <= '$date_end'";
+        //     }
+        //     $extraCondition = $extraCondition . $condition;
+        // }
 
         $data = SSP::simple($_GET, $sql_details, $table, $primaryKey, $columns, null, $extraCondition);
         $this->load->model('paketUmroh');
@@ -1039,62 +979,6 @@ class Finance extends CI_Controller
             //         $belum_dp += 1;
             //     }
             // }
-
-            // start ambil data infant //
-            $this->db->select('*');
-            $this->db->from('program_member pm');
-            $this->db->join('jamaah j', 'pm.id_jamaah = j.id_jamaah');
-            $this->db->where('TIMESTAMPDIFF(YEAR, tanggal_lahir, CURDATE()) < 2');
-            $this->db->where('pm.id_paket', $d['DT_RowId']);
-            $infant = $this->db->count_all_results();
-            $data['data'][$key]['infant'] = $infant;
-            // end ambil data infant //
-            
-            // start ambil data anak //
-            $this->db->select('*');
-            $this->db->from('program_member pm');
-            $this->db->join('jamaah j', 'pm.id_jamaah = j.id_jamaah');
-            $this->db->where('TIMESTAMPDIFF(YEAR, tanggal_lahir, CURDATE()) >= 2');
-            $this->db->where('TIMESTAMPDIFF(YEAR, tanggal_lahir, CURDATE()) < 7');
-            $this->db->where('pm.id_paket', $d['DT_RowId']);
-            $anak = $this->db->count_all_results();
-            $data['data'][$key]['anak'] = $anak;
-            // end ambil data anak //
-            
-            // start ambil data dewasa //
-            $this->db->select('*');
-            $this->db->from('program_member pm');
-            $this->db->join('jamaah j', 'pm.id_jamaah = j.id_jamaah');
-            $this->db->where('TIMESTAMPDIFF(YEAR, tanggal_lahir, CURDATE()) >= 7');
-            $this->db->where('TIMESTAMPDIFF(YEAR, tanggal_lahir, CURDATE()) < 60');
-            $this->db->where('pm.id_paket', $d['DT_RowId']);
-            $dewasa = $this->db->count_all_results();
-
-            $this->db->select('*');
-            $this->db->from('program_member pm');
-            $this->db->join('jamaah j', 'pm.id_jamaah = j.id_jamaah');
-            $this->db->where('j.tanggal_lahir', '0000-00-00');
-            $this->db->where('pm.id_paket', $d['DT_RowId']);
-            $formatDate = $this->db->count_all_results();
-
-            $this->db->select('*');
-            $this->db->from('program_member pm');
-            $this->db->join('jamaah j', 'pm.id_jamaah = j.id_jamaah');
-            $this->db->where('j.tanggal_lahir', null);
-            $this->db->where('pm.id_paket', $d['DT_RowId']);
-            $nullDate = $this->db->count_all_results();
-            $data['data'][$key]['dewasa'] = $dewasa + $nullDate + $formatDate;
-            // end ambil data dewasa //
-            
-            // start ambil data lansia //
-            $this->db->select('*');
-            $this->db->from('program_member pm');
-            $this->db->join('jamaah j', 'pm.id_jamaah = j.id_jamaah');
-            $this->db->where('TIMESTAMPDIFF(YEAR, tanggal_lahir, CURDATE()) >= 60');
-            $this->db->where('pm.id_paket', $d['DT_RowId']);
-            $lansia = $this->db->count_all_results();
-            $data['data'][$key]['lansia'] = $lansia;
-            // end ambil data lansia //
 
 
             $data['data'][$key]['belum_dp'] = $belum_dp;

@@ -274,11 +274,11 @@ class Tarif extends CI_Model
         $sumExclude = 0;
         $currentGroup = null;
         foreach ($result as $key => $r) {
-            $jamaahData = $this->registrasi->getJamaah($r->id_jamaah);
-            if ($jamaahData->member[0]->pilihan_kamar != 'Quad') {
-                $sumExclude = $sumExclude + $jamaahData->member[0]->total_harga - $jamaahData->member[0]->paket_info->harga;
+            $userData = $this->registrasi->getUser($r->id_user);
+            if ($userData->member[0]->pilihan_kamar != 'Quad') {
+                $sumExclude = $sumExclude + $userData->member[0]->total_harga - $userData->member[0]->paket_info->harga;
             }
-            $extraFee = $this->getExtraFee($jamaahData->member[0]->id_member);
+            $extraFee = $this->getExtraFee($userData->member[0]->id_member);
             if (!empty($extraFee)) {
                 foreach ($extraFee as $fee) {
                     if ($fee->nominal > 0) {
@@ -287,7 +287,7 @@ class Tarif extends CI_Model
                 }
             }
             $totalTagihan = $totalTagihan + $r->total_harga;
-            unset($jamaahData->member);
+            unset($userData->member);
             $payments = $this->getPembayaran($r->id_member, true);
             $tarif = $this->calcTariff($r->id_member);
             $kurangBayar = $tarif['totalHargaFamily'] - $payments['totalBayar'];
@@ -314,7 +314,7 @@ class Tarif extends CI_Model
                 }
             }
 
-            $result[$key]->jamaah = $jamaahData;
+            $result[$key]->user = $userData;
             $result[$key]->payments = $payments;
 
             $result[$key]->payments['kurangBayar'] = $kurangBayar;
@@ -789,7 +789,7 @@ class Tarif extends CI_Model
                 $idScan = $data['order_id'];
                 $doc = 'bayar_store';
             } else {
-                $idScan = $data['id_jamaah'];
+                $idScan = $data['id_user'];
                 $doc = 'bayar';
             }
 
@@ -802,8 +802,8 @@ class Tarif extends CI_Model
             }
             unset($data['files']);
         }
-        if (isset($data['id_jamaah'])) {
-            unset($data['id_jamaah']);
+        if (isset($data['id_user'])) {
+            unset($data['id_user']);
         }
 
         $insert = $this->db->insert('pembayaran', $data);
@@ -827,16 +827,16 @@ class Tarif extends CI_Model
         } else {
             $this->calcTariff($data['id_member']);
         }
-        $this->alert->set('success', 'Pembayaran Berhasil diinput');
+        $this->alert->toast('success', 'Selamat', 'Pembayaran berhasil di input');
 
         // send notification
-        if ($jenis != 'bayar_konsultan' && $jenis != "store") {
-            if ($data['verified'] == 1) {
-                $this->load->model('Notification');
-                $jumlah = number_format($data['jumlah_bayar']);
-                $this->Notification->sendPembayaranMessage($data['id_member'], "$data[keterangan] sebesar Rp. $jumlah dengan cara pembayaran $data[cara_pembayaran] Berhasil", "Pembayaran berhasil");
-            }
-        }
+        // if ($jenis != 'bayar_konsultan' && $jenis != "store") {
+        //     if ($data['verified'] == 1) {
+        //         $this->load->model('Notification');
+        //         $jumlah = number_format($data['jumlah_bayar']);
+        //         $this->Notification->sendPembayaranMessage($data['id_member'], "$data[keterangan] sebesar Rp. $jumlah dengan cara pembayaran $data[cara_pembayaran] Berhasil", "Pembayaran berhasil");
+        //     }
+        // }
 
         return true;
     }
