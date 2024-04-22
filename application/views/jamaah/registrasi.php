@@ -233,6 +233,7 @@
                             <input type="hidden" name="parent_id" value="<?php echo $parent_id ?>">
                         <?php } ?>
                         <input type="hidden" name="id_paket" value="<?php echo $paket->id_paket; ?>">
+                        <input type="hidden" name="id_user" value="<?php echo $user->id_user; ?>">
                         <div class="mt-1 mb-3">
                             <div class="mb-5">
                                 <p class="mb-n1 font-600 color-green-dark">Tipe Kamar</p>
