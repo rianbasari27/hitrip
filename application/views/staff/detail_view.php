@@ -3,6 +3,22 @@
 
 <head>
     <?php $this->load->view('staff/include/header_view'); ?>
+    <style>
+    /* Style untuk input form */
+    .form-control {
+        border: none;
+        border-radius: 0;
+        border-bottom: 1px solid #ced4da;
+        /* warna garis bawah */
+    }
+
+    /* Style untuk input form yang aktif/fokus */
+    .form-control:focus {
+        box-shadow: none;
+        border-color: #80bdff;
+        /* warna garis bawah saat aktif */
+    }
+    </style>
 
 </head>
 

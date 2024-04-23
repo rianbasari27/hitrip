@@ -100,12 +100,12 @@
             </a>
             <ul class="sidenav-menu">
                 <li class="sidenav-item <?php echo isset($input_bayar) ? 'active' : '' ;?>">
-                    <a href="<?php echo base_url() . 'staff/paket/tambah' ;?>" class="sidenav-link">
+                    <a href="<?php echo base_url() . 'staff/finance' ;?>" class="sidenav-link">
                         <div>Input Pembayaran</div>
                     </a>
                 </li>
                 <li class="sidenav-item <?php echo isset($verif_bayar) ? 'active' : '' ;?>">
-                    <a href="<?php echo base_url() . 'staff/paket' ;?>" class="sidenav-link">
+                    <a href="<?php echo base_url() . 'staff/finance/verifikasi' ;?>" class="sidenav-link">
                         <div>Verifikasi Pembayaran</div>
                     </a>
                 </li>

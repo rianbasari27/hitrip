@@ -14,7 +14,7 @@ class Bayar extends CI_Controller
         }
         //this page for master admin, manifest and finance
         if (!($_SESSION['bagian'] == 'Master Admin' || $_SESSION['bagian'] == 'Finance')) {
-            $this->alert->set('danger', 'Anda tidak memiliki akses untuk halaman tersebut');
+            $this->alert->toast('danger', 'Mohon Maaf', 'Anda tidak memiliki akses');
             redirect(base_url() . 'staff/dashboard');
         }
     }
@@ -26,26 +26,24 @@ class Bayar extends CI_Controller
 
 
         if ($this->form_validation->run() == FALSE) {
-            $this->alert->set('danger', 'Access Denied');
+            $this->alert->toast('danger', 'Mohon Maaf', 'Akses Ditolak');
             redirect(base_url() . 'staff/jamaah');
         }
         $this->load->model('registrasi');
         $this->load->model('paketUmroh');
         $this->load->model('tarif');
-        $jamaah = $this->registrasi->getJamaah(null, null, $_GET['idm']);
-        $member = $jamaah->member;
+        $user = $this->registrasi->getUser(null, null, null, $_GET['idm']);
+        $member = $user->member;
         $paket = $this->paketUmroh->getPackage($member[0]->id_paket, false);
         $groupMembers = [];
         if ($member[0]->parent_id) {
             $groupMembers = $this->registrasi->getGroupMembers($member[0]->parent_id);
         }
         $pembayaran = $this->tarif->getRiwayatBayar($_GET['idm']);
-        // echo '<pre>';
-        // print_r($groupMembers);
-        // echo exit();
+
         $this->load->view('staff/manifest_bayar', array(
             'member' => $member[0],
-            'jamaah' => $jamaah,
+            'user' => $user,
             'paket' => $paket,
             'groupMembers' => $groupMembers,
             'pembayaran' => $pembayaran
@@ -55,11 +53,11 @@ class Bayar extends CI_Controller
     public function proses_bayar()
     {
         $this->form_validation->set_rules('id_member', 'id member', 'trim|required|integer');
-        $this->form_validation->set_rules('id_jamaah', 'id jamaah', 'trim|required|integer');
+        $this->form_validation->set_rules('id_user', 'id user', 'trim|required|integer');
         $this->form_validation->set_rules('tanggal_bayar', 'tanggal_bayar', 'required');
         $this->form_validation->set_rules('jumlah_bayar', 'jumlah_bayar', 'trim|required');
         if ($this->form_validation->run() == FALSE) {
-            $this->alert->set('danger', 'Access Denied');
+            $this->alert->toast('danger', 'Mohon Maaf', 'Akses Ditolak');
             redirect(base_url() . 'staff/jamaah');
         }
 
@@ -72,7 +70,7 @@ class Bayar extends CI_Controller
         $this->load->model('tarif');
         $this->tarif->setPembayaran($data);
 
-        redirect(base_url() . 'staff/info/detail_jamaah?id=' . $data['id_jamaah'] . '&id_member=' . $data['id_member']);
+        redirect(base_url() . 'staff/finance');
     }
 
     public function hapus_pembayaran()
