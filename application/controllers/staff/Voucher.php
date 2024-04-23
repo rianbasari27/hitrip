@@ -13,7 +13,7 @@ class Voucher extends CI_Controller
         }
         //this page only for admin
         if (!($_SESSION['bagian'] == 'Admin' || $_SESSION['bagian'] == 'Master Admin' || $_SESSION['bagian'] == 'Finance')) {
-            $this->alert->set('danger', 'Anda tidak memiliki akses untuk halaman tersebut');
+            $this->alert->toast('danger', 'Mohon Maaf', 'Anda tidak memiliki akses');
             redirect(base_url() . 'staff/dashboard');
         }
     }
@@ -42,14 +42,14 @@ class Voucher extends CI_Controller
 
         $columns = array(
             array('db' => 'id_voucher', 'dt' => 'DT_RowId'),
-            array('db' => 'kode_voucher', 'dt' => 0),
-            array('db' => 'nominal', 'dt' => 1),
-            array('db' => 'kuota', 'dt' => 2),
-            array('db' => 'tgl_mulai', 'dt' => 3),
-            array('db' => 'tgl_berakhir', 'dt' => 4),
+            array('db' => 'kode_voucher', 'dt' => 1),
+            array('db' => 'nominal', 'dt' => 2),
+            array('db' => 'kuota', 'dt' => 3),
+            array('db' => 'tgl_mulai', 'dt' => 4),
+            array('db' => 'tgl_berakhir', 'dt' => 5),
             array(
                 'db' => 'aktif',
-                'dt' => 5,
+                'dt' => 6,
                 'formatter' => function ($d, $row) {
                     if ($d == 1) {
                         return "Aktif";
@@ -73,17 +73,19 @@ class Voucher extends CI_Controller
     public function proses_tambah()
     {
         $this->form_validation->set_rules('kode_voucher', 'Kode Voucher', 'trim|required|alpha_numeric_spaces');
-        $this->form_validation->set_rules('nominal', 'Nominal', 'trim|required|numeric');
-        $this->form_validation->set_rules('kuota', 'Kuota', 'trim|required|numeric');
+        $this->form_validation->set_rules('nominal', 'Nominal', 'trim|required');
+        $this->form_validation->set_rules('kuota', 'Kuota', 'trim|required');
         $this->form_validation->set_rules('tgl_mulai', 'Tanggal Mulai', 'trim|required');
         $this->form_validation->set_rules('tgl_berakhir', 'Tanggal Berakhir', 'trim|required');
 
         if ($this->form_validation->run() == FALSE) {
-            $this->alert->set('danger', validation_errors());
-            redirect(base_url() . 'staff/voucher/tambah');
+            $this->alert->toast('danger', 'Mohon Maaf', "Pastikan untuk mengisi semua data");
+            redirect($_SERVER['HTTP_REFERER']);
         }
 
         $data = $_POST;
+        $data['nominal'] = str_replace(",", "", $data['nominal']);
+        $data['kuota'] = str_replace(",", "", $data['kuota']);
         //add new voucher
         $this->load->model('voucherModel');
         if (!($id = $this->voucherModel->addVoucher($data))) {
@@ -98,9 +100,11 @@ class Voucher extends CI_Controller
         $this->load->model('voucherModel');
         $v = $this->voucherModel->getVoucher($_GET['id']);
         $this->load->model('paketUmroh');
-        $paket = $this->paketUmroh->getPackage(null, true);
+        $paket = $this->paketUmroh->getPackage(null, false);
+        $listVoucher = $this->voucherModel->getVoucherPaketArray($_GET['id']);
         $data = array (
             'paket' => $paket,
+            'listVoucher' => $listVoucher,
             'voucher' => $v
         );
         $this->load->view('staff/edit_voucher_view', $data);
@@ -115,16 +119,16 @@ class Voucher extends CI_Controller
         $this->form_validation->set_rules('tgl_berakhir', 'Tanggal Berakhir', 'trim|required');
 
         if ($this->form_validation->run() == FALSE) {
-            $this->alert->set('danger', validation_errors());
+            $this->alert->toast('danger', 'Mohon Maaf', "Pastikan untuk mengisi semua data");
             redirect(base_url() . 'staff/voucher/tambah');
         }
 
         $this->load->model('voucherModel');
         if (!($data = $this->voucherModel->editVoucher($_POST))) {
-            $this->alert->set('success', 'Voucher Berhasil Diubah');
+            $this->alert->toast('success', 'Selamat', "Voucher Berhasil Diubah");
             redirect(base_url() . 'staff/voucher');
         } else {
-            $this->alert->set('success', 'Voucher Gagal Diubah');
+            $this->alert->toast('danger', 'Mohon Maaf', "Voucher Gagal Diubah");
             redirect(base_url() . 'staff/voucher');
         }
     }
@@ -134,16 +138,16 @@ class Voucher extends CI_Controller
         $this->form_validation->set_data($this->input->get());
         $this->form_validation->set_rules('id', 'id', 'trim|required|integer');
         if ($this->form_validation->run() == FALSE) {
-            $this->alert->set('danger', 'ID Voucher tidak dapat ditemukan');
+            $this->alert->toast('danger', 'Mohon Maaf', "ID Voucher tidak ditemukan");
             redirect(base_url() . 'staff/voucher');
         }
 
         $this->load->model('voucherModel');
         if (!($data = $this->voucherModel->hapusVoucher($_GET['id']))) {
-            $this->alert->set('success', 'Voucher Berhasil Dihapus');
+            $this->alert->toast('success', 'Selamat', "Voucher Berhasil Dihapus");
             redirect(base_url() . 'staff/voucher');
         } else {
-            $this->alert->set('success', 'Voucher Gagal Dihapus');
+            $this->alert->toast('danger', 'Mohon Maaf', "Voucher Gagal Dihapus");
             redirect(base_url() . 'staff/voucher');
         }
     }

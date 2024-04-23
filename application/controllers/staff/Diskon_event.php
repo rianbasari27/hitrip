@@ -13,7 +13,7 @@ class Diskon_event extends CI_Controller
         }
         //this page only for admin
         if (!($_SESSION['bagian'] == 'Master Admin')) {
-            $this->alert->set('danger', 'Anda tidak memiliki akses untuk halaman tersebut');
+            $this->alert->toast('danger', 'Mohon Maaf', 'Anda tidak memiliki akses');
             redirect(base_url() . 'staff/dashboard');
         }
     }
@@ -32,18 +32,23 @@ class Diskon_event extends CI_Controller
 
         $columns = array(
             array('db' => 'id_diskon', 'dt' => 'DT_RowId'),
+            array('db' => 'nama_diskon', 'dt' => '1'),
             array(
                 'db' => 'nominal', // Kolom nominal untuk format Rupiah
-                'dt' => 0,
+                'dt' => 2,
                 'formatter' => function($d, $row) {
                     return 'Rp ' . number_format($d, 0, ',', '.');
                 }
             ),
-            array('db' => 'tgl_mulai', 'dt' => 1),
-            array('db' => 'tgl_berakhir', 'dt' => 2),
+            array('db' => 'kuota', 'dt' => 3,
+                'formatter' => function($d, $row) {
+                    return number_format($d);
+            }),
+            array('db' => 'tgl_mulai', 'dt' => 4),
+            array('db' => 'tgl_berakhir', 'dt' => 5),
             array(
                 'db' => 'aktif',
-                'dt' => 3,
+                'dt' => 6,
                 'formatter' => function ($d, $row) {
                     if ($d == 1) {
                         return "Aktif";
@@ -51,7 +56,7 @@ class Diskon_event extends CI_Controller
                         return "Tidak Aktif";
                     }
                 }
-            )
+            ),
         );
         
         $sql_details = array(
@@ -79,17 +84,19 @@ class Diskon_event extends CI_Controller
 
     public function proses_tambah()
     {
+        $this->form_validation->set_rules('nama_diskon', 'Nama Promo', 'trim|required');
         $this->form_validation->set_rules('nominal', 'Nominal', 'trim|required');
         $this->form_validation->set_rules('tgl_mulai', 'Tanggal Mulai', 'trim|required');
         $this->form_validation->set_rules('tgl_berakhir', 'Tanggal Berakhir', 'trim|required');
         if ($this->form_validation->run() == FALSE) {
-            $this->alert->set('danger', validation_errors());
-            redirect(base_url() . 'staff/diskon_event/tambah');
+            $this->alert->toast('danger', 'Mohon Maaf', "Pastikan untuk mengisi semua data");
+            redirect($_SERVER['HTTP_REFERER']);
         }
 
         $data = $_POST;
-        //add new voucher
         $data['nominal'] = str_replace(",", "", $data['nominal']);
+        $data['kuota'] = str_replace(",", "", $data['kuota']);
+        //add new Diskon
         $this->load->model('paketUmroh');
         if (!($id = $this->paketUmroh->addDiskonEvent($data))) {
             redirect(base_url() . 'staff/diskon_event/tambah');
@@ -102,6 +109,10 @@ class Diskon_event extends CI_Controller
     {
         $this->form_validation->set_data($this->input->get());
         $this->form_validation->set_rules('id', 'id', 'trim|required|numeric');
+        if ($this->form_validation->run() == FALSE) {
+            $this->alert->toast('danger', 'Mohon Maaf', "Promo tidak ditemukan");
+            redirect($_SERVER['HTTP_REFERER']);
+        }
         $this->load->model('paketUmroh');
         $discountEvent = $this->paketUmroh->getDiskonEvent($_GET['id']);
         $this->load->model('paketUmroh');
@@ -116,20 +127,22 @@ class Diskon_event extends CI_Controller
     public function proses_edit() 
     {
         $this->form_validation->set_rules('id_diskon', 'ID Diskon', 'trim|required|numeric');
+        $this->form_validation->set_rules('nama_diskon', 'Nama Promo', 'trim|required');
         $this->form_validation->set_rules('nominal', 'Nominal', 'trim|required');
         $this->form_validation->set_rules('tgl_mulai', 'Tanggal Mulai', 'trim|required');
         $this->form_validation->set_rules('tgl_berakhir', 'Tanggal Berakhir', 'trim|required');
         if ($this->form_validation->run() == FALSE) {
-            $this->alert->set('danger', validation_errors());
+            $this->alert->toast('danger', 'Mohon Maaf', "Pastikan untuk mengisi semua data");
             redirect($_SERVER['HTTP_REFERER']);
         }
-
         $_POST['nominal'] = str_replace(",", "", $_POST['nominal']);
+        $_POST['kuota'] = str_replace(",", "", $_POST['kuota']);
+
         $this->load->model('paketUmroh');
         if (!($data = $this->paketUmroh->editDiskonEvent($_POST))) {
-            $this->alert->set('danger', 'Discount Event Gagal Diubah');
+            $this->alert->toast('danger', 'Mohon Maaf', "Promo Gagal Diubah");
         } else {
-            $this->alert->set('success', 'Discount Event Berhasil Diubah');
+            $this->alert->toast('success', 'Selamat', "Promo Berhasil Diubah");
         }
         
         redirect(base_url() . 'staff/diskon_event');
@@ -145,10 +158,10 @@ class Diskon_event extends CI_Controller
         }
 
         $this->load->model('paketUmroh');
-        if (!($this->paketUmroh->hapusDiskonEvent($_GET['id']))) {
-            $this->alert->set('success', 'Discount Event Berhasil Dihapus');
+        if (($this->paketUmroh->hapusDiskonEvent($_GET['id']))) {
+            $this->alert->toast('success', 'Selamat' ,'Promo Berhasil Dihapus');
         } else {
-            $this->alert->set('success', 'Discount Event Gagal Dihapus');
+            $this->alert->toast('danger', 'Mohon Maaf' ,'Promo Gagal Dihapus');
         }
         
         redirect(base_url() . 'staff/diskon_event');

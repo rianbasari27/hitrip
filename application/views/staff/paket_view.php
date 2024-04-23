@@ -69,7 +69,7 @@
                                                     type="file" style="display: none;">
                                             </form>
                                             <a onclick="$('#banner_up').trigger('click');" href="#"
-                                                class="btn btn-warning btn-icon-split  btn-xs rounded-xs" for="it_up">
+                                                class="btn btn-secondary btn-icon-split  btn-xs rounded-xs" for="it_up">
                                                 <span class="icon text-white-50">
                                                     <i class="fas fa-list"></i>
                                                 </span>
@@ -109,7 +109,7 @@
                                                             <?php if ($paket_flyer !== null) { ?>
                                                             <tr>
                                                                 <td style="width: 250px;">
-                                                                    <a class="btn btn-success btn-icon-split btn-sm"
+                                                                    <a class="btn btn-success btn-icon-split btn-xs rounded-xs"
                                                                         href="<?php echo base_url() . $paket_flyer; ?>"
                                                                         download>
                                                                         <span class="icon text-white-50">
@@ -118,7 +118,7 @@
                                                                         <span class="text">Download Paket
                                                                             Flyer</span>
                                                                     </a>
-                                                                    <a class="btn btn-danger btn-icon-split btn-sm"
+                                                                    <a class="btn btn-danger btn-icon-split btn-xs rounded-xs"
                                                                         href="<?php echo base_url() . "staff/paket/delete_upload?field=paket_flyer&id=$id_paket" ?>">
                                                                         <span class="icon">
                                                                             <i class="fas fa-trash"></i>
@@ -130,7 +130,7 @@
                                                             <?php if ($itinerary !== null) { ?>
                                                             <tr>
                                                                 <td style="width: 250px;">
-                                                                    <a class="btn btn-info btn-icon-split btn-sm"
+                                                                    <a class="btn btn-info btn-icon-split btn-xs rounded-xs"
                                                                         href="<?php echo base_url() . $itinerary; ?>"
                                                                         download>
                                                                         <span class="icon text-white-50">
@@ -138,7 +138,7 @@
                                                                         </span>
                                                                         <span class="text">Download Itinerary</span>
                                                                     </a>
-                                                                    <a class="btn btn-danger btn-icon-split btn-sm"
+                                                                    <a class="btn btn-danger btn-icon-split btn-xs rounded-xs"
                                                                         href="<?php echo base_url() . "staff/paket/delete_upload?field=itinerary&id=$id_paket" ?>">
                                                                         <span class="icon">
                                                                             <i class="fas fa-trash"></i>
@@ -150,7 +150,7 @@
                                                             <?php if ($banner_image !== null) { ?>
                                                             <tr>
                                                                 <td style="width: 250px;">
-                                                                    <a class="btn btn-warning btn-icon-split btn-sm"
+                                                                    <a class="btn btn-secondary btn-icon-split btn-xs rounded-xs"
                                                                         href="<?php echo base_url() . $banner_image; ?>"
                                                                         download>
                                                                         <span class="icon text-white-50">
@@ -158,7 +158,7 @@
                                                                         </span>
                                                                         <span class="text">Download Banner Image</span>
                                                                     </a>
-                                                                    <a class="btn btn-danger btn-icon-split btn-sm"
+                                                                    <a class="btn btn-danger btn-icon-split btn-xs rounded-xs"
                                                                         href="<?php echo base_url() . "staff/paket/delete_upload?field=banner_image&id=$id_paket" ?>">
                                                                         <span class="icon">
                                                                             <i class="fas fa-trash"></i>

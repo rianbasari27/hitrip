@@ -117,9 +117,9 @@ class VoucherModel extends CI_Model
         );
 
         if ($this->db->insert('voucher', $insData)) {
-            $this->alert->set('success', 'Voucher berhasil ditambahkan');
+            $this->alert->toast('success', 'Selamat', "Voucher berhasil ditambahkan");
         } else {
-            $this->alert->set('danger', 'System Error, silakan coba kembali');
+            $this->alert->toast('danger', 'Mohon Maaf', 'System Error, silakan coba kembali');
             return false;
         }
 
@@ -185,27 +185,42 @@ class VoucherModel extends CI_Model
         $this->db->where('id_voucher', $data['id_voucher']);
         $this->db->update('voucher', $dataVoucher);
 
-        if (isset($data['paket'])) {
-            $this->db->where('id_voucher', $data['id_voucher']);
-            $this->db->delete('voucher_paket');
-
-            foreach ($data['paket'] as $p) {
+        $this->db->where('id_voucher', $data['id_voucher']);
+        $this->db->delete('voucher_paket');
+        if (isset($data['id_paket'])) {
+            foreach ($data['id_paket'] as $p) {
                 $voucherPaket = array(
                     'id_voucher' => $data['id_voucher'],
                     'id_paket' => $p
                 );
-
                 $this->db->insert('voucher_paket', $voucherPaket);
             }
         }
 
         // ambil data sesudahnya
-        $this->db->where('id_voucher', $data['id_paket']);
+        $this->db->where('id_voucher', $data['id_voucher']);
         $after = $this->db->get('voucher')->row();
         //////////////////////////////////
 
         $this->load->model('logs');
         $this->logs->addLogTable($data['id_voucher'], 'v', $before, $after);
+    }
+
+    public function getVoucherPaketArray($id)
+    {
+        $this->db->where('id_voucher', $id);
+        $query = $this->db->get('voucher');
+        $data = $query->row();
+
+        $this->db->where('id_voucher', $id);
+        $query = $this->db->get('voucher_paket');
+        $voucher_paket = $query->result();
+        $paket = array();
+        foreach ($voucher_paket as $v) {
+            $paket[] = $v->id_paket;
+        }
+        $data->paket = $paket;
+        return $data;
     }
 
     public function hapusVoucher($id)

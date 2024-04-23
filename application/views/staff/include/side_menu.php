@@ -88,10 +88,23 @@
         <li class="sidenav-header small font-weight-semibold">Finance</li>
         <!-- Product elements -->
         <li class="sidenav-item">
-            <a href="tables_bootstrap.html" class="sidenav-link">
+            <a href="javascript:"
+                class="sidenav-link sidenav-toggle <?php echo isset($voucher_promo) ? 'active' : '' ;?>">
                 <i class="sidenav-icon feather icon-tag"></i>
                 <div>Voucher / Promo</div>
             </a>
+            <ul class="sidenav-menu">
+                <li class="sidenav-item <?php echo isset($voucher_view) ? 'active' : '' ;?>">
+                    <a href="<?php echo base_url() . 'staff/voucher' ;?>" class="sidenav-link">
+                        <div>Voucher</div>
+                    </a>
+                </li>
+                <li class="sidenav-item <?php echo isset($promo_view) ? 'active' : '' ;?>">
+                    <a href="<?php echo base_url() . 'staff/diskon_event' ;?>" class="sidenav-link">
+                        <div>Promo</div>
+                    </a>
+                </li>
+            </ul>
         </li>
         <li class="sidenav-item">
             <a href="javascript:" class="sidenav-link sidenav-toggle <?php echo isset($finance) ? 'active' : '' ;?>">

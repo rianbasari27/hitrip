@@ -605,16 +605,11 @@ class PaketUmroh extends CI_Model
         $tgl_mulai = date("Y-m-d", strtotime($data['tgl_mulai']));
         $tgl_akhir = date("Y-m-d", strtotime($data['tgl_berakhir']));
 
-        if (!empty($data['keterangan_diskon'])) {
-            $keterangan_diskon = $data['keterangan_diskon'];
-        } else {
-            $keterangan_diskon = NULL;
-        }
-
 
         $insData = array(
+            'nama_diskon' => $data['nama_diskon'],
             'nominal' => $data['nominal'],
-            'keterangan_diskon' => $keterangan_diskon,
+            'kuota' => $data['kuota'],
             'tgl_mulai' => $tgl_mulai,
             'tgl_berakhir' => $tgl_akhir,
             'aktif' => $aktif
@@ -622,9 +617,9 @@ class PaketUmroh extends CI_Model
         );
 
         if ($this->db->insert('diskon', $insData)) {
-            $this->alert->set('success', 'Discount Event berhasil ditambahkan');
+            $this->alert->toast('success', 'Selamat', "Promo berhasil ditambahkan");
         } else {
-            $this->alert->set('danger', 'System Error, silakan coba kembali');
+            $this->alert->toast('danger', 'Mohon Maaf', "System Error, silakan coba kembali");
             return false;
         }
 
@@ -670,13 +665,29 @@ class PaketUmroh extends CI_Model
         return $data;
     }
 
-    public function getDiskonEventPaket($id_paket = null)
+    public function getDiskonEventPaket($id_diskon = null, $id_paket = null , $aktif = 1, $expiry = true, $avaible = true)
     {
         $this->db->select('*');
         $this->db->from('diskon');
         $this->db->join('diskon_paket', 'diskon.id_diskon = diskon_paket.id_diskon');
-        $this->db->where('diskon_paket.id_paket', $id_paket);
-        $data = $this->db->get()->row();
+        if ($id_paket) {
+            $this->db->where('diskon_paket.id_paket', $id_paket);
+        }
+        if ($id_diskon) {
+            $this->db->where('diskon.id_diskon', $id_diskon);
+        }
+        $this->db->where('diskon.aktif', $aktif);
+        if ($expiry) {
+            $this->db->where('diskon.tgl_mulai <=', date('Y-m-d'));
+            $this->db->where('diskon.tgl_berakhir >=', date('Y-m-d'));
+        }
+
+        if ($avaible) {
+            $this->db->where('diskon.kuota >', 0);
+        }
+
+
+        $data = $this->db->get()->result();
         return $data;
     }
 
@@ -689,21 +700,20 @@ class PaketUmroh extends CI_Model
 
         $dataDiskon = array(
             'id_diskon' => $data['id_diskon'],
+            'nama_diskon' => $data['nama_diskon'],
             'nominal' => $data['nominal'],
             'tgl_mulai' => $data['tgl_mulai'],
             'tgl_berakhir' => $data['tgl_berakhir'],
-            'keterangan_diskon' => $data['keterangan_diskon'],
             'aktif' => $data['aktif']
         );
 
         $this->db->where('id_diskon', $data['id_diskon']);
         $this->db->update('diskon', $dataDiskon);
 
-        if (isset($data['paket'])) {
-            $this->db->where('id_diskon', $data['id_diskon']);
-            $this->db->delete('diskon_paket');
-
-            foreach ($data['paket'] as $p) {
+        $this->db->where('id_diskon', $data['id_diskon']);
+        $this->db->delete('diskon_paket');
+        if (isset($data['id_paket'])) {
+            foreach ($data['id_paket'] as $p) {
                 $diskonPaket = array(
                     'id_diskon' => $data['id_diskon'],
                     'id_paket' => $p
@@ -714,7 +724,7 @@ class PaketUmroh extends CI_Model
         }
 
         // ambil data sesudahnya
-        $this->db->where('id_diskon', $data['id_paket']);
+        $this->db->where('id_diskon', $data['id_diskon']);
         $after = $this->db->get('diskon')->row();
         //////////////////////////////////
 
@@ -737,5 +747,22 @@ class PaketUmroh extends CI_Model
         }
 
         return true;
+    }
+
+    public function applyDiskonEvent( $id_member,  $id_paket = null, $id_diskon = null) {
+        $diskon = $this->getDiskonEventPaket($id_diskon, $id_paket);
+        
+        if ($diskon) {
+            foreach ($diskon as $d) {
+                $this->db->where("id_diskon", $d->id_diskon);
+                $this->db->set('kuota', $d->kuota-1);
+                $this->db->update('diskon');
+
+                $this->load->model('tarif');
+                $this->tarif->setExtraFee($id_member, $d->nominal * -1, "Promo " . $d->nama_diskon);
+            }
+        }
+        return true ;
+
     }
 }
