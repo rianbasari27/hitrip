@@ -81,6 +81,19 @@
                                                 <input name="banner_image" onchange='this.form.submit();' id="banner_up"
                                                     type="file" style="display: none;">
                                             </form>
+                                            <a onclick="$('#gallery_up').trigger('click');" href="#"
+                                                class="btn btn-primary btn-icon-split  btn-xs rounded-xs" for="gallery_up">
+                                                <span class="icon text-white-50">
+                                                    <i class="fas fa-image"></i>
+                                                </span>
+                                                <span class="text">Upload gallery Image</span>
+                                            </a>
+                                            <form action="<?php echo base_url(); ?>staff/paket/upload" method="post"
+                                                enctype="multipart/form-data" style="display: inline">
+                                                <input type="hidden" name="id" value="<?php echo $id_paket; ?>">
+                                                <input name="gallery_image[]" onchange='this.form.submit();' id="gallery_up"
+                                                    type="file" style="display: none;" multiple>
+                                            </form>
                                         </span>
 
                                     </div>
@@ -210,6 +223,15 @@
                                                     <th>Gambar Banner</th>
                                                     <td><img src="<?php echo base_url() . $banner_image; ?>" alt=""
                                                             style="max-width: 200px;"></td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Gallery</th>
+                                                    <td>
+                                                        <?php foreach ($gallery as $g) { ?>
+                                                            <img src="<?php echo base_url() . $g->gallery_image; ?>" alt=""
+                                                            style="max-width: 150px;" class="me-2">
+                                                        <?php }?>
+                                                    </td>
                                                 </tr>
                                                 <tr>
                                                     <th>Deskripsi Singkat</th>

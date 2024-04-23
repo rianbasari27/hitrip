@@ -10,7 +10,7 @@ class Profile extends CI_Controller
         //check if logged in redirect to user page
         $this->load->model('customer');
         if (!$this->customer->is_user_logged_in()) {
-            $this->alert->setJamaah('yellow', 'asdasd', 'Anda harus login terlebih dahulu');
+            $this->alert->toastAlert('red', 'Anda perlu login');
             redirect(base_url() . 'jamaah/login');
         }
     }
@@ -45,10 +45,10 @@ class Profile extends CI_Controller
         
         $this->load->model('registrasi');
         if (!$this->registrasi->daftar($_POST, null, true)) {
-            $this->alert->setJamaah('red', 'Error', 'Gagal menyimpan');
+            $this->alert->toastAlert('red', 'Gagal menyimpan');
             redirect($_SERVER['HTTP_REFERER']);
         } else {
-            $this->alert->setJamaah('green', 'Sukses', 'Berhasil menyimpan');
+            $this->alert->toastAlert('red', 'Berhasil menyimpan');
             redirect(base_url('jamaah/profile'));
         }
         

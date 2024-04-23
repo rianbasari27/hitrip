@@ -158,6 +158,8 @@ class Paket extends CI_Controller
         $this->load->library('date');
         $this->load->model('paketUmroh');
         $data = $this->paketUmroh->getPackage($_GET['id'], false);
+        $gallery = $this->paketUmroh->getGalleryPackage(null, $_GET['id']);
+        $data->gallery = $gallery;
         if (empty($data)) {
             $this->alert->toast('danger', 'Mohon Maaf', 'Paket tidak ditemukan');
             redirect(base_url() . 'staff/paket');

@@ -31,14 +31,16 @@
                     <img src="<?php echo base_url() . 'asset/appkit/images/pictures/default/default-profile.jpg' ?>"
                     class="rounded-xl" width="100">
                 </div>
-                <div class="mt-3">
-                    <a href="#" class="btn btn-xs d-inline-block rounded-pill shadow-xl bg-highlight">Ubah foto profile</a>
+                <div class="d-flex mt-3 justify-content-center">
+                    <a href="#" class="btn btn-xs me-1 d-inline-block rounded-pill shadow-xl bg-highlight">Upload foto</a>
+                    <a href="#" class="btn btn-xs ms-1 d-inline-block rounded-pill shadow-xl color-highlight border-highlight">Hapus foto</a>
                 </div>
             </div>
 
             <div class="card card-style">
                 <div class="content mb-0">
                     <form action="<?php echo base_url() ?>jamaah/profile/edit_profile" method="post">
+                        <input type="hidden" name="id_user" value="<?php echo $id_user ?>">
                         <div class="input-style has-borders validate-field mb-4">
                             <input type="text" name="name" class="form-control validate-name" value="<?php echo $name != null ? $name : set_value('name') ?>" id="name" placeholder="Nama Lengkap">
                             <label for="name" class="color-highlight">Nama Lengkap</label>
@@ -84,14 +86,14 @@
                         </div>
 
                         <div class="input-style has-borders validate-field mb-4">
-                            <input type="text" name="tempat_lahir" class="form-control validate-name" value="<?php echo $tempat_lahir != null ? $temp : set_value('temp') ?>" id="tempat_lahir" placeholder="Tempat Lahir">
+                            <input type="text" name="tempat_lahir" class="form-control validate-name" value="<?php echo $tempat_lahir != null ? $tempat_lahir : set_value('tempat_lahir') ?>" id="tempat_lahir" placeholder="Tempat Lahir">
                             <label for="tempat_lahir" class="color-highlight">Tempat Lahir</label>
                             <i class="fa fa-times disabled invalid color-red-dark"></i>
                             <i class="fa fa-check disabled valid color-green-dark"></i>
                             <em>(required)</em>
                         </div>
                         <div class="input-style has-borders validate-field mb-4">
-                            <input type="date" name="tanggal_lahir" class="form-control validate-name" value="<?php echo $tanggal_lahir ?>" id="tanggal_lahir" placeholder="Tanggal Lahir">
+                            <input type="date" name="tanggal_lahir" class="form-control validate-name" value="<?php echo $tanggal_lahir != null ? $tanggal_lahir : set_value('tanggal_lahir') ?>" id="tanggal_lahir" placeholder="Tanggal Lahir">
                             <label for="tanggal_lahir" class="color-highlight">Tanggal Lahir</label>
                             <i class="fa fa-times disabled invalid color-red-dark"></i>
                             <i class="fa fa-check disabled valid color-green-dark"></i>
@@ -102,8 +104,8 @@
                                 <option value="default" disabled selected>
                                 Pilih jenis kelamin
                                 </option>
-                                <option value="L">Laki-laki</option>
-                                <option value="P">Perempuan</option>
+                                <option value="L" <?php echo $jenis_kelamin == 'L' ? 'selected' : '' ?>>Laki-laki</option>
+                                <option value="P" <?php echo $jenis_kelamin == 'P' ? 'selected' : '' ?>>Perempuan</option>
                             </select>
                             <span><i class="fa fa-chevron-down"></i></span>
                             <i class="fa fa-check disabled valid color-green-dark"></i>
@@ -118,6 +120,7 @@
 
             <?php $this->load->view('jamaah/include/footer'); ?>
             <?php $this->load->view('jamaah/include/alert'); ?>
+            <?php $this->load->view('jamaah/include/toast'); ?>
         </div>
         <!-- Page content ends here-->
 

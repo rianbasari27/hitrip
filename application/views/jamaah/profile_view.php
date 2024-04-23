@@ -40,7 +40,7 @@
             </div>
         </div>
 
-        <div class="card card-style mb-3">
+        <!-- <div class="card card-style mb-3">
             <div class="content">
                 <div class="row mb-0">
                     <div class="col-6 border-end text-center">
@@ -53,15 +53,26 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
 
         <div class="card card-style mb-3">
             <div class="content">
                 <div class="list-group list-custom-small list-icon-0">
-                    <a href=""><i class="fa fa-envelope rounded-sm bg-blue-dark color-white"></i><span><?php echo $email ?></span></a>
-                    <a href=""><i class="fa fa-cake-candles font-14 rounded-sm bg-blue-dark color-white"></i><span><?php echo $tanggal_lahir ? $tanggal_lahir : '-' ?></span></a>
-                    <a href=""><i class="fa fa-mobile font-14 rounded-sm bg-blue-dark color-white"></i><span><?php echo $no_wa ? $no_wa : '-' ?></span></a>
-                    <a href=""><i class="fa fa-person font-14 rounded-sm bg-blue-dark color-white"></i><span><?php echo $jenis_kelamin ? $jenis_kelamin : '-' ?></span></a>
+                    <a href=""><i class="fa fa-address-card rounded-sm bg-blue-dark color-white"></i><span><?php echo $no_ktp ? $no_ktp : '<span class="text-secondary">Belum ada</span>' ?></span></a>
+                    <a href=""><i class="fa fa-envelope rounded-sm bg-blue-dark color-white"></i><span><?php echo $email ? $email : '<span class="text-secondary">Belum ada</span>' ?></span></a>
+                    <a href=""><i class="fa fa-cake-candles font-14 rounded-sm bg-blue-dark color-white"></i><span><?php echo $tempat_lahir ? $tempat_lahir . ', ' : '' ?><?php echo $tanggal_lahir ? $this->date->convert("j F Y", $tanggal_lahir) : '<span class="text-secondary">Belum ada</span>' ?></span></a>
+                    <a href=""><i class="fa fa-mobile font-14 rounded-sm bg-blue-dark color-white"></i><span><?php echo $no_wa ? $no_wa : '<span class="text-secondary">Belum ada</span>' ?></span></a>
+                    <a href=""><i class="fa fa-person font-14 rounded-sm bg-blue-dark color-white"></i><span>
+                        <?php if ($jenis_kelamin != null) { ?>
+                            <?php if ($jenis_kelamin == 'L') { ?>
+                                Laki-laki
+                            <?php } else { ?>
+                                Perempuan
+                            <?php } ?>
+                        <?php } else { ?>
+                            <span class="text-secondary">Belum ada</span>
+                        <?php } ?>
+                    </span></a>
                 </div>
             </div>
         </div>
@@ -80,6 +91,7 @@
 
             <?php $this->load->view('jamaah/include/footer'); ?>
             <?php $this->load->view('jamaah/include/alert'); ?>
+            <?php $this->load->view('jamaah/include/toast'); ?>
         </div>
         <!-- Page content ends here-->
 

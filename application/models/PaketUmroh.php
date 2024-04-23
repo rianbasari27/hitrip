@@ -199,6 +199,7 @@ class PaketUmroh extends CI_Model
     public function uploadDokumen($file, $idPaket)
     {
         $paket = $this->getPackage($idPaket);
+        $gallery = $this->getGalleryPackage(null, $idPaket);
         $this->load->library('scan');
         if (isset($file['itinerary'])) {
             $fileins = $file['itinerary'];
@@ -224,17 +225,52 @@ class PaketUmroh extends CI_Model
             if ($paket->banner_image != null) {
                 unlink(SITE_ROOT . $paket->banner_image);
             }
+        } elseif (isset($file['gallery_image'])) {
+            $fileins = $file['gallery_image'];
+            $jenis = 'gallery_image';
+            if (!empty($gallery->gallery_image)) {
+                unlink(SITE_ROOT . $gallery->gallery_image);
+            }
         } else {
             return false;
         }
-        $hasil = $this->scan->check($fileins, $jenis, $idPaket);
+        // echo '<pre>';
+        // print_r($fileins);
+        // exit();
+        if (is_array($fileins['name'])) {
+            $hasil = [];
+            $insertFile = [];
+            foreach ($fileins['name'] as $key => $files) {
+                $insertFile[$key] = [
+                    'name' => $fileins['name'][$key],
+                    'type' => $fileins['type'][$key],
+                    'tmp_name' => $fileins['tmp_name'][$key],
+                    'error' => $fileins['error'][$key],
+                    'size' => $fileins['size'][$key]
+                ];
+            
+                $result = $this->scan->check($insertFile[$key], $jenis, $idPaket);
+                $hasil[] = $result;
+            }
+        } else {
+            $hasil = $this->scan->check($fileins, $jenis, $idPaket);
+        }
         if ($hasil == false) {
             return false;
         }
         $this->db->where('id_paket', $idPaket);
-        $update = $this->db->update('paket_umroh', array(
-            $jenis => $hasil
-        ));
+        if (isset($file['gallery_image'])) {
+            foreach ($hasil as $h) {
+                $update = $this->db->insert('gallery', array(
+                    'id_paket' => $idPaket,
+                    $jenis => $h
+                ));
+            }
+        } else {
+            $update = $this->db->update('paket_umroh', array(
+                $jenis => $hasil
+            ));
+        }
 
         if ($update == false) {
             $this->alert->set('danger', 'File Gagal diupload');
@@ -462,6 +498,20 @@ class PaketUmroh extends CI_Model
             $data = $data[0];
         }
         return $data;
+    }
+
+    public function getGalleryPackage($id = null, $id_paket = null) {
+        if (empty($id) && empty($id_paket)) {
+            return false;
+        }
+        if ($id != null) {
+            $this->db->where('id', $id);
+        }
+        if ($id_paket != null) {
+            $this->db->where('id_paket', $id_paket);
+        }
+        $result = $this->db->get('gallery')->result();
+        return $result;
     }
 
     public function addHotel($data)

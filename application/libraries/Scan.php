@@ -126,6 +126,10 @@ class Scan
                 $targetDir = "/uploads/banner_image/";
                 $target_file = $targetDir . 'paket_' . time() . '_';
                 break;
+            case 'gallery_image':
+                $targetDir = "/uploads/gallery_image/";
+                $target_file = $targetDir . 'paket_' . time() . '_';
+                break;
             case 'foto_hotel':
                 $targetDir = "/uploads/hotel_image/";
                 $target_file = $targetDir . 'hotel_' . time() . '_';
