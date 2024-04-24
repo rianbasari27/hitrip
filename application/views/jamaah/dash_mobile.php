@@ -133,9 +133,7 @@
                                 <a href="#" class="card card-style my-3" aria-label="<?php echo $pkt->nama_paket ?>" data-filter-item data-filter-name="<?php echo strtolower($pkt->nama_paket . ' ' . $pkt->area_trip) ?>">
                                     <div class="d-flex content">
                                         <div class="align-self-center">
-                                            <!-- <img src="<?php //echo $pkt->banner_image != null ? base_url() . $pkt->banner_image : base_url() . 'asset/appkit/images/default-banner-image.jpg' ?>" alt=""
-                                                class="rounded-s me-3" width="80"> -->
-                                            <img src="<?php echo base_url() . $pkt->banner_image ?>" alt=""
+                                            <img src="<?php echo base_url() . ($pkt->banner_image != null ? $pkt->banner_image : 'asset/appkit/images/default-banner-image.jpg') ?>" alt=""
                                                 class="rounded-s me-3" width="80">
                                         </div>
                                         <div class="align-self-center">
@@ -244,7 +242,7 @@
                         <?php foreach ($paket_terbaru as $p) { ?>
                             <div class="splide__slide">
                                 <a href="<?php echo base_url() . 'jamaah/detail_paket?id=' . $p->id_paket ?>" class="card m-2 mb-1 card-style">
-                                    <img src="<?php echo $p->banner_image != null ? base_url() . $p->banner_image : base_url() . 'asset/appkit/images/default-banner-image.jpg' ?>" class="img-fluid"
+                                    <img src="<?php echo base_url() . ($p->banner_image != null ? $p->banner_image : 'asset/appkit/images/default-banner-image.jpg') ?>" class="img-fluid"
                                         alt="">
                                     <div class="p-2 bg-theme rounded-sm">
                                         <div class="mb-n1">

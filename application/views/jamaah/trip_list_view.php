@@ -43,7 +43,7 @@
                                     <a href="#" class="card card-style my-3" aria-label="<?php echo $pkt->nama_paket ?>" data-filter-item data-filter-name="<?php echo strtolower($pkt->nama_paket . ' ' . $pkt->area_trip) ?>">
                                         <div class="d-flex content">
                                             <div class="align-self-center">
-                                                <img src="<?php echo $pkt->banner_image != null ? base_url() . $pkt->banner_image : base_url() . 'asset/appkit/images/default-banner-image.jpg' ?>" alt=""
+                                                <img src="<?php echo base_url() . ($pkt->banner_image != null ? $pkt->banner_image : 'asset/appkit/images/default-banner-image.jpg') ?>" alt=""
                                                     class="rounded-s me-3" width="80">
                                             </div>
                                             <div class="align-self-center">
