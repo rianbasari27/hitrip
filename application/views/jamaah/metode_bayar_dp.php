@@ -44,13 +44,13 @@
                             <h5 class="col-6 text-start font-14 opacity-60 font-500">Paket</h5>
                             <h5 class="col-6 text-end font-14 font-700"><?php echo $currentPaket->nama_paket . ', ' . $currentPaket->area_trip ?></h5>
                             <h5 class="col-6 text-start font-14 opacity-60 font-500">Tanggal</h5>
-                            <h5 class="col-6 text-end font-14 font-700"><?php echo $this->date->convert("j F Y", $tgl_regist); ?></h5>
+                            <h5 class="col-6 text-end font-14 font-700"><?php echo $this->date->convert_date_indo($tgl_regist); ?></h5>
                             <h5 class="col-6 text-start font-14 opacity-60 font-500">Waktu</h5>
                             <h5 class="col-6 text-end font-14 font-700"><?php echo date('H:i', strtotime($tgl_regist)); ?> WIB</h5>
                             <h5 class="col-6 text-start font-14 opacity-60 font-500">Jumlah</h5>
                             <h5 class="col-6 text-end font-14 font-700"><?php echo count($dataMember); ?> Orang</h5>
                             <h5 class="col-6 text-start font-14 opacity-60 font-500">Keberangkatan</h5>
-                            <h5 class="col-6 text-end font-14 font-700"><?php echo $this->date->convert("j F Y", $currentPaket->tanggal_berangkat); ?></h5>
+                            <h5 class="col-6 text-end font-14 font-700"><?php echo $this->date->convert_date_indo($currentPaket->tanggal_berangkat); ?></h5>
                         </div>
                         
                         <div class="divider my-3"></div>
