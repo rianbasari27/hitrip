@@ -40,7 +40,7 @@
                     <?php foreach ($paket as $p) { ?>
                     <a href="<?php echo base_url() . 'jamaah/detail_paket?id=' . $p->id_paket ?>" class="col-6 p-0 mb-2">
                         <div class="card m-2 mb-1 card-style">
-                            <img src="<?php echo base_url() . $p->banner_image ?>" class="img-fluid">
+                            <img src="<?php echo base_url() . $p->banner_image != null ? $p->banner_image : 'asset/appkit/images/default_banner_image.jpg' ?>" class="img-fluid">
                             <div class="p-2 bg-theme rounded-sm">
                                 <div class="mb-n1">
                                     <?php for ($i = 1; $i <= $p->star; $i++) { ?>
