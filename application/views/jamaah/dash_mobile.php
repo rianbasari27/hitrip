@@ -330,40 +330,48 @@
                 </div>
             </div>
 
+            <?php if (!empty($paket_terbaru)) { ?>
             <div class="splide double-slider visible-slider slider-no-arrows slider-no-dots ps-2" id="double-slider-1">
                 <div class="splide__track">
                     <div class="splide__list">
                         <?php foreach ($paket_terbaru as $p) { ?>
-                        <div class="splide__slide">
-                            <a href="<?php echo base_url() . 'jamaah/detail_paket?id=' . $p->id_paket ?>" class="card m-2 mb-1 card-style">
-                                <img src="<?php echo base_url() . $p->banner_image ?>" class="img-fluid"
-                                    alt="">
-                                <div class="p-2 bg-theme rounded-sm">
-                                    <div class="mb-n1">
-                                        <?php for ($i = 1; $i <= $p->star; $i++) { ?>
-                                            <i class="fa-solid fa-star color-yellow-dark"></i>
-                                        <?php } ?>
-                                        <?php for ($i = 1; $i <= (5 - $p->star); $i++) { ?>
-                                            <i class="fa-solid fa-star color-gray-dark"></i>
+                            <div class="splide__slide">
+                                <a href="<?php echo base_url() . 'jamaah/detail_paket?id=' . $p->id_paket ?>" class="card m-2 mb-1 card-style">
+                                    <img src="<?php echo base_url() . $p->banner_image ?>" class="img-fluid"
+                                        alt="">
+                                    <div class="p-2 bg-theme rounded-sm">
+                                        <div class="mb-n1">
+                                            <?php for ($i = 1; $i <= $p->star; $i++) { ?>
+                                                <i class="fa-solid fa-star color-yellow-dark"></i>
+                                            <?php } ?>
+                                            <?php for ($i = 1; $i <= (5 - $p->star); $i++) { ?>
+                                                <i class="fa-solid fa-star color-gray-dark"></i>
+                                            <?php } ?>
+                                        </div>
+                                        <h4 class="font-17 pt-1 line-height-s pb-0 mb-n1"><?php echo $p->nama_paket ?></h4>
+                                        <!-- <span class="font-10 mb-0">7 Nights - All Inclusive</span> -->
+                                        <?php if ($p->default_diskon != 0) { ?>
+                                            <del style="text-decoration:line-through; color: grey;">
+                                                <span class="d-block mt-1"><?php echo $p->hargaPretty ?></span>
+                                            </del>
+                                            <h6 class="font-14 color-highlight"><?php echo $p->hargaPrettyDiskon ?></h6>
+                                        <?php } else { ?>
+                                            <h6 class="font-14 color-highlight mt-2"><?php echo $p->hargaPretty ?></h6>
                                         <?php } ?>
                                     </div>
-                                    <h4 class="font-17 pt-1 line-height-s pb-0 mb-n1"><?php echo $p->nama_paket ?></h4>
-                                    <!-- <span class="font-10 mb-0">7 Nights - All Inclusive</span> -->
-                                    <?php if ($p->default_diskon != 0) { ?>
-                                        <del style="text-decoration:line-through; color: grey;">
-                                            <span class="d-block mt-1"><?php echo $p->hargaPretty ?></span>
-                                        </del>
-                                        <h6 class="font-14 color-highlight"><?php echo $p->hargaPrettyDiskon ?></h6>
-                                    <?php } else { ?>
-                                        <h6 class="font-14 color-highlight mt-2"><?php echo $p->hargaPretty ?></h6>
-                                    <?php } ?>
-                                </div>
-                            </a>
-                        </div>
+                                </a>
+                            </div>
                         <?php } ?>
                     </div>
                 </div>
             </div>
+            <?php } else { ?>
+                <div class="card card-style">
+                    <div class="content text-center">
+                        <h5 class="font-14">Paket belum tersedia.</h5>
+                    </div>
+                </div>
+            <?php } ?>
 
             <div class="content mb-n1">
                 <div class="d-flex">

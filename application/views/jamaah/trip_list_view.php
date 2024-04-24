@@ -35,6 +35,7 @@
                     <input type="text" id="search" class="border-0" placeholder="Find your dream trips" data-search>
                 </div>
 
+                <?php if (!empty($paket)) { ?>
                 <div class="row mb-0 mx-0">
                     <?php foreach ($paket as $p) { ?>
                     <a href="<?php echo base_url() . 'jamaah/detail_paket?id=' . $p->id_paket ?>" class="col-6 p-0 mb-2">
@@ -64,6 +65,13 @@
                     </a>
                     <?php } ?>
                 </div>
+                <?php } else { ?>
+                    <div class="card card-style">
+                        <div class="content text-center">
+                            <h5 class="font-14">Paket belum tersedia.</h5>
+                        </div>
+                    </div>
+                <?php } ?>
             </div>
 
 
