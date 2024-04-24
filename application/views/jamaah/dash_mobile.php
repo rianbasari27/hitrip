@@ -128,126 +128,31 @@
                 </div>
                 <div class="search-results disabled-search-list">
                     <div>
-                        <a href="#" aria-label="Dubai" data-filter-item data-filter-name="dubai uae arab">
-                            <div class="d-flex mt-4">
-                                <div class="align-self-center">
-                                    <img src="<?php echo base_url() ?>asset/images/city/dubai-720x720.jpg" alt=""
-                                        class="rounded-s me-3" width="80">
-                                </div>
-                                <div class="align-self-center">
-                                    <h2 class="font-18 font-700 mb-1 line-height-s mt-1">Dubai</h2>
-                                    <del style="text-decoration:line-through" class="mb-0 color-theme">
-                                        <span class="d-block color-theme">Rp 9,299,000</span>
-                                    </del>
-                                    <h6 class="color-highlight mt-n1">Rp 8,299,000</h6>
-                                </div>
-                                <div class="ms-auto ps-3 align-self-center text-center">
-                                    <span
-                                        class="btn btn-xs gradient-blue text-uppercase font-600 rounded-s border-0">Book
-                                        Now</span>
-                                </div>
-                            </div>
-                        </a>
-                        <a href="#" aria-label="Bali" data-filter-item data-filter-name="bali indonesia">
-                            <div class="d-flex mt-4">
-                                <div class="align-self-center">
-                                    <img src="<?php echo base_url() ?>asset/images/city/bali-720x720.jpg" alt=""
-                                        class="rounded-s me-3" width="80">
-                                </div>
-                                <div class="align-self-center">
-                                    <h2 class="font-18 font-700 mb-1 line-height-s mt-1">Bali</h2>
-                                    <del style="text-decoration:line-through" class="mb-0 color-theme">
-                                        <span class="d-block color-theme">Rp 5,999,000</span>
-                                    </del>
-                                    <h6 class="color-highlight mt-n1">Rp 4,299,000</h6>
-                                </div>
-                                <div class="ms-auto ps-3 align-self-center text-center">
-                                    <span
-                                        class="btn btn-xs gradient-blue text-uppercase font-600 rounded-s border-0">Book
-                                        Now</span>
-                                </div>
-                            </div>
-                        </a>
-                        <a href="#" aria-label="Tokyo" data-filter-item data-filter-name="tokyo jepang">
-                            <div class="d-flex mt-4">
-                                <div class="align-self-center">
-                                    <img src="<?php echo base_url() ?>asset/images/city/tokyo-720x720.jpg" alt=""
-                                        class="rounded-s me-3" width="80">
-                                </div>
-                                <div class="align-self-center">
-                                    <h2 class="font-18 font-700 mb-1 line-height-s mt-1">Tokyo</h2>
-                                    <del style="text-decoration:line-through" class="mb-0 color-theme">
-                                        <span class="d-block color-theme">Rp 7,599,000</span>
-                                    </del>
-                                    <h6 class="color-highlight mt-n1">Rp 6,999,000</h6>
-                                </div>
-                                <div class="ms-auto ps-3 align-self-center text-center">
-                                    <span
-                                        class="btn btn-xs gradient-blue text-uppercase font-600 rounded-s border-0">Book
-                                        Now</span>
-                                </div>
-                            </div>
-                        </a>
-                        <a href="#" aria-label="Seoul" data-filter-item data-filter-name="seoul korea selatan">
-                            <div class="d-flex mt-4">
-                                <div class="align-self-center">
-                                    <img src="<?php echo base_url() ?>asset/images/city/seoul-720x720.jpg" alt=""
-                                        class="rounded-s me-3" width="80">
-                                </div>
-                                <div class="align-self-center">
-                                    <h2 class="font-18 font-700 mb-1 line-height-s mt-1">Seoul</h2>
-                                    <del style="text-decoration:line-through" class="mb-0 color-theme">
-                                        <span class="d-block color-theme">Rp 7,999,000</span>
-                                    </del>
-                                    <h6 class="color-highlight mt-n1">Rp 6,999,000</h6>
-                                </div>
-                                <div class="ms-auto ps-3 align-self-center text-center">
-                                    <span
-                                        class="btn btn-xs gradient-blue text-uppercase font-600 rounded-s border-0">Book
-                                        Now</span>
-                                </div>
-                            </div>
-                        </a>
-                        <a href="#" aria-label="Istanbul" data-filter-item data-filter-name="istanbul turki turkey">
-                            <div class="d-flex mt-4">
-                                <div class="align-self-center">
-                                    <img src="<?php echo base_url() ?>asset/images/city/istanbul-720x720.jpg" alt=""
-                                        class="rounded-s me-3" width="80">
-                                </div>
-                                <div class="align-self-center">
-                                    <h2 class="font-18 font-700 mb-1 line-height-s mt-1">Istanbul</h2>
-                                    <del style="text-decoration:line-through" class="mb-0 color-theme">
-                                        <span class="d-block color-theme">Rp 7,499,000</span>
-                                    </del>
-                                    <h6 class="color-highlight mt-n1">Rp 6,499,000</h6>
-                                </div>
-                                <div class="ms-auto ps-3 align-self-center text-center">
-                                    <span
-                                        class="btn btn-xs gradient-blue text-uppercase font-600 rounded-s border-0">Book
-                                        Now</span>
-                                </div>
-                            </div>
-                        </a>
-                        <a href="#" aria-label="London" data-filter-item data-filter-name="london inggris england">
-                            <div class="d-flex mt-4">
-                                <div class="align-self-center">
-                                    <img src="<?php echo base_url() ?>asset/images/city/london-720x720.jpg" alt=""
-                                        class="rounded-s me-3" width="80">
-                                </div>
-                                <div class="align-self-center">
-                                    <h2 class="font-18 font-700 mb-1 line-height-s mt-1">London</h2>
-                                    <del style="text-decoration:line-through" class="mb-0 color-theme">
-                                        <span class="d-block color-theme">Rp 7,499,000</span>
-                                    </del>
-                                    <h6 class="color-highlight mt-n1">Rp 6,499,000</h6>
-                                </div>
-                                <div class="ms-auto ps-3 align-self-center text-center">
-                                    <span
-                                        class="btn btn-xs gradient-blue text-uppercase font-600 rounded-s border-0">Book
-                                        Now</span>
-                                </div>
-                            </div>
-                        </a>
+                        <?php if ($paket != null) { ?>
+                            <?php foreach ($paket as $pkt) { ?>
+                                <a href="#" class="card card-style my-3" aria-label="<?php echo $pkt->nama_paket ?>" data-filter-item data-filter-name="<?php echo strtolower($pkt->nama_paket . ' ' . $pkt->area_trip) ?>">
+                                    <div class="d-flex content">
+                                        <div class="align-self-center">
+                                            <img src="<?php echo $pkt->banner_image != null ? base_url() . $pkt->banner_image : base_url() . 'asset/appkit/images/default-banner-image.jpg' ?>" alt=""
+                                                class="rounded-s me-3" width="80">
+                                        </div>
+                                        <div class="align-self-center">
+                                            <h2 class="font-18 font-700 mb-1 line-height-s mt-1"><?php echo $pkt->nama_paket ?></h2>
+                                            <?php if ($pkt->default_diskon != 0) { ?>
+                                                <del style="text-decoration:line-through; color: grey;">
+                                                    <span class="d-block mt-1"><?php echo $pkt->hargaPretty ?></span>
+                                                </del>
+                                                <h6 class="font-14 color-highlight"><?php echo $pkt->hargaPrettyDiskon ?></h6>
+                                            <?php } else { ?>
+                                                <h6 class="font-14 color-highlight mt-2"><?php echo $pkt->hargaPretty ?></h6>
+                                            <?php } ?>
+                                        </div>
+                                        <div class="ms-auto ps-3 align-self-center text-center">
+                                        </div>
+                                    </div>
+                                </a>
+                            <?php } ?>
+                        <?php } ?>
 
                     </div>
                 </div>
@@ -337,7 +242,7 @@
                         <?php foreach ($paket_terbaru as $p) { ?>
                             <div class="splide__slide">
                                 <a href="<?php echo base_url() . 'jamaah/detail_paket?id=' . $p->id_paket ?>" class="card m-2 mb-1 card-style">
-                                    <img src="<?php echo base_url() . ($p->banner_image != null) ? $p->banner_image : 'asset/appkit/images/default-banner-image.jpg' ?>" class="img-fluid"
+                                    <img src="<?php echo $p->banner_image != null ? base_url() . $p->banner_image : base_url() . 'asset/appkit/images/default-banner-image.jpg' ?>" class="img-fluid"
                                         alt="">
                                     <div class="p-2 bg-theme rounded-sm">
                                         <div class="mb-n1">
@@ -426,7 +331,7 @@
                 </div>
             </div>
 
-            <div class="content mb-n1">
+            <!-- <div class="content mb-n1">
                 <div class="d-flex">
                     <div class="align-self-center">
                         <h1 class="mb-0 font-16">Kunjungi lagi</h1>
@@ -435,9 +340,9 @@
                         <a href="#" aria-label="Click for See All Products" class="float-end font-12 font-400">Lihat semua</a>
                     </div>
                 </div>
-            </div>
+            </div> -->
 
-            <div class="splide double-slider visible-slider slider-no-arrows slider-no-dots ps-2" id="double-slider-3">
+            <!-- <div class="splide double-slider visible-slider slider-no-arrows slider-no-dots ps-2" id="double-slider-3">
                 <div class="splide__track">
                     <div class="splide__list">
                         <div class="splide__slide">
@@ -492,7 +397,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
 
             <div class="floating-button gradient-highlight">
                 <a href="https://wa.me/628881224549?text=Halo,%20Hi-Trip!" target="_blank">
