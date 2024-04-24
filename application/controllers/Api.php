@@ -35,6 +35,41 @@ class Api extends CI_Controller
         $this->load->view('api/display_paket',$data);
     }
 
+// Fungsi untuk mencari tempat berdasarkan kata kunci dan lokasi
+    function test_fitur() {
+        // Contoh penggunaan fungsi
+        $userKeyword = 'hotel'; // Kata kunci pencarian yang dimasukkan oleh pengguna
+        $userLatitude = 51.5074; // Lintang pengguna
+        $userLongitude = 0.1278; // Bujur pengguna
+        // Ganti dengan kunci API Google Places Anda
+        $apiKey = 'AIzaSyBvD72R4yUqCwFzhNwHNNW1YWEQCHXCebI';
+
+        // Lokasi pusat (lintang dan bujur)
+        $location = $userLatitude . ',' . $userLongitude;
+
+        // Jarak maksimum untuk pencarian (misalnya, 5 km)
+        $radius = 5000; // dalam meter
+
+        // URL untuk mengirim permintaan ke Google Places API
+        $url = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=' . $location . '&radius=' . $radius . '&keyword=' . urlencode($userKeyword) . '&key=' . $apiKey;
+
+        // Kirim permintaan ke API
+        $response = file_get_contents($url);
+
+        // Ubah respon JSON menjadi array PHP
+        $data = json_decode($response, true);
+        echo '<pre>';
+        print_r($data);
+        exit();
+        // Proses data yang diterima
+        if ($data['status'] == 'OK') {
+            return $data['results']; // Kembalikan hasil pencarian
+        } else {
+            return array(); // Jika terjadi kesalahan, kembalikan array kosong
+        }
+    }
+
+
     public function fetch_tabel(){
         $this->load->model('paketUmroh');
         $this->load->model('api_cleaner');
