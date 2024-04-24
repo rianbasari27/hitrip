@@ -114,9 +114,9 @@
 
 
                     <!-- <p class="color-highlight font-600 mb-n1">Terpercaya, Terbukti, Recommended</p> -->
-                    <div class="d-flex mb-3">
+                    <div class="d-flex mb-5">
                         <div>
-                            <div class="mb-n1">
+                            <div class="mb-2">
                                 <?php for ($i = 1; $i <= $star; $i++) { ?>
                                     <i class="fa-solid fa-star color-yellow-dark"></i>
                                 <?php } ?>
@@ -125,10 +125,10 @@
                                 <?php } ?>
                             </div>
                                 
-                            <h1 class="mb-n2"><?php echo $nama_paket; ?></h1>
+                            <h1 class="mb-n1"><?php echo $nama_paket; ?></h1>
                             <p class="color-highlight font-500"><i class="fa-solid fa-location-dot me-1"></i><?php echo $nama_paket . ', ' . $area_trip ?></p>
                         </div>
-                        <div class="ms-auto my-auto">
+                        <div class="ms-auto mt-auto">
                             <!-- <div> -->
                             <?php if ($default_diskon != 0) { ?>
                                 <del style="text-decoration:line-through; color: grey;">
@@ -143,6 +143,19 @@
                                 data-menu="<?php echo isset($_SESSION['id_user']) ? '' : 'menu-option-2' ?>"
                                 class="btn ms-auto mx-3 gradient-highlight btn-s rounded-sm shadow-xl text-uppercase font-800">Daftar</a> -->
                         </div>
+                    </div>
+
+                    <div class="row">
+                        <?php if ($gallery != null) { ?>
+                            <?php foreach ($gallery as $g) { ?>
+                                <div class="col-4 mb-3">
+                                    <a href="<?php echo base_url() . $g->gallery_image ?>" title="Preview <?php echo $nama_paket ?>" class="default-link" data-gallery="gallery-1">
+                                        <img src="<?php echo base_url() . $g->gallery_image ?>" class="img-fluid shadow-xl rounded-sm">
+                                    </a>
+                                    <!-- <img src="<?php echo base_url() . $g->gallery_image ?>" class="img-fluid rounded shadow"> -->
+                                </div>
+                            <?php } ?>
+                        <?php } ?>
                     </div>
 
                     <?php if ($detail_promo != null) { ?>

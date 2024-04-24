@@ -31,56 +31,41 @@
         </div>
         <div class="card card-style mb-2">
             <div class="content">
-                <div class="d-flex">
-                    <div>
-                        <img src="<?php echo base_url() ?>asset/images/city/dubai-720x720.jpg" class="rounded-sm" width="150">
-                    </div>
-                    <div class="w-100 ms-3 pt-1">
-                        <div class="mb-0">
-                            <i class="fa-solid fa-star color-yellow-dark"></i>
-                            <i class="fa-solid fa-star color-yellow-dark"></i>
-                            <i class="fa-solid fa-star color-yellow-dark"></i>
-                            <i class="fa-solid fa-star color-yellow-dark"></i>
-                            <i class="fa-solid fa-star color-yellow-dark"></i>
-                        </div>
-                        <h3>Dubai</h3>
-						<p class="mb-0 font-11 mb-2 mt-n1 line-height-s">7 Nights - All inclusive</p>
-                        <del style="text-decoration:line-through">
-                            <span class="d-block mt-n1">Rp 9,299,000</span>
-                        </del>
-                        <h5 class="color-highlight">Rp 8,299,000</h5>
-                    </div>
-                    <div class="align-self-center me-n2">
-                        <a data-menu="menu-cart" href="#"><i class="fa icon-30 text-end fa-info-circle font-18 color-blue-dark opacity-20"></i></a>
-                        <a data-menu="menu-cart" href="#"><i class="fa icon-30 text-end fa-times-circle mt-2 font-18 color-red-dark opacity-20"></i></a>
-                    </div>
-                </div>
+                <?php if ($member != null) { ?>
+                    <?php foreach ($member as $m) { ?>
+                        <a href="<?php echo base_url() . ($m->lunas == 0 ? 'jamaah/daftar/dp_notice' : 'jamaah/order/paket_aktif') ?>" class="d-flex">
+                            <div>
+                                <img src="<?php echo base_url() . $m->paket_info->banner_image ?>" class="rounded-sm" width="130">
+                            </div>
+                            <div class="w-100 ms-3 pt-1">
+                                <div class="mb-0">
+                                    <?php for ($i = 1; $i <= $m->paket_info->star; $i++) { ?>
+                                        <i class="fa-solid fa-star color-yellow-dark"></i>
+                                    <?php } ?>
+                                    <?php for ($i = 1; $i <= (5 - $m->paket_info->star); $i++) { ?>
+                                        <i class="fa-solid fa-star color-gray-dark"></i>
+                                    <?php } ?>
+                                </div>
+                                <h3><?php echo $m->paket_info->nama_paket ?></h3>
+                                <?php if ($m->paket_info->default_diskon != 0) { ?>
+                                    <del style="text-decoration:line-through; color: grey;">
+                                        <span class="d-block mt-1"><?php echo $m->paket_info->hargaPretty ?></span>
+                                    </del>
+                                    <h6 class="color-highlight"><?php echo $m->paket_info->hargaPrettyDiskon ?></h6>
+                                <?php } else { ?>
+                                    <h6 class="color-highlight mt-2"><?php echo $m->paket_info->hargaPretty ?></h6>
+                                <?php } ?>
+                                <p class="<?php echo $m->lunas == 0 ? 'color-red-dark' : 'color-green-dark' ?> font-11"><?php echo $m->lunas == 0 ? '<i class="fa-regular fa-clock me-1"></i>Menunggu pembayaran' : '<i class="fa-regular fa-circle-check me-1"></i>Active' ?></p>
+                            </div>
+                        </a>
+                    <?php } ?>
+                <?php } ?>
             </div>
         </div>
-
-        <div class="card card-style mt-3">
-            <div class="content mb-2 mt-3">
-                <div class="d-flex">
-                    <div class="pe-4 w-60">
-                        <p class="font-600 color-highlight mb-0 font-13">Your Total</p>
-                        <h1>Rp 8,299,000</h1>
-                    </div>
-                    <!-- <div class="w-100 pt-1">
-                        <h6 class="font-14 font-700">Shipping<span class="float-end color-green-dark">+$50</span></h6>
-                        <div class="divider mb-2 mt-1"></div>
-                        <h6 class="font-14 font-700">Taxes<span class="float-end color-red-dark">+$0.15</span></h6>
-                    </div> -->
-                </div>
-            </div>
-        </div>
-
-        <a href="#" class="close-menu btn btn-margins btn-full gradient-blue font-13 btn-l font-600 mt-3 rounded-sm">Proceed to Checkout</a>
-
-
-
 
             <?php $this->load->view('jamaah/include/footer'); ?>
             <?php $this->load->view('jamaah/include/alert'); ?>
+            <?php $this->load->view('jamaah/include/toast'); ?>
         </div>
         <!-- Page content ends here-->
 

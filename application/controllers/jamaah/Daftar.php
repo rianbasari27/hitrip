@@ -289,13 +289,16 @@ class Daftar extends CI_Controller
     public function dp_notice()
     {
         $this->load->model('tarif');
-        $tarif = $this->tarif->getRiwayatBayar($_SESSION['id_member']);
         $this->load->model('registrasi');
-        $member = $this->registrasi->getMember($_SESSION['id_member']);
+        $member = $this->registrasi->getMember(null, $_SESSION['id_user']);
+        // echo '<pre>';
+        // print_r($member);
+        // exit();
+        $tarif = $this->tarif->getRiwayatBayar($member[0]->id_member);
         // $statusLengkap = true;
         //jika sudah bayar redirect ke home
         if ($tarif['totalBayar'] > 0) {
-            redirect(base_url() . 'jamaah/home_user');
+            redirect(base_url() . 'jamaah/home');
         }
         $this->load->model('paketUmroh');
         $paket = $this->paketUmroh->getPackage($member[0]->id_paket, false);

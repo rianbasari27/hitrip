@@ -21,6 +21,26 @@ class Order extends CI_Controller
         if (!$this->customer->isSplashSeen()) {
             redirect(base_url() . "jamaah/splash");
         }
-        $this->load->view('jamaah/order_view');
+        $this->load->model('paketUmroh');
+        $this->load->model('registrasi');
+        $user = $this->registrasi->getUser($_SESSION['id_user']);
+        $this->load->view('jamaah/order_view', $user);
+    }
+
+    public function paket_aktif() {
+        $this->load->model('paketUmroh');
+        $this->load->model('registrasi');
+        $member = $this->registrasi->getMember(null, $_SESSION['id_user']);
+        $member = $member[0];
+        if ($member == null) {
+            $this->alert->toastAlert('red', 'Anda tidak terdaftar');
+            redirect(base_url() . 'jamaah/home');
+        }
+        if ($member->lunas == 0) {
+            $this->alert->toastAlert('red', 'Anda belum melakukan pembayaran');
+            redirect(base_url() . 'jamaah/order');
+        }
+        $paket = $this->paketUmroh->getPackage($member->id_paket);
+        $this->load->view('jamaah/paket_aktif_view', $paket);
     }
 }

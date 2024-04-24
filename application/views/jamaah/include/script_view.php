@@ -33,5 +33,10 @@
 <script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.print.min.js"></script> -->
 <!-- <script src="<?php echo base_url(); ?>asset/myjs/swup.js"></script> -->
 <!-- <script src="<?php echo base_url(); ?>asset/myjs/combobox.js"></script> -->
+<script>
+    var toastID = document.getElementById('toast-2');
+        toastID = new bootstrap.Toast(toastID);
+        toastID.show();
+</script>
 
 <?php //$this->load->view('/firebase_script'); ?>

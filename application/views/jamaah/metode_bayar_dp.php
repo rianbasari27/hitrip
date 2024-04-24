@@ -33,7 +33,7 @@
             <div class="content mt-0">
 
                 <div class="mt-1">
-                    <p class="color-highlight font-600 mb-n1">Berhasil Terdaftar</p>
+                    <p class="color-highlight font-600 mb-n1">Anda Telah Terdaftar</p>
                     <h1>Pembayaran</h1>
                 </div>
 
