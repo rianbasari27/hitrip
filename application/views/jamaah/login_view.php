@@ -61,7 +61,7 @@
                 <div class="card-center">
 
                     <div class="text-center">
-                        <p class="font-600 color-highlight mb-1 font-16">Let's Get Started</p>
+                        <p class="font-600 color-highlight mb-1 font-16">Ayo mulai!</p>
                         <h1 class="font-40 color-white">Sign In</h1>
                     </div>
 
@@ -70,11 +70,11 @@
 
                             <div class="input-style input-transparent no-borders has-icon validate-field mb-4">
                                 <i class="fa fa-user"></i>
-                                <input type="name" name="username" class="form-control validate-name" id="form1a"
+                                <input type="name" name="username" class="form-control validate-number" id="form1a"
                                     placeholder="Username">
                                 <label for="form1a" class="color-highlight">Username</label>
-                                <i class="fa fa-times disabled invalid color-red-dark"></i>
-                                <i class="fa fa-check disabled valid color-green-dark"></i>
+                                <!-- <i class="fa fa-times disabled invalid color-red-dark"></i>
+                                <i class="fa fa-check disabled valid color-green-dark"></i> -->
                                 <em>(required)</em>
                             </div>
                             <div class="mt-n3 mb-3"><?php echo form_error('username') ?></div>
@@ -84,8 +84,8 @@
                                 <input type="password" name="password" class="form-control validate-password"
                                     id="form1b" placeholder="Password">
                                 <label for="form1b" class="color-highlight">Password</label>
-                                <i class="fa fa-times disabled invalid color-red-dark"></i>
-                                <i class="fa fa-check disabled valid color-green-dark"></i>
+                                <!-- <i class="fa fa-times disabled invalid color-red-dark"></i>
+                                <i class="fa fa-check disabled valid color-green-dark"></i> -->
                                 <em>(required)</em>
                             </div>
                             <div class="mt-n3 mb-5"><?php echo form_error('password') ?></div>
@@ -97,11 +97,11 @@
                             <div class="row pt-3 mb-3">
                                 <div class="col-6 text-start font-11">
                                     <a class="color-white opacity-50"
-                                        href="<?php echo base_url() . 'jamaah/login/forgot' ;?>">Forgot Password?</a>
+                                        href="<?php echo base_url() . 'jamaah/login/forgot' ;?>">Lupa Password?</a>
                                 </div>
                                 <div class="col-6 text-end font-11">
                                     <a class="color-white opacity-50"
-                                        href="<?php echo base_url() . 'jamaah/login/sign_up' ;?>">Create Account</a>
+                                        href="<?php echo base_url() . 'jamaah/login/sign_up' ;?>">Buat Akun</a>
                                 </div>
                             </div>
                         </div>

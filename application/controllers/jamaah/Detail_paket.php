@@ -26,12 +26,14 @@ class Detail_paket extends CI_Controller
         $this->load->model('paketUmroh');
         $this->load->model('registrasi');
         // check if user already registered
-        $user = $this->registrasi->getUser($_SESSION['id_user']);
-        if ($user->member != null) {
-            $member = $this->registrasi->getMember($user->member[0]->id_member);
-            foreach ($member as $m) {
-                if ($m->id_paket == $_GET['id']) {
-                    redirect(base_url() . 'jamaah/daftar/dp_notice');
+        if (isset($_SESSION['id_user'])) {
+            $user = $this->registrasi->getUser($_SESSION['id_user']);
+            if ($user->member != null) {
+                $member = $this->registrasi->getMember($user->member[0]->id_member);
+                foreach ($member as $m) {
+                    if ($m->id_paket == $_GET['id']) {
+                        redirect(base_url() . 'jamaah/daftar/dp_notice');
+                    }
                 }
             }
         }

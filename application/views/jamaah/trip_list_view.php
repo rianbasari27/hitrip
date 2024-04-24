@@ -30,16 +30,61 @@
                 <h1>Trips</h1>
             </div>
             <div class="content">
-                <div class="search-box search-dark bg-theme rounded-sm mb-3 bottom-0">
-                    <i class="fa fa-search ms-1"></i>
-                    <input type="text" id="search" class="border-0" placeholder="Find your dream trips" data-search>
-                </div>
+                <!-- Search Section -->
+                <div class="mt-0 mb-4">
+                    <div class="search-box search-dark bg-theme rounded-sm bottom-0">
+                        <i class="fa fa-search ms-1"></i>
+                        <input type="text" class="border-0" placeholder="Searching for something? Try 'dubai'" data-search>
+                    </div>
+                    <div class="search-results disabled-search-list">
+                        <div>
+                            <?php if ($paket != null) { ?>
+                                <?php foreach ($paket as $pkt) { ?>
+                                    <a href="#" class="card card-style my-3" aria-label="<?php echo $pkt->nama_paket ?>" data-filter-item data-filter-name="<?php echo strtolower($pkt->nama_paket . ' ' . $pkt->area_trip) ?>">
+                                        <div class="d-flex content">
+                                            <div class="align-self-center">
+                                                <img src="<?php echo base_url() . ($pkt->banner_image != null ? $pkt->banner_image : 'asset/appkit/images/default-banner-image.jpg') ?>" alt=""
+                                                    class="rounded-s me-3" width="80">
+                                            </div>
+                                            <div class="align-self-center">
+                                                <h2 class="font-16 font-700 mb-1 line-height-s mt-1"><?php echo $pkt->nama_paket ?></h2>
+                                                <?php if ($pkt->default_diskon != 0) { ?>
+                                                    <del style="text-decoration:line-through; color: grey;">
+                                                        <span class="d-block mt-1"><?php echo $pkt->hargaPretty ?></span>
+                                                    </del>
+                                                    <h6 class="font-14 color-highlight"><?php echo $pkt->hargaPrettyDiskon ?></h6>
+                                                <?php } else { ?>
+                                                    <h6 class="font-14 color-highlight mt-2"><?php echo $pkt->hargaPretty ?></h6>
+                                                <?php } ?>
+                                            </div>
+                                            <div class="ms-auto ps-3 align-self-center text-center">
+                                            </div>
+                                        </div>
+                                    </a>
+                                <?php } ?>
+                            <?php } ?>
 
+                        </div>
+                    </div>
+                </div>
+                <div class="search-no-results disabled mt-4">
+                    <div class="card card-style">
+                        <div class="content">
+                            <h1>Oops!</h1>
+                            <p>
+                                Paket yang Anda cari tidak ditemukan. Coba untuk menggunakan keyword lain.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            <!-- End Search Section -->
+
+                <?php if (!empty($paket)) { ?>
                 <div class="row mb-0 mx-0">
                     <?php foreach ($paket as $p) { ?>
                     <a href="<?php echo base_url() . 'jamaah/detail_paket?id=' . $p->id_paket ?>" class="col-6 p-0 mb-2">
                         <div class="card m-2 mb-1 card-style">
-                            <img src="<?php echo base_url() . $p->banner_image ?>" class="img-fluid">
+                            <img src="<?php echo $p->banner_image != null ? base_url() . $p->banner_image : base_url() . 'asset/appkit/images/default-banner-image.jpg' ?>" class="img-fluid">
                             <div class="p-2 bg-theme rounded-sm">
                                 <div class="mb-n1">
                                     <?php for ($i = 1; $i <= $p->star; $i++) { ?>
@@ -64,6 +109,13 @@
                     </a>
                     <?php } ?>
                 </div>
+                <?php } else { ?>
+                    <div class="card card-style">
+                        <div class="content text-center">
+                            <h5 class="font-14">Paket belum tersedia.</h5>
+                        </div>
+                    </div>
+                <?php } ?>
             </div>
 
 

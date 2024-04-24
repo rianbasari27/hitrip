@@ -59,7 +59,7 @@
             <div data-card-height="cover-full" class="card mb-0" style="background-image:url(<?php echo base_url() . 'asset/appkit/images/background-3.jpg' ?>)">
                 <div class="card-center">
                     <div class="text-center">
-                        <p class="font-600 color-highlight mb-1 font-16">Let's Get Started</p>
+                        <p class="font-600 color-highlight mb-1 font-16">Buat akun</p>
                         <h1 class="font-40 color-white">Sign Up</h1>
                         <p class="boxed-text-xl color-white opacity-50 pt-3 font-15">
 
@@ -74,8 +74,8 @@
                                 <input type="name" class="form-control validate-text" name="username" id="form1ab"
                                     placeholder="Username" value="<?php echo set_value('username') ?>">
                                 <label for="form1ab" class="color-highlight">Username</label>
-                                <i class="fa fa-times disabled invalid color-red-dark"></i>
-                                <i class="fa fa-check disabled valid color-green-dark"></i>
+                                <!-- <i class="fa fa-times disabled invalid color-red-dark"></i> -->
+                                <!-- <i class="fa fa-check disabled valid color-green-dark"></i> -->
                                 <em>(required)</em>
                             </div>
                             <div class="mt-n2 mb-3"><?php echo form_error('username') ?></div>
@@ -86,8 +86,8 @@
                                     placeholder="Full Name"
                                     value="<?php echo set_value('name') ?>">
                                 <label for="form1ac" class="color-highlight">Full Name</label>
-                                <i class="fa fa-times disabled invalid color-red-dark"></i>
-                                <i class="fa fa-check disabled valid color-green-dark"></i>
+                                <!-- <i class="fa fa-times disabled invalid color-red-dark"></i> -->
+                                <!-- <i class="fa fa-check disabled valid color-green-dark"></i> -->
                                 <em>(required)</em>
                             </div>
                             <div class="mt-n2 mb-3"><?php echo form_error('name') ?></div>
@@ -97,8 +97,8 @@
                                 <input type="email" name="email" class="form-control validate-email" id="form1ad"
                                     placeholder="Email Address">
                                 <label for="form1ad" class="color-highlight">Email Address</label>
-                                <i class="fa fa-times disabled invalid color-red-dark"></i>
-                                <i class="fa fa-check disabled valid color-green-dark"></i>
+                                <!-- <i class="fa fa-times disabled invalid color-red-dark"></i> -->
+                                <!-- <i class="fa fa-check disabled valid color-green-dark"></i> -->
                                 <em>(required)</em>
                             </div>
                             <div class="mt-n2 mb-3"><?php echo form_error('email') ?></div>
@@ -108,8 +108,8 @@
                                 <input type="number" name="no_telp" class="form-control validate-email" id="form1ae"
                                     placeholder="No. Telp">
                                 <label for="form1ae" class="color-highlight">No. Telp</label>
-                                <i class="fa fa-times disabled invalid color-red-dark"></i>
-                                <i class="fa fa-check disabled valid color-green-dark"></i>
+                                <!-- <i class="fa fa-times disabled invalid color-red-dark"></i> -->
+                                <!-- <i class="fa fa-check disabled valid color-green-dark"></i> -->
                                 <em>(required)</em>
                             </div>
                             <div class="mt-n2 mb-3"><?php echo form_error('no_telp') ?></div>
@@ -119,8 +119,8 @@
                                 <input type="password" name="password" class="form-control validate-password"
                                     id="form1af" placeholder="Password">
                                 <label for="form1af" class="color-highlight">Password</label>
-                                <i class="fa fa-times disabled invalid color-red-dark"></i>
-                                <i class="fa fa-check disabled valid color-green-dark"></i>
+                                <!-- <i class="fa fa-times disabled invalid color-red-dark"></i> -->
+                                <!-- <i class="fa fa-check disabled valid color-green-dark"></i> -->
                                 <em>(required)</em>
                             </div>
                             <div class="mt-n2 mb-3"><?php echo form_error('password') ?></div>
@@ -130,8 +130,8 @@
                                 <input type="password" name="confirmPassword" class="form-control validate-password"
                                     id="form1ag" placeholder="Confirm Password">
                                 <label for="form1ag" class="color-highlight">Confirm Password</label>
-                                <i class="fa fa-times disabled invalid color-red-dark"></i>
-                                <i class="fa fa-check disabled valid color-green-dark"></i>
+                                <!-- <i class="fa fa-times disabled invalid color-red-dark"></i> -->
+                                <!-- <i class="fa fa-check disabled valid color-green-dark"></i> -->
                                 <em>(required)</em>
                             </div>
                             <div class="mt-n2 mb-3"><?php echo form_error('confirmPassword') ?></div>
@@ -143,7 +143,7 @@
                             <div class="row pt-3 mb-3">
                                 <div class="col-6 text-start font-11">
                                     <a class="color-white opacity-50"
-                                        href="<?php echo base_url() . 'jamaah/login/forgot' ;?>">Forgot
+                                        href="<?php echo base_url() . 'jamaah/login/forgot' ;?>">Lupa
                                         Password?</a>
                                 </div>
                                 <div class="col-6 text-end font-11">
