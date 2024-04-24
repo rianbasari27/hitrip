@@ -61,8 +61,8 @@ error_log
 #add bt rian
 !/asset/datepicker/*
 /application/controllers/Push_Notification.php
-# /application/views/firebase_script.php
-# /application/controllers/Call_notification.php
-# /application/views/call_notification.php
-# /application/models/Notification.php
+/application/views/firebase_script.php
+/application/controllers/Call_notification.php
+/application/views/call_notification.php
+/application/models/Notification.php
 /asset/easy_datepicker/*
