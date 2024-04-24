@@ -61,7 +61,7 @@
                 <div class="card-center">
 
                     <div class="text-center">
-                        <p class="font-600 color-highlight mb-1 font-16">Let's Get Started</p>
+                        <p class="font-600 color-highlight mb-1 font-16">Ayo mulai!</p>
                         <h1 class="font-40 color-white">Sign In</h1>
                     </div>
 
@@ -97,11 +97,11 @@
                             <div class="row pt-3 mb-3">
                                 <div class="col-6 text-start font-11">
                                     <a class="color-white opacity-50"
-                                        href="<?php echo base_url() . 'jamaah/login/forgot' ;?>">Forgot Password?</a>
+                                        href="<?php echo base_url() . 'jamaah/login/forgot' ;?>">Lupa Password?</a>
                                 </div>
                                 <div class="col-6 text-end font-11">
                                     <a class="color-white opacity-50"
-                                        href="<?php echo base_url() . 'jamaah/login/sign_up' ;?>">Create Account</a>
+                                        href="<?php echo base_url() . 'jamaah/login/sign_up' ;?>">Buat Akun</a>
                                 </div>
                             </div>
                         </div>

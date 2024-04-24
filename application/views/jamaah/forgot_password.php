@@ -68,11 +68,11 @@
             <div data-card-height="cover-full" class="card mb-0 bg-34">
                 <div class="card-center">
                     <div class="text-center">
-                        <p class="font-600 color-highlight mb-1 font-16">Reset Account</p>
-                        <h1 class="font-40 color-white">Forgot</h1>
+                        <p class="font-600 color-highlight mb-1 font-16">Pemulihan Akun</p>
+                        <h1 class="font-36 color-white">Lupa Password</h1>
                         <p class="boxed-text-xl color-white opacity-50 pt-3 font-15">
-                            Enter your email account associated with your account and we'll send you the reset
-                            instructions!
+                            Masukkan akun email Anda yang terdaftar di akun Hi-Trip dan kami akan mengirimkan
+                            instruksi untuk melakukan reset akun.
                         </p>
                     </div>
 
@@ -101,7 +101,7 @@
                                 </div>
                                 <div class="col-6 text-end font-11">
                                     <a class="color-white opacity-50"
-                                        href="<?php echo base_url() . 'jamaah/login/sign_up' ;?>">Create Account</a>
+                                        href="<?php echo base_url() . 'jamaah/login/sign_up' ;?>">Buat Akun</a>
                                 </div>
                             </div>
                         </div>
