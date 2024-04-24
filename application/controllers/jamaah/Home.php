@@ -23,6 +23,11 @@ class Home extends CI_Controller
         }
         $this->load->model('paketUmroh');
         $paket = $this->paketUmroh->getPackage();
+        foreach ($paket as $p) {
+            if ($p->banner_image == null) {
+                $p->banner_image = 'asset/appkit/images/default-banner-image.jpg';
+            }
+        }
         $paket_terbaru = null;
         if ($paket != null) {
             for ($i = 0; $i < 3; $i++) {
