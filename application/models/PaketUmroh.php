@@ -600,6 +600,17 @@ class PaketUmroh extends CI_Model
             $aktif = $data['aktif'];
         }
 
+        if (isset($data['files']['banner_promo'])) {
+            $this->load->library('scan');
+            $hasil = $this->scan->check($data['files']['banner_promo'], 'banner_promo', null);
+            if ($hasil !== false) {
+                $data['banner_promo'] = $hasil;
+            } else {
+                $data['banner_promo'] = null;
+            }
+        }
+        unset($data['files']);
+
         //check detail promo
 
         $tgl_mulai = date("Y-m-d", strtotime($data['tgl_mulai']));
@@ -610,6 +621,8 @@ class PaketUmroh extends CI_Model
             'nama_diskon' => $data['nama_diskon'],
             'nominal' => $data['nominal'],
             'kuota' => $data['kuota'],
+            'banner_promo' => $data['banner_promo'],
+            'deskripsi' => $data['deskripsi'],
             'tgl_mulai' => $tgl_mulai,
             'tgl_berakhir' => $tgl_akhir,
             'aktif' => $aktif
@@ -702,6 +715,7 @@ class PaketUmroh extends CI_Model
             'id_diskon' => $data['id_diskon'],
             'nama_diskon' => $data['nama_diskon'],
             'nominal' => $data['nominal'],
+            'deskripsi' => $data['deskripsi'],
             'tgl_mulai' => $data['tgl_mulai'],
             'tgl_berakhir' => $data['tgl_berakhir'],
             'aktif' => $data['aktif']
@@ -764,5 +778,27 @@ class PaketUmroh extends CI_Model
         }
         return true ;
 
+    }
+
+    public function uploadBannerDiskon($files, $id_diskon) {
+        $diskon = $this->getDiskonEvent($id_diskon);
+        $this->load->library('scan');
+        if ($diskon->banner_promo != null) {
+            unlink(SITE_ROOT . $diskon->banner_promo);
+        }
+        if (isset($files['banner_promo'])) {
+            $this->load->library('scan');
+            $hasil = $this->scan->check($files['banner_promo'], 'banner_promo', null);
+            if ($hasil !== false) {
+                $data['banner_promo'] = $hasil;
+            } else {
+                $data['banner_promo'] = null;
+            }
+        }
+
+        $this->db->where('id_diskon', $id_diskon);
+        $this->db->update('diskon', $data);
+
+        return true;
     }
 }

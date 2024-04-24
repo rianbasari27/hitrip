@@ -44,6 +44,12 @@
                                             </span>
                                             <span class="text">Tambah Promo</span>
                                         </a>
+                                        <form action="<?php echo base_url(); ?>staff/diskon_event/upload" method="post"
+                                            enctype="multipart/form-data" style="display: inline">
+                                            <input type="hidden" name="id_diskon" id="diskonID" value="">
+                                            <input name="banner_promo" onchange='this.form.submit();' id="banner_up"
+                                                type="file" style="display: none;">
+                                        </form>
                                         <table id="dataTable" class="display" style="width:100%">
                                             <thead>
                                                 <tr>
@@ -113,8 +119,9 @@
                     targets: -1,
                     data: null,
                     defaultContent: '<a href="javascript:void(0);" class="btn btn-primary btn-xs rounded-xs edit_btn mt-1">Edit</a> \n\
-                                <a href="javascript:void(0);" class="btn btn-danger btn-xs rounded-xs hapus_btn mt-1">Delete</a> \n\
-                                <a href="javascript:void(0);" class="btn btn-success btn-xs rounded-xs log_btn mt-1">Log</a>'
+                                     <a href="javascript:void(0);" class="btn btn-info btn-xs rounded-xs ganti_btn mt-1">Ganti Banner</a> \n\
+                                     <a href="javascript:void(0);" class="btn btn-danger btn-xs rounded-xs hapus_btn mt-1">Delete</a> \n\
+                                     <a href="javascript:void(0);" class="btn btn-success btn-xs rounded-xs log_btn mt-1">Log</a>'
                 },
                 {
                     targets: [4, 5],
@@ -146,6 +153,12 @@
         $("#dataTable tbody").on("click", ".edit_btn", function() {
             var trid = $(this).closest('tr').attr('id'); // table row ID 
             window.open("<?php echo base_url(); ?>staff/diskon_event/edit?id=" + trid, '_blank');
+        });
+
+        $("#dataTable tbody").on("click", ".ganti_btn", function() {
+            var trid = $(this).closest('tr').attr('id'); // table row ID
+            $('#diskonID').val(trid);
+            $('#banner_up').trigger('click');
         });
 
         $("#dataTable tbody").on("click", ".hapus_btn", function() {

@@ -76,6 +76,24 @@
                                                 <input class="form-control format_harga" type="text" name="kuota">
                                             </div>
                                             <div class="form-group">
+                                                <label class="col-form-label">Upload Gambar Banner</label>
+                                                <div class="input-group mb-3">
+                                                    <div class="custom-file">
+                                                        <input type="file" class="custom-file-input"
+                                                            id="inputGroupFile01"
+                                                            aria-describedby="inputGroupFileAddon01"
+                                                            name="banner_promo">
+                                                        <label class="custom-file-label" for="inputGroupFile01">Choose
+                                                            file</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-form-label">Deskripsi Singkat</label>
+                                                <textarea name="deskripsi" id="" class="form-control" cols="30"
+                                                    rows="5"></textarea>
+                                            </div>
+                                            <div class="form-group">
                                                 <label class="col-form-label">Tanggal Mulai</label>
                                                 <input class="form-control" type="date" name="tgl_mulai">
                                             </div>

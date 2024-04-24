@@ -97,6 +97,11 @@ class Diskon_event extends CI_Controller
         $data['nominal'] = str_replace(",", "", $data['nominal']);
         $data['kuota'] = str_replace(",", "", $data['kuota']);
         //add new Diskon
+
+        if (!empty($_FILES['banner_promo']['name'])) {
+            $data['files']['banner_promo'] = $_FILES['banner_promo'];
+        }
+
         $this->load->model('paketUmroh');
         if (!($id = $this->paketUmroh->addDiskonEvent($data))) {
             redirect(base_url() . 'staff/diskon_event/tambah');
@@ -165,5 +170,18 @@ class Diskon_event extends CI_Controller
         }
         
         redirect(base_url() . 'staff/diskon_event');
+    }
+
+    public function upload()
+    {
+        $this->form_validation->set_rules('id_diskon', 'id_diskon', 'trim|required|integer');
+        if ($this->form_validation->run() == FALSE) {
+            $this->alert->toast('danger', 'Mohon Maaf', 'Anda tidak memiliki akses');
+            redirect($_SERVER['HTTP_REFERER']);
+        }
+        $this->load->model('paketUmroh');
+        $up = $this->paketUmroh->uploadBannerDiskon($_FILES, $_POST['id_diskon']);
+        $this->alert->toast('success', 'Selamat', 'Upload gambar berhasil');
+        redirect($_SERVER['HTTP_REFERER']);
     }
 }

@@ -81,6 +81,11 @@
                                                     value="<?php echo $diskon->kuota ;?>">
                                             </div>
                                             <div class="form-group">
+                                                <label class="col-form-label">Deskripsi Singkat</label>
+                                                <textarea name="deskripsi" id="" class="form-control" cols="30"
+                                                    rows="5"><?php echo $diskon->deskripsi ;?></textarea>
+                                            </div>
+                                            <div class="form-group">
                                                 <label class="col-form-label">Tanggal Mulai</label>
                                                 <input class="form-control" type="date" name="tgl_mulai"
                                                     value="<?php echo $diskon->tgl_mulai ;?>">

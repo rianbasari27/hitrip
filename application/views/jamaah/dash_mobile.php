@@ -69,8 +69,8 @@
 
         <div class="page-content mt-n1">
 
-        <!-- Timezone Section -->
-        <!-- <div class="content my-0 mx-4">
+            <!-- Timezone Section -->
+            <!-- <div class="content my-0 mx-4">
             <div id="timeInfo" class="text-center d-flex justify-content-between mb-2">
                 <p class="mb-0">Zona waktu Anda: </p>
                 <div class="font-700">
@@ -79,45 +79,44 @@
                 </div>
             </div>
         </div> -->
-        <!-- End Timezone Section -->
+            <!-- End Timezone Section -->
 
-        <!-- Promo Section -->
-        <div class="splide single-slider slider-no-arrows visible-slider slider-no-dots" id="single-slider-1">
+            <!-- Promo Section -->
+            <?php if ($promo) { ?>
+            <?php if (count($promo) > 1) { ?>
+            <div class="splide single-slider slider-no-arrows visible-slider slider-no-dots" id="single-slider-1">
                 <div class="splide__track">
                     <div class="splide__list">
+                        <?php foreach ($promo as $prm) { ?>
                         <div class="splide__slide">
                             <div class="card card-style ms-3"
-                                style="background-image:url(<?php echo base_url() ?>asset/images/city/dubai-1280x720.jpg);"
+                                style="background-image:url(<?php echo base_url() . $prm->banner_promo ?>);"
                                 data-card-height="200">
                                 <div class="card-bottom px-3 py-3">
-                                    <a href="<?php echo base_url() ?>jamaah/home/promo" aria-label="Click for Explore"
-                                            class="bg-white color-black rounded-sm btn btn-xs float-start font-700 font-12">Ambil Promo</a>
+                                    <a href="<?php echo base_url() . 'jamaah/home/promo?id=' . $prm->id_diskon; ?>"
+                                        aria-label="Click for Explore"
+                                        class="bg-white color-black rounded-sm btn btn-xs float-start font-700 font-12">Ambil
+                                        Promo</a>
                                 </div>
                             </div>
                         </div>
-                        <div class="splide__slide">
-                            <div class="card card-style ms-3"
-                                style="background-image:url(<?php echo base_url() ?>asset/images/city/seoul-1280x720.jpg);"
-                                data-card-height="200">
-                                <div class="card-bottom px-3 py-3">
-                                    <a href="<?php echo base_url() ?>jamaah/home/promo" aria-label="Click for Explore"
-                                            class="bg-white color-black rounded-sm btn btn-xs float-start font-700 font-12">Ambil Promo</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="splide__slide">
-                            <div class="card card-style ms-3"
-                                style="background-image:url(<?php echo base_url() ?>asset/images/city/istanbul-1280x720.jpg);"
-                                data-card-height="200">
-                                <div class="card-bottom px-3 py-3">
-                                    <a href="<?php echo base_url() ?>jamaah/home/promo" aria-label="Click for Explore"
-                                            class="bg-white color-black rounded-sm btn btn-xs float-start font-700 font-12">Ambil Promo</a>
-                                </div>
-                            </div>
-                        </div>
+                        <?php } ?>
                     </div>
                 </div>
             </div>
+            <?php } else { ?>
+            <?php foreach ($promo as $prm) { ?>
+            <div class="card card-style ms-3"
+                style="background-image:url(<?php echo base_url() . $prm->banner_promo ?>);" data-card-height="200">
+                <div class="card-bottom px-3 py-3">
+                    <a href="<?php echo base_url() . 'jamaah/home/promo?id=' . $prm->id_diskon; ?>"
+                        aria-label="Click for Explore"
+                        class="bg-white color-black rounded-sm btn btn-xs float-start font-700 font-12">Ambil Promo</a>
+                </div>
+            </div>
+            <?php } ?>
+            <?php } ?>
+            <?php } ?>
             <!-- End Promo Section -->
 
             <!-- Search Section -->
@@ -129,29 +128,32 @@
                 <div class="search-results disabled-search-list">
                     <div>
                         <?php if ($paket != null) { ?>
-                            <?php foreach ($paket as $pkt) { ?>
-                                <a href="#" class="card card-style my-3" aria-label="<?php echo $pkt->nama_paket ?>" data-filter-item data-filter-name="<?php echo strtolower($pkt->nama_paket . ' ' . $pkt->area_trip) ?>">
-                                    <div class="d-flex content">
-                                        <div class="align-self-center">
-                                            <img src="<?php echo base_url() . ($pkt->banner_image != null ? $pkt->banner_image : 'asset/appkit/images/default-banner-image.jpg') ?>" alt=""
-                                                class="rounded-s me-3" width="80">
-                                        </div>
-                                        <div class="align-self-center">
-                                            <h2 class="font-16 font-700 mb-1 line-height-s mt-1"><?php echo $pkt->nama_paket ?></h2>
-                                            <?php if ($pkt->default_diskon != 0) { ?>
-                                                <del style="text-decoration:line-through; color: grey;">
-                                                    <span class="d-block mt-1"><?php echo $pkt->hargaPretty ?></span>
-                                                </del>
-                                                <h6 class="font-14 color-highlight"><?php echo $pkt->hargaPrettyDiskon ?></h6>
-                                            <?php } else { ?>
-                                                <h6 class="font-14 color-highlight mt-2"><?php echo $pkt->hargaPretty ?></h6>
-                                            <?php } ?>
-                                        </div>
-                                        <div class="ms-auto ps-3 align-self-center text-center">
-                                        </div>
-                                    </div>
-                                </a>
-                            <?php } ?>
+                        <?php foreach ($paket as $pkt) { ?>
+                        <a href="#" class="card card-style my-3" aria-label="<?php echo $pkt->nama_paket ?>"
+                            data-filter-item
+                            data-filter-name="<?php echo strtolower($pkt->nama_paket . ' ' . $pkt->area_trip) ?>">
+                            <div class="d-flex content">
+                                <div class="align-self-center">
+                                    <img src="<?php echo base_url() . ($pkt->banner_image != null ? $pkt->banner_image : 'asset/appkit/images/default-banner-image.jpg') ?>"
+                                        alt="" class="rounded-s me-3" width="80">
+                                </div>
+                                <div class="align-self-center">
+                                    <h2 class="font-16 font-700 mb-1 line-height-s mt-1"><?php echo $pkt->nama_paket ?>
+                                    </h2>
+                                    <?php if ($pkt->default_diskon != 0) { ?>
+                                    <del style="text-decoration:line-through; color: grey;">
+                                        <span class="d-block mt-1"><?php echo $pkt->hargaPretty ?></span>
+                                    </del>
+                                    <h6 class="font-14 color-highlight"><?php echo $pkt->hargaPrettyDiskon ?></h6>
+                                    <?php } else { ?>
+                                    <h6 class="font-14 color-highlight mt-2"><?php echo $pkt->hargaPretty ?></h6>
+                                    <?php } ?>
+                                </div>
+                                <div class="ms-auto ps-3 align-self-center text-center">
+                                </div>
+                            </div>
+                        </a>
+                        <?php } ?>
                         <?php } ?>
 
                     </div>
@@ -230,7 +232,8 @@
                         <h1 class="mb-0 font-16">Paket Terbaru</h1>
                     </div>
                     <div class="ms-auto align-self-center">
-                        <a href="<?php echo base_url() ?>jamaah/trip" aria-label="Click for See All Products" class="float-end font-12 font-400">Lihat semua</a>
+                        <a href="<?php echo base_url() ?>jamaah/trip" aria-label="Click for See All Products"
+                            class="float-end font-12 font-400">Lihat semua</a>
                     </div>
                 </div>
             </div>
@@ -240,42 +243,43 @@
                 <div class="splide__track">
                     <div class="splide__list">
                         <?php foreach ($paket_terbaru as $p) { ?>
-                            <div class="splide__slide">
-                                <a href="<?php echo base_url() . 'jamaah/detail_paket?id=' . $p->id_paket ?>" class="card m-2 mb-1 card-style">
-                                    <img src="<?php echo base_url() . ($p->banner_image != null ? $p->banner_image : 'asset/appkit/images/default-banner-image.jpg') ?>" class="img-fluid"
-                                        alt="">
-                                    <div class="p-2 bg-theme rounded-sm">
-                                        <div class="mb-n1">
-                                            <?php for ($i = 1; $i <= $p->star; $i++) { ?>
-                                                <i class="fa-solid fa-star color-yellow-dark"></i>
-                                            <?php } ?>
-                                            <?php for ($i = 1; $i <= (5 - $p->star); $i++) { ?>
-                                                <i class="fa-solid fa-star color-gray-dark"></i>
-                                            <?php } ?>
-                                        </div>
-                                        <h4 class="font-16 pt-1 line-height-s pb-0 mb-n1"><?php echo $p->nama_paket ?></h4>
-                                        <!-- <span class="font-10 mb-0">7 Nights - All Inclusive</span> -->
-                                        <?php if ($p->default_diskon != 0) { ?>
-                                            <del style="text-decoration:line-through; color: grey;">
-                                                <span class="d-block mt-1"><?php echo $p->hargaPretty ?></span>
-                                            </del>
-                                            <h6 class="font-14 color-highlight"><?php echo $p->hargaPrettyDiskon ?></h6>
-                                        <?php } else { ?>
-                                            <h6 class="font-14 color-highlight mt-2"><?php echo $p->hargaPretty ?></h6>
+                        <div class="splide__slide">
+                            <a href="<?php echo base_url() . 'jamaah/detail_paket?id=' . $p->id_paket ?>"
+                                class="card m-2 mb-1 card-style">
+                                <img src="<?php echo base_url() . ($p->banner_image != null ? $p->banner_image : 'asset/appkit/images/default-banner-image.jpg') ?>"
+                                    class="img-fluid" alt="">
+                                <div class="p-2 bg-theme rounded-sm">
+                                    <div class="mb-n1">
+                                        <?php for ($i = 1; $i <= $p->star; $i++) { ?>
+                                        <i class="fa-solid fa-star color-yellow-dark"></i>
+                                        <?php } ?>
+                                        <?php for ($i = 1; $i <= (5 - $p->star); $i++) { ?>
+                                        <i class="fa-solid fa-star color-gray-dark"></i>
                                         <?php } ?>
                                     </div>
-                                </a>
-                            </div>
+                                    <h4 class="font-16 pt-1 line-height-s pb-0 mb-n1"><?php echo $p->nama_paket ?></h4>
+                                    <!-- <span class="font-10 mb-0">7 Nights - All Inclusive</span> -->
+                                    <?php if ($p->default_diskon != 0) { ?>
+                                    <del style="text-decoration:line-through; color: grey;">
+                                        <span class="d-block mt-1"><?php echo $p->hargaPretty ?></span>
+                                    </del>
+                                    <h6 class="font-14 color-highlight"><?php echo $p->hargaPrettyDiskon ?></h6>
+                                    <?php } else { ?>
+                                    <h6 class="font-14 color-highlight mt-2"><?php echo $p->hargaPretty ?></h6>
+                                    <?php } ?>
+                                </div>
+                            </a>
+                        </div>
                         <?php } ?>
                     </div>
                 </div>
             </div>
             <?php } else { ?>
-                <div class="card card-style">
-                    <div class="content text-center">
-                        <h5 class="font-14">Paket belum tersedia.</h5>
-                    </div>
+            <div class="card card-style">
+                <div class="content text-center">
+                    <h5 class="font-14">Paket belum tersedia.</h5>
                 </div>
+            </div>
             <?php } ?>
 
             <div class="content mb-n1">
@@ -284,7 +288,8 @@
                         <h1 class="mb-0 font-16">Discover</h1>
                     </div>
                     <div class="ms-auto align-self-center">
-                        <a href="#" aria-label="Click for See All Products" class="float-end font-12 font-400">Lihat semua</a>
+                        <a href="#" aria-label="Click for See All Products" class="float-end font-12 font-400">Lihat
+                            semua</a>
                     </div>
                 </div>
                 <div class="row mb-n4">
@@ -421,34 +426,33 @@
             <h3 class="text-center pt-2">Saved to Favorites</h3>
         </div>
 
-        <div id="menu-other" class="menu menu-box-bottom rounded-m bg-theme" 
-                data-menu-height="300" 
-                data-menu-effect="menu-over">
+        <div id="menu-other" class="menu menu-box-bottom rounded-m bg-theme" data-menu-height="300"
+            data-menu-effect="menu-over">
             <div class="menu-title">
                 <p class="color-highlight">Menu</p>
                 <h1>Lainnya</h1>
                 <a href="#" class="close-menu"><i class="fa fa-times-circle"></i></a>
             </div>
             <div class="content">
-                <div class="list-group list-custom-small list-menu ms-0 me-2">  
+                <div class="list-group list-custom-small list-menu ms-0 me-2">
                     <a href="#">
                         <i class="fa fa-star-and-crescent gradient-highlight color-white"></i>
                         <span>Jadwal Sholat</span>
                         <i class="fa fa-angle-right"></i>
-                    </a>        
+                    </a>
                     <a href="#">
                         <i class="fa fa-location-arrow gradient-highlight color-white"></i>
                         <span>Arah Kiblat</span>
                         <i class="fa fa-angle-right"></i>
-                    </a>        
+                    </a>
                     <a href="#">
                         <i class="fa fa-mosque gradient-highlight color-white"></i>
                         <span>Tempat Ibadah</span>
                         <i class="fa fa-angle-right"></i>
-                    </a>  
+                    </a>
                 </div>
             </div>
-        </div>    
+        </div>
 
 
         <!-- Main Menu-->
@@ -468,44 +472,43 @@
     <script src="<?php echo base_url(); ?>asset/sbadmin2/vendor/jquery/jquery.min.js"></script>
     <?php $this->load->view('jamaah/include/script_view'); ?>
     <script type="text/javascript">
+    var firebaseConfig = {
+        apiKey: "AIzaSyB-6_F42LEc7yhYxrtwIbVM3YSGMpCO8cU",
+        authDomain: "my-app-bd747.firebaseapp.com",
+        projectId: "my-app-bd747",
+        storageBucket: "my-app-bd747.appspot.com",
+        messagingSenderId: "1049171222616",
+        appId: "1:1049171222616:web:c39c8d86bb9dba8a04ea2d",
+        measurementId: "G-LTP6XBLHHH"
+    };
 
-        var firebaseConfig = {
-            apiKey: "AIzaSyB-6_F42LEc7yhYxrtwIbVM3YSGMpCO8cU",
-            authDomain: "my-app-bd747.firebaseapp.com",
-            projectId: "my-app-bd747",
-            storageBucket: "my-app-bd747.appspot.com",
-            messagingSenderId: "1049171222616",
-            appId: "1:1049171222616:web:c39c8d86bb9dba8a04ea2d",
-            measurementId: "G-LTP6XBLHHH"
-        };
-
-        // Initialize Firebase
-        firebase.initializeApp(firebaseConfig);
-        const messaging = firebase.messaging();
-        messaging
-            .requestPermission()
-            .then(function() {
-                console.log("Notification permission granted.");
-                // get the token in the form of promise
-                return messaging.getToken()
-            })
-            .then(function(token) {
-                $.getJSON("<?php echo base_url() . 'call_notification/getToken'; ?>", {
-                        token: token,
-                        id: null,
-                        user: null
-                    }).done(function(json) {
-                        console.log('Berhasil tambah token');
-                    })
-                    .fail(function(jqxhr, textStatus, error) {
-                        console.log('Token Sudah ada');
-                    });
-                console.log("Device token is : " + token)
-            })
-            .catch(function(err) {
-                // ErrElem.innerHTML = ErrElem.innerHTML + "; " + err
-                console.log("Unable to get permission to notify.", err);
-            });
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    const messaging = firebase.messaging();
+    messaging
+        .requestPermission()
+        .then(function() {
+            console.log("Notification permission granted.");
+            // get the token in the form of promise
+            return messaging.getToken()
+        })
+        .then(function(token) {
+            $.getJSON("<?php echo base_url() . 'call_notification/getToken'; ?>", {
+                    token: token,
+                    id: null,
+                    user: null
+                }).done(function(json) {
+                    console.log('Berhasil tambah token');
+                })
+                .fail(function(jqxhr, textStatus, error) {
+                    console.log('Token Sudah ada');
+                });
+            console.log("Device token is : " + token)
+        })
+        .catch(function(err) {
+            // ErrElem.innerHTML = ErrElem.innerHTML + "; " + err
+            console.log("Unable to get permission to notify.", err);
+        });
 
     // Fungsi untuk memperbarui waktu dan mendapatkan latitude serta longitude
     function updateTimeAndLocation() {

@@ -34,9 +34,13 @@ class Home extends CI_Controller
                 }
             }
         }
+
+        $promo = $this->paketUmroh->getDiskonEventPaket();
+
         $data = [
             'paket' => $paket,
             'paket_terbaru' => $paket_terbaru,
+            'promo' => $promo
         ];
         $this->load->view('jamaah/dash_mobile', $data);
     }
@@ -47,6 +51,13 @@ class Home extends CI_Controller
     }
 
     public function promo() {
-        $this->load->view('jamaah/detail_promo');
+        $this->load->model('paketUmroh');
+        $promo = $this->paketUmroh->getDiskonEventPaket($_GET['id']);
+        if (!$promo) {
+            $this->alert->toastAlert('red', 'Maaf Akses anda ditolak!');
+            redirect($_SERVER['HTTP_REFERER']);
+        }
+
+        $this->load->view('jamaah/detail_promo', $data = array ( 'promo' => $promo[0] ));
     }
 }
