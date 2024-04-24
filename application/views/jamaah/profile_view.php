@@ -60,7 +60,7 @@
                 <div class="list-group list-custom-small list-icon-0">
                     <a href=""><i class="fa fa-address-card rounded-sm bg-blue-dark color-white"></i><span><?php echo $no_ktp ? $no_ktp : '<span class="text-secondary">Belum ada</span>' ?></span></a>
                     <a href=""><i class="fa fa-envelope rounded-sm bg-blue-dark color-white"></i><span><?php echo $email ? $email : '<span class="text-secondary">Belum ada</span>' ?></span></a>
-                    <a href=""><i class="fa fa-cake-candles font-14 rounded-sm bg-blue-dark color-white"></i><span><?php echo $tempat_lahir ? $tempat_lahir . ', ' : '' ?><?php echo $tanggal_lahir ? $this->date->convert("j F Y", $tanggal_lahir, 'id') : '<span class="text-secondary">Belum ada</span>' ?></span></a>
+                    <a href=""><i class="fa fa-cake-candles font-14 rounded-sm bg-blue-dark color-white"></i><span><?php echo $tempat_lahir ? $tempat_lahir . ', ' : '' ?><?php echo $tanggal_lahir ? $this->date->convert_date_indo($tanggal_lahir) : '<span class="text-secondary">Belum ada</span>' ?></span></a>
                     <a href=""><i class="fa fa-mobile font-14 rounded-sm bg-blue-dark color-white"></i><span><?php echo $no_wa ? $no_wa : '<span class="text-secondary">Belum ada</span>' ?></span></a>
                     <a href=""><i class="fa fa-person font-14 rounded-sm bg-blue-dark color-white"></i><span>
                         <?php if ($jenis_kelamin != null) { ?>
