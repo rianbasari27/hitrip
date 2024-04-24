@@ -1,7 +1,7 @@
 <div class="card card-style mt-5">
     <h4 class="font-28 text-center color-theme font-800 pt-3 mt-2">HiTrip</h4>
     <p class="boxed-text-l mb-2">
-        Cobalah untuk mengerti
+        Booking Penerbanganmu<br>Bersama Hi-Trip
     </p>
     <div class="text-center mb-3">
         <!-- <a href="#" target="_blank" class="icon icon-xs rounded-sm shadow-l mr-1 bg-facebook"><i

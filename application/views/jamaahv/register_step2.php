@@ -37,7 +37,7 @@
                     Anda telah terdaftar pada paket <span
                         class="color-highlight font-800"><?php echo $paket->nama_paket; ?></span>
                     dengan keberangkatan tanggal <span
-                        class="color-highlight font-800"><?php echo $this->date->convert("j F Y", $paket->tanggal_berangkat); ?></span>.
+                        class="color-highlight font-800"><?php echo $this->date->convert_date_indo($paket->tanggal_berangkat); ?></span>.
                 </p>
                 <!-- <?php if (!isset($family)) { ?>
                 <p>

@@ -295,12 +295,12 @@
                 <div class="row mb-n4">
                     <div class="col-6 pe-1">
                         <div class="card card-style mx-0"
-                            style="background-image: url(<?php echo base_url() ?>asset/images/city/london-720x720.jpg);"
+                            style="background-image: url(<?php echo base_url() ?>asset/appkit/images/tokyo.jpg);"
                             data-card-height="350">
                             <div class="card-bottom p-3">
-                                <h2 class="color-white">London</h2>
+                                <h2 class="color-white">Jepang</h2>
                                 <p class="color-white opacity-60 line-height-s">
-                                    Experience a Night Life like never before.
+                                    Tradisi dan teknologi bertaut dalam harmony.
                                 </p>
                             </div>
                             <div class="card-overlay bg-gradient opacity-10"></div>
@@ -309,24 +309,24 @@
                     </div>
                     <div class="col-6">
                         <div class="card card-style mx-0 mb-2"
-                            style="background-image: url(<?php echo base_url() ?>asset/images/city/bali-720x720.jpg);;"
+                            style="background-image: url(<?php echo base_url() ?>asset/appkit/images/dubai.jpg);"
                             data-card-height="170">
                             <div class="card-bottom p-3">
-                                <h2 class="color-white">Bali</h2>
+                                <h2 class="color-white">Uni Emirat Arab</h2>
                                 <p class="color-white opacity-60 line-height-s font-12">
-                                    Nature's beauty explored. Pure beauty.
+                                    Kota futuristik dan gurun yang memikat
                                 </p>
                             </div>
                             <div class="card-overlay bg-gradient opacity-10"></div>
                             <div class="card-overlay bg-gradient"></div>
                         </div>
                         <div class="card card-style mx-0 mb-0"
-                            style="background-image: url(<?php echo base_url() ?>asset/images/city/istanbul-720x720.jpg);"
+                            style="background-image: url(<?php echo base_url() ?>asset/appkit/images/turki.jpg);"
                             data-card-height="170">
                             <div class="card-bottom p-3">
-                                <h2 class="color-white">Istanbul</h2>
+                                <h2 class="color-white">Turkiye</h2>
                                 <p class="color-white opacity-60 line-height-s font-12">
-                                    A natura park and wonder of the world
+                                    Sentuhan Timur dan Barat yang memukau.
                                 </p>
                             </div>
                             <div class="card-overlay bg-gradient opacity-10"></div>
