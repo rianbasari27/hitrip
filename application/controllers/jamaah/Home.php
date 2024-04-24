@@ -23,10 +23,15 @@ class Home extends CI_Controller
         }
         $this->load->model('paketUmroh');
         $paket = $this->paketUmroh->getPackage();
-        $paket_terbaru = null;
+        $paket_terbaru = [];
         if ($paket != null) {
-            for ($i = 0; $i < 3; $i++) {
-                $paket_terbaru = $paket;
+            foreach ($paket as $key => $p) {
+            // for ($i = 0; $i < 3; $i++) {
+                $paket_terbaru[] = $p;
+                // break;
+                if ($key == 2) {
+                    break;
+                }
             }
         }
         $data = [

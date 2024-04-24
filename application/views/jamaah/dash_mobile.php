@@ -70,7 +70,7 @@
         <div class="page-content mt-n1">
 
         <!-- Timezone Section -->
-        <div class="content my-0 mx-4">
+        <!-- <div class="content my-0 mx-4">
             <div id="timeInfo" class="text-center d-flex justify-content-between mb-2">
                 <p class="mb-0">Zona waktu Anda: </p>
                 <div class="font-700">
@@ -78,7 +78,7 @@
                     class="color-highlight"></span> | <span id="zoneName" class="font-500"></span>
                 </div>
             </div>
-        </div>
+        </div> -->
         <!-- End Timezone Section -->
 
         <!-- Promo Section -->
@@ -137,7 +137,7 @@
                                                 class="rounded-s me-3" width="80">
                                         </div>
                                         <div class="align-self-center">
-                                            <h2 class="font-18 font-700 mb-1 line-height-s mt-1"><?php echo $pkt->nama_paket ?></h2>
+                                            <h2 class="font-16 font-700 mb-1 line-height-s mt-1"><?php echo $pkt->nama_paket ?></h2>
                                             <?php if ($pkt->default_diskon != 0) { ?>
                                                 <del style="text-decoration:line-through; color: grey;">
                                                     <span class="d-block mt-1"><?php echo $pkt->hargaPretty ?></span>
@@ -253,7 +253,7 @@
                                                 <i class="fa-solid fa-star color-gray-dark"></i>
                                             <?php } ?>
                                         </div>
-                                        <h4 class="font-17 pt-1 line-height-s pb-0 mb-n1"><?php echo $p->nama_paket ?></h4>
+                                        <h4 class="font-16 pt-1 line-height-s pb-0 mb-n1"><?php echo $p->nama_paket ?></h4>
                                         <!-- <span class="font-10 mb-0">7 Nights - All Inclusive</span> -->
                                         <?php if ($p->default_diskon != 0) { ?>
                                             <del style="text-decoration:line-through; color: grey;">

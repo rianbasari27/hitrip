@@ -47,7 +47,7 @@
                                                     class="rounded-s me-3" width="80">
                                             </div>
                                             <div class="align-self-center">
-                                                <h2 class="font-18 font-700 mb-1 line-height-s mt-1"><?php echo $pkt->nama_paket ?></h2>
+                                                <h2 class="font-16 font-700 mb-1 line-height-s mt-1"><?php echo $pkt->nama_paket ?></h2>
                                                 <?php if ($pkt->default_diskon != 0) { ?>
                                                     <del style="text-decoration:line-through; color: grey;">
                                                         <span class="d-block mt-1"><?php echo $pkt->hargaPretty ?></span>

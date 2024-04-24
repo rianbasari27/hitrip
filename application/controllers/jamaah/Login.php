@@ -153,18 +153,18 @@ class Login extends CI_Controller
         $this->form_validation->set_rules('confirmPassword', 'Confirm Password', 'required|trim|matches[password]');
         if ($this->form_validation->run() == FALSE) {
             $this->session->set_flashdata(['form' => $_POST]);
-            $this->alert->setJamaah('red', 'Mohon Maaf', validation_errors());
+            $this->alert->toastAlert('red', 'Mohon Maaf', validation_errors());
             redirect($_SERVER['HTTP_REFERER']);
         }
 
         $this->load->model('customer');
         if (!$this->customer->resetPassword($_POST['email'], $_POST['password'])) {
             $this->session->set_flashdata(['form' => $_POST]);
-            $this->alert->setJamaah('red', 'Mohon Maaf', 'Proses Reset Password gagal !');
+            $this->alert->toastAlert('red', 'Mohon Maaf', 'Proses Reset Password gagal !');
             redirect($_SERVER['HTTP_REFERER']);
         }
 
-        $this->alert->setJamaah('green', 'Selamat', 'Reset password berhasil');
+        $this->alert->toastAlert('green', 'Selamat', 'Reset password berhasil');
         redirect(base_url() . 'jamaah/login');
     }
 }

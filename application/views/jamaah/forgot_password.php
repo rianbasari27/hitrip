@@ -84,8 +84,8 @@
                                 <input type="email" name="email" class="form-control validate-name" id="form1a"
                                     placeholder="Email">
                                 <label for="form1a" class="color-highlight">Email</label>
-                                <i class="fa fa-times disabled invalid color-red-dark"></i>
-                                <i class="fa fa-check disabled valid color-green-dark"></i>
+                                <!-- <i class="fa fa-times disabled invalid color-red-dark"></i>
+                                <i class="fa fa-check disabled valid color-green-dark"></i> -->
                                 <em>(required)</em>
                             </div>
 
