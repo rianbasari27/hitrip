@@ -337,7 +337,7 @@
                         <?php foreach ($paket_terbaru as $p) { ?>
                             <div class="splide__slide">
                                 <a href="<?php echo base_url() . 'jamaah/detail_paket?id=' . $p->id_paket ?>" class="card m-2 mb-1 card-style">
-                                    <img src="<?php echo base_url() . ($p->banner_image != null ? $p->banner_image : 'asset/appkit/images/default-banner-image.jpg') ?>" class="img-fluid"
+                                    <img src="<?php echo base_url() . ($p->banner_image != null) ? $p->banner_image : 'asset/appkit/images/default-banner-image.jpg' ?>" class="img-fluid"
                                         alt="">
                                     <div class="p-2 bg-theme rounded-sm">
                                         <div class="mb-n1">
