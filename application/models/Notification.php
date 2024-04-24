@@ -156,9 +156,6 @@ class Notification extends CI_Model {
         $notif = $this->db->get('notif')->result();
         $this->load->model('paketUmroh');
         $paket = $this->paketUmroh->getPackage($id_paket, false, false) ;
-        echo '<pre>';
-        print_r($paket);
-        exit();
         $this->load->library('date');
         $tgl = $this->date->convert_date_indo($paket->tanggal_berangkat);
         $paketFull = "$paket->nama_paket ($tgl)";
