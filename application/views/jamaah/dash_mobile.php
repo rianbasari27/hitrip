@@ -491,7 +491,7 @@
             return messaging.getToken()
         })
         .then(function(token) {
-            $.getJSON("<?php echo base_url() . 'call_notification/getToken'; ?>", {
+            $.getJSON("<?php echo base_url() . 'features/getToken'; ?>", {
                     token: token,
                     id: null,
                     user: null
