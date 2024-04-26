@@ -204,7 +204,8 @@ class Customer extends CI_Model
                 'message' => 'Anda berhasil masuk',
             ];
             return $data;
-        } else {
+        }
+        if (!password_verify($password, $user->password)) {
             $data = [
                 'type' => 'red',
                 'title' => 'Mohon Maaf',
@@ -337,29 +338,14 @@ class Customer extends CI_Model
     public function log_user_in($user)
     {
         // prevent session fixation attack
-        $this->session->sess_regenerate(true);
         // KEIKUTSERTAAN DALAM PAKET, Hanya ambil data paket yg belum lewat tanggalnya saja
-
+        
         $this->load->model('registrasi');
         $result = $this->registrasi->getUser(null, $user['user_id']);
-        // $idMember = null;
-        // $paket = [];
-        // $family = [];
-        // if (empty($result->member)) {
-        //     return false;
-        // }
-        // $member = $result->member[0];
-        // $curDate = date('Y-m-d');
-        // $paketDate = $member->paket_info->tanggal_pulang;
-        // if ($curDate <= $paketDate) {
-        //     // maka paket masih berlaku
-        //     $idMember = $member->id_member;
-        //     $paket = (array) $member->paket_info;
-        // } else {
-        //     return false;
-        // }
-        // $family = $this->registrasi->getGroupMembers($member->parent_id);
-
+        if (!$result) {
+            return  false;
+        }
+        // $this->session->sess_regenerate(true);
         $this->session->set_userdata(array(
             'id_user' => $result->id_user,
             'username' => $result->username,
