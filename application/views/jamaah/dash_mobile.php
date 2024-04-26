@@ -186,7 +186,7 @@
                         </div>
                         <div class="lh-sm mt-2 font-11 color-theme">Promo</div>
                     </a>
-                    <a href="#" class="col-3 py-2 mb-2 text-center">
+                    <a href="<?php echo base_url() . 'call_notification/send' ;?>" class="col-3 py-2 mb-2 text-center">
                         <div class="squircle-icon gradient-highlight shadow mx-auto">
                             <i class="fa-solid fa-bell icon font-20 color-white"></i>
                         </div>
@@ -264,14 +264,16 @@
                         <h1 class="mb-0 font-16">Discover</h1>
                     </div>
                     <div class="ms-auto align-self-center">
-                        <a href="<?php echo base_url() ?>jamaah/discover" aria-label="Click for See All Products" class="float-end font-12 font-400">Lihat
+                        <a href="<?php echo base_url() ?>jamaah/discover" aria-label="Click for See All Products"
+                            class="float-end font-12 font-400">Lihat
                             semua</a>
                     </div>
                 </div>
                 <?php if ($areaTrip != null) { ?>
                 <div class="row mb-n4">
                     <?php foreach ($areaTrip as $a) { ?>
-                    <a href="<?php echo base_url() . 'jamaah/discover/list_area?area=' . $a->area_trip ?>" class="col-6 mb-2 pe-1">
+                    <a href="<?php echo base_url() . 'jamaah/discover/list_area?area=' . $a->area_trip ?>"
+                        class="col-6 mb-2 pe-1">
                         <div class="card card-style mx-0 mb-2"
                             style="background-image: url(<?php echo base_url() . ($a->banner_image != null ? $a->banner_image : 'asset/appkit/images/default-banner-image.jpg') ?>);"
                             data-card-height="150">

@@ -159,10 +159,10 @@ class Notification extends CI_Model {
         $this->load->library('date');
         $tgl = $this->date->convert_date_indo($paket->tanggal_berangkat);
         $paketFull = "$paket->nama_paket ($tgl)";
-        $text = "$paketFull \nKini hadir kembali. Yuk amankan seatnya sekarang~";
+        $text = "Kreasikan notification sesuai kebutuhanmu";
         if($notif) {
             foreach ($notif as $notify) {
-                $this->sendMessage($notify->token, $text, base_url("jamaah/detail_paket?id=$id_paket"), "🎉 Spesial Hanya untukmu" );
+                $this->sendMessage($notify->token, $text, base_url("jamaah/detail_paket?id=$id_paket"), "🎉 Fitur Push Notification" );
             }
         } else {
             return false ;

@@ -22,7 +22,9 @@ class Call_notification extends CI_Controller
 
     public function send() {
         $this->load->model('Notification');
-
-        $this->Notification->sendEditPackageNotif(1);
+        $this->load->model('paketUmroh');
+        $paket = $this->paketUmroh->getPackage(null, false);
+        $this->Notification->sendEditPackageNotif($paket[0]->id_paket);
+        redirect($_SERVER['HTTP_REFERER']);
     }
 }
