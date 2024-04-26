@@ -4,6 +4,9 @@
 <head>
     <?php $this->load->view('jamaah/include/header'); ?>
     <style>
+        .error-message p {
+            color: red !important;
+        }
         .bg-34 {
             background-image: url(<?php echo base_url() . 'asset/appkit/images/background-3.jpg' ?>);
         }
@@ -76,18 +79,17 @@
                         </p>
                     </div>
 
-                    <form action="<?php echo base_url() . 'jamaah/login/proses_verif_email' ;?>" method="post"
+                    <form action="<?php echo base_url() . 'jamaah/login/forgot' ;?>" method="post"
                         id="myForm">
                         <div class="content px-4">
                             <div class="input-style input-transparent no-borders has-icon validate-field mb-4">
                                 <i class="fa fa-at"></i>
-                                <input type="email" name="email" class="form-control validate-name" id="form1a"
+                                <input type="email" name="email" value="<?php echo set_value('name') ?>" class="form-control validate-name" id="form1a"
                                     placeholder="Email">
                                 <label for="form1a" class="color-highlight">Email</label>
-                                <!-- <i class="fa fa-times disabled invalid color-red-dark"></i>
-                                <i class="fa fa-check disabled valid color-green-dark"></i> -->
                                 <em>(required)</em>
                             </div>
+                            <div class="error-message mt-n2 mb-3"><?php echo form_error('email') ?></div>
 
                             <a href="#" id="submitBtn" data-back-button
                                 class="btn btn-full btn-l font-600 font-13 gradient-highlight mt-4 rounded-s">Send Reset

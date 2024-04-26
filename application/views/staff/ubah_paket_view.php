@@ -74,6 +74,16 @@
                                                     value="<?php echo $tanggal_pulang ;?>">
                                             </div>
                                             <div class="form-group">
+                                                <label class="col-form-label">Negara</label>
+                                                <input class="form-control" type="text" name="negara"
+                                                    value="<?php echo $negara ;?>">
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-form-label">Area Trip (Benua)</label>
+                                                <input class="form-control" type="text" name="area_trip"
+                                                    value="<?php echo $area_trip ;?>">
+                                            </div>
+                                            <div class="form-group">
                                                 <label class="col-form-label">Jumlah Pax</label>
                                                 <input class="form-control format_harga" type="text" name="jumlah_seat"
                                                     value="<?php echo $jumlah_seat ;?>">

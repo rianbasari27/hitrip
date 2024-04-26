@@ -68,6 +68,8 @@ class PaketUmroh extends CI_Model
             'nama_paket' => $data['nama_paket'],
             'tanggal_berangkat' => $newDate,
             'tanggal_pulang' => $datePulang,
+            'negara' => $data['negara'],
+            'area_trip' => $data['area_trip'],
             'jumlah_seat' => $jumlahSeat,
             'banner_image' => $data['banner_image'],
             'detail_promo' => $detail,
@@ -166,6 +168,8 @@ class PaketUmroh extends CI_Model
             'nama_paket' => $data['nama_paket'],
             'tanggal_berangkat' => $newDate,
             'tanggal_pulang' => $datePulang,
+            'negara' => $data['negara'],
+            'area_trip' => $data['area_trip'],
             'jumlah_seat' => $jumlahSeat,
             'detail_promo' => $detail,
             'harga' => $data['harga'],
@@ -379,7 +383,7 @@ class PaketUmroh extends CI_Model
         return $data;
     }
 
-    public function getPackage($id = null, $notExpired = TRUE, $active = false, $curSeasonOnly = false, $month = null, $available = false, $season = null)
+    public function getPackage($id = null, $notExpired = TRUE, $active = false, $curSeasonOnly = false, $month = null, $available = false, $season = null, $area = null)
     {
         if ($id != null) {
             $this->db->where('id_paket', $id);
@@ -406,6 +410,10 @@ class PaketUmroh extends CI_Model
         }
         if ($month) {
             $this->db->where('MONTH(tanggal_berangkat)', $month);
+        }
+
+        if ($area) {
+            $this->db->where('area_trip', $area);
         }
 
         // $this->db->order_by('tanggal_berangkat', 'ASC');
@@ -511,6 +519,18 @@ class PaketUmroh extends CI_Model
             $this->db->where('id_paket', $id_paket);
         }
         $result = $this->db->get('gallery')->result();
+        return $result;
+    }
+
+    public function getAreaTrip($limit = null) {
+        $this->db->select('area_trip, banner_image');
+        $this->db->from('paket_umroh');
+        $this->db->where('area_trip IS NOT NULL');
+        $this->db->group_by('area_trip');
+        if ($limit != null) {
+            $this->db->limit($limit);
+        }
+        $result = $this->db->get()->result();
         return $result;
     }
 

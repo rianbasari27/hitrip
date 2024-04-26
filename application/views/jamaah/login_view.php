@@ -4,7 +4,7 @@
 <head>
     <?php $this->load->view('jamaah/include/header'); ?>
     <style>
-        p {
+        .error-message p {
             color: red !important;
         }
 
@@ -77,7 +77,7 @@
                                 <i class="fa fa-check disabled valid color-green-dark"></i> -->
                                 <em>(required)</em>
                             </div>
-                            <div class="mt-n3 mb-3"><?php echo form_error('username') ?></div>
+                            <div class="error-message mt-n3 mb-3"><?php echo form_error('username') ?></div>
                             
                             <div class="input-style input-transparent no-borders has-icon validate-field mb-4 mt-4">
                                 <i class="fa fa-lock"></i>
@@ -88,7 +88,7 @@
                                 <i class="fa fa-check disabled valid color-green-dark"></i> -->
                                 <em>(required)</em>
                             </div>
-                            <div class="mt-n3 mb-5"><?php echo form_error('password') ?></div>
+                            <div class="error-message mt-n3 mb-5"><?php echo form_error('password') ?></div>
 
                             <a href="#" id="submitBtn" data-back-button
                                 class="btn btn-full btn-l font-600 font-13 gradient-highlight mt-4 rounded-s">Sign
@@ -110,6 +110,7 @@
                 </div>
                 <div class="card-overlay bg-black opacity-85"></div>
                 <?php $this->load->view('jamaah/include/alert'); ?>
+                <?php $this->load->view('jamaah/include/toast'); ?>
             </div>
 
 

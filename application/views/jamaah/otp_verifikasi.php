@@ -68,7 +68,7 @@
                                 id="myForm">
                                 <input type="hidden" name="username" value="<?php echo $username;?>">
                                 <input type="hidden" name="name" value="<?php echo $name;?>">
-                                <input type="hidden" id="noWa" name="no_telp" value="<?php echo $no_telp;?>">
+                                <input type="hidden" id="noWa" name="no_wa" value="<?php echo $no_wa;?>">
                                 <input type="hidden" name="email" value="<?php echo $email;?>">
                                 <input type="hidden" name="password" value="<?php echo $password;?>">
                                 <input class="otp mx-1 rounded-sm text-center font-20 font-900" name="otp1" type="tel"
@@ -97,6 +97,7 @@
                 </div>
                 <div class="card-overlay bg-black opacity-85"></div>
                 <?php $this->load->view('jamaah/include/alert'); ?>
+                <?php $this->load->view('jamaah/include/toast'); ?>
             </div>
         </div>
         <!-- Page content ends here-->

@@ -104,7 +104,7 @@
                                                 <tr>
                                                     <th style="width:200px;">Nama Paket</th>
                                                     <td>
-                                                        <div><?php echo $nama_paket; ?></div>
+                                                        <div><?php echo $nama_paket . ' ' . $negara ; ?></div>
                                                         <table class="table table-borderless">
                                                             <?php if ($paket_flyer !== null) { ?>
                                                             <tr>
@@ -172,12 +172,22 @@
                                                 </tr>
                                                 <tr>
                                                     <th>Tanggal Keberangkatan</th>
-                                                    <td><?php echo $this->date->convert_date_indo($tanggal_berangkat) ; ?>
+                                                    <td><?php echo $tanggal_berangkat != null ? $this->date->convert_date_indo($tanggal_berangkat) : '-'; ?>
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <th>Tanggal Pulang</th>
-                                                    <td><?php echo $this->date->convert_date_indo($tanggal_pulang); ?>
+                                                    <td><?php echo $tanggal_pulang != null ? $this->date->convert_date_indo($tanggal_pulang) : '-'; ?>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Negara</th>
+                                                    <td><?php echo $negara ; ?>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Area Trip</th>
+                                                    <td><?php echo $area_trip ; ?>
                                                     </td>
                                                 </tr>
                                                 <tr>

@@ -71,6 +71,17 @@
                                                 <input class="form-control" type="date" name="tanggal_pulang">
                                             </div>
                                             <div class="form-group">
+                                                <label class="col-form-label">Negara</label>
+                                                <input class="form-control" type="text" name="negara"
+                                                    required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-form-label">Area Trip (<span
+                                                        class="text-primary font-italic font-weight-lighter">Benua</span>)</label>
+                                                <input class="form-control" type="text" name="area_trip"
+                                                    required>
+                                            </div>
+                                            <div class="form-group">
                                                 <label class="col-form-label">Jumlah Pax</label>
                                                 <input class="form-control format_harga" type="text" name="jumlah_seat">
                                             </div>

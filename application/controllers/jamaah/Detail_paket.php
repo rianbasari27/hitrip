@@ -31,7 +31,7 @@ class Detail_paket extends CI_Controller
             if ($user->member != null) {
                 $member = $this->registrasi->getMember($user->member[0]->id_member);
                 foreach ($member as $m) {
-                    if ($m->id_paket == $_GET['id']) {
+                    if ($m->id_paket == $_GET['id'] && $m->lunas == 0) {
                         redirect(base_url() . 'jamaah/daftar/dp_notice');
                     }
                 }

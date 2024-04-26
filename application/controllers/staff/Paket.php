@@ -114,6 +114,8 @@ class Paket extends CI_Controller
     {
         $this->form_validation->set_rules('nama_paket', 'Nama Paket', 'trim|required|alpha_numeric_spaces');
         $this->form_validation->set_rules('tanggal_berangkat', 'Tanggal Keberangkatan', 'trim|required');
+        $this->form_validation->set_rules('negara', 'Negara', 'trim|required');
+        $this->form_validation->set_rules('area_trip', 'Area Trip', 'trim|required');
         $this->form_validation->set_rules('harga', 'Harga', 'trim|required');
 
         if ($this->form_validation->run() == FALSE) {

@@ -4,7 +4,7 @@
 <head>
     <?php $this->load->view('jamaah/include/header'); ?>
     <style>
-        p {
+        .error-message p {
             color: red !important;
         }
         .back-button {
@@ -78,7 +78,7 @@
                                 <!-- <i class="fa fa-check disabled valid color-green-dark"></i> -->
                                 <em>(required)</em>
                             </div>
-                            <div class="mt-n2 mb-3"><?php echo form_error('username') ?></div>
+                            <div class="error-message mt-n2 mb-3"><?php echo form_error('username') ?></div>
 
                             <div class="input-style input-transparent no-borders has-icon validate-field">
                                 <i class="fa fa-user"></i>
@@ -90,51 +90,55 @@
                                 <!-- <i class="fa fa-check disabled valid color-green-dark"></i> -->
                                 <em>(required)</em>
                             </div>
-                            <div class="mt-n2 mb-3"><?php echo form_error('name') ?></div>
+                            <div class="error-message mt-n2 mb-3"><?php echo form_error('name') ?></div>
 
                             <div class="input-style input-transparent no-borders has-icon validate-field">
                                 <i class="fa fa-at"></i>
                                 <input type="email" name="email" class="form-control validate-email" id="form1ad"
-                                    placeholder="Email Address">
+                                    placeholder="Email Address"
+                                    value="<?php echo set_value('email') ?>">
                                 <label for="form1ad" class="color-highlight">Email Address</label>
                                 <!-- <i class="fa fa-times disabled invalid color-red-dark"></i> -->
                                 <!-- <i class="fa fa-check disabled valid color-green-dark"></i> -->
                                 <em>(required)</em>
                             </div>
-                            <div class="mt-n2 mb-3"><?php echo form_error('email') ?></div>
+                            <div class="error-message mt-n2 mb-3"><?php echo form_error('email') ?></div>
 
                             <div class="input-style input-transparent no-borders has-icon validate-field">
                                 <i class="fa fa-phone"></i>
-                                <input type="number" name="no_telp" class="form-control validate-email" id="form1ae"
-                                    placeholder="No. Telp">
+                                <input type="number" name="no_wa" class="form-control validate-email" id="form1ae"
+                                    placeholder="No. Telp"
+                                    value="<?php echo set_value('no_wa') ?>">
                                 <label for="form1ae" class="color-highlight">No. Telp</label>
                                 <!-- <i class="fa fa-times disabled invalid color-red-dark"></i> -->
                                 <!-- <i class="fa fa-check disabled valid color-green-dark"></i> -->
                                 <em>(required)</em>
                             </div>
-                            <div class="mt-n2 mb-3"><?php echo form_error('no_telp') ?></div>
+                            <div class="error-message mt-n2 mb-3"><?php echo form_error('no_wa') ?></div>
 
                             <div class="input-style input-transparent no-borders has-icon validate-field">
                                 <i class="fa fa-lock"></i>
                                 <input type="password" name="password" class="form-control validate-password"
-                                    id="form1af" placeholder="Password">
+                                    id="form1af" placeholder="Password"
+                                    value="<?php echo set_value('password') ?>">
                                 <label for="form1af" class="color-highlight">Password</label>
                                 <!-- <i class="fa fa-times disabled invalid color-red-dark"></i> -->
                                 <!-- <i class="fa fa-check disabled valid color-green-dark"></i> -->
                                 <em>(required)</em>
                             </div>
-                            <div class="mt-n2 mb-3"><?php echo form_error('password') ?></div>
+                            <div class="error-message mt-n2 mb-3"><?php echo form_error('password') ?></div>
 
                             <div class="input-style input-transparent no-borders has-icon validate-field">
                                 <i class="fa fa-lock"></i>
                                 <input type="password" name="confirmPassword" class="form-control validate-password"
-                                    id="form1ag" placeholder="Confirm Password">
+                                    id="form1ag" placeholder="Confirm Password"
+                                    value="<?php echo set_value('confirmPassword') ?>">
                                 <label for="form1ag" class="color-highlight">Confirm Password</label>
                                 <!-- <i class="fa fa-times disabled invalid color-red-dark"></i> -->
                                 <!-- <i class="fa fa-check disabled valid color-green-dark"></i> -->
                                 <em>(required)</em>
                             </div>
-                            <div class="mt-n2 mb-3"><?php echo form_error('confirmPassword') ?></div>
+                            <div class="error-message mt-n2 mb-3"><?php echo form_error('confirmPassword') ?></div>
 
                             <a href="#" id="submitBtn" data-back-button
                                 class="btn btn-full btn-l font-600 font-13 gradient-highlight mt-4 rounded-s">Sign
@@ -159,6 +163,7 @@
                 </div>
                 <div class="card-overlay bg-black opacity-85"></div>
                 <?php $this->load->view('jamaah/include/alert'); ?>
+                <?php $this->load->view('jamaah/include/toast'); ?>
             </div>
 
 

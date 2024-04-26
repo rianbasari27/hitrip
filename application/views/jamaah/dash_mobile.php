@@ -131,7 +131,7 @@
                         <?php foreach ($paket as $pkt) { ?>
                         <a href="#" class="card card-style my-3" aria-label="<?php echo $pkt->nama_paket ?>"
                             data-filter-item
-                            data-filter-name="<?php echo strtolower($pkt->nama_paket . ' ' . $pkt->area_trip) ?>">
+                            data-filter-name="<?php echo strtolower($pkt->nama_paket . ' ' . $pkt->negara) ?>">
                             <div class="d-flex content">
                                 <div class="align-self-center">
                                     <img src="<?php echo base_url() . ($pkt->banner_image != null ? $pkt->banner_image : 'asset/appkit/images/default-banner-image.jpg') ?>"
@@ -188,33 +188,9 @@
                     </a>
                     <a href="#" class="col-3 py-2 mb-2 text-center">
                         <div class="squircle-icon gradient-highlight shadow mx-auto">
-                            <i class="fa-solid fa-ticket icon font-20 color-white"></i>
+                            <i class="fa-solid fa-bell icon font-20 color-white"></i>
                         </div>
-                        <div class="lh-sm mt-2 font-11 color-theme">Voucher</div>
-                    </a>
-                    <a href="#" class="col-3 py-2 mb-2 text-center">
-                        <div class="squircle-icon gradient-highlight shadow mx-auto">
-                            <i class="fa-solid fa-money-bill-wave icon font-20 color-white"></i>
-                        </div>
-                        <div class="lh-sm mt-2 font-11 color-theme">Currency</div>
-                    </a>
-                    <a href="#" class="col-3 py-2 mb-2 text-center">
-                        <div class="squircle-icon gradient-highlight shadow mx-auto">
-                            <i class="fa-solid fa-utensils icon font-20 color-white"></i>
-                        </div>
-                        <div class="lh-sm mt-2 font-11 color-theme">Restoran Terdekat</div>
-                    </a>
-                    <a href="#" class="col-3 py-2 mb-2 text-center">
-                        <div class="squircle-icon gradient-highlight shadow mx-auto">
-                            <i class="fa-solid fa-hotel icon font-20 color-white"></i>
-                        </div>
-                        <div class="lh-sm mt-2 font-11 color-theme">Hotel Terdekat</div>
-                    </a>
-                    <a href="#" class="col-3 py-2 mb-2 text-center">
-                        <div class="squircle-icon gradient-highlight shadow mx-auto">
-                            <i class="fa-solid fa-compass icon font-20 color-white"></i>
-                        </div>
-                        <div class="lh-sm mt-2 font-11 color-theme">Discover</div>
+                        <div class="lh-sm mt-2 font-11 color-theme">Notifikasi</div>
                     </a>
                     <a href="#" class="col-3 py-2 mb-2 text-center" data-menu="menu-other">
                         <div class="squircle-icon gradient-highlight shadow mx-auto">
@@ -288,52 +264,27 @@
                         <h1 class="mb-0 font-16">Discover</h1>
                     </div>
                     <div class="ms-auto align-self-center">
-                        <a href="#" aria-label="Click for See All Products" class="float-end font-12 font-400">Lihat
+                        <a href="<?php echo base_url() ?>jamaah/discover" aria-label="Click for See All Products" class="float-end font-12 font-400">Lihat
                             semua</a>
                     </div>
                 </div>
+                <?php if ($areaTrip != null) { ?>
                 <div class="row mb-n4">
-                    <div class="col-6 pe-1">
-                        <div class="card card-style mx-0"
-                            style="background-image: url(<?php echo base_url() ?>asset/appkit/images/tokyo.jpg);"
-                            data-card-height="350">
-                            <div class="card-bottom p-3">
-                                <h2 class="color-white">Jepang</h2>
-                                <p class="color-white opacity-60 line-height-s">
-                                    Tradisi dan teknologi bertaut dalam harmony.
-                                </p>
-                            </div>
-                            <div class="card-overlay bg-gradient opacity-10"></div>
-                            <div class="card-overlay bg-gradient"></div>
-                        </div>
-                    </div>
-                    <div class="col-6">
+                    <?php foreach ($areaTrip as $a) { ?>
+                    <a href="<?php echo base_url() . 'jamaah/discover/list_area?area=' . $a->area_trip ?>" class="col-6 mb-2 pe-1">
                         <div class="card card-style mx-0 mb-2"
-                            style="background-image: url(<?php echo base_url() ?>asset/appkit/images/dubai.jpg);"
-                            data-card-height="170">
+                            style="background-image: url(<?php echo base_url() . ($a->banner_image != null ? $a->banner_image : 'asset/appkit/images/default-banner-image.jpg') ?>);"
+                            data-card-height="150">
                             <div class="card-bottom p-3">
-                                <h2 class="color-white">Uni Emirat Arab</h2>
-                                <p class="color-white opacity-60 line-height-s font-12">
-                                    Kota futuristik dan gurun yang memikat
-                                </p>
+                                <h2 class="color-white"><?php echo $a->area_trip ?></h2>
                             </div>
                             <div class="card-overlay bg-gradient opacity-10"></div>
                             <div class="card-overlay bg-gradient"></div>
                         </div>
-                        <div class="card card-style mx-0 mb-0"
-                            style="background-image: url(<?php echo base_url() ?>asset/appkit/images/turki.jpg);"
-                            data-card-height="170">
-                            <div class="card-bottom p-3">
-                                <h2 class="color-white">Turkiye</h2>
-                                <p class="color-white opacity-60 line-height-s font-12">
-                                    Sentuhan Timur dan Barat yang memukau.
-                                </p>
-                            </div>
-                            <div class="card-overlay bg-gradient opacity-10"></div>
-                            <div class="card-overlay bg-gradient"></div>
-                        </div>
-                    </div>
+                    </a>
+                    <?php } ?>
                 </div>
+                <?php } ?>
             </div>
 
             <!-- <div class="content mb-n1">
@@ -426,7 +377,7 @@
             <h3 class="text-center pt-2">Saved to Favorites</h3>
         </div>
 
-        <div id="menu-other" class="menu menu-box-bottom rounded-m bg-theme" data-menu-height="300"
+        <div id="menu-other" class="menu menu-box-bottom rounded-m bg-theme" data-menu-height="500"
             data-menu-effect="menu-over">
             <div class="menu-title">
                 <p class="color-highlight">Menu</p>
@@ -435,18 +386,58 @@
             </div>
             <div class="content">
                 <div class="list-group list-custom-small list-menu ms-0 me-2">
+                    <a href="<?php echo base_url() ?>/jamaah/trip">
+                        <i class="fa-solid fa-umbrella-beach gradient-highlight color-white"></i>
+                        <span>Trip</span>
+                        <i class="fa fa-angle-right"></i>
+                    </a>
                     <a href="#">
-                        <i class="fa fa-star-and-crescent gradient-highlight color-white"></i>
+                        <i class="fa-solid fa-percent gradient-highlight color-white"></i>
+                        <span>Promo</span>
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                    <a href="#">
+                        <i class="fa-solid fa-bell gradient-highlight color-white"></i>
+                        <span>Notifikasi</span>
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                    <a href="#">
+                        <i class="fa-solid fa-ticket gradient-highlight color-white"></i>
+                        <span>Voucher</span>
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                    <a href="#">
+                        <i class="fa-solid fa-money-bill-wave gradient-highlight color-white"></i>
+                        <span>Currency</span>
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                    <a href="#">
+                        <i class="fa-solid fa-utensils gradient-highlight color-white"></i>
+                        <span>Restoran Terdekat</span>
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                    <a href="#">
+                        <i class="fa-solid fa-hotel gradient-highlight color-white"></i>
+                        <span>Hotel Terdekat</span>
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                    <a href="#">
+                        <i class="fa-solid fa-compass gradient-highlight color-white"></i>
+                        <span>Discover</span>
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                    <a href="#">
+                        <i class="fa-solid fa-star-and-crescent gradient-highlight color-white"></i>
                         <span>Jadwal Sholat</span>
                         <i class="fa fa-angle-right"></i>
                     </a>
                     <a href="#">
-                        <i class="fa fa-location-arrow gradient-highlight color-white"></i>
+                        <i class="fa-solid fa-location-arrow gradient-highlight color-white"></i>
                         <span>Arah Kiblat</span>
                         <i class="fa fa-angle-right"></i>
                     </a>
                     <a href="#">
-                        <i class="fa fa-mosque gradient-highlight color-white"></i>
+                        <i class="fa-solid fa-mosque gradient-highlight color-white"></i>
                         <span>Tempat Ibadah</span>
                         <i class="fa fa-angle-right"></i>
                     </a>

@@ -126,7 +126,7 @@
                             </div>
                                 
                             <h1 class="mb-n1"><?php echo $nama_paket; ?></h1>
-                            <p class="color-highlight font-500"><i class="fa-solid fa-location-dot me-1"></i><?php echo $nama_paket . ', ' . $area_trip ?></p>
+                            <p class="color-highlight font-500"><i class="fa-solid fa-location-dot me-1"></i><?php echo $nama_paket . ', ' . $negara ?></p>
                         </div>
                         <div class="ms-auto mt-auto">
                             <!-- <div> -->
