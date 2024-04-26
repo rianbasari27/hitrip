@@ -44,7 +44,7 @@ class Notification extends CI_Model {
         curl_setopt($ch, CURLOPT_URL, 'https://fcm.googleapis.com/fcm/send');
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_POST, 1);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, "{\n  \"notification\": {\n    \"title\": \"$title\",\n    \"body\": \"$body\",\n    \"icon\": \"null\",\n    \"click_action\": \"$action\"\n  },\n  \"to\": \"$token\"\n}");
+        curl_setopt($ch, CURLOPT_POSTFIELDS, "{\n  \"notification\": {\n    \"title\": \"$title\",\n    \"body\": \"$body\",\n   \"click_action\": \"$action\"\n  },\n  \"to\": \"$token\"\n}");
         
         $headers = array();
         $headers[] = 'Authorization: key=AAAA9Ed6YFg:APA91bFWAZUaIUx8DWyNLmf9WmXXXashu1iYVl2owyYyuITge0AYPLKAZoozdURXNovFEsm9Briuw0aWAXJMhE2mC5UYXjBZY2_ta4rMViRUXl-2ouuinUnzvq2G6dovUNIuq-acaC4w';
