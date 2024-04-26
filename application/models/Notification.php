@@ -162,7 +162,7 @@ class Notification extends CI_Model {
         $text = "Kreasikan notification sesuai kebutuhanmu";
         if($notif) {
             foreach ($notif as $notify) {
-                $this->sendMessage($notify->token, $text, base_url("jamaah/detail_paket?id=$id_paket"), "🎉 Fitur Push Notification" );
+                $this->sendMessage($notify->token, $text, base_url("jamaah/detail_paket?id=$id_paket"), "🔔 Fitur Push Notification 🔔" );
             }
         } else {
             return false ;

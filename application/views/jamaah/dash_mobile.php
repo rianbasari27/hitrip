@@ -186,7 +186,7 @@
                         </div>
                         <div class="lh-sm mt-2 font-11 color-theme">Promo</div>
                     </a>
-                    <a href="<?php echo base_url() . 'call_notification/send' ;?>" class="col-3 py-2 mb-2 text-center">
+                    <a href="<?php echo base_url() . 'features' ;?>" class="col-3 py-2 mb-2 text-center">
                         <div class="squircle-icon gradient-highlight shadow mx-auto">
                             <i class="fa-solid fa-bell icon font-20 color-white"></i>
                         </div>
@@ -431,6 +431,11 @@
                     <a href="#">
                         <i class="fa-solid fa-star-and-crescent gradient-highlight color-white"></i>
                         <span>Jadwal Sholat</span>
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                    <a href="<?php echo base_url() . "features/list_surat" ;?>">
+                        <i class="fa-solid fa-star-and-crescent gradient-highlight color-white"></i>
+                        <span>Al Quran</span>
                         <i class="fa fa-angle-right"></i>
                     </a>
                     <a href="#">
