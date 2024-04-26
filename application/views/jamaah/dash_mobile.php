@@ -215,6 +215,7 @@
             </div>
 
             <?php if (!empty($paket_terbaru)) { ?>
+            <?php if (count($paket_terbaru) >= 3) { ?>
             <div class="splide double-slider visible-slider slider-no-arrows slider-no-dots ps-2" id="double-slider-1">
                 <div class="splide__track">
                     <div class="splide__list">
@@ -250,6 +251,40 @@
                     </div>
                 </div>
             </div>
+            <?php } else { ?>
+            <div class="row">
+                <?php foreach ($paket_terbaru as $p) { ?>
+                <div class="col-md-6">
+                    <a href="<?php echo base_url() . 'jamaah/detail_paket?id=' . $p->id_paket ?>"
+                        class="card m-2 mb-1 card-style">
+                        <img src="<?php echo base_url() . ($p->banner_image != null ? $p->banner_image : 'asset/appkit/images/default-banner-image.jpg') ?>"
+                            class="card-img-top" alt="">
+                        <div class="card-body bg-theme rounded-sm">
+                            <div class="mb-n1">
+                                <?php for ($i = 1; $i <= $p->star; $i++) { ?>
+                                <i class="fa-solid fa-star color-yellow-dark"></i>
+                                <?php } ?>
+                                <?php for ($i = 1; $i <= (5 - $p->star); $i++) { ?>
+                                <i class="fa-solid fa-star color-gray-dark"></i>
+                                <?php } ?>
+                            </div>
+                            <h4 class="card-title font-16 pt-1 line-height-s pb-0 mb-n1"><?php echo $p->nama_paket ?>
+                            </h4>
+                            <!-- <span class="font-10 mb-0">7 Nights - All Inclusive</span> -->
+                            <?php if ($p->default_diskon != 0) { ?>
+                            <del style="text-decoration:line-through; color: grey;">
+                                <span class="d-block mt-1"><?php echo $p->hargaPretty ?></span>
+                            </del>
+                            <h6 class="card-subtitle font-14 color-highlight"><?php echo $p->hargaPrettyDiskon ?></h6>
+                            <?php } else { ?>
+                            <h6 class="card-subtitle font-14 color-highlight mt-2"><?php echo $p->hargaPretty ?></h6>
+                            <?php } ?>
+                        </div>
+                    </a>
+                </div>
+                <?php } ?>
+            </div>
+            <?php } ?>
             <?php } else { ?>
             <div class="card card-style">
                 <div class="content text-center">
