@@ -10,7 +10,7 @@ class Features extends CI_Controller
         $this->load->model('Notification');
         $this->load->model('paketUmroh');
         $paket = $this->paketUmroh->getPackage(null, false);
-        $this->Notification->sendEditPackageNotif($paket[0]->id_paket);
+        $this->Notification->sendEditPackageNotif();
         redirect($_SERVER['HTTP_REFERER']);
     }
 

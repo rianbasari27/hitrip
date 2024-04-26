@@ -152,17 +152,17 @@ class Notification extends CI_Model {
         return true ;
     }
 
-    public function sendEditPackageNotif($id_paket) {
+    public function sendEditPackageNotif() {
         $notif = $this->db->get('notif')->result();
-        $this->load->model('paketUmroh');
-        $paket = $this->paketUmroh->getPackage($id_paket, false, false) ;
-        $this->load->library('date');
-        $tgl = $this->date->convert_date_indo($paket->tanggal_berangkat);
-        $paketFull = "$paket->nama_paket ($tgl)";
+        // $this->load->model('paketUmroh');
+        // $paket = $this->paketUmroh->getPackage($id_paket, false, false) ;
+        // $this->load->library('date');
+        // $tgl = $this->date->convert_date_indo($paket->tanggal_berangkat);
+        // $paketFull = "$paket->nama_paket ($tgl)";
         $text = "Kreasikan notification sesuai kebutuhanmu";
         if($notif) {
             foreach ($notif as $notify) {
-                $this->sendMessage($notify->token, $text, base_url("jamaah/detail_paket?id=$id_paket"), "🔔 Fitur Push Notification 🔔" );
+                $this->sendMessage($notify->token, $text, base_url("jamaah/home"), "🔔 Fitur Push Notification 🔔" );
             }
         } else {
             return false ;
