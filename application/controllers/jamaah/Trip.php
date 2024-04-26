@@ -21,14 +21,19 @@ class Trip extends CI_Controller
         if (!$this->customer->isSplashSeen()) {
             redirect(base_url() . "jamaah/splash");
         }
+
         $this->load->model('paketUmroh');
-        $paket = $this->paketUmroh->getPackage();
+        $paket = $this->paketUmroh->getPackage(null, true, true, false, null, true);
+        $id_diskon = null ;
+        if (isset($_GET['id_diskon'])) {
+            $paket = $this->paketUmroh->getPackageAndDiskon($_GET['id_diskon']);
+            $id_diskon = $_GET['id_diskon'];
+        }
+
         $data = [
-            'paket' => $paket
+            'paket' => $paket,
+            'id_diskon' => $id_diskon
         ];
-        // echo '<pre>';
-        // print_r($paket);
-        // exit();
         $this->load->view('jamaah/trip_list_view', $data);
     }
 }

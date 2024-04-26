@@ -383,7 +383,7 @@ class PaketUmroh extends CI_Model
         return $data;
     }
 
-    public function getPackage($id = null, $notExpired = TRUE, $active = false, $curSeasonOnly = false, $month = null, $available = false, $season = null, $area = null)
+    public function getPackage($id = null, $notExpired = TRUE, $active = false, $curSeasonOnly = false, $month = null, $available = false, $season = null, $area = null, $id_diskon = null)
     {
         if ($id != null) {
             $this->db->where('id_paket', $id);
@@ -457,12 +457,18 @@ class PaketUmroh extends CI_Model
                 }
                 $data[$key]->harga_display = $hargaDisplay;
 
+                $diskon_promo = 0;
+                if ($id_diskon) {
+                    $diskon = $this->db->where('id_diskon', $id_diskon)->get('diskon')->row();
+                    $diskon_promo = $diskon->nominal;
+                }
+
                 //harga di home jamaah
                 $this->load->library('money');
                 $data[$key]->hargaPretty = $this->money->format($hargaDisplay);
-                $data[$key]->hargaPrettyDiskon = $this->money->format($hargaDisplay - $d->default_diskon);
+                $data[$key]->hargaPrettyDiskon = $this->money->format($hargaDisplay - $d->default_diskon - $diskon_promo);
                 $data[$key]->hargaHome = $this->money->hargaHomeFormat($hargaDisplay);
-                $data[$key]->hargaHomeDiskon = $this->money->hargaHomeFormat($hargaDisplay - $d->default_diskon);
+                $data[$key]->hargaHomeDiskon = $this->money->hargaHomeFormat($hargaDisplay - $d->default_diskon - $diskon_promo);
                 //get berapa hari paket umrohnya
                 if (isset($d->tanggal_pulang)) {
                     $data[$key]->lamaHari = ($this->calculate->dateDiff($d->tanggal_pulang, $d->tanggal_berangkat)) + 1;
@@ -502,7 +508,7 @@ class PaketUmroh extends CI_Model
             return false;
         }
 
-        if ($id != null) {
+        if ($id != null && (!empty($data))) {
             $data = $data[0];
         }
         return $data;
@@ -820,5 +826,22 @@ class PaketUmroh extends CI_Model
         $this->db->update('diskon', $data);
 
         return true;
+    }
+
+    public function getPackageAndDiskon($id_diskon) {
+        $this->db->where('id_diskon', $id_diskon);
+        $query = $this->db->get('diskon_paket');
+        $diskon_paket = $query->result();
+        $paketDiskon = array();
+        if ($diskon_paket) {
+            foreach ($diskon_paket as $key => $v) {
+                $paket = $this->getPackage($v->id_paket, true, true, false, null, true, null, null, $v->id_diskon);
+                if ($paket) {
+                    $paketDiskon[] = $paket;
+                }
+
+            }
+        }
+        return $paketDiskon ;
     }
 }

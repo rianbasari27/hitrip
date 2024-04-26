@@ -43,7 +43,7 @@
                     <p><?php echo $promo->deskripsi ;?>
                     </p>
                     <h4>Expired : <?php echo $this->date->convert_date_indo($promo->tgl_berakhir) ;?></h4>
-                    <a href="#"
+                    <a href="<?php echo base_url() . 'jamaah/trip?id_diskon=' . $promo->id_diskon ;?>"
                         class="btn btn-full btn-m mt-5 rounded-s text-uppercase font-700 shadow-s gradient-highlight">Dapatkan
                         promo</a>
 
