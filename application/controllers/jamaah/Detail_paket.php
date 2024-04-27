@@ -50,11 +50,7 @@ class Detail_paket extends CI_Controller
             $this->alert->toastAlert('red', 'Paket tidak ditemukan');
             redirect(base_url() . 'jamaah/home');
         }
-        $data = [
-            'paket' => $paket,
-            'member' => $member,
-        ];
-        $this->load->view('jamaah/detail_paket_view', $data);
+        $this->load->view('jamaah/detail_paket_view', $paket);
     }
 }
         

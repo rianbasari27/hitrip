@@ -4,6 +4,15 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Daftar extends CI_Controller
 {
+    public function __construct()
+    {
+        parent::__construct();
+        $this->load->model('customer');
+        if (!$this->customer->is_user_logged_in()) {
+            $this->alert->toastAlert('red', 'Anda perlu login!');
+            redirect(base_url() . 'jamaah/home');
+        }
+    }
 
     public function index()
     {
@@ -37,6 +46,15 @@ class Daftar extends CI_Controller
 
         $this->load->model('registrasi');
         $user = $this->registrasi->getUser($_SESSION['id_user']);
+        if ($user->member != null) {
+            foreach ($user->member as $m) {
+                if ($m->id_paket == $_GET['id']) {
+                    $this->alert->toastAlert('red', 'Anda sudah terdaftar di paket ini');
+                    redirect(base_url() . 'jamaah/order');   
+                }
+            }
+        }
+
         if (isset($_GET['parent'])) {
             $parent = $this->registrasi->getMember($_GET['parent']);
             if (empty($parent)) {
