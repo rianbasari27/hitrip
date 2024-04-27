@@ -463,7 +463,7 @@
                         <span>Discover</span>
                         <i class="fa fa-angle-right"></i>
                     </a>
-                    <a href="#">
+                    <a href="<?php echo base_url() . 'features/jadwal_solat' ?>">
                         <i class="fa-solid fa-star-and-crescent gradient-highlight color-white"></i>
                         <span>Jadwal Sholat</span>
                         <i class="fa fa-angle-right"></i>
