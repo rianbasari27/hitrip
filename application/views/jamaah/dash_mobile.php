@@ -107,7 +107,7 @@
             <?php } else { ?>
             <?php foreach ($promo as $prm) { ?>
             <div class="card card-style ms-3"
-                style="background-image:url(<?php echo base_url() . $prm->banner_promo ?>);" data-card-height="200">
+                style="background-image:url('<?php echo base_url() . $prm->banner_promo ?>');" data-card-height="200">
                 <div class="card-bottom px-3 py-3">
                     <a href="<?php echo base_url() . 'jamaah/home/promo?id=' . $prm->id_diskon; ?>"
                         aria-label="Click for Explore"

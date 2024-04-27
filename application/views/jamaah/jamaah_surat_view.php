@@ -4,9 +4,6 @@
 <head>
     <?php $this->load->view('jamaah/include/header'); ?>
     <style>
-    .bg-11 {
-        background-image: url("<?php echo base_url(); ?>asset/appkit/images/ventour/quran-bg.jpg");
-    }
 
     .menu-ads {
         position: fixed;
@@ -87,7 +84,7 @@
         <div class="page-title-clear"></div>
 
         <div class="page-content">
-            <div class="card card-style bg-11 mt-3" data-card-height="250">
+            <div class="card card-style gradient-highlight mt-3" data-card-height="250">
                 <div class="card-top ps-3 mt-3 mb-2">
                     <a href="<?php echo base_url() . 'jamaah/surat_doa/' ?>"
                         class="py-2 px-3 bg-white rounded-l color-dark-dark"><i

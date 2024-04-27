@@ -22,7 +22,7 @@ class Surat_doa extends CI_Controller
         $data = [
             'surat' => $surat
         ];
-        $this->load->view('jamaahv2/list_surat_jamaah', $data);
+        $this->load->view('jamaah/list_surat_jamaah', $data);
     }
 
     public function surat($nomor)
@@ -33,7 +33,7 @@ class Surat_doa extends CI_Controller
         // echo '<pre>';
         // print_r($data);
         // exit();
-        $this->load->view('jamaahv2/jamaah_surat_view', $data);
+        $this->load->view('jamaah/jamaah_surat_view', $data);
     }
 
     public function tandai_ayat()
@@ -77,11 +77,11 @@ class Surat_doa extends CI_Controller
         $data = [
             'doa' => $doa['result']
         ];
-        $this->load->view('jamaahv2/doa_view', $data);
+        $this->load->view('jamaah/doa_view', $data);
     }
 
     public function tasbih()
     {
-        $this->load->view('jamaahv2/counter_tasbih_view');
+        $this->load->view('jamaah/counter_tasbih_view');
     }
 }

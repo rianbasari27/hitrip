@@ -41,11 +41,20 @@ class Detail_paket extends CI_Controller
         $paket = $this->paketUmroh->getPackage($_GET['id']);
         $gallery = $this->paketUmroh->getGalleryPackage(null, $_GET['id']);
         $paket->gallery = $gallery;
+        $member = null;
+        if (isset($_SESSION['id_user'])) {
+            $user = $this->registrasi->getUser($_SESSION['id_user']);
+            $member = $this->registrasi->getMember($user->member[0]->id_member);
+        }
         if (!$paket) {
             $this->alert->toastAlert('red', 'Paket tidak ditemukan');
             redirect(base_url() . 'jamaah/home');
         }
-        $this->load->view('jamaah/detail_paket_view', $paket);
+        $data = [
+            'paket' => $paket,
+            'member' => $member,
+        ];
+        $this->load->view('jamaah/detail_paket_view', $data);
     }
 }
         

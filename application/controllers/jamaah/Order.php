@@ -41,6 +41,13 @@ class Order extends CI_Controller
             redirect(base_url() . 'jamaah/order');
         }
         $paket = $this->paketUmroh->getPackage($member->id_paket);
-        $this->load->view('jamaah/paket_aktif_view', $paket);
+        // echo '<pre>';
+        // print_r($member);
+        // exit();
+        $data = [
+            'paket' => $paket,
+            'member' => $member,
+        ];
+        $this->load->view('jamaah/paket_aktif_view', $data);
     }
 }

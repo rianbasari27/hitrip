@@ -27,11 +27,45 @@
         <div class="page-content mt-n1">
 
             
-        <div class="card card-style mb-2 mt-3">
+        <div class="card card-style mb-3 mt-3">
             <div class="content">
-                <h1 class="mb-n2 font-20"><?php echo $nama_paket?></h1>
-                <p class="color-highlight"><i class="fa-solid fa-location-dot me-1"></i><?php echo $nama_paket . ', ' . $negara ?></p>
+                <h1 class="mb-n2 font-20"><?php echo $paket->nama_paket?></h1>
+                <p class="color-highlight mb-1"><i class="fa-solid fa-location-dot me-1"></i><?php echo $paket->nama_paket . ', ' . $paket->negara ?></p>
+                <div class="card card-style mx-0" 
+                    style="background-image:url('<?php echo base_url() . $paket->banner_image ?>');" 
+                    data-card-height="100">
+                </div>
+
+                <div class="d-flex opacity-60">
+                    <div class="mx-auto">
+                        <i class="fa-solid fa-plane-departure font-16 color-theme"></i>
+                    </div>
+                    <div class="mx-auto" style="width: 70%">
+                        <div style="border-bottom: 1px dashed grey;" class="mt-2"></div>
+                    </div>
+                    <div class="mx-auto">
+                        <i class="fa-solid fa-plane-arrival font-16 color-theme"></i>
+                    </div>
+                </div>
+                <div class="d-flex opacity-60">
+                    <h4 class="font-12 text-start"><?php echo $this->date->convert_date_indo($paket->tanggal_berangkat) ?></h4>
+                    <h4 class="font-12 text-end ms-auto"><?php echo $this->date->convert_date_indo($paket->tanggal_pulang) ?></h4>
+                </div>
+
+                
             </div>
+        </div>
+        <div class="card card-style">
+            <div class="content">
+                <h3 class="font-16">Detail</h3>
+                <div class="row">
+                    <div class="col-6">Pilihan Kamar</div>
+                    <div class="col-6 text-end color-theme font-700"><?php echo $member->pilihan_kamar ?></div>
+                    <div class="col-6">Status Pembayaran</div>
+                    <div class="col-6 text-end font-700 <?php echo $member->lunas != '1' ? 'color-red-dark' : 'color-green-dark' ?>"><?php echo $member->lunas != '1' ? 'Belum lunas' : 'Lunas' ?></div>
+                </div>
+            </div>
+
         </div>
 
             <?php $this->load->view('jamaah/include/footer'); ?>
