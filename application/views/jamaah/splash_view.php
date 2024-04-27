@@ -44,13 +44,13 @@
                 width="200"> -->
             <h1 class="color-white">Hi<span class="p-1 rounded-sm bg-highlight ms-2">Trip</span></h1>
             <h5 class="opacity-70 color-white">Explore the World with HiTrip</h5>
-        </div>
-        <div class="card-bottom" style="top: 110%;">
             <h4 class="boxed-text-xl pt-4 line-height-l color-white">Explore new horizons and make lasting memories with
                 HiTrip's seamless global adventures.</h4>
-    
+        </div>
+        <div class="card-bottom" style="top: 130%;">
+
             <a href="<?php echo base_url() ?>jamaah/splash/end/home"
-                class="btn btn-center-l gradient-highlight rounded-sm btn-l font-13 font-600 mt-5 scale-box"
+                class="btn btn-full mx-5 gradient-highlight rounded-sm btn-l font-13 font-600 mt-5 scale-box"
                 style="margin-top: 100px;">Get Started</a>
         </div>
 
