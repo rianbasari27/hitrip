@@ -218,7 +218,7 @@ class Daftar extends CI_Controller
         $this->load->model('va_model');
         $this->va_model->createVAOpen($id_member);
         if (!$id_member) {
-            $this->alert->setJamaah('red', 'Ups...', $_SESSION['alert_message']);
+            $this->alert->setJamaah('red', 'Ups...', "kaka");
             redirect($_SERVER['HTTP_REFERER']);
         }
         if ($id_member == true && $parent_id != null) {

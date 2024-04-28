@@ -57,14 +57,14 @@
                         </a>
                     </div>
                 <?php } ?>
+                <div class="content">
+                    <p class="text-center">Pilih salah satu untuk download invoice</p>
+                </div>
             <?php } else { ?>
                 <div class="content">
                     <p class="text-center">Belum ada transaksi</p>
                 </div>
             <?php } ?>
-            <div class="content">
-                <p class="text-center">Pilih salah satu untuk download invoice</p>
-            </div>
 
 
             <?php $this->load->view('jamaah/include/alert'); ?>

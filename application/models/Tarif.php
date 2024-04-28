@@ -1056,7 +1056,7 @@ class Tarif extends CI_Model
         $this->load->model('registrasi');
         $member = $this->registrasi->getMember($pembayaran->id_member);
         $member = $member[0];
-        $jamaah = $this->registrasi->getJamaah($member->id_jamaah);
+        $user = $this->registrasi->getUser($member->id_user);
         $riwayat = $this->getRiwayatBayar($member->id_member, $pembayaran->tanggal_bayar);
 
         $tanggal = new DateTime($member->paket_info->tanggal_berangkat);
@@ -1064,7 +1064,9 @@ class Tarif extends CI_Model
         $h_45 = $tanggal->format("j F Y");
 
         $data = array(
-            'nama' => $jamaah->first_name . ' ' . $jamaah->second_name . ' ' . $jamaah->last_name,
+            'nama' => $user->name,
+            'email' => $user->email,
+            'no_wa' => $user->no_wa,
             'tanggal_cetak' => $this->date->convert('j F Y', date('Y-m-d')),
             'nama_paket' => $member->paket_info->nama_paket . ' ' . $this->date->convert("j F Y", $member->paket_info->tanggal_berangkat),
             'h_45' => $h_45,

@@ -71,7 +71,7 @@
                 </div>
             </div>
             <div class="content mt-n2">
-                <a href="#" class="btn btn-m btn-full rounded-s gradient-highlight">Download Invoice</a>
+                <a href="<?php echo base_url() . 'jamaah/kuitansi_dl/download?id=' . $payment->id_pembayaran ?>" class="btn btn-m btn-full rounded-s gradient-highlight">Download Invoice</a>
             </div>
 
             <?php $this->load->view('jamaah/include/alert'); ?>

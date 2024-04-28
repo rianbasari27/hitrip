@@ -13,38 +13,38 @@ class Kuitansi_dl extends CI_Controller
     public function download()
     {
 
-        if (!isset($_SESSION['ktp_no'])) {
-            $this->alert->setJamaah('red', 'Oops..' , 'Access Denied');
+        if (!isset($_SESSION['id_user'])) {
+            $this->alert->toastAlert('red', 'Access Denied');
             redirect($_SERVER['HTTP_REFERER']);
         }
         $this->form_validation->set_data($this->input->get());
         $this->form_validation->set_rules('id', 'id', 'trim|required');
         if ($this->form_validation->run() == FALSE) {
-            $this->alert->setJamaah('red', 'Oops..' , 'Access Denied');
+            $this->alert->toastAlert('red', 'Access Denied');
             redirect($_SERVER['HTTP_REFERER']);
         }
 
         //validate
-        $this->load->library('secret_key');
-        $id_pembayaran = $this->secret_key->validate($_GET['id']);
-        if ($id_pembayaran == false ) {
-            $this->alert->setJamaah('red', 'Oops..' , 'Access Denied');
-            redirect(base_url() . 'jamaah/home_user');
-        }
+        // $this->load->library('secret_key');
+        // $id_pembayaran = $this->secret_key->validate($_GET['id']);
+        // if ($id_pembayaran == false ) {
+        //     $this->alert->setJamaah('red', 'Oops..' , 'Access Denied');
+        //     redirect(base_url() . 'jamaah/home_user');
+        // }
 
         $this->load->model('auth');
-        $check = $this->auth->checkPembayaran($_SESSION['id_member'], $id_pembayaran);
-        if (!$check) {
-            $this->alert->setJamaah('red', 'Oops..' , 'Access Denied');
-            redirect(base_url() . 'jamaah/home_user');
-        }
+        // $check = $this->auth->checkPembayaran($_SESSION['id_member'], $_GET['id']);
+        // if (!$check) {
+        //     $this->alert->toastAlert('red', 'Access Denied');
+        //     redirect(base_url() . 'jamaah/home');
+        // }
 
         $this->load->model('tarif');
-        $data = $this->tarif->getKuitansiData($id_pembayaran);
+        $data = $this->tarif->getKuitansiData($_GET['id']);
         $strpos = strpos(strtolower($data['nama_paket']), ' ');
         $firstWord= substr($data['nama_paket'], 0, $strpos);
         $data['jenisPaket'] = false;
-        $data['logo'] = 'asset/login/images/LOGO-VENTOUR.png';
+        $data['logo'] = '/asset/appkit/images/hitrip/hitrip-logo.png';
         if (strtolower($firstWord) == "low" || strtolower($firstWord) == "lcu") {
             $data['jenisPaket'] = true;
             $data['logo'] = 'asset/login/images/LOGO-LCU.png';
@@ -113,6 +113,10 @@ class Kuitansi_dl extends CI_Controller
             $data['riwayat']['tarif']['dataMember'][$key]['detailJamaah']->member[0]->kategori = $kategori;
         }
         $data['id'] = $_GET['id'];
+        // echo '<pre>';
+        // print_r($data);
+        // exit();
+        // $this->load->view('staff/kuitansi_html_view', $data);
         $data['html'] = $this->load->view('staff/kuitansi_html_view', $data, true);
         $this->load->view('staff/kuitansi_view', $data);
     }
