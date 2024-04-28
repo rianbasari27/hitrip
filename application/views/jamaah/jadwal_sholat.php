@@ -3,6 +3,11 @@
 
 <head>
     <?php $this->load->view('jamaah/include/header'); ?>
+    <style>
+        #page {
+            min-height: 100vh !important;
+        }
+    </style>
 </head>
 
 <body class="theme-light">
