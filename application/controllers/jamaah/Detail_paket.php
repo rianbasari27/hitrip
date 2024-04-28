@@ -44,6 +44,9 @@ class Detail_paket extends CI_Controller
         $member = null;
         if (isset($_SESSION['id_user'])) {
             $user = $this->registrasi->getUser($_SESSION['id_user']);
+            echo '<pre>';
+            print_r($user);
+            exit();
             $member = $this->registrasi->getMember($user->member[0]->id_member);
         }
         if (!$paket) {
