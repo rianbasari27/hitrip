@@ -28,7 +28,7 @@
 
 <body class="theme-light">
     <video autoplay muted loop id="myVideo">
-        <source src="<?php echo base_url() . 'asset/video/background_vid.mp4' ;?>" type="video/mp4">
+        <source src="<?php echo base_url() . 'asset/video/splash-video.mp4' ;?>" type="video/mp4">
         Your browser does not support HTML5 video.
     </video>
 
