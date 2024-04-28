@@ -59,7 +59,7 @@
                         <div class="col-6 mb-2 color-theme">Status</div>
                         <div class="col-6 mb-2 text-end font-700 <?php echo $payment->verified == 1 ? 'color-green-dark ' : 'color-red-dark' ; ?>"><?php echo $payment->verified == 1 ? 'Valid' : 'Tidak Valid' ; ?></div>
                         <div class="col-6 mb-2 color-theme">Tanggal Bayar</div>
-                        <div class="col-6 mb-2 text-end font-700 color-theme"><?php echo $this->date->convert('j F Y',$payment->tanggal_bayar); ?></div>
+                        <div class="col-6 mb-2 text-end font-700 color-theme"><?php echo $this->date->convert_date_indo(date('Y-m-d', strtotime($payment->tanggal_bayar))); ?></div>
                         <div class="col-6 mb-2 color-theme">Metode Pembayaran</div>
                         <div class="col-6 mb-2 text-end font-700 color-theme"><?php echo $payment->cara_pembayaran ?></div>
                         <div class="col-6 mb-2 color-theme">Nominal</div>
