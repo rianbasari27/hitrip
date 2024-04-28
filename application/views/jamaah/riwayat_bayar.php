@@ -51,7 +51,7 @@
                                     <h5 class="color-theme font-15 font-700 d-block mb-n1">
                                         <?php echo number_format($item->jumlah_bayar, 0, ',', '.') ?></h5>
                                     <p
-                                        class="color-green-dark font-11 d-inline"><?php echo $this->date->convert("j F Y", $item->tanggal_bayar) ?>
+                                        class="color-green-dark font-11 d-inline"><?php echo $this->date->convert_date_indo(date('Y-m-d', strtotime($item->tanggal_bayar))); ?>
                                         <i class="fa fa-check-circle"></i></p>
                             </div>
                         </a>
