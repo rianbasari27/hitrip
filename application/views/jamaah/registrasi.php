@@ -401,7 +401,7 @@
                             </div>
                             <div class="input-style has-borders no-icon input-style-always-active validate-field mb-4">
                                 <a href="#" data-menu="datepicker2" class="text-dark">
-                                    <input name="tanggal_lahir" type="date" class="form-control validate-name upper color-theme" id="form7" readonly value="<?php echo $user->tanggal_lahir != null ? $user->tanggal_lahir : ''; ?>">
+                                    <input name="tanggal_lahir" type="date" class="form-control validate-name upper" id="form7" readonly value="<?php echo $user->tanggal_lahir != null ? $user->tanggal_lahir : ''; ?>">
                                     <label for="form7" class="color-highlight">Tanggal Lahir <strong class="text-danger">*</strong></label>
                                 </a>
                             </div>

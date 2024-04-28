@@ -7,6 +7,9 @@
     .bg-home {
         background-image: url("<?php echo base_url(); ?>asset/appkit/images/ventour/register.png");
     }
+    #page {
+        min-height: 100vh !important;
+    }
     </style>
 </head>
 
@@ -73,10 +76,10 @@
                 <!-- <p>
                     Atau, lanjut ke tahap berikutnya.
                 </p> -->
-                <a href="<?php echo base_url() . 'jamaah/daftar/registrasi_next'; ?>"
-                    class="btn btn-l mb-3 mt-3 rounded-s text-uppercase font-700 shadow-s bg-green-light btn-full">Lanjutkan</span></a>
-
+                
             </div>
+            <a href="<?php echo base_url() . 'jamaah/daftar/registrasi_next'; ?>"
+                class="btn btn-l mb-3 mx-3 rounded-s text-uppercase font-700 shadow-s bg-green-light btn-full fixed-bottom" style="bottom:70px;">Lanjutkan</span></a>
         </div>
         <!-- Page content ends here-->
 
