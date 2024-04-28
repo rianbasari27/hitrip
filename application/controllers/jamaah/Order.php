@@ -30,6 +30,7 @@ class Order extends CI_Controller
     public function paket_aktif() {
         $this->load->model('paketUmroh');
         $this->load->model('registrasi');
+        $this->load->model('tarif');
         $member = $this->registrasi->getMember(null, $_SESSION['id_user']);
         $member = $member[0];
         if ($member == null) {
@@ -41,9 +42,7 @@ class Order extends CI_Controller
             redirect(base_url() . 'jamaah/order');
         }
         $paket = $this->paketUmroh->getPackage($member->id_paket);
-        // echo '<pre>';
-        // print_r($member);
-        // exit();
+
         $data = [
             'paket' => $paket,
             'member' => $member,

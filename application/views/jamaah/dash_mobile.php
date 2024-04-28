@@ -458,7 +458,7 @@
                         <span>Hotel Terdekat</span>
                         <i class="fa fa-angle-right"></i>
                     </a>
-                    <a href="#">
+                    <a href="<?php echo base_url() . 'jamaah/discover'?>">
                         <i class="fa-solid fa-compass gradient-highlight color-white"></i>
                         <span>Discover</span>
                         <i class="fa fa-angle-right"></i>

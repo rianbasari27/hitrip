@@ -42,7 +42,7 @@
                         <h5>Details</h5>
                         <div class="row mb-0 mt-2">
                             <h5 class="col-6 text-start font-14 opacity-60 font-500">Paket</h5>
-                            <h5 class="col-6 text-end font-14 font-700"><?php echo $currentPaket->nama_paket . ', ' . $currentPaket->area_trip ?></h5>
+                            <h5 class="col-6 text-end font-14 font-700"><?php echo $currentPaket->nama_paket . ', ' . $currentPaket->negara ?></h5>
                             <h5 class="col-6 text-start font-14 opacity-60 font-500">Tanggal</h5>
                             <h5 class="col-6 text-end font-14 font-700"><?php echo $this->date->convert_date_indo($tgl_regist); ?></h5>
                             <h5 class="col-6 text-start font-14 opacity-60 font-500">Waktu</h5>

@@ -12,14 +12,14 @@ class Pembayaran extends CI_Controller
         if (!$this->customer->is_user_logged_in()) {
             redirect(base_url() . 'jamaah/home');
         }
-        $this->load->model('tarif');
-        $tarif = $this->tarif->getRiwayatBayar($_SESSION['id_member']);
+        // $this->load->model('tarif');
+        // $tarif = $this->tarif->getRiwayatBayar($_SESSION['id_member']);
         //get basename
-        $functionCall = basename($_SERVER['REQUEST_URI']);
-        $exceptionFunctions = ['bayar_duitku', 'duitku_bayar_baru', 'proses_bayar_duitku'];
-        if ($tarif['totalBayar'] <= 0 && !in_array($functionCall, $exceptionFunctions)) {
-            redirect(base_url() . 'jamaah/daftar/dp_notice');
-        }
+        // $functionCall = basename($_SERVER['REQUEST_URI']);
+        // $exceptionFunctions = ['bayar_duitku', 'duitku_bayar_baru', 'proses_bayar_duitku'];
+        // if ($tarif['totalBayar'] <= 0 && !in_array($functionCall, $exceptionFunctions)) {
+        //     redirect(base_url() . 'jamaah/daftar/dp_notice');
+        // }
     }
 
     public function index()
@@ -38,13 +38,42 @@ class Pembayaran extends CI_Controller
     }
     public function riwayat()
     {
-        $idMember = $_SESSION['id_member'];
+        $idMember = $_GET['id'];
+        if (!$idMember) {
+            $this->alert->toastAlert('red', 'Pembayaran tidak ditemukan.');
+            redirect(base_url() . 'jamaah/home');
+        }
         $this->load->model('tarif');
         $data = $this->tarif->getRiwayatBayar($idMember);
         // echo '<pre>';
         // print_r($data);
         // exit();
-        $this->load->view('jamaahv2/riwayat_bayar', $data);
+        $this->load->view('jamaah/riwayat_bayar', $data);
+    }
+    public function detail_pembayaran() {
+        $this->load->model('tarif');
+        $this->load->model('registrasi');
+        $this->load->model('paketUmroh');
+        $data = $this->tarif->getPembayaran($_GET['idm']);
+        $payment = null;
+        foreach ($data['data'] as $key => $d) {
+            if ($data['data'][$key]->id_pembayaran == $_GET['id']) {
+                $payment = $data['data'][$key];
+                $payment->kode_transaksi = '#' . $data['data'][$key]->id_pembayaran . $data['data'][$key]->id_member . date('YmdHi', strtotime($data['data'][$key]->tanggal_bayar));
+            }
+        }
+        if ($payment == null) {
+            $this->alert->toastAlert('red', 'Pembayaran tidak ditemukan');
+            redirect(base_url() . 'jamaah/home');
+        }
+        $user = $this->registrasi->getUser($_SESSION['id_user']);
+        $paket = $user->member[0]->paket_info;
+        $data = [
+            'payment' => $payment,
+            'user' => $user,
+            'paket' => $paket,
+        ];
+        $this->load->view('jamaah/detail_transaksi', $data);
     }
     public function bayar()
     {

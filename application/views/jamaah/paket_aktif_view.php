@@ -51,12 +51,11 @@
                     <h4 class="font-12 text-start"><?php echo $this->date->convert_date_indo($paket->tanggal_berangkat) ?></h4>
                     <h4 class="font-12 text-end ms-auto"><?php echo $this->date->convert_date_indo($paket->tanggal_pulang) ?></h4>
                 </div>
-
-                
             </div>
         </div>
+
         <div class="card card-style">
-            <div class="content">
+            <div class="content mb-0">
                 <h3 class="font-16">Detail</h3>
                 <div class="row">
                     <div class="col-6">Pilihan Kamar</div>
@@ -65,7 +64,10 @@
                     <div class="col-6 text-end font-700 <?php echo $member->lunas != '1' ? 'color-red-dark' : 'color-green-dark' ?>"><?php echo $member->lunas != '1' ? 'Belum lunas' : 'Lunas' ?></div>
                 </div>
             </div>
+        </div>
 
+        <div class="content">
+            <a href="<?php echo base_url() . 'jamaah/pembayaran/riwayat?id=' . $member->id_member ?>" class="btn btn-m btn-full gradient-highlight rounded-s">Riwayat Transaksi</a>
         </div>
 
             <?php $this->load->view('jamaah/include/footer'); ?>
