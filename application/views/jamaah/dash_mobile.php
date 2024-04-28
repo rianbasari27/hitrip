@@ -234,15 +234,15 @@
                                         <i class="fa-solid fa-star color-gray-dark"></i>
                                         <?php } ?>
                                     </div>
-                                    <h4 class="font-16 pt-1 line-height-s pb-0 mb-n1"><?php echo $p->nama_paket ?></h4>
+                                    <h4 class="font-15 pt-1 line-height-s pb-0 mb-0"><?php echo $p->nama_paket ?></h4>
                                     <!-- <span class="font-10 mb-0">7 Nights - All Inclusive</span> -->
                                     <?php if ($p->default_diskon != 0) { ?>
                                     <del style="text-decoration:line-through; color: grey;">
-                                        <span class="d-block mt-1"><?php echo $p->hargaPretty ?></span>
+                                        <span class="d-block mt-1 font-12"><?php echo $p->hargaPretty ?></span>
                                     </del>
-                                    <h6 class="font-14 color-highlight"><?php echo $p->hargaPrettyDiskon ?></h6>
+                                    <h6 class="font-13 color-highlight"><?php echo $p->hargaPrettyDiskon ?></h6>
                                     <?php } else { ?>
-                                    <h6 class="font-14 color-highlight mt-2"><?php echo $p->hargaPretty ?></h6>
+                                    <h6 class="font-13 color-highlight mt-2"><?php echo $p->hargaPretty ?></h6>
                                     <?php } ?>
                                 </div>
                             </a>
