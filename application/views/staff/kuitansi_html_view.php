@@ -8,6 +8,7 @@
     body {
         margin: 0;
         padding: 0;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
     }
     .table {
         width: 100%;
@@ -17,11 +18,13 @@
         background-color: rgba(0, 0, 0, .075);
     }
     h1, h2, h3, h4, h5 {
-        margin-bottom: 0;
+        line-height: 10px;
     }
     p {
-        margin-bottom: 0;
+        line-height: 10px;
+        color: #808080;
     }
+
     /* .logo {
         margin: 5px;
     }
@@ -131,378 +134,134 @@
         
     <table class="table">
         <tr>
-            <td>
+            <td style="vertical-align: top; width: 280px;" colspan="3">
                 <img width="140px" src="<?php echo base_url() . $logo ?>"><br>
             </td>
-            <td>
+            <td colspan="3">
                 <h3>INVOICE</h3><br>
                 <h4>Nomor Invoice</h4>
-                <p><?php echo '#' . $id . $riwayat['id_member']; ?></p><br>
+                <p><?php echo '#' . $id . $riwayat['id_member'] . date('Ymd', strtotime($tanggal_pembayaran)); ?></p><br>
                 <h4>Tanggal</h4>
                 <p><?php echo isset($tanggal_pembayaran) ? $tanggal_pembayaran : '-' ?></p><br>
-                <h4>Tanggal Cetak</h4>
-                <p><?php echo $tanggal_cetak ?></p>
             </td>
         </tr>
         <tr>
-            <td colspan="2">
-                <hr>
+            <td colspan="6">
+                <hr  style="height: 3px;">
             </td>
         </tr>
         <tr>
-            <td>
+            <td colspan="3">
                 <h4>Ditagih kepada</h4>
                 <p><?php echo $nama ?></p>
                 <p><?php echo $email ?></p>
-                <p><?php echo $no_wa ?></p>
+                <p><?php echo $no_wa ?></p><br>
             </td>
-            <td>
-                <h4>Ditagih dari</h4>
+            <td colspan="3">
+                <h4>Ditagih oleh</h4>
                 <p>HiTrip</p>
                 <p>info@hi-trip.com</p>
-                <p>(021) 726 287812</p>
+                <p>(021) 726 287812</p><br>
             </td>
         </tr>
-    </table>
-    <div class="row">
-        <div class="col-5">
-            <!-- <div class="logo"> -->
-                <img width="140px" src="<?php echo base_url() . $logo ?>"><br>
-            <!-- </div> -->
-        </div>
-        <div class="col-5">
-            <p style="margin-bottom: 5px; font-weight: 700;">INVOICE</p>
-            <p style="font-weight: 700; margin-bottom: 0;">Nomor Invoice</p>
-            <?php echo '#' . $id . $riwayat['id_member']; ?>
-            <p style="font-weight: 700; margin-bottom: 0;">Tanggal</p>
-            <?php echo isset($tanggal_pembayaran) ? $tanggal_pembayaran : '-' ?>
-        </div>
-    </div>
-
-    <table>
         <tr>
-            <td colspan="2">
-                <div class="logo">
-                    <img width="150px" src="<?php echo base_url() . $logo ?>"><br>
-                </div>
+            <td colspan="6"><hr></td>
+        </tr>
+        <tr>
+            <td colspan="3">
+                <h4>Paket</h4>
             </td>
             <td>
-                <!-- <div>
-                    <p style="margin-bottom: 5px; font-weight: 700;">INVOICE</p>
-                    <p style="font-weight: 700; margin-bottom: 0;">Nomor Invoice</p>
-                    <?php echo '#' . $id . $riwayat['id_member']; ?>
-                    <p style="font-weight: 700; margin-bottom: 0;">Tanggal</p>
-                    <?php echo isset($tanggal_pembayaran) ? $tanggal_pembayaran : '-' ?>
-                </div> -->
+                <h4>Tipe/Jenis</h4>
             </td>
-            <!-- <td class="bold header">
-                Invoice<br>
-                Tanggal : <?php echo isset($tanggal_pembayaran) ? $tanggal_pembayaran : '-'; ?>
-            </td> -->
-        </tr>
-        <tr>
-            <td colspan="4">
-                <hr>
+            <td style="text-align: center;">
+                <h4>Jumlah</h4>
+            </td>
+            <td style="text-align: right;">
+                <h4>Harga</h4>
             </td>
         </tr>
         <tr>
-            <td>Sudah Diterima Dari</td>
-            <td>:</td>
-            <td colspan="2"><?php echo $nama; ?></td>
+            <td colspan="6"><hr></td><br>
         </tr>
         <tr>
-            <td style="padding-bottom: 15px;">Tanggal Cetak Kwitansi</td>
-            <td style="padding-bottom: 15px;">:</td>
-            <td colspan="2" style="padding-bottom: 15px;"><?php echo $tanggal_cetak; ?></td>
-        </tr>
-
-        <tr>
-            <td class="title-body" colspan="4"><strong>Untuk Pembayaran :</strong></td>
-        </tr>
-        <tr>
-            <td class="bold body-left">Program</td>
-            <td>:</td>
-            <td class="bold body-right" colspan="2">
-                <?php echo $nama_paket . " ( Pendaftar ke-". $registNumber . " )"; ?></td>
-        </tr>
-        <tr>
-            <td class="bold body-left">Pilihan Kamar</td>
-            <td>:</td>
-            <td class="body-right" colspan="2" style="padding-top: 10px; padding-bottom: 10px;">
-                <ol>
-                    <?php foreach ($riwayat['tarif']['dataMember'] as $dm) { ?>
-                    <li>
-                        <?php echo $dm['detailJamaah']->name ; ?>
-                        (<?php echo $dm['detailJamaah']->member[0]->pilihan_kamar; ?>)
-                    </li>
-                    <?php } ?>
-                </ol>
-
-
-        </tr>
-        <tr>
-            <td class="bold body-left">Cara Pembayaran</td>
-            <td>:</td>
-            <td class="body-right" colspan="2"><?php echo isset($cara_pembayaran) ? $cara_pembayaran : '-'; ?></td>
-        </tr>
-        <tr>
-            <?php if (isset($jenis)) : ?>
-            <td class="bold body-left">Tanggal <?php echo $jenis == 'bayar' ? 'Pembayaran' : 'Refund' ;?></td>
-            <td>:</td>
-            <td class="body-right" colspan="2"><?php echo $tanggal_pembayaran; ?></td>
-            <?php endif; ?>
-        </tr>
-        <tr>
-            <td class="bold body-left">Atas Nama</td>
-            <td>:</td>
-            <td class="body-right" colspan="2" style="padding-top: 15px; padding-bottom: 15px;">
-                <div>
-                    <ol>
-                        <?php foreach ($riwayat['tarif']['dataMember'] as $dm) { ?>
-                        <li>
-                            <?php echo $dm['detailJamaah']->name; ?>
-                            (<?php echo $dm['detailJamaah']->no_ktp; ?>)&nbsp;(No WA :
-                            <?php echo $dm['detailJamaah']->no_wa; ?>)
-                        </li>
-                        <?php } ?>
-                    </ol>
-                </div>
+            <td colspan="3">
+                <h4><?php echo $nama_paket ?></h4><br>
+            </td>
+            <td>
+                <p><?php echo $riwayat['tarif']['dataMember'][$riwayat['id_member']]['baseFee']['pilihanKamar'] ?></p><br>
+            </td>
+            <td style="text-align: center;">
+                <p><?php echo count($riwayat['tarif']['dataMember']) ?></p><br>
+            </td>
+            <td style="text-align: right;">
+                <p><?php echo $this->money->format($riwayat['tarif']['dataMember'][$riwayat['id_member']]['baseFee']['harga']) ?></p><br>
             </td>
         </tr>
         <tr>
-            <td class="bold body-left">Konsultan</td>
-            <td>:</td>
-            <td class="body-right" colspan="2"><?php echo $agen; ?>
-                <?php echo ($agenTelp != '') ? "(telp : $agenTelp)" : ''; ?></td>
+            <td colspan="3"></td>
+            <td colspan="3"><hr></td>
+        </tr>
+        <?php $extraFee = 0 ?>
+        <?php foreach ($riwayat['tarif']['dataMember'] as $dm) { ?>
+            <?php foreach ($dm['potongan'] as $ef) { ?>
+            <tr>
+                <td colspan="3"></td>
+                <td colspan="2"><p><?php echo $ef->keterangan ?></p><br></td>
+                <td style="text-align: right;"><p><?php echo $this->money->format($ef->nominal); ?></p><br></td>
+            </tr>
+            <?php $extraFee += $ef->nominal ?>
+            <?php } ?>
+        <?php } ?>
+        <tr>
+            <td colspan="3"></td>
+            <td colspan="2">
+                <h4>Total</h4><br>
+            </td>
+            <td style="text-align: right;">
+                <?php 
+                    $total = 0; 
+                    foreach ($riwayat['tarif']['dataMember'] as $dm) {
+                        $total += $dm['baseFee']['harga'] + $extraFee;
+                    }
+                ?>
+                <h4><?php echo $this->money->format($total); ?></h4><br>
+            </td>
         </tr>
         <tr>
-            <?php if (isset($jenis)) : ?>
-            <td class="bold body-left"><?php echo $jenis == 'bayar' ? 'Pembayaran' : 'Refund' ;?> (IDR)</td>
-            <td>:</td>
-            <td class="body-right money bold" colspan="2"><?php echo $jumlah_bayar; ?></td>
-            <?php endif; ?>
+            <td colspan="3"></td>
+            <td colspan="2">
+                <p>Total sudah bayar</p><br>
+            </td>
+            <td style="text-align: right;">
+                <p><?php echo $this->money->format($riwayat['totalBayar']) ?></p><br>
+            </td>
         </tr>
         <tr>
-            <?php if (isset($jenis)) : ?>
-            <td class="bold body-left">SISA TAGIHAN (IDR)</td>
-            <td>:</td>
-            <td class="body-right money bold" colspan="2">Rp.
-                <?php echo number_format($riwayat['sisaTagihan'], 0, ',', '.'); ?>,-</td>
-            <?php endif; ?>
+            <td colspan="3"></td>
+            <td colspan="3"><hr></td>
         </tr>
         <tr>
-            <td colspan="4" class="body-bottom"></td>
+            <td colspan="3"></td>
+            <td colspan="2">
+                <h4>Sisa tagihan</h4><br>
+            </td>
+            <td style="text-align: right;">
+                <h4><?php echo $this->money->format($riwayat['sisaTagihan']) ?></h4><br>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="6"><hr style="height: 3px;"></td>
+        </tr>
+        <tr>
+            <td colspan="3">
+                <h4>Payment Via:</h4>
+                <p><?php echo $cara_pembayaran ?></p><br>
+                <h4>Tanggal Cetak:</h4>
+                <p><?php echo $tanggal_cetak ?></p><br>
+            </td>
         </tr>
     </table>
-    <div class="left-notes">
-        Notes :
-        <div class="box">
-            <?php echo isset($keterangan) ? $keterangan : ''; ?>
-        </div>
-    </div>
-    <div class="right-sign">
-        Penerima
-        <!-- <div class="penerima">
-        </div> -->
-        <div class="bold">
-            Ventour Finance
-
-        </div>
-    </div>
-    <br>
-
-    <div class="box-rincian">
-        <?php if (isset($jenis)) : ?>
-        <h3>Rincian Pembayaran</h3>
-        <table cellspacing="0">
-            <?php $total_tagihan = 0 ;?>
-            <?php foreach ($riwayat['tarif']['dataMember'] as $dm) { ?>
-            <tr>
-                <td style="text-align: left;">
-                    <?php $dm['detailJamaah']->name; ?><?php echo ($dm['detailJamaah']->member[0]->kategori != '' || $dm['detailJamaah']->member[0]->kategori != null) ? " ( " . $dm['detailJamaah']->member[0]->kategori . " ) " : '' ;?>
-                </td>
-                <td>:</td>
-                <td><?php echo 'Rp. ' . number_format($dm['baseFee']['harga'], 0, ',', '.') . ',-'; ?></td>
-                <?php echo $total_tagihan = $total_tagihan + $dm['baseFee']['harga']; ?>
-            </tr>
-            <?php } ?>
-            <tr>
-                <td style="text-align: left; padding-bottom: 10px;">Total Tagihan</td>
-                <td style="padding-bottom: 10px;">:</td>
-                <td style="padding-bottom: 10px;">
-                    <?php echo 'Rp. ' . number_format($total_tagihan, 0, ',', '.') . ',-'; ?>
-                </td>
-            </tr>
-            <tr>
-                <th colspan="3" style="text-align: left;">Biaya Tambahan</th>
-            </tr>
-            <?php 
-            $extraFee = 0;
-            $dendaProgres = 0;
-            foreach ($riwayat['tarif']['dataMember'] as $dm) { 
-                // $dendaProgres = $dendaProgres + $dm['dendaProgresif']; 
-                ?>
-            <?php
-                if (!empty($dm['dendaProgresif'])) {                    
-                
-                ?>
-            <tr>
-                <td>Denda Progresif</td>
-                <td>:</td>
-                <td><?php echo 'Rp. ' . number_format($dm['dendaProgresif'], 0, ',', '.') . ',-'; ?></td>
-            </tr>
-            <?php } ?>
-            <?php foreach ($dm['biayaExtra'] as $ef) { 
-                    // $extraFee = $extraFee + $ef->nominal;
-                    ?>
-            <tr>
-                <td><?php echo $ef->keterangan . (count($riwayat['tarif']['dataMember']) > 1 ? ' <strong>(' . $dm['detailJamaah']->name . ')</strong>' : ''); ?>
-                </td>
-                <td>:</td>
-                <td><?php echo 'Rp. ' . number_format($ef->nominal, 0, ',', '.') . ',-'; ?></td>
-            </tr>
-            <?php } ?>
-            <?php if (!empty($dm['extraFeeProgram'])) { ?>
-            <tr>
-                <td><?php echo $dm['deskripsiExtraFeeProgram'] . (count($riwayat['tarif']['dataMember']) > 1 ? ' <strong>(' . $dm['detailJamaah']->name . ')</strong>' : ''); ?>
-                </td>
-                <td>:</td>
-                <td><?php echo 'Rp. ' . number_format($dm['extraFeeProgram'], 0, ',', '.') . ',-'; ?></td>
-            </tr>
-            <?php } ?>
-            <?php } ?>
-
-            <tr>
-                <th colspan="3" style="text-align: left;">Potongan</th>
-            </tr>
-            <?php 
-            $extraFee = 0;
-            $dendaProgres = 0;
-            foreach ($riwayat['tarif']['dataMember'] as $dm) { ?>
-            <?php foreach ($dm['potongan'] as $ef) { 
-                    // $extraFee = $extraFee + $ef->nominal;
-                    ?>
-            <tr>
-                <td><?php echo $ef->keterangan . (count($riwayat['tarif']['dataMember']) > 1 ? ' <strong>(' . $dm['detailJamaah']->name . ')</strong>' : ''); ?>
-                </td>
-                <td>:</td>
-                <td><?php echo 'Rp. ' . number_format($ef->nominal, 0, ',', '.') . ',-'; ?></td>
-            </tr>
-            <?php } ?>
-            <?php } ?>
-
-            <tr class="bg-warning text-white">
-                <td style="padding-bottom: 10px;">Total Biaya</td>
-                <td style="padding-bottom: 10px;">:</td>
-                <td style="padding-bottom: 10px;">
-                    <?php echo 'Rp. ' . number_format($riwayat['tarif']['totalHargaFamily']+$extraFee+$dendaProgres, 0, ',', '.') . ',-'; ?>
-                </td>
-            </tr>
-
-            <tr>
-                <th colspan="3" style="text-align: left;">Untuk Pembayaran</th>
-            </tr>
-            <?php foreach ($riwayat['data'] as $byr) { ?>
-            <tr>
-                <td>Tanggal
-                    <?php echo $this->date->convert("d M Y", $byr->tanggal_bayar) . " ( " . $byr->id_pembayaran . " )"; ?>
-                </td>
-                <td>:</td>
-                <td>
-                    Rp. <?php echo number_format($byr->jumlah_bayar, 0, ',', '.'); ?>,-
-                </td>
-            </tr>
-            <?php } ?>
-            <tr class="bg-warning text-white">
-                <th style="padding: 10px 0px 10px 0px;">Total Sudah Bayar</th>
-                <td style="padding: 10px 0px 10px 0px;">:</td>
-                <th style="padding: 10px 0px 10px 0px;">Rp.
-                    <?php echo number_format($riwayat['totalBayar'], 0, ',', '.'); ?>,-</th>
-            </tr>
-            <tr class="bg-primary text-white">
-                <th>SISA TAGIHAN</th>
-                <td>:</td>
-                <th>Rp. <?php echo number_format($riwayat['sisaTagihan'], 0, ',', '.'); ?>,-</th>
-            </tr>
-        </table>
-        <?php else : ?>
-        <table>
-            <tr>
-                <th>
-                    <h3>Total DP</h3>
-                </th>
-                <td>
-                    <h3>:</h3>
-                </td>
-                <th>
-                    <h3>Rp. <?php echo number_format($totalDp, 0, ',', '.'); ?></h3>
-                </th>
-            </tr>
-        </table>
-        <?php endif; ?>
-    </div>
-
-
-    <div class="stamps">
-        <img src="<?php echo base_url() . 'asset/images/' . $logoLunas ?>" alt="Lunas" width="200px">
-    </div>
-
-
-    <div class="keterangan" style="font-size: 14px;">
-
-        <p><strong>PERHATIAN KHUSUS:</strong></p>
-        <ol>
-            <li style="color: red;">Full payment paling lambat H-45 atau tanggal
-                (<?php echo $this->date->convert('j F Y', $h_45) ?>)</li>
-            <li>Harga sewaktu-waktu dapat berubah tanpa pemberitahuan sebelumnya.</li>
-            <li>Transaksi Pembayaran dilakukan dengan (IDR) Rupiah Indonesia.</li>
-            <li>Membayar berarti setuju dengan semua syarat dan ketentuan yang berlaku ( Terlampir )</li>
-            <li>Harga mengacu kurs Rp.16.000</li>
-        </ol>
-
-        <p><strong><span style="border-bottom: 2px solid red;">SYARAT & KETENTUAN</span></strong></p>
-        <p><strong>A. PROSEDUR PEMBAYARAN</strong></p>
-        <ol type="I">
-            <li>
-                Pemesanan program &gt; 60 hari sebelum keberangkatan;
-                <ul>
-                    <li><strong>Deposit IDR 15,000,000 Per Orang/ Pax</strong></li>
-                </ul>
-            </li>
-            <li>
-                Pemesanan program antara 45-14 hari sebelum keberangkatan;
-                <ul>
-                    <li><strong>Diharuskan FULL PAYMENT</strong></li>
-                </ul>
-            </li>
-            <li>
-                Pembayaran Deposit dan Full payment dapat dilakukan pada hari kerja dari Senin s/d Jumat, pada jam 09.00
-                s/d 16.00 WIB dan Sabtu jam 09.00 s/d 13.00 WIB.
-            </li>
-            <li>
-                Transaksi pembayaran setelah jam kerja akan dikonfirmasi dan diterbitkan tanda terimanya pada hari kerja
-                berikutnya.
-            </li>
-            <li>
-                Transaksi pembayaran dapat dilakukan dengan cara sebagai berikut:
-                <ul>
-                    <li>Transfer - Bukti tanda terima/ invoice akan diterbitkan setelah dana efektif masuk ke rekening
-                        PT. Ventura Semesta Wisata.</li>
-                </ul>
-            </li>
-            <li>
-                Pembayaran yang sudah diterima tidak dapat dikembalikan dan tidak dapat dirubah peruntukannya ke yang
-                lain.
-            </li>
-        </ol>
-        <p><strong>B. KEBIJAKAN PEMBATALAN</strong></p>
-        <p><strong><span style="margin-left: 15px; border-bottom: 1px solid red;">Setelah konfirmasi diterima, jika ada
-                    pembatalan atau perubahan pemesanan, harap memberitahu kami melalui email, fax, alamat surat kepada
-                    bagian Manifest dan diberlakukan sesuai ketentuan diatas. Nama-nama calon Jama’ah sudah harus di
-                    berikan ke bagian Manifest pada saat pendaftaran.</span></strong></p>
-    </div>
-    
-    <?php $this->load->view('jamaah/include/script_view'); ?>
 </body>
 
 </html>

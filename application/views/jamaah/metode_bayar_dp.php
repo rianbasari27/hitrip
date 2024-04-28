@@ -73,7 +73,7 @@
                 
                 </div>
 
-                <a href="#" class="btn btn-m btn-full rounded gradient-highlight" data-menu="menu-receipts">Pembayaran</a>
+                <!-- <a href="#" class="btn btn-m btn-full rounded gradient-highlight" data-menu="menu-receipts">Pembayaran</a> -->
 
                 <div class="card card-style mx-0">
                     <div class="content">
