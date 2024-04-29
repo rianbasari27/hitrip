@@ -81,14 +81,17 @@
                         displayPrayerTimes(jadwal, timezone, city, country, d);
                     })
                     .catch(error => {
+                        // console.error("Error getting city and country: ", error);
+                        const jakartaLatitude = -6.186486;
+                        const jakartaLongitude = 106.834091;
+                        getCityAndCountry(jakartaLatitude, jakartaLongitude);
                         // Penanganan kesalahan jika gagal mendapatkan informasi kota dan negara
-                        console.error("Error getting city and country: ", error);
                     });
             })
             .catch(error => {
-                console.error("Error getting city and country: ", error);
-                const jakartaLatitude = -6.2088;
-                const jakartaLongitude = 106.8456;
+                // console.error("Error getting city and country: ", error);
+                const jakartaLatitude = -6.186486;
+                const jakartaLongitude = 106.834091;
                 getCityAndCountry(jakartaLatitude, jakartaLongitude);
                 // Penanganan kesalahan jika gagal mendapatkan informasi kota dan negara
             });
