@@ -113,9 +113,9 @@ class Kuitansi_dl extends CI_Controller
             $data['riwayat']['tarif']['dataMember'][$key]['detailJamaah']->member[0]->kategori = $kategori;
         }
         $data['id'] = $_GET['id'];
-        echo '<pre>';
-        print_r($data);
-        exit();
+        // echo '<pre>';
+        // print_r($data);
+        // exit();
         // $this->load->view('staff/kuitansi_html_view', $data);
         $data['html'] = $this->load->view('staff/kuitansi_html_view', $data, true);
         $this->load->view('staff/kuitansi_view', $data);
