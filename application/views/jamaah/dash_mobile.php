@@ -443,11 +443,11 @@
                         <span>Notifikasi</span>
                         <i class="fa fa-angle-right"></i>
                     </a>
-                    <a href="#">
+                    <!-- <a href="#">
                         <i class="fa-solid fa-money-bill-wave gradient-highlight color-white"></i>
                         <span>Currency</span>
                         <i class="fa fa-angle-right"></i>
-                    </a>
+                    </a> -->
                     <!-- <a href="#">
                         <i class="fa-solid fa-utensils gradient-highlight color-white"></i>
                         <span>Restoran Terdekat</span>
