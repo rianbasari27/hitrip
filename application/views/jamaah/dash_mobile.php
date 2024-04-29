@@ -129,7 +129,7 @@
                     <div>
                         <?php if ($paket != null) { ?>
                         <?php foreach ($paket as $pkt) { ?>
-                        <a href="#" class="card card-style my-3" aria-label="<?php echo $pkt->nama_paket ?>"
+                        <a href="<?php echo base_url() . 'jamaah/detail_paket?id=' . $pkt->id_paket ?>" class="card card-style my-3" aria-label="<?php echo $pkt->nama_paket ?>"
                             data-filter-item
                             data-filter-name="<?php echo strtolower($pkt->nama_paket . ' ' . $pkt->negara) ?>">
                             <div class="d-flex content">
@@ -422,8 +422,8 @@
                 <a href="#" class="close-menu"><i class="fa fa-times-circle"></i></a>
             </div>
             <div class="content">
-                <div class="list-group list-custom-small list-menu ms-0 me-2">
-                    <a href="<?php echo base_url() ?>/jamaah/trip">
+                <div class="list-group list-custom-small list-menu ms-0 me-2 mb-4">
+                    <a href="<?php echo base_url() ?>jamaah/trip">
                         <i class="fa-solid fa-umbrella-beach gradient-highlight color-white"></i>
                         <span>Trip</span>
                         <i class="fa fa-angle-right"></i>
@@ -438,7 +438,7 @@
                         <span>Notifikasi</span>
                         <i class="fa fa-angle-right"></i>
                     </a>
-                    <a href="#">
+                    <a href="<?php echo base_url() ?>jamaah/voucher">
                         <i class="fa-solid fa-ticket gradient-highlight color-white"></i>
                         <span>Voucher</span>
                         <i class="fa fa-angle-right"></i>

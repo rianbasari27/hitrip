@@ -3,6 +3,12 @@
 
 <head>
     <?php $this->load->view('jamaah/include/header'); ?>
+    <style>
+        .theme-dark label {
+            background-color: #4a89dc !important;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.css" />
 </head>
 
 <body class="theme-light">
@@ -28,12 +34,22 @@
 
             <div class="content text-center">
                 <div class="p-1 border border-4 border-blue-dark d-inline-block rounded-pill">
-                    <img src="<?php echo base_url() . 'asset/appkit/images/pictures/default/default-profile.jpg' ?>"
+                    <img src="<?php echo base_url() . ($profile_picture != null ? $profile_picture : 'asset/appkit/images/pictures/default/default-profile.jpg') ?>"
                     class="rounded-xl" width="100">
                 </div>
                 <div class="d-flex mt-3 justify-content-center">
-                    <a href="#" class="btn btn-xs me-1 d-inline-block rounded-pill shadow-xl bg-highlight">Upload foto</a>
-                    <a href="#" class="btn btn-xs ms-1 d-inline-block rounded-pill shadow-xl color-highlight border-highlight">Hapus foto</a>
+                    <label
+                        class="btn btn-s btn-full ignore btn-full rounded-xl text-uppercase font-700 me-2 shadow-s bg-highlight">
+                        <input type="file" style="display: none;" name="insert_image" id="insert_image"
+                            accept="image/*" />
+                        <span class="text">Upload Foto</span>
+                    </label>
+                    <a rel="profile_picture" href="#"
+                        class="btn btn-s btn-border btn-full rounded-xl text-uppercase font-700 border-red-dark color-red-dark hapusImg">
+                        <span class="text">Hapus Foto</span>
+                    </a>
+                    <!-- <a href="#" class="btn btn-xs me-1 d-inline-block rounded-pill shadow-xl bg-highlight">Upload foto</a> -->
+                    <!-- <a href="#" class="btn btn-s btn-full ignore btn-full rounded-xl text-uppercase font-700 me-2 color-red-dark shadow-s border-red-dark">Hapus foto</a> -->
                 </div>
             </div>
 
@@ -124,6 +140,30 @@
         </div>
         <!-- Page content ends here-->
 
+        <div id="insertimageModal" class="modal" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content rounded-m">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Ganti Profile Anda</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-8 text-center">
+                                <div id="image_demo" style="width:350px; margin-top:30px"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn rounded btn-success crop_image">Save</button>
+                        <button type="button" class="btn rounded btn-danger btn-default close"
+                            data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
 
         <!-- Main Menu-->
         <div id="menu-main" class="menu menu-box-left rounded-0"
@@ -142,4 +182,145 @@
 
     <script src="<?php echo base_url(); ?>asset/sbadmin2/vendor/jquery/jquery.min.js"></script>
     <?php $this->load->view('jamaah/include/script_view'); ?>
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.js"></script>
+    <script>
+        $('#agen_pic').change(function() {
+            $('#target').submit();
+        });
+        $('.close').click(function() {
+            $('#insertimageModal').modal('hide');
+            location.reload();
+        });
+        
+        $(document).ready(function() {
+
+            $image_crop = $('#image_demo').croppie({
+                enableExif: true,
+                viewport: {
+                    width: 200,
+                    height: 200,
+                    type: 'circle' //circle
+                },
+                boundary: {
+                    width: 300,
+                    height: 300
+                }
+            });
+
+            $('#insert_image').on('change', function() {
+                var reader = new FileReader();
+                reader.onload = function(event) {
+                    $image_crop.croppie('bind', {
+                        url: event.target.result
+                    }).then(function() {
+                        console.log('jQuery bind complete');
+                    });
+                }
+                reader.readAsDataURL(this.files[0]);
+                $('#insertimageModal').modal('show');
+            });
+
+            $('.crop_image').click(function(event) {
+                $image_crop.croppie('result', {
+                    type: 'canvas',
+                    size: 'viewport'
+                }).then(function(response) {
+                    $.ajax({
+                        url: "<?php echo base_url(). 'jamaah/profile/pic_ganti' ;?>",
+                        type: 'POST',
+                        data: {
+                            "image": response
+                        },
+                        success: function(data) {
+                            console.log(response);
+                            $('#insertimageModal').modal('hide');
+                            alert(data);
+                            window.location.href =
+                                "<?php echo base_url(); ?>jamaah/profile/edit_profile";
+                        }
+                    })
+                });
+            });
+            
+        });
+
+        $(".hapusImg").click(function() {
+        if (confirm('Hapus foto profile?')) {
+            var id = $(this).attr('rel');
+            console.log(id);
+            $.getJSON("<?php echo base_url() . 'jamaah/profile/hapus_pic'; ?>", {
+                    id_user: "<?php echo $_SESSION['id_user']; ?>",
+                    field: id
+                })
+                .done(function(json) {
+                    alert('File berhasil dihapus');
+                    $("#" + id).remove();
+                    location.reload("<?php echo base_url().'jamaah/profile/edit_profile'?>")
+                })
+                .fail(function(jqxhr, textStatus, error) {
+                    alert('File gagal dihapus');
+                });
+        }
+    });
+
+    $("#kewarganegaraan").autocomplete({
+        source: "getCountries"
+    });
+
+    // Start upload preview image
+    $(document).on('click', '#upload-aphoto', function() {
+        document.getElementById('selectedFile').click();
+    });
+
+    $('#selectedFile').change(function() {
+        if (this.files[0] == undefined)
+            return;
+        $('#imageModalContainer').modal('show');
+        let reader = new FileReader();
+        reader.addEventListener("load", function() {
+            window.src = reader.result;
+            $('#selectedFile').val('');
+        }, false);
+        if (this.files[0]) {
+            reader.readAsDataURL(this.files[0]);
+        }
+    });
+
+    let croppi;
+    $('#imageModalContainer').on('shown.bs.modal', function() {
+        let width = document.getElementById('crop-image-container').offsetWidth - 20;
+        $('#crop-image-container').height((width - 80) + 'px');
+        croppi = $('#crop-image-container').croppie({
+            viewport: {
+                width: width,
+                height: width,
+                type: 'circle'
+            },
+        });
+        $('.modal-body1').height(document.getElementById('crop-image-container').offsetHeight + 50 +
+            'px');
+        croppi.croppie('bind', {
+            url: window.src,
+        }).then(function() {
+            croppi.croppie('setZoom', 0);
+        });
+    });
+    $('#imageModalContainer').on('hidden.bs.modal', function() {
+        croppi.croppie('destroy');
+    });
+
+    $(document).on('click', '.save-modal', function(ev) {
+        croppi.croppie('result', {
+            type: 'base64',
+            format: 'jpeg',
+            size: 'original'
+        }).then(function(resp) {
+            $('#confirm-img').attr('src', resp);
+            $('.modal').modal('hide');
+        });
+        $('#modalForm').submit();
+    });
+        
+    </script>
 </body>

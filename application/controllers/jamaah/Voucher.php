@@ -16,7 +16,7 @@ class Voucher extends CI_Controller
 
     public function index()
     {
-        $this->load->view('jamaahv2/voucher_view');
+        $this->load->view('jamaah/voucher_view');
     }
 
     public function proses()
@@ -27,6 +27,6 @@ class Voucher extends CI_Controller
         $kodeVoucher = $_POST['kode_voucher'];
         $this->load->model('voucherModel');
         $apply = $this->voucherModel->applyVoucher($kodeVoucher, $_SESSION['id_member']);
-        $this->load->view('jamaahv2/voucher_view', $apply);
+        $this->load->view('jamaah/voucher_view', $apply);
     }
 }

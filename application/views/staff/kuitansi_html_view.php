@@ -134,7 +134,7 @@
         
     <table class="table">
         <tr>
-            <td style="vertical-align: top; width: 280px;" colspan="3">
+            <td style="vertical-align: top; width: 350px;" colspan="3">
                 <img width="140px" src="<?php echo base_url() . $logo ?>"><br>
             </td>
             <td colspan="3">
@@ -182,7 +182,7 @@
             </td>
         </tr>
         <tr>
-            <td colspan="6"><hr></td><br>
+            <td colspan="6"><hr></td>
         </tr>
         <tr>
             <td colspan="3">
@@ -206,18 +206,18 @@
         <?php foreach ($riwayat['tarif']['dataMember'] as $dm) { ?>
             <?php foreach ($dm['potongan'] as $ef) { ?>
             <tr>
-                <td colspan="3"></td>
-                <td colspan="2"><p><?php echo $ef->keterangan ?></p><br></td>
-                <td style="text-align: right;"><p><?php echo $this->money->format($ef->nominal); ?></p><br></td>
+                <td colspan="3"></td><br>
+                <td colspan="2"><p><?php echo $ef->keterangan ?></p></td><br>
+                <td style="text-align: right;"><p><?php echo $this->money->format($ef->nominal); ?></p></td><br>
             </tr>
             <?php $extraFee += $ef->nominal ?>
             <?php } ?>
         <?php } ?>
         <tr>
-            <td colspan="3"></td>
+            <td colspan="3"></td><br>
             <td colspan="2">
-                <h4>Total</h4><br>
-            </td>
+                <h4>Total</h4>
+            </td><br>
             <td style="text-align: right;">
                 <?php 
                     $total = 0; 
@@ -225,16 +225,16 @@
                         $total += $dm['baseFee']['harga'] + $extraFee;
                     }
                 ?>
-                <h4><?php echo $this->money->format($total); ?></h4><br>
-            </td>
+                <h4><?php echo $this->money->format($total); ?></h4>
+            </td><br>
         </tr>
         <tr>
             <td colspan="3"></td>
             <td colspan="2">
-                <p>Total sudah bayar</p><br>
+                <p>Total sudah bayar</p>
             </td>
             <td style="text-align: right;">
-                <p><?php echo $this->money->format($riwayat['totalBayar']) ?></p><br>
+                <p><?php echo $this->money->format($riwayat['totalBayar']) ?></p>
             </td>
         </tr>
         <tr>

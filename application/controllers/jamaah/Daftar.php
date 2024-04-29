@@ -50,7 +50,7 @@ class Daftar extends CI_Controller
             foreach ($user->member as $m) {
                 if ($m->id_paket == $_GET['id']) {
                     $this->alert->toastAlert('red', 'Anda sudah terdaftar di paket ini');
-                    redirect(base_url() . 'jamaah/order');   
+                    redirect(base_url() . 'jamaah/order/paket_aktif?id=' . $_GET['id'] . '&idm=' . $m->id_member);   
                 }
             }
         }
@@ -218,7 +218,7 @@ class Daftar extends CI_Controller
         $this->load->model('va_model');
         $this->va_model->createVAOpen($id_member);
         if (!$id_member) {
-            $this->alert->setJamaah('red', 'Ups...', "kaka");
+            $this->alert->setJamaah('red', 'Ups...', "Gagal melakukan pendaftaran");
             redirect($_SERVER['HTTP_REFERER']);
         }
         if ($id_member == true && $parent_id != null) {
@@ -316,7 +316,7 @@ class Daftar extends CI_Controller
         // $statusLengkap = true;
         //jika sudah bayar redirect ke home
         if ($tarif['totalBayar'] > 0) {
-            redirect(base_url() . 'jamaah/home');
+            redirect(base_url() . 'jamaah/order');
         }
         $this->load->model('paketUmroh');
         $paket = $this->paketUmroh->getPackage($member[0]->id_paket, false);

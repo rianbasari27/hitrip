@@ -32,13 +32,22 @@ class Registrasi extends CI_Model
         //     }
         // }
         // already member (by ID)
-        $alreadyMember = $this->getUser($inputs['id_user']);
-        if (isset($alreadyMember->member[0]) && $update == false) {
-            $memberExistPaket = $alreadyMember->member[0]->paket_info->tanggal_berangkat;
-            if ($memberExistPaket > date('Y-m-d')) {
-                $this->alert->set('danger', 'Akun sudah terdaftar');
+        $alreadyMember = $this->getMember(null, $inputs['id_user']);
+        // echo '<pre>';
+        // print_r($alreadyMember);
+        // exit();
+        if (isset($alreadyMember) && $update == false) {
+            foreach ($alreadyMember as $am) {
+                if ($am == $inputs['id_paket']) {
+                    $this->alert->set('danger', 'Akun sudah terdaftar');
                 return false;
+                }
             }
+            // $memberExistPaket = $alreadyMember->member[0]->paket_info->tanggal_berangkat;
+            // if ($memberExistPaket > date('Y-m-d')) {
+            //     $this->alert->set('danger', 'Akun sudah terdaftar');
+            //     return false;
+            // }
         }
 
         $this->load->library('scan');
@@ -47,7 +56,7 @@ class Registrasi extends CI_Model
             $hasil = $this->scan->check($inputs['files']['upload_penyakit'], 'upload_penyakit', null);
             if ($hasil !== false) {
                 $inputs['upload_penyakit'] = $hasil;
-                unlink(SITE_ROOT . $isMember->upload_penyakit);
+                unlink(SITE_ROOT . $alreadyMember->upload_penyakit);
                 $uploadSuccess = true;
             } else {
                 $uploadSuccess = false;
@@ -125,6 +134,26 @@ class Registrasi extends CI_Model
             return $id_member;
         } else {
             return true;
+        }
+    }
+
+    public function deletePic($id, $field)
+    {
+        $user = $this->getUser($id);
+        if (empty($user)) {
+            return false;
+        }
+
+        $path = $user->$field;
+        unlink(SITE_ROOT . $path);
+
+        $this->db->where('id_user', $id);
+        $this->db->set($field, null);
+        $query = $this->db->update('user');
+        if ($query == true) {
+            return true;
+        } else {
+            return false;
         }
     }
 

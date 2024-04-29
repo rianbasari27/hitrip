@@ -156,20 +156,20 @@
                 <div class="content">
                     <div class="row mb-0">
                         <?php if ($itinerary != null) { ?>
-                        <div class="col-3">
+                        <div class="<?php echo $paket_flyer != null ? 'col-6 mx-auto' : 'col-12' ?>">
                             <a href="<?php echo base_url() . $itinerary; ?>" download
                                 class="font-12 mb-3 py-3 text-center d-block rounded-sm shadow font-700 color-highlight bg-theme"><i
                                     class="fa-solid fa-file-lines font-24 mb-2"></i><br>Itinerary</a>
                         </div>
                         <?php } ?>
                         <?php if ( $paket_flyer != null ) { ?>
-                        <div class="col-3">
+                        <div class="<?php echo $itinerary != null ? 'col-6 mx-auto' : 'col-12' ?>">
                             <a href="<?php echo base_url() . $paket_flyer?>" download
                                 class="font-12 mb-3 py-3 text-center d-block rounded-sm shadow font-700 color-highlight bg-theme"><i
                                     class="fa-solid fa-file-image font-24 mb-2"></i><br> Flyer</a>
                         </div>
                         <?php } ?>
-                        <div class="col-3">
+                        <!-- <div class="col-3">
                             <a href="#" download
                                 class="font-12 mb-3 py-3 text-center d-block rounded-sm shadow font-700 color-highlight bg-theme"><i
                                     class="fa-solid fa-hotel font-24 mb-2"></i><br> Hotel</a>
@@ -178,7 +178,7 @@
                             <a href="#" download
                                 class="font-12 mb-3 py-3 text-center d-block rounded-sm shadow font-700 color-highlight bg-theme"><i
                                     class="fa-solid fa-plane-up font-24 mb-2"></i><br> Maskapai</a>
-                        </div>
+                        </div> -->
                     </div>
                     <div class="divider"></div>
     

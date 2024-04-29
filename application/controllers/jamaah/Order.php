@@ -31,21 +31,37 @@ class Order extends CI_Controller
         $this->load->model('paketUmroh');
         $this->load->model('registrasi');
         $this->load->model('tarif');
-        $member = $this->registrasi->getMember(null, $_SESSION['id_user']);
-        $member = $member[0];
+        $member = $this->registrasi->getMember($_GET['idm']);
+        // $member = $member[0];
+        if (!isset($_GET['id']) || !isset($_GET['idm'])) {
+            $this->alert->toastAlert('red', 'Access Denied');
+            redirect(base_url() . 'jamaah/home');
+        }
         if ($member == null) {
             $this->alert->toastAlert('red', 'Anda tidak terdaftar');
             redirect(base_url() . 'jamaah/home');
         }
-        if ($member->lunas == 0) {
-            $this->alert->toastAlert('red', 'Anda belum melakukan pembayaran');
-            redirect(base_url() . 'jamaah/order');
+        $memberAktif = null;
+        foreach ($member as $m) {
+            if ($m->id_paket == $_GET['id']) {
+                if ($m->lunas == 0) {
+                    redirect(base_url() . 'jamaah/daftar/dp_notice');
+                }
+                $memberAktif = $m;
+            }
+            // if ($m->lunas == 0) {
+            //     $this->alert->toastAlert('red', 'Anda belum melakukan pembayaran');
+            //     redirect(base_url() . 'jamaah/order');
+            // }
         }
-        $paket = $this->paketUmroh->getPackage($member->id_paket);
+        // echo '<pre>';
+        // print_r($memberAktif);
+        // exit();
+        $paket = $this->paketUmroh->getPackage($_GET['id']);
 
         $data = [
             'paket' => $paket,
-            'member' => $member,
+            'member' => $memberAktif,
         ];
         $this->load->view('jamaah/paket_aktif_view', $data);
     }

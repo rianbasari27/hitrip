@@ -35,10 +35,10 @@
             <h1>Your Orders</h1>
         </div>
         <?php if ($member != null) { ?>
-        <div class="card card-style mb-2">
-            <div class="content">
-                <?php foreach ($member as $m) { ?>
-                    <a href="<?php echo base_url() . ($m->lunas == 0 ? 'jamaah/daftar/dp_notice' : 'jamaah/order/paket_aktif') ?>" class="d-flex">
+            <?php foreach ($member as $m) { ?>
+            <div class="card card-style mb-2">
+                <div class="content">
+                    <a href="<?php echo base_url() . 'jamaah/order/paket_aktif?id=' . $m->id_paket . '&idm=' . $m->id_member ?>" class="d-flex">
                         <div>
                             <img src="<?php echo base_url() . $m->paket_info->banner_image ?>" class="rounded-sm" width="130">
                         </div>
@@ -63,9 +63,9 @@
                             <p class="<?php echo $m->lunas == 0 ? 'color-red-dark' : 'color-green-dark' ?> font-11"><?php echo $m->lunas == 0 ? '<i class="fa-regular fa-clock me-1"></i>Menunggu pembayaran' : '<i class="fa-regular fa-circle-check me-1"></i>Active' ?></p>
                         </div>
                     </a>
-                <?php } ?>
+                </div>
             </div>
-        </div>
+            <?php } ?>
         <?php } else { ?>
             <div class="card card-style">
                 <div class="content text-center">

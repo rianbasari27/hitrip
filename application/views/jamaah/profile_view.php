@@ -29,7 +29,7 @@
         <div class="content">
             <div class="d-flex">
                 <div class="p-1 border border-4 border-blue-dark d-inline-block rounded-pill">
-                    <img src="<?php echo base_url() . 'asset/appkit/images/pictures/default/default-profile.jpg' ?>"
+                    <img src="<?php echo base_url() . ($profile_picture != null ? $profile_picture : 'asset/appkit/images/pictures/default/default-profile.jpg') ?>"
                     class="rounded-xl" width="60">
                 </div>
                 <div class="my-auto ms-3">

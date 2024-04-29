@@ -44,7 +44,7 @@
                             <h5 class="col-6 text-start font-14 opacity-60 font-500">Paket</h5>
                             <h5 class="col-6 text-end font-14 font-700"><?php echo $currentPaket->nama_paket . ', ' . $currentPaket->negara ?></h5>
                             <h5 class="col-6 text-start font-14 opacity-60 font-500">Tanggal</h5>
-                            <h5 class="col-6 text-end font-14 font-700"><?php echo $this->date->convert_date_indo($tgl_regist); ?></h5>
+                            <h5 class="col-6 text-end font-14 font-700"><?php echo $this->date->convert_date_indo(date('Y-m-d', strtotime($tgl_regist))); ?></h5>
                             <h5 class="col-6 text-start font-14 opacity-60 font-500">Waktu</h5>
                             <h5 class="col-6 text-end font-14 font-700"><?php echo date('H:i', strtotime($tgl_regist)); ?> WIB</h5>
                             <h5 class="col-6 text-start font-14 opacity-60 font-500">Jumlah</h5>
@@ -68,6 +68,8 @@
                         <div class="row mb-0 mt-2">
                             <h5 class="col-6 text-start">Total</h5>
                             <h5 class="col-6 text-end font-18 font-700"><?php echo $currentPaket->hargaPrettyDiskon ?></h5>
+                            <h5 class="col-6 text-start font-14 opacity-60 font-500">Down Payment (DP)</h5>
+                            <h5 class="col-6 text-end font-16 font-700"><?php echo $this->money->format($dp_display) ?></h5>
                         </div>
                     </div>
                 

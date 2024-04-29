@@ -48,10 +48,59 @@ class Profile extends CI_Controller
             $this->alert->toastAlert('red', 'Gagal menyimpan');
             redirect($_SERVER['HTTP_REFERER']);
         } else {
-            $this->alert->toastAlert('red', 'Berhasil menyimpan');
+            $this->alert->toastAlert('green', 'Berhasil menyimpan');
             redirect(base_url('jamaah/profile'));
         }
         
+    }
+
+    public function pic_ganti() {
+        $this->load->model('registrasi');
+        $user = $this->registrasi->getUser($_SESSION['id_user']);
+        if(isset($_POST["image"]))
+        {
+            $data = $_POST["image"];
+            $image_array_1 = explode(";", $data);
+            $image_array_2 = explode(",", $image_array_1[1]);
+            $data = base64_decode($image_array_2[1]);
+            $imageName = $user->name . "profile". time() . '.png';
+            $file = "/uploads/user_picture/". $imageName;
+            if(!empty($user->profile_picture)) {
+                unlink(SITE_ROOT . $user->profile_picture);
+            }
+            file_put_contents(SITE_ROOT . $file, $data);
+            $image_file = addslashes(file_get_contents(SITE_ROOT . $file));
+            
+            $this->db->where('id_user', $user->id_user);
+            $this->db->set('profile_picture', $file);
+            $this->db->update('user');
+
+            // $statement = $connect->prepare($query);
+            // if($statement->execute())
+            // {
+            echo 'Profil berhasil diganti';
+            // unlink($imageName);
+            // }
+
+        }
+    }
+
+    public function hapus_pic()
+    {
+        $this->form_validation->set_data($this->input->get());
+        $this->form_validation->set_rules('id_user', 'id_user', 'trim|required|integer');
+        $this->form_validation->set_rules('field', 'field', 'required');
+
+        if ($this->form_validation->run() == FALSE) {
+            return false;
+        }
+        $this->load->model('registrasi');
+        $result = $this->registrasi->deletePic($_GET['id_user'], $_GET['field']);
+        if ($result == true) {
+            echo json_encode(true);
+        } else {
+            return false;
+        }
     }
     // public function main_menu()
     // {        

@@ -45,7 +45,7 @@
                         <a href="<?php echo base_url() . 'jamaah/pembayaran/detail_pembayaran?id=' . $item->id_pembayaran . '&idm=' . $id_member ?>" class="d-flex">
                             <div class="align-self-center">
                                 <h5 class="mb-n1 font-15"><?php echo $item->keterangan ?></h5>
-                                <span class="font-11 color-theme opacity-70"">Kode Pembayaran #<?php echo $item->id_pembayaran . '-' . $item->id_member . '-' . date('y', strtotime($item->tanggal_bayar)) . date('m', strtotime($item->tanggal_bayar)) . date('d', strtotime($item->tanggal_bayar)) ?></span>
+                                <span class="font-11 color-theme opacity-70"">No. Pembayaran #<?php echo $item->id_pembayaran . $item->id_member . date('Ymd', strtotime($item->tanggal_bayar)) ?></span>
                                 </div>
                                 <div class=" ms-auto text-end align-self-center">
                                     <h5 class="color-theme font-15 font-700 d-block mb-n1">
