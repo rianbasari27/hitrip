@@ -23,6 +23,11 @@
         padding-top: 60vh;
         /* Sesuaikan padding-top agar konten tidak bertabrakan dengan video */
     }
+
+    #page {
+        background: linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
+        min-height: 100vh !important;
+    }
     </style>
 </head>
 
@@ -47,7 +52,7 @@
             <h4 class="boxed-text-xl pt-4 line-height-l color-white">Explore new horizons and make lasting memories with
                 HiTrip's seamless global adventures.</h4>
         </div>
-        <div class="card-bottom" style="top: 130%;">
+        <div class="card-bottom" style="bottom: 50px;">
 
             <a href="<?php echo base_url() ?>jamaah/splash/end/home"
                 class="btn btn-full mx-5 gradient-highlight rounded-sm btn-l font-13 font-600 mt-5 scale-box"
