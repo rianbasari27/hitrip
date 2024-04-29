@@ -11,6 +11,7 @@
         bottom: 0;
         min-width: 100%;
         min-height: 100%;
+        height: 100%;
     }
 
     .card-center {

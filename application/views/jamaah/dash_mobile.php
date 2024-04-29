@@ -180,11 +180,11 @@
                         </div>
                         <div class="lh-sm mt-2 font-11 color-theme">Trip</div>
                     </a>
-                    <a href="#" class="col-3 py-2 mb-2 text-center">
+                    <a href="<?php echo base_url() ?>jamaah/voucher" class="col-3 py-2 mb-2 text-center">
                         <div class="squircle-icon gradient-highlight shadow mx-auto">
-                            <i class="fa-solid fa-percent icon font-20 color-white"></i>
+                            <i class="fa-solid fa-ticket icon font-20 color-white"></i>
                         </div>
-                        <div class="lh-sm mt-2 font-11 color-theme">Promo</div>
+                        <div class="lh-sm mt-2 font-11 color-theme">Voucher</div>
                     </a>
                     <a href="<?php echo base_url() . 'features' ;?>" class="col-3 py-2 mb-2 text-center">
                         <div class="squircle-icon gradient-highlight shadow mx-auto">
@@ -414,7 +414,7 @@
             <h3 class="text-center pt-2">Saved to Favorites</h3>
         </div>
 
-        <div id="menu-other" class="menu menu-box-bottom rounded-m bg-theme" data-menu-height="500"
+        <div id="menu-other" class="menu menu-box-bottom rounded-m bg-theme" data-menu-height="400"
             data-menu-effect="menu-over">
             <div class="menu-title">
                 <p class="color-highlight">Menu</p>
@@ -428,9 +428,14 @@
                         <span>Trip</span>
                         <i class="fa fa-angle-right"></i>
                     </a>
-                    <a href="#">
+                    <!-- <a href="#">
                         <i class="fa-solid fa-percent gradient-highlight color-white"></i>
                         <span>Promo</span>
+                        <i class="fa fa-angle-right"></i>
+                    </a> -->
+                    <a href="<?php echo base_url() ?>jamaah/voucher">
+                        <i class="fa-solid fa-ticket gradient-highlight color-white"></i>
+                        <span>Voucher</span>
                         <i class="fa fa-angle-right"></i>
                     </a>
                     <a href="#">
@@ -438,17 +443,12 @@
                         <span>Notifikasi</span>
                         <i class="fa fa-angle-right"></i>
                     </a>
-                    <a href="<?php echo base_url() ?>jamaah/voucher">
-                        <i class="fa-solid fa-ticket gradient-highlight color-white"></i>
-                        <span>Voucher</span>
-                        <i class="fa fa-angle-right"></i>
-                    </a>
                     <a href="#">
                         <i class="fa-solid fa-money-bill-wave gradient-highlight color-white"></i>
                         <span>Currency</span>
                         <i class="fa fa-angle-right"></i>
                     </a>
-                    <a href="#">
+                    <!-- <a href="#">
                         <i class="fa-solid fa-utensils gradient-highlight color-white"></i>
                         <span>Restoran Terdekat</span>
                         <i class="fa fa-angle-right"></i>
@@ -457,7 +457,7 @@
                         <i class="fa-solid fa-hotel gradient-highlight color-white"></i>
                         <span>Hotel Terdekat</span>
                         <i class="fa fa-angle-right"></i>
-                    </a>
+                    </a> -->
                     <a href="<?php echo base_url() . 'jamaah/discover'?>">
                         <i class="fa-solid fa-compass gradient-highlight color-white"></i>
                         <span>Discover</span>
@@ -473,16 +473,16 @@
                         <span>Al Quran</span>
                         <i class="fa fa-angle-right"></i>
                     </a>
-                    <a href="#">
+                    <!-- <a href="#">
                         <i class="fa-solid fa-location-arrow gradient-highlight color-white"></i>
                         <span>Arah Kiblat</span>
                         <i class="fa fa-angle-right"></i>
-                    </a>
-                    <a href="#">
+                    </a> -->
+                    <!-- <a href="#">
                         <i class="fa-solid fa-mosque gradient-highlight color-white"></i>
                         <span>Tempat Ibadah</span>
                         <i class="fa fa-angle-right"></i>
-                    </a>
+                    </a> -->
                 </div>
             </div>
         </div>
