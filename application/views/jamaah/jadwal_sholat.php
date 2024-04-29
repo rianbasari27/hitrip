@@ -86,8 +86,11 @@
                     });
             })
             .catch(error => {
-                // Penanganan kesalahan jika gagal mendapatkan informasi kota dan negara
                 console.error("Error getting city and country: ", error);
+                const jakartaLatitude = -6.2088;
+                const jakartaLongitude = 106.8456;
+                getCityAndCountry(jakartaLatitude, jakartaLongitude);
+                // Penanganan kesalahan jika gagal mendapatkan informasi kota dan negara
             });
     }
 
