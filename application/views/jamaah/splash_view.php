@@ -44,14 +44,14 @@
 
     <div id="page">
 
-    <!-- <div class="card"> -->
+        <!-- <div class="card"> -->
         <div class="card-top text-center ps-3 mt-5 pt-4">
             <!-- <img src="<?php echo base_url() ?>asset/appkit/images/hitrip/hitrip-white.png" alt="hitrip-logo"
                 width="200"> -->
             <h1 class="color-white">Hi<span class="p-1 rounded-sm bg-highlight ms-2">Trip</span></h1>
-            <h5 class="opacity-70 color-white">Explore the World with HiTrip</h5>
-            <h4 class="boxed-text-xl pt-4 line-height-l color-white">Explore new horizons and make lasting memories with
-                HiTrip's seamless global adventures.</h4>
+            <h5 class="opacity-70 color-white">Looking for an ultimate travel bucket list?</h5>
+            <h4 class="boxed-text-xl pt-4 line-height-l color-white">Book your trip and discover your dream destinations
+                now</h4>
         </div>
         <div class="card-bottom" style="bottom: 50px;">
 
@@ -62,8 +62,8 @@
 
 
 
-    <!-- </div> -->
-    <!-- Page content ends here-->
+        <!-- </div> -->
+        <!-- Page content ends here-->
 
 
     </div>
