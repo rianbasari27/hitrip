@@ -49,9 +49,8 @@
             <!-- <img src="<?php echo base_url() ?>asset/appkit/images/hitrip/hitrip-white.png" alt="hitrip-logo"
                 width="200"> -->
             <h1 class="color-white">Hi<span class="p-1 rounded-sm bg-highlight ms-2">Trip</span></h1>
-            <h5 class="opacity-70 color-white">Looking for an ultimate travel</h5>
-            <h5 class="opacity-70 color-white">bucket list?</h5>
-            <h4 class="boxed-text-xl pt-4 line-height-l color-white">Book your trip and discover your dream destinations
+            <h4 class="boxed-text-xl pt-4 line-height-l color-white">Looking for an ultimate travel bucket list? Book
+                your trip and discover your dream destinations
                 now</h4>
         </div>
         <div class="card-bottom" style="bottom: 50px;">
