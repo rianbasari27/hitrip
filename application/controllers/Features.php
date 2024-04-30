@@ -83,4 +83,8 @@ class Features extends CI_Controller
             return false;
         }
     }
+
+    public function arah_kiblat() {
+        $this->load->view('jamaah/arah_kilbat');
+    }
 }
