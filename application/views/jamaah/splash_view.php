@@ -7,11 +7,11 @@
     <style>
     #myVideo {
         position: fixed;
-        right: 0;
-        bottom: 0;
-        min-width: 100%;
-        min-height: 100%;
-        height: 100%;
+        /* right: 0;
+        bottom: 0; */
+        max-width: 600px;
+        /* min-height: 100%; */
+        /* height: 100%; */
     }
 
     .card-center {

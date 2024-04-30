@@ -7,6 +7,14 @@
     #page {
         min-height: 100vh !important;
     }
+    .iconn {
+        width: 35px;
+        height: 35px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+    }
     </style>
 </head>
 
@@ -30,6 +38,14 @@
         <div class="page-content mt-n2">
             <div class="content">
                 <h1 class="mb-0 mt-n2">Jadwal Sholat</h1>
+                <div class="row mt-5" id="preLoader">
+                    <div class="col-12">
+                        <div class="d-flex justify-content-center">
+                            <div class="spinner-border color-blue-dark" role="status"></div>
+                        </div>
+                        <span class="d-flex mt-3 justify-content-center">Mohon tunggu</span>
+                    </div>
+                </div>
                 <span class="color-theme" id="location"></span>
                 <h1 class="font-48 mt-5" id="time"></h1>
                 <p id="tgl-container" class="mb-n2"></p>
@@ -165,6 +181,7 @@
     }
 
     function displayPrayerTimes(pray, timezone, city, country, date) {
+        $('#preLoader').addClass('d-none');
         const options = {
             weekday: "long",
             year: "numeric",
@@ -196,17 +213,26 @@
         var tglContainer = $('#tgl-container');
         tglContainer.append(tgl);
 
+        var icon = {
+            Fajr: '<i class="font-20 iconn me-2 color-highlight fa-solid fa-cloud-sun"></i>',
+            Dhuhr: '<i class="font-20 iconn me-2 color-highlight fa-solid fa-sun"></i>',
+            Asr: '<i class="font-20 iconn me-2 color-highlight fa-solid fa-cloud-sun" style="transform: scaleX(-1);"></i>',
+            Maghrib: '<i class="font-20 iconn me-2 color-highlight fa-solid fa-cloud-moon"></i>',
+            Isha: '<i class="font-20 iconn me-2 color-highlight fa-solid fa-moon"></i>',
+        }
+
         var resultContainer = $('#result-container');
         var html = '<div class="card card-style mt-3">';
-        html += '<div class="content row">';
+        html += '<div class="content mx-0 mb-2 row">';
         delete pray.Midnight;
         delete pray.Firstthird;
         delete pray.Lastthird;
         delete pray.Sunrise;
         delete pray.Sunset;
+        delete pray.Imsak;
         $.each(pray, function(key, value) {
-            html += '<div class="col-6 mb-3"><p class="font-14 color-theme">' + key + '</p></div>';
-            html += '<div class="col-6 mb-3"><p class="font-16 color-theme text-end font-700">' + value +
+            html += '<div class="col-6 mb-3 d-flex">' + icon[key] + '<p class="font-14 my-auto color-theme">' + key + '</p></div>';
+            html += '<div class="col-6 mb-3 my-auto"><p class="font-16 color-theme text-end font-700">' + value +
                 '</p></div>';
         });
         html += '</div>';

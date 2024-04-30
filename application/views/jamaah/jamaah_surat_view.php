@@ -103,7 +103,7 @@
                 <div class="card-bottom ps-3 pb-3">
                     <div>
                         <audio class="pe-3" controls style="width: 100%; height: 40px;">
-                            <source src="<?php echo $audioFull['01']; ?>" type="audio/mp3">
+                            <source src="<?php echo $audioFull['02']; ?>" type="audio/mp3">
                             Browser Anda tidak mendukung elemen audio.
                         </audio>
                     </div>
