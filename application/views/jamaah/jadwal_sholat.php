@@ -30,6 +30,15 @@
         <div class="page-content mt-n2">
             <div class="content">
                 <h1 class="mb-0 mt-n2">Jadwal Sholat</h1>
+                <div class="row mt-5" id="preLoader">
+                    <div class="col-12">
+                        <div class="d-flex justify-content-center">
+                            <div class="spinner-border color-blue-dark" role="status">
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <span class="color-theme" id="location"></span>
                 <h1 class="font-48 mt-5" id="time"></h1>
                 <p id="tgl-container" class="mb-n2"></p>
@@ -165,6 +174,7 @@
     }
 
     function displayPrayerTimes(pray, timezone, city, country, date) {
+        $('#preLoader').addClass('d-none');
         const options = {
             weekday: "long",
             year: "numeric",
