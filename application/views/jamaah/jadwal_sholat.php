@@ -220,7 +220,6 @@
             Maghrib: '<i class="font-20 iconn me-2 color-highlight fa-solid fa-cloud-moon"></i>',
             Isha: '<i class="font-20 iconn me-2 color-highlight fa-solid fa-moon"></i>',
         }
-        console.log(icon);
 
         var resultContainer = $('#result-container');
         var html = '<div class="card card-style mt-3">';
