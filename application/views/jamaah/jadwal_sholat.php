@@ -81,6 +81,7 @@
                         displayPrayerTimes(jadwal, timezone, city, country, d);
                     })
                     .catch(error => {
+                        console.error("Error getting city and country: ", error);
                         var jakartaLatitude = -6.186486;
                         var jakartaLongitude = 106.834091;
                         var solatApiErr =
@@ -102,7 +103,7 @@
                                         displayPrayerTimes(jadwal, timezone, city, country, d);
                                     })
                                     .catch(error => {
-                                        // console.error("Error getting city and country: ", error);
+                                        console.error("Error getting city and country: ", error);
                                         const jakartaLatitude = -6.186486;
                                         const jakartaLongitude = 106.834091;
                                         getCityAndCountry(jakartaLatitude, jakartaLongitude);
@@ -116,6 +117,7 @@
                     });
             })
             .catch(error => {
+                console.error("Error getting city and country: ", error);
                 var jakartaLatitude = -6.186486;
                 var jakartaLongitude = 106.834091;
                 var solatApiErr =
@@ -136,7 +138,7 @@
                                 displayPrayerTimes(jadwal, timezone, city, country, d);
                             })
                             .catch(error => {
-                                // console.error("Error getting city and country: ", error);
+                                console.error("Error getting city and country: ", error);
                                 const jakartaLatitude = -6.186486;
                                 const jakartaLongitude = 106.834091;
                                 getCityAndCountry(jakartaLatitude, jakartaLongitude);
@@ -223,7 +225,38 @@
             // Mendapatkan informasi kota dan negara
             getCityAndCountry(latitude, longitude);
         }, function(error) {
-            // Penanganan kesalahan jika mendapatkan lokasi gagal
+            const d = new Date();
+            var tanggal = d.getDate() + '-' + (d.getMonth() + 1) + '-' + d.getFullYear();
+            var jakartaLatitude = -6.186486;
+            var jakartaLongitude = 106.834091;
+            var solatApiErr =
+                `https://api.aladhan.com/v1/timings/${tanggal}?latitude=${jakartaLatitude}&longitude=${jakartaLongitude}&method=20&tune=1,1,1,1,1,1,1,1`;
+            var apiUrlErr =
+                `https://nominatim.openstreetmap.org/reverse?format=json&lat=${jakartaLatitude}&lon=${jakartaLongitude}&accept-language=id`;
+            fetch(solatApiErr)
+                .then(response => response.json())
+                .then(data => {
+                    fetch(apiUrlErr)
+                        .then(response => response.json())
+                        .then(location => {
+                            console.log(data.data);
+                            var jadwal = data.data.timings;
+                            var timezone = data.data.meta.timezone;
+                            var city = location.address.city || location.address.city_district;
+                            var country = location.address.country;
+                            displayPrayerTimes(jadwal, timezone, city, country, d);
+                        })
+                        .catch(error => {
+                            console.error("Error getting city and country: ", error);
+                            const jakartaLatitude = -6.186486;
+                            const jakartaLongitude = 106.834091;
+                            getCityAndCountry(jakartaLatitude, jakartaLongitude);
+                            // Penanganan kesalahan jika gagal mendapatkan informasi kota dan negara
+                        });
+                })
+                .catch(error => {
+                    console.error("Error getting city and country: ", error);
+                });
             console.error("Error getting location: ", error);
         });
     } else {
