@@ -640,15 +640,15 @@ class Registrasi extends CI_Model
 
     public function getNewRegistrar($limit)
     {
-        $this->db->order_by('id_jamaah', 'desc');
-        $query = $this->db->get('jamaah', $limit);
-        $jamaah = $query->result();
-        if (empty($jamaah)) {
+        $this->db->order_by('id_user', 'desc');
+        $query = $this->db->get('user', $limit);
+        $user = $query->result();
+        if (empty($user)) {
             return false;
         }
         $data = array();
-        foreach ($jamaah as $j) {
-            $data[] = $this->getJamaah($j->id_jamaah);
+        foreach ($user as $j) {
+            $data[] = $this->getUser($j->id_user);
         }
         return $data;
     }

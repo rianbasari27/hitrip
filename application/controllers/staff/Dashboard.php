@@ -16,36 +16,36 @@ class Dashboard extends CI_Controller
     
     public function index()
     {
-        // $this->load->model('paketUmroh');
-        // $this->load->model('registrasi');
+        $this->load->model('paketUmroh');
+        $this->load->model('registrasi');
         // $this->load->model('logistik');
-        // $paket = $this->paketUmroh->getPackage(null, true);
-        // $nextTrip = [];
-        // $totalJamaah = 0;
-        // $member = [];
-        // if (!empty($paket)) {
-        //     $nextTrip = $paket[0];
-        //     $this->load->library('calculate');
-        //     $nextTrip->countdown = $this->calculate->dateDiff($nextTrip->tanggal_berangkat, date('Y-m-d'));
+        $paket = $this->paketUmroh->getPackage(null, true);
+        $nextTrip = [];
+        $totalJamaah = 0;
+        $member = [];
+        if (!empty($paket)) {
+            $nextTrip = $paket[0];
+            $this->load->library('calculate');
+            $nextTrip->countdown = $this->calculate->dateDiff($nextTrip->tanggal_berangkat, date('Y-m-d'));
 
-        //     $member = $this->registrasi->getMember(null, null, $nextTrip->id_paket);
-        //     if ($member) {
-        //         $totalJamaah = count($member);
-        //     }
-        // }
+            $member = $this->registrasi->getMember(null, null, $nextTrip->id_paket);
+            if ($member) {
+                $totalJamaah = count($member);
+            }
+        }
 
-        // $packagePublished = $this->paketUmroh->getPackage(null, true, 'yes');
-        // if ($packagePublished) {
-        //     $packagePublished = count($packagePublished);
-        // } else {
-        //     $packagePublished = 0;
-        // }
-        // $packageUnPublished = $this->paketUmroh->getPackage(null, true, 'no');
-        // if ($packageUnPublished) {
-        //     $packageUnPublished = count($packageUnPublished);
-        // } else {
-        //     $packageUnPublished = 0;
-        // }
+        $packagePublished = $this->paketUmroh->getPackage(null, true, 'yes');
+        if ($packagePublished) {
+            $packagePublished = count($packagePublished);
+        } else {
+            $packagePublished = 0;
+        }
+        $packageUnPublished = $this->paketUmroh->getPackage(null, true, 'no');
+        if ($packageUnPublished) {
+            $packageUnPublished = count($packageUnPublished);
+        } else {
+            $packageUnPublished = 0;
+        }
 
         // $this->load->model('dashboardModel');
         // $info_seat = null;
@@ -60,14 +60,17 @@ class Dashboard extends CI_Controller
 
         // // $perlengkapan = $this->paketUmroh->getPackage(null, true);
 
-        // $newRegistrar = null;
-        // $berkas = null;
-        // if (in_array($_SESSION['bagian'], array('Manifest', 'Master Admin', 'Finance'))) {
-        //     $newRegistrar = $this->registrasi->getNewRegistrar(5);
-        //     if (!empty($nextTrip)) {
-        //         $berkas = $this->registrasi->getBerkasBelumLengkap($nextTrip->id_paket);
-        //     }
-        // }
+        $newRegistrar = null;
+        $berkas = null;
+        if (in_array($_SESSION['bagian'], array('Manifest', 'Master Admin', 'Finance'))) {
+            $newRegistrar = $this->registrasi->getNewRegistrar(5);
+            if (!empty($nextTrip)) {
+                $berkas = $this->registrasi->getBerkasBelumLengkap($nextTrip->id_paket);
+            }
+        }
+        // echo '<pre>';
+        // print_r($newRegistrar);
+        // exit();
         // $unverified = null;
         // if (in_array($_SESSION['bagian'], array('Finance', 'Master Admin'))) {
         //     $this->load->model('tarif');
@@ -82,13 +85,13 @@ class Dashboard extends CI_Controller
         //         $statusPengambilan = $this->logistik->getStatusPengambilan($nextTrip->id_paket);
         //     }
         // }
-        // $data = array(
-        //     'paket' => $paket,
-        //     'nextTrip' => $nextTrip,
-        //     'totalJamaah' => $totalJamaah,
-        //     'packagePublished' => $packagePublished,
-        //     'packageUnpublished' => $packageUnPublished,
-        //     'newRegistrar' => $newRegistrar ? $newRegistrar : [],
+        $data = array(
+            'paket' => $paket,
+            'nextTrip' => $nextTrip,
+            'totalJamaah' => $totalJamaah,
+            'packagePublished' => $packagePublished,
+            'packageUnpublished' => $packageUnPublished,
+            'newRegistrar' => $newRegistrar ? $newRegistrar : [],
         //     'berkas' => $berkas,
         //     'unverified' => $unverified,
         //     'statusPerlengkapan' => $statusPerlengkapan,
@@ -96,8 +99,8 @@ class Dashboard extends CI_Controller
         //     'info_seat' => $info_seat,
         //     'detail_perl' => $detail_perl,
         //     // 'perlengkapan' =>$perlengkapan
-        // );
-        $this->load->view('staff/dash_view');
+        );
+        $this->load->view('staff/dash_view', $data);
     }
 
     public function load_jamaah() {
