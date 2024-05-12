@@ -329,6 +329,24 @@
                             </div>
                         </div>
                     </div>
+                    <div class="modal fade" id="hapusModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Yakin untuk menghapus hotel?</h5>
+                                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">Pilih "Ya" untuk menghapus hotel.</div>
+                            <div class="modal-footer">
+                                <button class="btn btn-secondary" type="button" data-dismiss="modal">Batal</button>
+                                <a class="btn btn-primary" id="btnModal">Ya</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                     <!-- [ content ] End -->
 
                     <?php $this->load->view('staff/include/footer_view') ?>
@@ -343,6 +361,13 @@
     <!-- [ Layout wrapper] End -->
     <script src="<?php echo base_url(); ?>asset/sbadmin2/vendor/jquery/jquery.min.js"></script>
     <?php $this->load->view('staff/include/script_view') ?>
+    <script>
+        $(".btnHapus").click(function() {
+            var ref = $(this).attr("href");
+            $("#btnModal").attr("href", ref);
+
+        });
+    </script>
 </body>
 
 </html>
