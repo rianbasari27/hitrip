@@ -153,6 +153,30 @@
                     <div class="card-overlay bg-black opacity-70"></div>
                 </div>
 
+                <?php if ($hotel_info != null) { ?>
+                    <div class="content">
+                        <h3>Info Hotel</h3>
+                    </div>
+
+                    <?php foreach ($hotel_info as $h) { ?>
+                    <div class="card card-style mb-3">
+                        <div class="card mb-0 rounded-0" style="background-image: url('<?php echo base_url() . ($h->foto != null ? $h->foto : 'asset/appkit/images/hotel-default.jpg'); ?>');"  data-card-height="150">
+                            <div class="card-bottom">
+                                <a href="<?php echo $h->maps_link != null ? $h->maps_link : '#' ?>" class="float-end btn btn-xs font-700 bg-white rounded-s color-black mb-2 me-2">Temukan</a>
+                            </div>
+                        </div>
+                        <div class="content">
+                            <!-- <p class="font-600 color-yellow-dark mb-n1"><i class="fa-solid fa-star me-1"></i><?php echo $h->star ?></p> -->
+                            <h1 class="font-20 font-700"><?php echo $h->nama_hotel?></h1>
+                            <p class="opacity-80">
+                                <i class="fa icon-30 text-center fa-star color-yellow-dark pe-2"></i>Bintang <?php echo $h->star ?><br>
+                                <i class="fa icon-30 text-center fa-map-marker pe-2 color-highlight"></i><?php echo $h->kota . ', ' . $negara ?><br>
+                            </p>
+                        </div>
+                    </div>
+                    <?php } ?>
+                <?php } ?>
+
                 <div class="content">
                     <div class="row mb-0">
                         <?php if ($itinerary != null) { ?>

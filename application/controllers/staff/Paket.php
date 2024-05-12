@@ -160,8 +160,6 @@ class Paket extends CI_Controller
         $this->load->library('date');
         $this->load->model('paketUmroh');
         $data = $this->paketUmroh->getPackage($_GET['id'], false);
-        $gallery = $this->paketUmroh->getGalleryPackage(null, $_GET['id']);
-        $data->gallery = $gallery;
         if (empty($data)) {
             $this->alert->toast('danger', 'Mohon Maaf', 'Paket tidak ditemukan');
             redirect(base_url() . 'staff/paket');
@@ -234,8 +232,8 @@ class Paket extends CI_Controller
     public function proses_tambah_hotel()
     {
         $this->form_validation->set_rules('id_paket', 'ID Paket', 'trim|required|numeric');
-        $this->form_validation->set_rules('nama_hotel', 'Nama Hotel', 'trim|required|alpha_numeric_spaces');
-
+        $this->form_validation->set_rules('nama_hotel', 'Nama Hotel', 'trim|required');
+        
         if ($this->form_validation->run() == FALSE) {
             $this->alert->toast('danger', 'Mohon Maaf', 'Anda tidak memiliki akses');
             redirect(base_url() . 'staff/paket');

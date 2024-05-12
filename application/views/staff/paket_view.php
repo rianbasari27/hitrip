@@ -253,7 +253,7 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- <div class="row">
+                        <div class="row">
                             <div class="col-lg-12">
                                 <div class="card shadow mb-4 border-left-primary">
                                     <div class="card-header py-3">
@@ -262,51 +262,52 @@
                                     <div class="card-body">
                                         <div class="col-xl-3 col-md-6 mb-4">
                                             <a href="<?php echo base_url(); ?>staff/paket/tambah_hotel?id=<?php echo $id_paket; ?>"
-                                                class="btn btn-success btn-icon-split">
+                                                class="btn btn-sm rounded btn-success btn-icon-split">
                                                 <span class="icon text-white-50">
                                                     <i class="fas fa-plus"></i>
                                                 </span>
                                                 <span class="text">Tambah Hotel</span>
                                             </a>
                                         </div>
-                                        <?php if (empty($hotel)) { ?>
-                                        <center><span class="text-gray-500 font-italic">Belum ada data</span></center>
+                                        <?php if (empty($hotel_info)) { ?>
+                                        <center><span class="text-gray-500 font-italic">Hotel belum ditambahkan</span></center>
                                         <?php } else { ?>
                                         <div class="row">
-                                            <?php foreach ($hotel as $htl) { ?>
+                                            <?php foreach ($hotel_info as $htl) { ?>
                                             <div class="col-xl-6 col-md-6 mb-4">
-                                                <div class="card border-left-warning shadow h-100 py-2">
+                                                <div class="card border-left-warning rounded-s shadow p-3">
                                                     <div class="card-body">
                                                         <div class="row no-gutters align-items-center">
-                                                            <div class="col mr-2">
+                                                            <div class="mr-2">
 
                                                                 <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                                                    <?php echo $htl->nama_hotel; ?>
                                                                     <a href="<?php echo base_url(); ?>staff/paket/hapus_hotel?id=<?php echo $htl->id_hotel; ?>"
-                                                                        class="btn btn-sm btn-warning btn-icon-split btnHapus"
+                                                                        class="btn btn-sm btn-warning btn-icon-split btnHapus mb-3"
                                                                         data-toggle="modal" data-target="#hapusModal">
 
                                                                         <span class="text">Hapus</span>
                                                                     </a>
+                                                                    <h2><?php echo $htl->nama_hotel; ?></h2>
+                                                                    
                                                                 </div>
-                                                                <div class="mb-0 text-gray-800">The Time :
+                                                                <!-- <div class="mb-0 text-gray-800">The Time :
                                                                     <?php echo $htl->time; ?></div>
                                                                 <div class="mb-0 text-gray-800">History :
                                                                     <?php echo $htl->history; ?></div>
                                                                 <div class="mb-0 text-gray-800">Mazarat :
-                                                                    <?php echo $htl->mazarat; ?></div>
+                                                                    <?php echo $htl->mazarat; ?></div> -->
                                                             </div>
 
-                                                            <div class="col mr-2">
+                                                            <div class="mr-2">
                                                                 <div class="table-responsive">
                                                                     <img src="<?php echo base_url() . $htl->foto; ?>"
-                                                                        alt="" style="max-width: 400px;">
+                                                                        alt="" class="img-fluid rounded">
 
                                                                 </div>
                                                             </div>
-                                                            <div class="col mr-2 mt-3">
+                                                            <div class="mr-2 mt-3">
                                                                 <div class="table-responsive">
-                                                                    <iframe width="720" height="300" frameborder="0"
+                                                                    <iframe width="400" height="300" frameborder="0"
                                                                         style="border:0" src="
                                                                                     https://www.google.com/maps/embed/v1/place?q=<?php echo urlencode($htl->nama_hotel); ?>&key=AIzaSyD0mI9tAXxHhM-qtUak3XcPyeolqymIgno
                                                                                     ">
@@ -326,7 +327,7 @@
 
                                 </div>
                             </div>
-                        </div> -->
+                        </div>
                     </div>
                     <!-- [ content ] End -->
 

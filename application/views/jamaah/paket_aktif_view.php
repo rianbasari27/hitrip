@@ -54,7 +54,7 @@
             </div>
         </div>
 
-        <div class="card card-style">
+        <div class="card card-style mb-3">
             <div class="content mb-0">
                 <h3 class="font-16">Detail</h3>
                 <div class="row">
@@ -62,7 +62,42 @@
                     <div class="col-6 text-end color-theme font-700"><?php echo $member->pilihan_kamar ?></div>
                     <div class="col-6">Status Pembayaran</div>
                     <div class="col-6 text-end font-700 <?php echo $member->lunas != '1' ? 'color-red-dark' : 'color-green-dark' ?>"><?php echo $member->lunas != '1' ? 'Belum lunas' : 'Lunas' ?></div>
+                    <div class="col-6">Itinerary</div>
+                    <?php if ($paket->itinerary != null) { ?>
+                        <a href="<?php echo base_url() . $paket->itinerary; ?>" download class="col-6 text-end font-700"><u><i class="fa-solid fa-download me-1"></i>Download</u></a>
+                    <?php } else { ?>
+                        <div class="col-6 text-end">Belum tersedia</div>
+                    <?php } ?>
                 </div>
+            </div>
+        </div>
+
+        <div class="card card-style">
+            <div class="content">
+                <h3 class="font-16 mb-3">Hotel Info</h3>
+                <?php if ($paket->hotel_info != null) { ?>
+                    <?php foreach ($paket->hotel_info as $h) { ?>
+                    <div class="card card-style mx-0 mb-3">
+                        <div class="card mb-0" style="background-image: url('<?php echo base_url() . ($h->foto != null ? $h->foto : 'asset/appkit/images/hotel-default.jpg'); ?>');" 
+                        data-card-height="100">
+                        </div>
+                        <div class="content m-3">
+                            <div class="d-flex mb-n1">
+                                <div>
+                                    <h3 class="font-16 mb-n1"><?php echo $h->nama_hotel ?></h3>
+                                    <p class="font-12 mb-0"><?php echo $h->kota . ', ' . $paket->negara ?></p>
+                                </div>
+                                <div class="ms-auto">
+                                    <p class="color-yellow-dark font-700 mb-0 text-end"><?php echo $h->star ?><i class="fa-solid fa-star ms-1"></i></p>
+                                    <a href="<?php echo $h->maps_link != null ? $h->maps_link : '#' ?>" class="color-highlight font-12"><i class="fa-solid fa-up-right-from-square me-1"></i>Temukan</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <?php } ?>
+                <?php } else { ?>
+                    <p>Hotel belum tersedia</p>
+                <?php } ?>
             </div>
         </div>
 
