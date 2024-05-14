@@ -333,9 +333,9 @@ class Daftar extends CI_Controller
                 redirect(base_url() . 'jamaah/daftar/dp_notice');
             }
             $method = $this->bank->getBankName($_GET['method']);
-        }
-        if ($method['bankName'] == 'unknown') {
-            redirect(base_url() . 'jamaah/daftar/dp_notice');
+            if ($method['bankName'] == 'unknown') {
+                redirect(base_url() . 'jamaah/daftar/dp_notice');
+            }
         }
         $data = [
             'tarif' => $tarif,
