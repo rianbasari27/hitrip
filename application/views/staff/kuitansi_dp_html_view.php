@@ -81,7 +81,7 @@
         </tr>
         <tr>
             <td colspan="3">
-                <p>Paket</p>
+                <h4>Paket</h4>
             </td>
             <td>
                 <h4>Tipe/Jenis</h4>
