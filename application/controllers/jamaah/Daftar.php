@@ -320,11 +320,27 @@ class Daftar extends CI_Controller
         }
         $this->load->model('paketUmroh');
         $paket = $this->paketUmroh->getPackage($member[0]->id_paket, false);
-        $data = $tarif['tarif'];
-        $data['tgl_regist'] = $member[0]->tgl_regist;
-        // $data['nama'] = implode(' ', array_filter([$r->first_name, $r->second_name, $r->last_name]));
-        $data['countDown'] = date("M d, Y H:i:s", strtotime($member[0]->dp_expiry_time));
-        $data['currentPaket'] = $paket;
+        $tarif = $tarif['tarif'];
+        $tarif['tgl_regist'] = $member[0]->tgl_regist;
+        // $tarif['nama'] = implode(' ', array_filter([$r->first_name, $r->second_name, $r->last_name]));
+        $tarif['countDown'] = date("M d, Y H:i:s", strtotime($member[0]->dp_expiry_time));
+        $tarif['currentPaket'] = $paket;
+
+        $method = null;
+        $this->load->library('bank');
+        if (isset($_GET['method'])) {
+            if ($_GET['method'] == null) {
+                redirect(base_url() . 'jamaah/daftar/dp_notice');
+            }
+            $method = $this->bank->getBankName($_GET['method']);
+        }
+        if ($method['bankName'] == 'unknown') {
+            redirect(base_url() . 'jamaah/daftar/dp_notice');
+        }
+        $data = [
+            'tarif' => $tarif,
+            'method' => $method,
+        ];
         $this->load->view('jamaah/metode_bayar_dp', $data);
     }
 
@@ -341,6 +357,10 @@ class Daftar extends CI_Controller
         $data = $tarif['tarif'];
         $data['countDown'] = date("M d, Y H:i:s", strtotime($member[0]->dp_expiry_time));
         $this->load->view('jamaahv2/bayar_dp', $data);
+    }
+
+    public function pembayaran() {
+        $this->load->view('jamaah/pembayaran_view');
     }
 
     public function incomplete_data()
