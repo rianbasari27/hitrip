@@ -868,9 +868,9 @@ class Registrasi extends CI_Model
             $this->db->where('parent_id', $parent_id);
         }
         if ($this->db->delete('program_member')) {
-            $this->alert->set('success', 'Program member berhasil dihapus');
+            $this->alert->toast('success', 'Selamat', 'Program member berhasil dihapus');
         } else {
-            $this->alert->set('danger', 'System Error, silakan coba kembali');
+            $this->alert->toast('danger', 'Mohon Maaf', 'System Error, silakan coba kembali');
             return false;
         }
 
