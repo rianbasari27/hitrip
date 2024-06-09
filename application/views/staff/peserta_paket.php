@@ -198,7 +198,7 @@
             var trid = $(this).closest('tr').attr('id'); // table row ID 
             var r = confirm("Yakin untuk menghapus?");
             if (r == true) {
-                window.location.href = "<?php echo base_url(); ?>staff/jamaah/hapus?id=" + trid;
+                window.location.href = "<?php echo base_url(); ?>staff/jamaah/hapus_member?id=" + trid;
             }
         });
 

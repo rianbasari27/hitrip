@@ -526,4 +526,23 @@ class Jamaah extends CI_Controller
         }
         echo json_encode($data);
     }
+
+    public function hapus_member()
+    {
+        if (!($_SESSION['bagian'] == 'Master Admin')) {
+            $this->alert->toast('danger', 'Mohon Maaf', 'Anda tidak memiliki akses');
+            redirect($_SERVER['HTTP_REFERER']);
+        }
+        $this->form_validation->set_data($this->input->get());
+        $this->form_validation->set_rules('id', 'id', 'trim|required|integer');
+
+        if ($this->form_validation->run() == FALSE) {
+            $this->alert->toast('danger', 'Mohon Maaf', 'Anda tidak memiliki akses');
+            redirect($_SERVER['HTTP_REFERER']);
+        }
+
+        $this->load->model('registrasi');
+        $data = $this->registrasi->deleteProgramMember($_GET['id']);
+        redirect($_SERVER['HTTP_REFERER']);
+    }
 }
