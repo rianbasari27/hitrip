@@ -121,6 +121,115 @@ class Kuitansi_dl extends CI_Controller
         $this->load->view('staff/kuitansi_view', $data);
     }
 
+    public function invoice_dp()
+    {
+
+        if (!isset($_SESSION['id_user'])) {
+            $this->alert->toastAlert('red', 'Access Denied');
+            redirect($_SERVER['HTTP_REFERER']);
+        }
+        $this->form_validation->set_data($this->input->get());
+        $this->form_validation->set_rules('id', 'id', 'trim|required');
+        $this->form_validation->set_rules('method', 'method', 'trim|required');
+        if ($this->form_validation->run() == FALSE) {
+            $this->alert->toastAlert('red', 'Access Denied');
+            redirect($_SERVER['HTTP_REFERER']);
+        }
+
+        $this->load->model('auth');
+        $this->load->model('tarif');
+        $this->load->model('registrasi'); 
+        $this->load->library('date'); 
+        $this->load->library('bank'); 
+        $member = $this->registrasi->getMember($_GET['id']);
+        $member = $member[0];
+        $user = $this->registrasi->getUser($member->id_user);
+        $riwayat = $this->tarif->getRiwayatBayar($member->id_member);
+        // echo '<pre>';
+        // print_r($riwayat);
+        // exit();
+        $logo = '/asset/appkit/images/hitrip/hitrip-logo.png';
+        $data = [
+            'name' => $user->name,
+            'no_wa' => $user->no_wa,
+            'email' => $user->email,
+            'logo' => $logo,
+            'tanggal' => $this->date->convert_date_indo(date('Y-m-d', strtotime($member->tgl_regist))),
+            'tanggal_cetak' => $this->date->convert_date_indo(date('Y-m-d')),
+            'nama_paket' => $member->paket_info->nama_paket . ', ' . $member->paket_info->negara,
+            'pilihan_kamar' => $member->pilihan_kamar,
+            'jumlah' => count($riwayat['tarif']['dataMember']),
+            'harga' => $riwayat['tarif']['dataMember'][$riwayat['id_member']]['baseFee']['harga'],
+            'lunas' => $member->lunas,
+            'payment_method' => $this->bank->getBankName($_GET['method']),
+            'riwayat' => $riwayat
+        ];
+
+
+        foreach ($data['riwayat']['tarif']['dataMember'] as $key => $dm) {
+        $data['potongan'] = [];
+        $data['extraFee'] = [];
+            foreach ($dm['extraFee'] as $fee) {
+                if (!empty($fee)) {
+                    //ambil extrafee
+                    if ($fee->nominal > 0 ) {
+                        $data['extraFee'][] = $fee;
+                    }
+                    //ambil potongan
+                    if ($fee->nominal < 0 ) {
+                        $data['potongan'][] = $fee;
+                    }
+                }
+            }
+            $data['riwayat']['tarif']['dataMember'][$key]['potongan'] = $data['potongan'];
+            $data['riwayat']['tarif']['dataMember'][$key]['biayaExtra'] = $data['extraFee'];
+        }
+        $id_paket = $data['riwayat']['tarif']['dataMember'][$data['riwayat']['id_member']]['detailJamaah']->member[0]->id_paket;
+        $this->db->where('id_paket', $id_paket);
+        $this->db->order_by('id_member', 'asc');
+        $query = $this->db->get('program_member');
+        $result = $query->result();
+        if (empty($result)) {
+            return false;
+        }
+        $daftar = [];
+        foreach ($result as $key => $r) {
+            foreach ($data['riwayat']['tarif']['dataMember'] as $idMember => $dm) {
+                if ($r->id_member == $idMember) {
+                    $daftar[] = $key + 1;
+                }
+            }
+        }
+        $data['registNumber'] = implode(", ", $daftar);
+
+        //cek infant
+        foreach ($data['riwayat']['tarif']['dataMember'] as $key => $d) {
+            $this->load->library('calculate');
+            $age = $this->calculate->ageDiff($d['detailJamaah']->tanggal_lahir, $d['detailJamaah']->member[0]->paket_info->tanggal_berangkat);
+            if ($age !== null) {
+                if ($age < 2) {
+                    $kategori = 'Infant';
+                }
+                else if ($age >= 2 && $age <= 6 && $d['detailJamaah']->member[0]->sharing_bed == 1) {
+                    $kategori = "Sharing Bed";
+                }
+                else {
+                    $kategori = '';
+                }
+            } else {
+                $kategori = '';
+            }
+            $data['riwayat']['tarif']['dataMember'][$key]['detailJamaah']->member[0]->kategori = $kategori;
+        }
+        $data['id'] = $_GET['id'];
+        // $this->load->view('staff/kuitansi_html_view', $data);
+        $data['html'] = $this->load->view('staff/kuitansi_dp_html_view', $data, true);
+        // echo '<pre>';
+        // print_r($data['html']);
+        // exit();
+        $this->load->view('staff/kuitansi_dp_view', $data);
+    }
+
     public function invoiceBelumDp() {
         $this->load->model('tarif');
         $this->load->model('registrasi');

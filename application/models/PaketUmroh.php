@@ -486,6 +486,8 @@ class PaketUmroh extends CI_Model
                 }
                 // get tanggal pelunasan
                 $data[$key]->tanggal_pelunasan = date('d F Y', strtotime($d->tanggal_berangkat . ' -45 day'));
+                $data[$key]->hotel_info = $this->getHotel($id);
+                $data[$key]->gallery = $this->getGalleryPackage(null, $id);
                 //get hotel
                 // $this->db->where('id_paket', $d->id_paket);
                 // $query = $this->db->get('hotel_info');
@@ -538,6 +540,12 @@ class PaketUmroh extends CI_Model
         }
         $result = $this->db->get()->result();
         return $result;
+    }
+
+    public function getHotel($id_paket) {
+        $this->db->where('id_paket', $id_paket);
+        $data = $this->db->get('hotel_info')->result();
+        return $data;
     }
 
     public function addHotel($data)

@@ -253,7 +253,7 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- <div class="row">
+                        <div class="row">
                             <div class="col-lg-12">
                                 <div class="card shadow mb-4 border-left-primary">
                                     <div class="card-header py-3">
@@ -262,51 +262,52 @@
                                     <div class="card-body">
                                         <div class="col-xl-3 col-md-6 mb-4">
                                             <a href="<?php echo base_url(); ?>staff/paket/tambah_hotel?id=<?php echo $id_paket; ?>"
-                                                class="btn btn-success btn-icon-split">
+                                                class="btn btn-sm rounded btn-success btn-icon-split">
                                                 <span class="icon text-white-50">
                                                     <i class="fas fa-plus"></i>
                                                 </span>
                                                 <span class="text">Tambah Hotel</span>
                                             </a>
                                         </div>
-                                        <?php if (empty($hotel)) { ?>
-                                        <center><span class="text-gray-500 font-italic">Belum ada data</span></center>
+                                        <?php if (empty($hotel_info)) { ?>
+                                        <center><span class="text-gray-500 font-italic">Hotel belum ditambahkan</span></center>
                                         <?php } else { ?>
                                         <div class="row">
-                                            <?php foreach ($hotel as $htl) { ?>
+                                            <?php foreach ($hotel_info as $htl) { ?>
                                             <div class="col-xl-6 col-md-6 mb-4">
-                                                <div class="card border-left-warning shadow h-100 py-2">
+                                                <div class="card border-left-warning rounded-s shadow p-3">
                                                     <div class="card-body">
                                                         <div class="row no-gutters align-items-center">
-                                                            <div class="col mr-2">
+                                                            <div class="mr-2">
 
                                                                 <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                                                    <?php echo $htl->nama_hotel; ?>
                                                                     <a href="<?php echo base_url(); ?>staff/paket/hapus_hotel?id=<?php echo $htl->id_hotel; ?>"
-                                                                        class="btn btn-sm btn-warning btn-icon-split btnHapus"
+                                                                        class="btn btn-sm btn-warning btn-icon-split btnHapus mb-3"
                                                                         data-toggle="modal" data-target="#hapusModal">
 
                                                                         <span class="text">Hapus</span>
                                                                     </a>
+                                                                    <h2><?php echo $htl->nama_hotel; ?></h2>
+                                                                    
                                                                 </div>
-                                                                <div class="mb-0 text-gray-800">The Time :
+                                                                <!-- <div class="mb-0 text-gray-800">The Time :
                                                                     <?php echo $htl->time; ?></div>
                                                                 <div class="mb-0 text-gray-800">History :
                                                                     <?php echo $htl->history; ?></div>
                                                                 <div class="mb-0 text-gray-800">Mazarat :
-                                                                    <?php echo $htl->mazarat; ?></div>
+                                                                    <?php echo $htl->mazarat; ?></div> -->
                                                             </div>
 
-                                                            <div class="col mr-2">
+                                                            <div class="mr-2">
                                                                 <div class="table-responsive">
                                                                     <img src="<?php echo base_url() . $htl->foto; ?>"
-                                                                        alt="" style="max-width: 400px;">
+                                                                        alt="" class="img-fluid rounded">
 
                                                                 </div>
                                                             </div>
-                                                            <div class="col mr-2 mt-3">
+                                                            <div class="mr-2 mt-3">
                                                                 <div class="table-responsive">
-                                                                    <iframe width="720" height="300" frameborder="0"
+                                                                    <iframe width="400" height="300" frameborder="0"
                                                                         style="border:0" src="
                                                                                     https://www.google.com/maps/embed/v1/place?q=<?php echo urlencode($htl->nama_hotel); ?>&key=AIzaSyD0mI9tAXxHhM-qtUak3XcPyeolqymIgno
                                                                                     ">
@@ -326,8 +327,26 @@
 
                                 </div>
                             </div>
-                        </div> -->
+                        </div>
                     </div>
+                    <div class="modal fade" id="hapusModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Yakin untuk menghapus hotel?</h5>
+                                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">Pilih "Ya" untuk menghapus hotel.</div>
+                            <div class="modal-footer">
+                                <button class="btn btn-secondary" type="button" data-dismiss="modal">Batal</button>
+                                <a class="btn btn-primary" id="btnModal">Ya</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                     <!-- [ content ] End -->
 
                     <?php $this->load->view('staff/include/footer_view') ?>
@@ -342,6 +361,13 @@
     <!-- [ Layout wrapper] End -->
     <script src="<?php echo base_url(); ?>asset/sbadmin2/vendor/jquery/jquery.min.js"></script>
     <?php $this->load->view('staff/include/script_view') ?>
+    <script>
+        $(".btnHapus").click(function() {
+            var ref = $(this).attr("href");
+            $("#btnModal").attr("href", ref);
+
+        });
+    </script>
 </body>
 
 </html>

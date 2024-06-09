@@ -27,8 +27,7 @@ class Kuitansi_dl extends CI_Controller
         $data = $this->tarif->getKuitansiData($_GET['id']);
         $strpos = strpos(strtolower($data['nama_paket']), ' ');
         $firstWord= substr($data['nama_paket'], 0, $strpos);
-        $data['jenisPaket'] = false;
-        $data['logo'] = 'asset/appkit/images/hitrip/hitrip-logo.png';
+        $data['logo'] = '/asset/appkit/images/hitrip/hitrip-logo.png';
         $lunas = $data['riwayat']['tarif']['dataMember'][$data['riwayat']['id_member']]['detailJamaah']->member[0]->lunas;
         if ($lunas == 0) {
             $data['logoLunas'] = 'belum_dp_stamp.png';
