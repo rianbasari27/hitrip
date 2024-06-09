@@ -482,6 +482,7 @@
                                 </select>
                                 <em><strong>(wajib diisi)</strong></em>
                             </div>
+                            <?php if (!empty($voucherPaket)) { ?>
                             <div class="input-style has-borders no-icon input-style-always-active validate-field mb-4">
                                 <input name="kode_voucher" type="text" class="form-control validate-name upper"
                                     id="formKode" placeholder="" value="">
@@ -491,6 +492,7 @@
                                 <i class="fa fa-check disabled valid color-green-dark"></i>
                                 <em><strong>(wajib diisi)</strong></em>
                             </div>
+                            <?php } ?>
                             <!-- <div class="form-group" id="selectOffice" style="display: none;">
                                     <label class="color-highlight" for="form10">Pilih Kantor</label>
                                     <div class="input-style has-borders no-icon input-style-always-active validate-field mb-4">

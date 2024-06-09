@@ -231,4 +231,16 @@ class VoucherModel extends CI_Model
         $this->db->where('id_voucher', $id);
         $this->db->delete('voucher_paket');
     }
+
+    public function getVoucherPaket($id_voucher = null, $id_paket = null) {
+        if ($id_voucher) {
+            $this->db->where('id_voucher', $id_voucher);
+        }
+
+        if ($id_paket) {
+            $this->db->where('id_paket', $id_paket);
+        }
+
+        return $this->db->get('voucher_paket')->result();
+    }
 }

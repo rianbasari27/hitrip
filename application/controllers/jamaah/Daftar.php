@@ -98,6 +98,9 @@ class Daftar extends CI_Controller
         $this->load->model('agen');
         // $agenList = $this->agen->getAgen(null, false, false, false, true);
 
+        $this->load->model('voucherModel');
+        $voucherPaket = $this->voucherModel->getVoucherPaket(null, $paket->id_paket);
+
         $data = array(
             'paket' => $paket,
             // 'agenList' => $agenList,
@@ -106,6 +109,7 @@ class Daftar extends CI_Controller
             'ktp_no' => $ktp_no,
             'parentMembers' => $parentMembers,
             'user' => $user,
+            'voucherPaket' => $voucherPaket
         );
         $this->load->view('jamaah/registrasi', $data);
     }
