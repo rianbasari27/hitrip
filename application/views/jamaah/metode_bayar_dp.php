@@ -42,54 +42,78 @@
                         <h5>Details</h5>
                         <div class="row mb-0 mt-2">
                             <h5 class="col-6 text-start font-14 opacity-60 font-500">Paket</h5>
-                            <h5 class="col-6 text-end font-14 font-700"><?php echo $tarif['currentPaket']->nama_paket . ', ' . $tarif['currentPaket']->negara ?></h5>
+                            <h5 class="col-6 text-end font-14 font-700">
+                                <?php echo $tarif['currentPaket']->nama_paket . ', ' . $tarif['currentPaket']->negara ?>
+                            </h5>
                             <h5 class="col-6 text-start font-14 opacity-60 font-500">Tanggal</h5>
-                            <h5 class="col-6 text-end font-14 font-700"><?php echo $this->date->convert_date_indo(date('Y-m-d', strtotime($tarif['tgl_regist']))); ?></h5>
+                            <h5 class="col-6 text-end font-14 font-700">
+                                <?php echo $this->date->convert_date_indo(date('Y-m-d', strtotime($tarif['tgl_regist']))); ?>
+                            </h5>
                             <h5 class="col-6 text-start font-14 opacity-60 font-500">Waktu</h5>
-                            <h5 class="col-6 text-end font-14 font-700"><?php echo date('H:i', strtotime($tarif['tgl_regist'])); ?> WIB</h5>
+                            <h5 class="col-6 text-end font-14 font-700">
+                                <?php echo date('H:i', strtotime($tarif['tgl_regist'])); ?> WIB</h5>
                             <h5 class="col-6 text-start font-14 opacity-60 font-500">Jumlah</h5>
-                            <h5 class="col-6 text-end font-14 font-700"><?php echo count($tarif['dataMember']); ?> Orang</h5>
+                            <h5 class="col-6 text-end font-14 font-700"><?php echo count($tarif['dataMember']); ?> Orang
+                            </h5>
                             <h5 class="col-6 text-start font-14 opacity-60 font-500">Keberangkatan</h5>
-                            <h5 class="col-6 text-end font-14 font-700"><?php echo $this->date->convert_date_indo($tarif['currentPaket']->tanggal_berangkat); ?></h5>
+                            <h5 class="col-6 text-end font-14 font-700">
+                                <?php echo $this->date->convert_date_indo($tarif['currentPaket']->tanggal_berangkat); ?>
+                            </h5>
                         </div>
-                        
+
                         <div class="divider my-3"></div>
 
                         <h5>Rincian</h5>
                         <div class="row mb-0 mt-2">
                             <h5 class="col-6 text-start font-14 opacity-60 font-500">Harga</h5>
-                            <h5 class="col-6 text-end font-14 font-700"><?php echo $tarif['currentPaket']->hargaPretty . ' (x' . count($tarif['dataMember']) . ')' ?></h5>
-                            <h5 class="col-6 text-start font-14 opacity-60 font-500">Potongan</h5>
-                            <h5 class="col-6 text-end font-14 font-700"><?php echo $this->money->format($tarif['currentPaket']->default_diskon) ?></h5>
+                            <h5 class="col-6 text-end font-14 font-700">
+                                <?php echo $tarif['currentPaket']->hargaPretty . ' (x' . count($tarif['dataMember']) . ')' ?>
+                            </h5>
+                            <?php if (!empty($tarif['dataMember'][$tarif['idMember']]['extraFee'])) { ?>
+                            <?php 
+                                $c = 0 ;
+                                foreach ($tarif['dataMember'][$tarif['idMember']]['extraFee'] as $ef) { $c++ ?>
+                            <h5 class="col-6 text-start font-14 opacity-60 font-500">
+                                <?php echo $c == 1 ? 'Potongan' :'' ;?></h5>
+                            <h5 class="col-6 text-end font-14 font-700">
+                                <?php echo $this->money->format(abs($ef->nominal)) ?></h5>
+                            <?php } ?>
+                            <?php } ?>
                         </div>
-                        
+
                         <div class="divider my-3"></div>
 
                         <div class="row mb-0 mt-2">
                             <h5 class="col-6 text-start">Total</h5>
-                            <h5 class="col-6 text-end font-18 font-700"><?php echo $tarif['currentPaket']->hargaPrettyDiskon ?></h5>
+                            <h5 class="col-6 text-end font-18 font-700">
+                                <?php echo $this->money->format($tarif['dataMember'][$tarif['idMember']]['totalHarga']) ?>
+                            </h5>
                             <h5 class="col-6 text-start font-14 opacity-60 font-500">Down Payment (DP)</h5>
-                            <h5 class="col-6 text-end font-16 font-700"><?php echo $this->money->format($tarif['dp_display']) ?></h5>
+                            <h5 class="col-6 text-end font-16 font-700">
+                                <?php echo $this->money->format($tarif['dp_display']) ?></h5>
                         </div>
                     </div>
-                
+
                 </div>
 
                 <?php if ($method != null) { ?>
-                    <div class="card card-style mx-0">
-                        <div class="content">
-                            <div class="d-flex">
-                                <img src="<?php echo $method['icon'] ?>" alt="<?php echo $method['bankName'] ?>" width="80" class="shadow rounded-sm">
-                                <div class="ms-3">
-                                    <h5 class="font-12 font-500 mb-0 opacity-60"><?php echo $method['bankName'] ?></h5>
-                                    <h3 class="font-18 mb-0">7261829103 (DEMO)</h3>
-                                    <a href="<?php echo base_url() . 'jamaah/kuitansi_dl/invoice_dp?id=' . $tarif['idMember'] . '&method=' . $_GET['method'] ?>" class="btn btn-xs mt-1 rounded shadow gradient-highlight">Download Invoice</a>
-                                </div>
+                <div class="card card-style mx-0">
+                    <div class="content">
+                        <div class="d-flex">
+                            <img src="<?php echo $method['icon'] ?>" alt="<?php echo $method['bankName'] ?>" width="80"
+                                class="shadow rounded-sm">
+                            <div class="ms-3">
+                                <h5 class="font-12 font-500 mb-0 opacity-60"><?php echo $method['bankName'] ?></h5>
+                                <h3 class="font-18 mb-0">7261829103 (DEMO)</h3>
+                                <a href="<?php echo base_url() . 'jamaah/kuitansi_dl/invoice_dp?id=' . $tarif['idMember'] . '&method=' . $_GET['method'] ?>"
+                                    class="btn btn-xs mt-1 rounded shadow gradient-highlight">Download Invoice</a>
                             </div>
                         </div>
                     </div>
+                </div>
                 <?php } else { ?>
-                    <a href="<?php echo base_url() ?>jamaah/daftar/pembayaran" class="btn btn-m btn-full rounded gradient-highlight">Pembayaran</a>
+                <a href="<?php echo base_url() ?>jamaah/daftar/pembayaran"
+                    class="btn btn-m btn-full rounded gradient-highlight">Pembayaran</a>
                 <?php } ?>
 
                 <!-- <div class="card card-style mx-0">

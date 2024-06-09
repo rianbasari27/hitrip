@@ -208,7 +208,13 @@ class Daftar extends CI_Controller
         $sharing_bed = $_POST['sharing_bed'];
         unset($_POST['sharing_bed']);
 
+        $kodeVoucher = $_POST['kode_voucher'];
+        unset($_POST['kode_voucher']);
+
         $id_member = $this->registrasi->daftar($_POST, true);
+
+        $this->load->model('voucherModel');
+        $this->voucherModel->applyVoucher($kodeVoucher, $id_member);
 
         // set sharing_bed
         $this->db->where('id_member', $id_member);
@@ -341,6 +347,9 @@ class Daftar extends CI_Controller
             'tarif' => $tarif,
             'method' => $method,
         ];
+        // echo '<pre>';
+        // print_r($tarif['dataMember'][$tarif['idMember']]);
+        // exit();
         $this->load->view('jamaah/metode_bayar_dp', $data);
     }
 
