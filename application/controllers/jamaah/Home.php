@@ -36,12 +36,12 @@ class Home extends CI_Controller
         }
 
         $promo = $this->paketUmroh->getDiskonEventPaket();
-        $areaTrip = $this->paketUmroh->getAreaTrip(4);
+        $category = $this->paketUmroh->getAreaTrip();
         $data = [
             'paket' => $paket,
             'paket_terbaru' => $paket_terbaru,
             'promo' => $promo,
-            'areaTrip' => $areaTrip,
+            'category' => $category,
         ];
         $this->load->view('jamaah/dash_mobile', $data);
     }

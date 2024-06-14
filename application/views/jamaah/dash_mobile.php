@@ -129,8 +129,8 @@
                     <div>
                         <?php if ($paket != null) { ?>
                         <?php foreach ($paket as $pkt) { ?>
-                        <a href="<?php echo base_url() . 'jamaah/detail_paket?id=' . $pkt->id_paket ?>" class="card card-style my-3" aria-label="<?php echo $pkt->nama_paket ?>"
-                            data-filter-item
+                        <a href="<?php echo base_url() . 'jamaah/detail_paket?id=' . $pkt->id_paket ?>"
+                            class="card card-style my-3" aria-label="<?php echo $pkt->nama_paket ?>" data-filter-item
                             data-filter-name="<?php echo strtolower($pkt->nama_paket . ' ' . $pkt->negara) ?>">
                             <div class="d-flex content">
                                 <div class="align-self-center">
@@ -293,6 +293,7 @@
             </div>
             <?php } ?>
 
+            <?php if ($category != null) { ?>
             <div class="content mb-n1">
                 <div class="d-flex">
                     <div class="align-self-center">
@@ -304,16 +305,15 @@
                             semua</a>
                     </div>
                 </div>
-                <?php if ($areaTrip != null) { ?>
                 <div class="row mb-n4">
-                    <?php foreach ($areaTrip as $a) { ?>
-                    <a href="<?php echo base_url() . 'jamaah/discover/list_area?area=' . $a->area_trip ?>"
+                    <?php $no = 0; foreach ($category as $a) { $no++ ?>
+                    <a href="<?php echo base_url() . 'jamaah/discover/list_area?area=' . $a->kategori ?>"
                         class="col-6 mb-2 pe-1">
                         <div class="card card-style mx-0 mb-2"
-                            style="background-image: url(<?php echo base_url() . ($a->banner_image != null ? $a->banner_image : 'asset/appkit/images/default-banner-image.jpg') ?>);"
+                            style="background-image: url(<?php echo base_url() . ($no != 1 ? 'asset/appkit/images/banner-hajj.jpg' : 'asset/appkit/images/banner-umroh.jpg') ?>);"
                             data-card-height="150">
                             <div class="card-bottom p-3">
-                                <h2 class="color-white"><?php echo $a->area_trip ?></h2>
+                                <h2 class="color-white"><?php echo $a->kategori ?></h2>
                             </div>
                             <div class="card-overlay bg-gradient opacity-10"></div>
                             <div class="card-overlay bg-gradient"></div>
@@ -321,8 +321,8 @@
                     </a>
                     <?php } ?>
                 </div>
-                <?php } ?>
             </div>
+            <?php } ?>
 
             <!-- <div class="content mb-n1">
                 <div class="d-flex">

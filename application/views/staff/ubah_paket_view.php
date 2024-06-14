@@ -64,6 +64,16 @@
                                                     value="<?php echo $nama_paket ;?>" required>
                                             </div>
                                             <div class="form-group">
+                                                <label class="col-form-label">Kategori Paket</label>
+                                                <select name="kategori" class="form-select" id="">
+                                                    <option value="UMROH"
+                                                        <?php echo $kategori == 'UMROH' ? 'selected':'' ;?>>UMROH
+                                                    </option>
+                                                    <option value="HAJJ"
+                                                        <?php echo $kategori == 'HAJJ' ? 'selected':'' ;?>>HAJJ</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
                                                 <label class="col-form-label">Tanggal Berangkat</label>
                                                 <input class="form-control" type="date" name="tanggal_berangkat"
                                                     value="<?php echo $tanggal_berangkat ;?>" required>
@@ -73,7 +83,7 @@
                                                 <input class="form-control" type="date" name="tanggal_pulang"
                                                     value="<?php echo $tanggal_pulang ;?>">
                                             </div>
-                                            <div class="form-group">
+                                            <!-- <div class="form-group">
                                                 <label class="col-form-label">Negara</label>
                                                 <input class="form-control" type="text" name="negara"
                                                     value="<?php echo $negara ;?>">
@@ -82,7 +92,7 @@
                                                 <label class="col-form-label">Area Trip (Benua)</label>
                                                 <input class="form-control" type="text" name="area_trip"
                                                     value="<?php echo $area_trip ;?>">
-                                            </div>
+                                            </div> -->
                                             <div class="form-group">
                                                 <label class="col-form-label">Jumlah Pax</label>
                                                 <input class="form-control format_harga" type="text" name="jumlah_seat"

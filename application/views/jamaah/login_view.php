@@ -4,37 +4,37 @@
 <head>
     <?php $this->load->view('jamaah/include/header'); ?>
     <style>
-        .error-message p {
-            color: red !important;
-        }
+    .error-message p {
+        color: red !important;
+    }
 
+    .back-button {
+        position: fixed;
+        top: 30px;
+        left: 30px;
+        width: 35px;
+        height: 35px;
+        border-radius: 50%;
+        text-align: center;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        z-index: 10;
+    }
+
+    .back-button a {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+        font-size: 20px;
+        text-decoration: none;
+    }
+
+    @media only screen and (min-width:600px) {
         .back-button {
-            position: fixed;
-            top: 30px;
-            left: 30px;
-            width: 35px;
-            height: 35px;
-            border-radius: 50%;
-            text-align: center;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-            z-index: 10;
+            left: calc((100% - 600px) / 2 + 30px);
         }
-
-        .back-button a {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 100%;
-            height: 100%;
-            font-size: 20px;
-            text-decoration: none;
-        }
-
-        @media only screen and (min-width:600px) {
-            .back-button {
-                left: calc((100% - 600px) / 2 + 30px);
-            }
-        }
+    }
     </style>
 </head>
 
@@ -57,7 +57,8 @@
                 </a>
             </div>
 
-            <div data-card-height="cover-full" class="card mb-0" style="background-image:url(<?php echo base_url() . 'asset/appkit/images/background-1.jpg' ?>)">
+            <div data-card-height="cover-full" class="card mb-0"
+                style="background-image:url(<?php echo base_url() . 'asset/appkit/images/background-1.jpg' ?>)">
                 <div class="card-center">
 
                     <div class="text-center">
@@ -70,31 +71,20 @@
 
                             <div class="input-style input-transparent no-borders has-icon validate-field mb-4">
                                 <i class="fa fa-user"></i>
-                                <input type="name" name="username" class="form-control validate-number" id="form1a"
-                                    placeholder="Username">
-                                <label for="form1a" class="color-highlight">Username</label>
+                                <input type="name" name="no_ktp" class="form-control validate-number" id="form1a"
+                                    placeholder="No KTP">
+                                <label for="form1a" class="color-highlight">No KTP</label>
                                 <!-- <i class="fa fa-times disabled invalid color-red-dark"></i>
                                 <i class="fa fa-check disabled valid color-green-dark"></i> -->
                                 <em>(required)</em>
                             </div>
-                            <div class="error-message mt-n3 mb-3"><?php echo form_error('username') ?></div>
-                            
-                            <div class="input-style input-transparent no-borders has-icon validate-field mb-4 mt-4">
-                                <i class="fa fa-lock"></i>
-                                <input type="password" name="password" class="form-control validate-password"
-                                    id="form1b" placeholder="Password">
-                                <label for="form1b" class="color-highlight">Password</label>
-                                <!-- <i class="fa fa-times disabled invalid color-red-dark"></i>
-                                <i class="fa fa-check disabled valid color-green-dark"></i> -->
-                                <em>(required)</em>
-                            </div>
-                            <div class="error-message mt-n3 mb-5"><?php echo form_error('password') ?></div>
+                            <div class="error-message mt-n3 mb-3"><?php echo form_error('no_ktp') ?></div>
 
                             <a href="#" id="submitBtn" data-back-button
                                 class="btn btn-full btn-l font-600 font-13 gradient-highlight mt-4 rounded-s">Sign
                                 In</a>
 
-                            <div class="row pt-3 mb-3">
+                            <!-- <div class="row pt-3 mb-3">
                                 <div class="col-6 text-start font-11">
                                     <a class="color-white opacity-50"
                                         href="<?php echo base_url() . 'jamaah/login/forgot' ;?>">Lupa Password?</a>
@@ -103,7 +93,7 @@
                                     <a class="color-white opacity-50"
                                         href="<?php echo base_url() . 'jamaah/login/sign_up' ;?>">Buat Akun</a>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                     </form>
 

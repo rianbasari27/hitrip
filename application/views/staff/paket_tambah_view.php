@@ -62,6 +62,14 @@
                                                 <input class="form-control" type="text" name="nama_paket" required>
                                             </div>
                                             <div class="form-group">
+                                                <label class="col-form-label">Kategori Paket</label>
+                                                <select name="kategori" class="form-select" id="">
+                                                    <option value="">-- Pilih Kategori Paket --</option>
+                                                    <option value="UMROH">UMROH</option>
+                                                    <option value="HAJJ">HAJJ</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
                                                 <label class="col-form-label">Tanggal Berangkat</label>
                                                 <input class="form-control" type="date" name="tanggal_berangkat"
                                                     required>
@@ -70,7 +78,7 @@
                                                 <label class="col-form-label">Tanggal Pulang</label>
                                                 <input class="form-control" type="date" name="tanggal_pulang">
                                             </div>
-                                            <div class="form-group">
+                                            <!-- <div class="form-group">
                                                 <label class="col-form-label">Negara</label>
                                                 <input class="form-control" type="text" name="negara"
                                                     required>
@@ -80,7 +88,7 @@
                                                         class="text-primary font-italic font-weight-lighter">Benua</span>)</label>
                                                 <input class="form-control" type="text" name="area_trip"
                                                     required>
-                                            </div>
+                                            </div> -->
                                             <div class="form-group">
                                                 <label class="col-form-label">Jumlah Pax</label>
                                                 <input class="form-control format_harga" type="text" name="jumlah_seat">

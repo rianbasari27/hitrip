@@ -234,7 +234,6 @@
                         <input type="hidden" name="parent_id" value="<?php echo $parent_id ?>">
                         <?php } ?>
                         <input type="hidden" name="id_paket" value="<?php echo $paket->id_paket; ?>">
-                        <input type="hidden" name="id_user" value="<?php echo $user->id_user; ?>">
                         <div class="mt-1 mb-3">
                             <div class="mb-5">
                                 <p class="mb-n1 font-600 color-green-dark">Tipe Kamar</p>
@@ -391,7 +390,8 @@
                                 </div> -->
                             <div class="input-style has-borders no-icon input-style-always-active validate-field mb-4">
                                 <input name="name" type="name" class="form-control validate-name upper" id="form1"
-                                    placeholder="" value="<?php echo $user->name ?>">
+                                    placeholder="" value="<?php echo $user != null ? $user->name :'';?>"
+                                    <?php echo $user != null ? 'readonly' :'';?>>
                                 <label for="form1" class="color-highlight">Nama Lengkap <strong class="text-danger">
                                         *</strong></label>
                                 <i class="fa fa-times disabled invalid color-red-dark"></i>
@@ -406,7 +406,8 @@
                             </div> -->
                             <div class="input-style has-borders no-icon input-style-always-active validate-field mb-4">
                                 <input name="no_ktp" type="text" class="form-control validate-name upper" id="form4"
-                                    placeholder="" value="<?php echo $user->no_ktp != null ? $user->no_ktp : ''; ?>">
+                                    placeholder="" value="<?php echo $user != null ? $user->no_ktp :'';?>"
+                                    <?php echo $user != null ? 'readonly' :'';?>>
                                 <label for="form4" class="color-highlight">Nomor KTP <strong class="text-danger">
                                         *</strong></label>
                                 <i class="fa fa-times disabled invalid color-red-dark"></i>
@@ -414,10 +415,11 @@
                                 <em><strong>(wajib diisi)</strong></em>
                             </div>
                             <div class="input-style has-borders no-icon input-style-always-active validate-field mb-4">
-                                <a href="#" data-menu="datepicker2" class="text-dark">
+                                <a href="#" class="text-dark">
                                     <input name="tanggal_lahir" type="date" class="form-control validate-name upper"
                                         id="form7" readonly
-                                        value="<?php echo $user->tanggal_lahir != null ? $user->tanggal_lahir : ''; ?>">
+                                        value="<?php echo $user != null ? $user->tanggal_lahir :'';?>"
+                                        <?php echo $user != null ? '' : 'data-menu="datepicker2"';?>>
                                     <label for="form7" class="color-highlight">Tanggal Lahir <strong
                                             class="text-danger">*</strong></label>
                                 </a>
@@ -449,11 +451,9 @@
                                 <select name="jenis_kelamin" id="form-9">
                                     <option class="color-dark-dark" value="" disabled selected>-- Pilih Jenis Kelamin --
                                     </option>
-                                    <option class="color-dark-dark"
-                                        <?php echo $user->jenis_kelamin == 'L' ? 'selected' : ''; ?> value="L">LAKI-LAKI
+                                    <option class="color-dark-dark" value="L">LAKI-LAKI
                                     </option>
-                                    <option class="color-dark-dark"
-                                        <?php echo $user->jenis_kelamin == 'P' ? 'selected' : ''; ?> value="P">PEREMPUAN
+                                    <option class="color-dark-dark" value="P">PEREMPUAN
                                     </option>
                                 </select>
                                 <span><i class="fa fa-chevron-down"></i></span>
@@ -470,15 +470,10 @@
                                         disabled selected>Pilih salah satu ... </option>
                                     <!-- <option value="Agen" class="color-dark-dark" <?php echo ($agen == null) ? '' : 'selected'; ?>>KONSULTAN
                                     </option> -->
-                                    <option value="Walk_in"
-                                        <?php echo $user->referensi == 'Walk_in' ? 'selected' : ''; ?>
-                                        class="color-dark-dark">WALK IN</option>
-                                    <option value="Teman" <?php echo $user->referensi == 'Teman' ? 'selected' : ''; ?>
-                                        class="color-dark-dark">TEMAN/SAUDARA</option>
-                                    <option value="Socmed" <?php echo $user->referensi == 'Socmed' ? 'selected' : ''; ?>
-                                        class="color-dark-dark">SOCIAL MEDIA</option>
-                                    <option value="Iklan" <?php echo $user->referensi == 'Iklan' ? 'selected' : ''; ?>
-                                        class="color-dark-dark">IKLAN</option>
+                                    <option value="Walk_in" class="color-dark-dark">WALK IN</option>
+                                    <option value="Teman" class="color-dark-dark">TEMAN/SAUDARA</option>
+                                    <option value="Socmed" class="color-dark-dark">SOCIAL MEDIA</option>
+                                    <option value="Iklan" class="color-dark-dark">IKLAN</option>
                                 </select>
                                 <em><strong>(wajib diisi)</strong></em>
                             </div>
@@ -541,7 +536,7 @@
                             </div> -->
                         </div>
                         <?php else : ?>
-                        <a href="#" onclick="submit();"
+                        <a href="#" data-menu="menu-option-2"
                             class="btn btn-full btn-m bg-highlight rounded-s font-13 font-600 mt-4">Berikutnya</a>
                         <?php endif; ?>
 
@@ -666,6 +661,24 @@
         </div>
     </div>
 
+    <div id="menu-option-2" class="menu menu-box-modal rounded-m" data-menu-height="300" data-menu-width="350">
+        <h1 class="text-center mt-4"><i
+                class="fa fa-3x fa-info-circle scale-box color-blue-dark shadow-xl rounded-circle"></i></h1>
+        <h3 class="text-center mt-3 font-700">Peringatan</h3>
+        <p class="boxed-text-xl opacity-70">
+            Kami tidak bertanggung jawab atas ketidakakuratan data yang mungkin terjadi.
+        </p>
+        <div class="row mb-0 me-3 ms-3">
+            <div class="col-6">
+                <a href="#" class="btn close-menu btn-full btn-m bg-red-dark font-600 rounded-s">Batal</a>
+            </div>
+            <div class="col-6">
+                <a href="#" id="submitBtn"
+                    class="btn close-menu btn-full btn-m bg-highlight font-600 rounded-s">Daftar</a>
+            </div>
+        </div>
+    </div>
+
     <script type="text/javascript" src="<?php echo base_url(); ?>asset/appkit/scripts/bootstrap.min.js"></script>
     <script type="text/javascript" src="<?php echo base_url(); ?>asset/appkit/scripts/custom.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
@@ -688,22 +701,9 @@
     })();
     // end for datepicker
 
-    function submit() {
-        Swal.fire({
-            title: 'Apa anda sudah yakin?',
-            text: 'Kami tidak bertanggung jawab atas ketidakakuratan data yang mungkin terjadi',
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#F7C255',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                document.getElementById("myForm").submit();
-            }
-        })
-        $(".swal2-confirm").addClass('bg-highlight')
-    }
+    document.getElementById('submitBtn').addEventListener('click', function() {
+        document.getElementById('myForm').submit();
+    });
 
     function showOnChange(e) {
         var elem = document.getElementById("slct");

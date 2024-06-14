@@ -7,8 +7,7 @@ class Login extends CI_Controller
 
     public function index()
     {
-        $this->form_validation->set_rules('username', 'username', 'required|trim');
-        $this->form_validation->set_rules('password', 'password', 'required|trim');
+        $this->form_validation->set_rules('no_ktp', 'No KTP', 'required|trim');
 
         if ($this->form_validation->run() == FALSE) {
             // $this->session->set_flashdata(['form' => $_POST]);
@@ -21,17 +20,8 @@ class Login extends CI_Controller
     }
     public function proses()
     {
-        // $this->form_validation->set_rules('username', 'Username', 'required|trim');
-        // $this->form_validation->set_rules('password', 'Password', 'required|trim');
-
-        // if ($this->form_validation->run() == FALSE) {
-        //     $this->session->set_flashdata(['form' => $_POST]);
-        //     $this->alert->setJamaah('red', 'Ups...', validation_errors('<li>', '</li>'));
-        //     redirect($_SERVER['HTTP_REFERER']);
-        // }
-
         $this->load->model('customer');
-        $result = $this->customer->verifyLoginUser($_POST['username'], $_POST['password']);
+        $result = $this->customer->verifyLoginUser($_POST['no_ktp']);
         if ($result['type'] == 'green') {
             $this->alert->toastAlert($result['type'], $result['message']);
             redirect(base_url() . 'jamaah/home');

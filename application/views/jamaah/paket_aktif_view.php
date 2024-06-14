@@ -26,60 +26,68 @@
 
         <div class="page-content mt-n1">
 
-            
-        <div class="card card-style mb-3 mt-3">
-            <div class="content">
-                <h1 class="mb-n2 font-20"><?php echo $paket->nama_paket?></h1>
-                <p class="color-highlight mb-1"><i class="fa-solid fa-location-dot me-1"></i><?php echo $paket->nama_paket . ', ' . $paket->negara ?></p>
-                <div class="card card-style mx-0" 
-                    style="background-image:url('<?php echo base_url() . $paket->banner_image ?>');" 
-                    data-card-height="100">
-                </div>
 
-                <div class="d-flex opacity-60">
-                    <div class="mx-auto">
-                        <i class="fa-solid fa-plane-departure font-16 color-theme"></i>
+            <div class="card card-style mb-3 mt-3">
+                <div class="content">
+                    <h1 class="mb-n2 font-20"><?php echo $paket->nama_paket?></h1>
+                    <p class="color-highlight mb-1"><i
+                            class="fa-solid fa-location-dot me-1"></i><?php echo $paket->nama_paket . ', ' . $paket->negara ?>
+                    </p>
+                    <div class="card card-style mx-0"
+                        style="background-image:url('<?php echo base_url() . $paket->banner_image ?>');"
+                        data-card-height="100">
                     </div>
-                    <div class="mx-auto" style="width: 70%">
-                        <div style="border-bottom: 1px dashed grey;" class="mt-2"></div>
+
+                    <div class="d-flex opacity-60">
+                        <div class="mx-auto">
+                            <i class="fa-solid fa-plane-departure font-16 color-theme"></i>
+                        </div>
+                        <div class="mx-auto" style="width: 70%">
+                            <div style="border-bottom: 1px dashed grey;" class="mt-2"></div>
+                        </div>
+                        <div class="mx-auto">
+                            <i class="fa-solid fa-plane-arrival font-16 color-theme"></i>
+                        </div>
                     </div>
-                    <div class="mx-auto">
-                        <i class="fa-solid fa-plane-arrival font-16 color-theme"></i>
+                    <div class="d-flex opacity-60">
+                        <h4 class="font-12 text-start">
+                            <?php echo $this->date->convert_date_indo($paket->tanggal_berangkat) ?></h4>
+                        <h4 class="font-12 text-end ms-auto">
+                            <?php echo $this->date->convert_date_indo($paket->tanggal_pulang) ?></h4>
                     </div>
-                </div>
-                <div class="d-flex opacity-60">
-                    <h4 class="font-12 text-start"><?php echo $this->date->convert_date_indo($paket->tanggal_berangkat) ?></h4>
-                    <h4 class="font-12 text-end ms-auto"><?php echo $this->date->convert_date_indo($paket->tanggal_pulang) ?></h4>
                 </div>
             </div>
-        </div>
 
-        <div class="card card-style mb-3">
-            <div class="content mb-0">
-                <h3 class="font-16">Detail</h3>
-                <div class="row">
-                    <div class="col-6">Pilihan Kamar</div>
-                    <div class="col-6 text-end color-theme font-700"><?php echo $member->pilihan_kamar ?></div>
-                    <div class="col-6">Status Pembayaran</div>
-                    <div class="col-6 text-end font-700 <?php echo $member->lunas != '1' ? 'color-red-dark' : 'color-green-dark' ?>"><?php echo $member->lunas != '1' ? 'Belum lunas' : 'Lunas' ?></div>
-                    <div class="col-6">Itinerary</div>
-                    <?php if ($paket->itinerary != null) { ?>
-                        <a href="<?php echo base_url() . $paket->itinerary; ?>" download class="col-6 text-end font-700"><u><i class="fa-solid fa-download me-1"></i>Download</u></a>
-                    <?php } else { ?>
+            <div class="card card-style mb-3">
+                <div class="content mb-0">
+                    <h3 class="font-16">Detail</h3>
+                    <div class="row">
+                        <div class="col-6">Pilihan Kamar</div>
+                        <div class="col-6 text-end color-theme font-700"><?php echo $member->pilihan_kamar ?></div>
+                        <div class="col-6">Status Pembayaran</div>
+                        <div
+                            class="col-6 text-end font-700 <?php echo $member->lunas != '1' ? 'color-red-dark' : 'color-green-dark' ?>">
+                            <?php echo $member->lunas != '1' ? 'Belum lunas' : 'Lunas' ?></div>
+                        <div class="col-6">Itinerary</div>
+                        <?php if ($paket->itinerary != null) { ?>
+                        <a href="<?php echo base_url() . $paket->itinerary; ?>" download
+                            class="col-6 text-end font-700"><u><i class="fa-solid fa-download me-1"></i>Download</u></a>
+                        <?php } else { ?>
                         <div class="col-6 text-end">Belum tersedia</div>
-                    <?php } ?>
+                        <?php } ?>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="card card-style">
-            <div class="content">
-                <h3 class="font-16 mb-3">Hotel Info</h3>
-                <?php if ($paket->hotel_info != null) { ?>
+            <div class="card card-style">
+                <div class="content">
+                    <h3 class="font-16 mb-3">Hotel Info</h3>
+                    <?php if ($paket->hotel_info != null) { ?>
                     <?php foreach ($paket->hotel_info as $h) { ?>
                     <div class="card card-style mx-0 mb-3">
-                        <div class="card mb-0" style="background-image: url('<?php echo base_url() . ($h->foto != null ? $h->foto : 'asset/appkit/images/hotel-default.jpg'); ?>');" 
-                        data-card-height="100">
+                        <div class="card mb-0"
+                            style="background-image: url('<?php echo base_url() . ($h->foto != null ? $h->foto : 'asset/appkit/images/hotel-default.jpg'); ?>');"
+                            data-card-height="100">
                         </div>
                         <div class="content m-3">
                             <div class="d-flex mb-n1">
@@ -88,22 +96,44 @@
                                     <p class="font-12 mb-0"><?php echo $h->kota . ', ' . $paket->negara ?></p>
                                 </div>
                                 <div class="ms-auto">
-                                    <p class="color-yellow-dark font-700 mb-0 text-end"><?php echo $h->star ?><i class="fa-solid fa-star ms-1"></i></p>
-                                    <a href="<?php echo $h->maps_link != null ? $h->maps_link : '#' ?>" class="color-highlight font-12"><i class="fa-solid fa-up-right-from-square me-1"></i>Temukan</a>
+                                    <p class="color-yellow-dark font-700 mb-0 text-end"><?php echo $h->star ?><i
+                                            class="fa-solid fa-star ms-1"></i></p>
+                                    <a href="<?php echo $h->maps_link != null ? $h->maps_link : '#' ?>"
+                                        class="color-highlight font-12"><i
+                                            class="fa-solid fa-up-right-from-square me-1"></i>Temukan</a>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <?php } ?>
-                <?php } else { ?>
+                    <?php } else { ?>
                     <p>Hotel belum tersedia</p>
-                <?php } ?>
+                    <?php } ?>
+                </div>
             </div>
-        </div>
 
-        <div class="content">
-            <a href="<?php echo base_url() . 'jamaah/pembayaran/riwayat?id=' . $member->id_member ?>" class="btn btn-m btn-full gradient-highlight rounded-s">Riwayat Transaksi</a>
-        </div>
+            <div class="content">
+                <div class="row mb-0">
+                    <?php if ($paket->itinerary != null) { ?>
+                    <div class="<?php echo $paket->paket_flyer != null ? 'col-6 mx-auto' : 'col-12' ?>">
+                        <a href="<?php echo base_url() . $paket->itinerary; ?>" download
+                            class="font-12 mb-3 py-3 text-center d-block rounded-sm shadow font-700 color-highlight bg-theme"><i
+                                class="fa-solid fa-file-lines font-24 mb-2"></i><br>Itinerary</a>
+                    </div>
+                    <?php } ?>
+                    <?php if ($paket->paket_flyer != null ) { ?>
+                    <div class="<?php echo $paket->itinerary != null ? 'col-6 mx-auto' : 'col-12' ?>">
+                        <a href="<?php echo base_url() . $paket->paket_flyer?>" download
+                            class="font-12 mb-3 py-3 text-center d-block rounded-sm shadow font-700 color-highlight bg-theme"><i
+                                class="fa-solid fa-file-image font-24 mb-2"></i><br> Flyer</a>
+                    </div>
+                    <?php } ?>
+                </div>
+            </div>
+            <div class="content">
+                <a href="<?php echo base_url() . 'jamaah/pembayaran/riwayat?id=' . $member->id_member ?>"
+                    class="btn btn-m btn-full gradient-highlight rounded-s">Riwayat Transaksi</a>
+            </div>
 
             <?php $this->load->view('jamaah/include/footer'); ?>
             <?php $this->load->view('jamaah/include/alert'); ?>

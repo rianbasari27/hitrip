@@ -36,14 +36,16 @@
                                         <h6 class="m-0 font-weight-bold text-primary">Informasi Paket Umroh</h6>
                                         <span class="m-0">
                                             <a href="<?php echo base_url(); ?>staff/paket/ubah_paket?id=<?php echo $id_paket; ?>"
-                                                class="btn btn-xs rounded-xs btn-warning btn-icon-split">
+                                                class="btn rounded-xs btn-warning"
+                                                style="padding: 5px 6px; font-size:10px;">
                                                 <span class="icon text-white-50">
                                                     <i class="fas fa-edit"></i>
                                                 </span>
                                                 <span class="text">Ubah Data</span>
                                             </a>
                                             <a onclick="$('#fly_up').trigger('click');" href="#"
-                                                class="btn btn-success btn-icon-split btn-xs rounded-xs" for="fly_up">
+                                                class="btn btn-success btn-icon-split rounded-xs"
+                                                style="padding: 5px 6px; font-size:10px;" for="fly_up">
                                                 <span class="icon text-white-50">
                                                     <i class="fas fa-newspaper"></i>
                                                 </span>
@@ -56,7 +58,7 @@
                                                     type="file" style="display: none;">
                                             </form>
                                             <a onclick="$('#it_up').trigger('click');" href="#"
-                                                class="btn btn-info btn-icon-split  btn-xs rounded-xs" for="it_up">
+                                                class="btn btn-info btn-icon-split btn-xs rounded-xs" for="it_up">
                                                 <span class="icon text-white-50">
                                                     <i class="fas fa-route"></i>
                                                 </span>
@@ -69,7 +71,7 @@
                                                     type="file" style="display: none;">
                                             </form>
                                             <a onclick="$('#banner_up').trigger('click');" href="#"
-                                                class="btn btn-secondary btn-icon-split  btn-xs rounded-xs" for="it_up">
+                                                class="btn btn-secondary btn-icon-split btn-xs rounded-xs" for="it_up">
                                                 <span class="icon text-white-50">
                                                     <i class="fas fa-list"></i>
                                                 </span>
@@ -82,7 +84,8 @@
                                                     type="file" style="display: none;">
                                             </form>
                                             <a onclick="$('#gallery_up').trigger('click');" href="#"
-                                                class="btn btn-primary btn-icon-split  btn-xs rounded-xs" for="gallery_up">
+                                                class="btn btn-primary btn-icon-split  btn-xs rounded-xs"
+                                                for="gallery_up">
                                                 <span class="icon text-white-50">
                                                     <i class="fas fa-image"></i>
                                                 </span>
@@ -91,8 +94,8 @@
                                             <form action="<?php echo base_url(); ?>staff/paket/upload" method="post"
                                                 enctype="multipart/form-data" style="display: inline">
                                                 <input type="hidden" name="id" value="<?php echo $id_paket; ?>">
-                                                <input name="gallery_image[]" onchange='this.form.submit();' id="gallery_up"
-                                                    type="file" style="display: none;" multiple>
+                                                <input name="gallery_image[]" onchange='this.form.submit();'
+                                                    id="gallery_up" type="file" style="display: none;" multiple>
                                             </form>
                                         </span>
 
@@ -171,6 +174,11 @@
                                                     </td>
                                                 </tr>
                                                 <tr>
+                                                    <th>Kategori Paket</th>
+                                                    <td><?php echo $kategori?>
+                                                    </td>
+                                                </tr>
+                                                <tr>
                                                     <th>Tanggal Keberangkatan</th>
                                                     <td><?php echo $tanggal_berangkat != null ? $this->date->convert_date_indo($tanggal_berangkat) : '-'; ?>
                                                     </td>
@@ -180,7 +188,7 @@
                                                     <td><?php echo $tanggal_pulang != null ? $this->date->convert_date_indo($tanggal_pulang) : '-'; ?>
                                                     </td>
                                                 </tr>
-                                                <tr>
+                                                <!-- <tr>
                                                     <th>Negara</th>
                                                     <td><?php echo $negara ; ?>
                                                     </td>
@@ -189,7 +197,7 @@
                                                     <th>Area Trip</th>
                                                     <td><?php echo $area_trip ; ?>
                                                     </td>
-                                                </tr>
+                                                </tr> -->
                                                 <tr>
                                                     <th>Jumlah Pax</th>
                                                     <td><?php echo $jumlah_seat; ?></td>
@@ -238,7 +246,7 @@
                                                     <th>Gallery</th>
                                                     <td>
                                                         <?php foreach ($gallery as $g) { ?>
-                                                            <img src="<?php echo base_url() . $g->gallery_image; ?>" alt=""
+                                                        <img src="<?php echo base_url() . $g->gallery_image; ?>" alt=""
                                                             style="max-width: 150px;" class="me-2">
                                                         <?php }?>
                                                     </td>
@@ -270,7 +278,8 @@
                                             </a>
                                         </div>
                                         <?php if (empty($hotel_info)) { ?>
-                                        <center><span class="text-gray-500 font-italic">Hotel belum ditambahkan</span></center>
+                                        <center><span class="text-gray-500 font-italic">Hotel belum ditambahkan</span>
+                                        </center>
                                         <?php } else { ?>
                                         <div class="row">
                                             <?php foreach ($hotel_info as $htl) { ?>
@@ -288,7 +297,7 @@
                                                                         <span class="text">Hapus</span>
                                                                     </a>
                                                                     <h2><?php echo $htl->nama_hotel; ?></h2>
-                                                                    
+
                                                                 </div>
                                                                 <!-- <div class="mb-0 text-gray-800">The Time :
                                                                     <?php echo $htl->time; ?></div>
@@ -329,24 +338,24 @@
                             </div>
                         </div>
                     </div>
-                    <div class="modal fade" id="hapusModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-                    aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Yakin untuk menghapus hotel?</h5>
-                                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">×</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">Pilih "Ya" untuk menghapus hotel.</div>
-                            <div class="modal-footer">
-                                <button class="btn btn-secondary" type="button" data-dismiss="modal">Batal</button>
-                                <a class="btn btn-primary" id="btnModal">Ya</a>
+                    <div class="modal fade" id="hapusModal" tabindex="-1" role="dialog"
+                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Yakin untuk menghapus hotel?</h5>
+                                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">×</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">Pilih "Ya" untuk menghapus hotel.</div>
+                                <div class="modal-footer">
+                                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Batal</button>
+                                    <a class="btn btn-primary" id="btnModal">Ya</a>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
                     <!-- [ content ] End -->
 
                     <?php $this->load->view('staff/include/footer_view') ?>
@@ -362,11 +371,11 @@
     <script src="<?php echo base_url(); ?>asset/sbadmin2/vendor/jquery/jquery.min.js"></script>
     <?php $this->load->view('staff/include/script_view') ?>
     <script>
-        $(".btnHapus").click(function() {
-            var ref = $(this).attr("href");
-            $("#btnModal").attr("href", ref);
+    $(".btnHapus").click(function() {
+        var ref = $(this).attr("href");
+        $("#btnModal").attr("href", ref);
 
-        });
+    });
     </script>
 </body>
 

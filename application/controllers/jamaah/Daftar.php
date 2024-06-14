@@ -7,11 +7,6 @@ class Daftar extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->load->model('customer');
-        if (!$this->customer->is_user_logged_in()) {
-            $this->alert->toastAlert('red', 'Anda perlu login!');
-            redirect(base_url() . 'jamaah/home');
-        }
     }
 
     public function index()
@@ -35,6 +30,7 @@ class Daftar extends CI_Controller
         $ktp_no = null;
         $userGroup = null;
         $parentMembers = null;
+        $user = null;
         // $this->load->model('agen');
         // if ($_GET['idg'] != null) {
         //     $this->load->library('secret_key');
@@ -45,12 +41,14 @@ class Daftar extends CI_Controller
         // }
 
         $this->load->model('registrasi');
-        $user = $this->registrasi->getUser($_SESSION['id_user']);
-        if ($user->member != null) {
-            foreach ($user->member as $m) {
-                if ($m->id_paket == $_GET['id']) {
-                    $this->alert->toastAlert('red', 'Anda sudah terdaftar di paket ini');
-                    redirect(base_url() . 'jamaah/order/paket_aktif?id=' . $_GET['id'] . '&idm=' . $m->id_member);   
+        if(isset($_SESSION['id_user'])) {
+            $user = $this->registrasi->getUser($_SESSION['id_user']);
+            if ($user->member != null) {
+                foreach ($user->member as $m) {
+                    if ($m->id_paket == $_GET['id']) {
+                        $this->alert->toastAlert('red', 'Anda sudah terdaftar di paket ini');
+                        redirect(base_url() . 'jamaah/order/paket_aktif?id=' . $_GET['id'] . '&idm=' . $m->id_member);   
+                    }
                 }
             }
         }
@@ -156,8 +154,8 @@ class Daftar extends CI_Controller
             $this->alert->toastAlert('red', 'Paket tidak ditemukan');
             redirect($_SERVER['HTTP_REFERER']);
         }
-        $this->form_validation->set_rules('name', 'Nama Depan', 'trim|required|alpha_numeric_spaces', array(
-            'alpha_numeric_spaces' => 'Nama depan tidak boleh mengandung simbol atau karakter khusus'
+        $this->form_validation->set_rules('name', 'Nama Lengkap', 'trim|required|alpha_numeric_spaces', array(
+            'alpha_numeric_spaces' => 'Nama Lengkap tidak boleh mengandung simbol atau karakter khusus'
         ));
         $this->form_validation->set_rules('no_ktp', 'Nomor KTP', 'required');
         $this->form_validation->set_rules('referensi', 'Referensi', 'required');
@@ -216,7 +214,6 @@ class Daftar extends CI_Controller
         unset($_POST['kode_voucher']);
 
         $id_member = $this->registrasi->daftar($_POST, true);
-
         $this->load->model('voucherModel');
         $this->voucherModel->applyVoucher($kodeVoucher, $id_member);
 
@@ -228,7 +225,7 @@ class Daftar extends CI_Controller
         $this->load->model('va_model');
         $this->va_model->createVAOpen($id_member);
         if (!$id_member) {
-            $this->alert->setJamaah('red', 'Ups...', "Gagal melakukan pendaftaran");
+            $this->alert->toastAlert('red', "Ups... Gagal melakukan pendaftaran");
             redirect($_SERVER['HTTP_REFERER']);
         }
         if ($id_member == true && $parent_id != null) {
@@ -319,9 +316,6 @@ class Daftar extends CI_Controller
         $this->load->model('tarif');
         $this->load->model('registrasi');
         $member = $this->registrasi->getMember(null, $_SESSION['id_user']);
-        // echo '<pre>';
-        // print_r($member);
-        // exit();
         $tarif = $this->tarif->getRiwayatBayar($member[0]->id_member);
         // $statusLengkap = true;
         //jika sudah bayar redirect ke home

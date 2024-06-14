@@ -62,4 +62,9 @@
 .fixed-button .btn {
     display: none !important;
 }
+
+.btn-xs {
+    padding: 5px 6px !important;
+    font-size: 12px !important;
+}
 </style>

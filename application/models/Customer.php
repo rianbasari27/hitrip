@@ -184,32 +184,22 @@ class Customer extends CI_Model
     }
 
 
-    public function verifyLoginUser($username, $password) {
+    public function verifyLoginUser($username) {
 
-        $user = $this->log_user_in(['user_id' => $username]);
+        $user = $this->log_user_in(['no_ktp' => $username]);
         if (!$user) {
             $data = [
                 'type' => 'red',
                 'title' => 'Mohon Maaf',
-                'message' => 'Username belum terdaftar',
+                'message' => 'No KTP belum terdaftar',
             ];
             return $data;
         }
-        //verify login
-        if (password_verify($password, $user->password)) {
-            $this->remember_me($username);
+        if ($user) {
             $data = [
                 'type' => 'green',
                 'title' => 'Selamat',
                 'message' => 'Anda berhasil masuk',
-            ];
-            return $data;
-        }
-        if (!password_verify($password, $user->password)) {
-            $data = [
-                'type' => 'red',
-                'title' => 'Mohon Maaf',
-                'message' => 'Password anda salah',
             ];
             return $data;
         }
@@ -280,7 +270,7 @@ class Customer extends CI_Model
     public function is_user_logged_in()
     {
         // check the session
-        if (isset($_SESSION['username'])) {
+        if (isset($_SESSION['no_ktp'])) {
             return true;
         }
 
@@ -341,7 +331,7 @@ class Customer extends CI_Model
         // KEIKUTSERTAAN DALAM PAKET, Hanya ambil data paket yg belum lewat tanggalnya saja
         
         $this->load->model('registrasi');
-        $result = $this->registrasi->getUser(null, $user['user_id']);
+        $result = $this->registrasi->getUser(null, null, null, null, $user['no_ktp']);
         if (!$result) {
             return  false;
         }
@@ -351,6 +341,7 @@ class Customer extends CI_Model
             'username' => $result->username,
             'email' => $result->email,
             'name' => $result->name,
+            'no_ktp' => $result->no_ktp,
             // 'id_member' => $idMember,
             // 'paket' => $paket,
             // 'ktp_no' => $user['user_id'],

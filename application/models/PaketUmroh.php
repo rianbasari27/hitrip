@@ -63,13 +63,19 @@ class PaketUmroh extends CI_Model
             $jumlahSeat = 45;
         }
 
+        if (!empty($data['kategori'])) {
+            $kategori = $data['kategori'];
+        } else {
+            $kategori = 'UMROH';
+        }
+
 
         $insData = array(
             'nama_paket' => $data['nama_paket'],
             'tanggal_berangkat' => $newDate,
             'tanggal_pulang' => $datePulang,
-            'negara' => $data['negara'],
-            'area_trip' => $data['area_trip'],
+            // 'negara' => $data['negara'],
+            // 'area_trip' => $data['area_trip'],
             'jumlah_seat' => $jumlahSeat,
             'banner_image' => $data['banner_image'],
             'detail_promo' => $detail,
@@ -79,6 +85,7 @@ class PaketUmroh extends CI_Model
             'publish' => $publish,
             'default_diskon' => $data['default_diskon'],
             'deskripsi_default_diskon' => $data['deskripsi_default_diskon'],
+            'kategori' => $kategori
 
         );
 
@@ -164,12 +171,18 @@ class PaketUmroh extends CI_Model
             $jumlahSeat = 45;
         }
 
+        if (!empty($data['kategori'])) {
+            $kategori = $data['kategori'];
+        } else {
+            $kategori = 'UMROH';
+        }
+
         $insData = array(
             'nama_paket' => $data['nama_paket'],
             'tanggal_berangkat' => $newDate,
             'tanggal_pulang' => $datePulang,
-            'negara' => $data['negara'],
-            'area_trip' => $data['area_trip'],
+            // 'negara' => $data['negara'],
+            // 'area_trip' => $data['area_trip'],
             'jumlah_seat' => $jumlahSeat,
             'detail_promo' => $detail,
             'harga' => $data['harga'],
@@ -178,6 +191,7 @@ class PaketUmroh extends CI_Model
             'publish' => $publish,
             'default_diskon' => $data['default_diskon'],
             'deskripsi_default_diskon' => $data['deskripsi_default_diskon'],
+            'kategori' => $kategori,
             
         );
 
@@ -383,7 +397,7 @@ class PaketUmroh extends CI_Model
         return $data;
     }
 
-    public function getPackage($id = null, $notExpired = TRUE, $active = false, $curSeasonOnly = false, $month = null, $available = false, $season = null, $area = null, $id_diskon = null)
+    public function getPackage($id = null, $notExpired = TRUE, $active = false, $curSeasonOnly = false, $month = null, $available = false, $season = null, $kategori = null, $id_diskon = null)
     {
         if ($id != null) {
             $this->db->where('id_paket', $id);
@@ -412,8 +426,8 @@ class PaketUmroh extends CI_Model
             $this->db->where('MONTH(tanggal_berangkat)', $month);
         }
 
-        if ($area) {
-            $this->db->where('area_trip', $area);
+        if ($kategori) {
+            $this->db->where('kategori', $kategori);
         }
 
         // $this->db->order_by('tanggal_berangkat', 'ASC');
@@ -531,10 +545,10 @@ class PaketUmroh extends CI_Model
     }
 
     public function getAreaTrip($limit = null) {
-        $this->db->select('area_trip, banner_image');
+        $this->db->select('kategori, banner_image');
         $this->db->from('paket_umroh');
-        $this->db->where('area_trip IS NOT NULL');
-        $this->db->group_by('area_trip');
+        $this->db->where('kategori IS NOT NULL');
+        $this->db->group_by('kategori');
         if ($limit != null) {
             $this->db->limit($limit);
         }

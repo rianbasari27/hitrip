@@ -30,28 +30,30 @@
                 <h1>Area Trip</h1>
             </div>
             <?php if ($area != null) { ?>
-                <?php foreach ($area as $a) { ?>
-                <a href="<?php echo base_url() . 'jamaah/discover/list_area?area=' . $a->area_trip ?>" class="card card-style mb-3" style="background-image:url('<?php echo base_url() . ($a->banner_image != null ? $a->banner_image : "asset/appkit/images/default-banner-image.jpg") ?>')" 
-                    data-card-height="120">
-                    <div class="card-center ps-3">
-                        <h1 class="color-white mb-n1 font-28"><?php echo $a->area_trip ?></h1>
-                        <!-- <p class="color-white opacity-50 mb-0">Parties and Dancing</p> -->
-                    </div>
-                    <!-- <div class="card-center">
+            <?php $no = 0; foreach ($area as $a) {  $no++ ?>
+            <a href="<?php echo base_url() . 'jamaah/discover/list_area?area=' . $a->kategori ?>"
+                class="card card-style mb-3"
+                style="background-image:url('<?php echo base_url() . ($no != 1 ? "asset/appkit/images/banner-hajj.jpg" : "asset/appkit/images/banner-umroh.jpg") ?>')"
+                data-card-height="150">
+                <div class="card-center ps-3">
+                    <h1 class="color-white mb-n1 font-28"><?php echo $a->kategori ?></h1>
+                    <!-- <p class="color-white opacity-50 mb-0">Parties and Dancing</p> -->
+                </div>
+                <!-- <div class="card-center">
                         <span class="icon icon-s float-end bg-theme color-black me-3 rounded-xl"><i class="fa fa-arrow-right"></i></span>
                     </div> -->
-                    <div class="card-overlay bg-gradient opacity-60"></div>
-                </a>
-                <?php } ?>
+                <div class="card-overlay bg-gradient opacity-60"></div>
+            </a>
+            <?php } ?>
             <?php } else { ?>
-                <div class="card card-style">
-                    <div class="content">
-                        <h1>Oops!</h1>
-                        <p>
-                            Tidak dapat menampilkan area trip. Paket belum tersedia.
-                        </p>
-                    </div>
+            <div class="card card-style">
+                <div class="content">
+                    <h1>Oops!</h1>
+                    <p>
+                        Tidak dapat menampilkan area trip. Paket belum tersedia.
+                    </p>
                 </div>
+            </div>
             <?php } ?>
 
             <?php $this->load->view('jamaah/include/footer'); ?>
