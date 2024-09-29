@@ -202,7 +202,7 @@
         <div class="page-title-clear"></div>
 
         <div class="page-content">
-            <div class="card card-style bg-home" data-card-height="300">
+            <!-- <div class="card card-style bg-home" data-card-height="300">
                 <div class="card-bottom ms-3 me-3">
                     <h1 class="font-40 line-height-xl color-white"><?php echo $paket->nama_paket; ?></h1>
                     <p class="color-white opacity-60"><i
@@ -213,16 +213,20 @@
                     </p>
                 </div>
                 <div class="card-overlay bg-gradient"></div>
+            </div> -->
+            <div class="card card-style">
+                <div class="content">
+                    <p class="mb-n1 color-highlight font-600 font-12">Formulir Pendaftaran</p>
+                    <h4>Program dipilih : <?php echo $paket->nama_paket; ?></h4>
+                    <p>
+                        Lengkapi formulir dibawah ini. Pastikan data Anda diinput dengan benar.
+                    </p>
+                </div>
             </div>
 
             <form action="<?php echo base_url(); ?>jamaah/daftar/proses" method="post" id="myForm">
                 <div class="card card-style">
                     <div class="content">
-                        <p class="mb-n1 color-highlight font-600 font-12">Formulir Pendaftaran</p>
-                        <h4><?php echo $paket->nama_paket; ?></h4>
-                        <p>
-                            Lengkapi formulir dibawah ini. Pastikan data Anda diinput dengan benar.
-                        </p>
                         <?php if (isset($_SESSION['alert'])) { ?>
                         <div class="card card-style bg-pink2-light ms-0 me-0 pt-2 pb-0 rounded-0">
                             <ul class="color-white">
@@ -235,83 +239,87 @@
                         <?php } ?>
                         <input type="hidden" name="id_paket" value="<?php echo $paket->id_paket; ?>">
                         <div class="mt-1 mb-3">
-                            <div class="mb-5">
-                                <p class="mb-n1 font-600 color-green-dark">Tipe Kamar</p>
-                                <h1>Pilih Tipe Kamar</h1>
-                                <p class="opacity-60">
-                                    Harga yang dikenakan sesuai dengan jenis kamar yang dipilih.
-                                </p>
-                                <?php $n = 0;
+                            <div>
+                                <h4>Pilih tipe kamar</h4>
+                                <div class="mt-1 mb-3">
+                                    <label class="text-danger mb-4">Notes : Harga yang dikenakan sesuai dengan jenis
+                                        kamar yang dipilih</label>
+                                    <!-- <p class="mb-n1 font-600 color-green-dark">Tipe Kamar</p>
+                                    <h1>Pilih Tipe Kamar</h1>
+                                    <p class="opacity-60">
+                                        Harga yang dikenakan sesuai dengan jenis kamar yang dipilih.
+                                    </p> -->
+                                    <?php $n = 0;
                                 foreach ($paket->availableKamar as $availableKamar) {
                                     $n++; ?>
-                                <div class="form-check icon-check">
-                                    <input class="form-check-input" type="radio" name="pilihan_kamar"
-                                        value="<?php echo $availableKamar; ?>" id="radio<?php echo $n; ?>"
-                                        <?php echo $n == 1 && !isset($_SESSION['form']['pilihan_kamar']) ? 'checked' : ''; ?>
-                                        <?php if (isset($_SESSION['form']['pilihan_kamar'])) {
+                                    <div class="form-check icon-check">
+                                        <input class="form-check-input" type="radio" name="pilihan_kamar"
+                                            value="<?php echo $availableKamar; ?>" id="radio<?php echo $n; ?>"
+                                            <?php echo $n == 1 && !isset($_SESSION['form']['pilihan_kamar']) ? 'checked' : ''; ?>
+                                            <?php if (isset($_SESSION['form']['pilihan_kamar'])) {
                                                                                                                                                                                                                                                                         if ($_SESSION['form']['pilihan_kamar'] == $availableKamar) {
                                                                                                                                                                                                                                                                             echo 'checked';
                                                                                                                                                                                                                                                                         }
                                                                                                                                                                                                                                                                     }
                                                                                                                                                                                                                                                                     ?>>
-                                    <label class="form-check-label font-600" for="radio<?php echo $n; ?>"
-                                        style="font-size: 16px;">
-                                        <?php echo $availableKamar; ?>
-                                        (
-                                        <?php if ($availableKamar == 'Quad') { ?>
-                                        <?php echo "Rp." . number_format($paket->harga, 0, ',', '.') . ",-"; ?>
-                                        <?php } elseif ($availableKamar == 'Triple') { ?>
-                                        <?php echo "Rp." . number_format($paket->harga_triple, 0, ',', '.') . ",-"; ?>
-                                        <?php } elseif ($availableKamar == 'Double') { ?>
-                                        <?php echo "Rp." . number_format($paket->harga_double, 0, ',', '.') . ",-"; ?>
-                                        <?php } ?>
-                                        )
-                                    </label>
-                                    <i class="icon-check-1 far fa-circle color-gray-dark font-16"></i>
-                                    <i class="icon-check-2 far fa-check-circle font-16 color-highlight"></i>
+                                        <label class="form-check-label font-600" for="radio<?php echo $n; ?>"
+                                            style="font-size: 16px;">
+                                            <?php echo $availableKamar; ?>
+                                            (
+                                            <?php if ($availableKamar == 'Quad') { ?>
+                                            <?php echo "Rp." . number_format($paket->harga, 0, ',', '.') . ",-"; ?>
+                                            <?php } elseif ($availableKamar == 'Triple') { ?>
+                                            <?php echo "Rp." . number_format($paket->harga_triple, 0, ',', '.') . ",-"; ?>
+                                            <?php } elseif ($availableKamar == 'Double') { ?>
+                                            <?php echo "Rp." . number_format($paket->harga_double, 0, ',', '.') . ",-"; ?>
+                                            <?php } ?>
+                                            )
+                                        </label>
+                                        <i class="icon-check-1 far fa-circle color-gray-dark font-16"></i>
+                                        <i class="icon-check-2 far fa-check-circle font-16 color-highlight"></i>
+                                    </div>
+                                    <?php } ?>
                                 </div>
-                                <?php } ?>
-                            </div>
 
 
-                        </div>
-                        <?php if (isset($parent_id)) : ?>
-                        <div class="form-group">
-                            <div
-                                class="input-style has-borders no-icon input-style-always-active validate-field mt-4 mb-4">
-                                <input name="referensi" type="tel" class="form-control validate-name upper" id="form9"
-                                    value="<?php echo $jamaah->referensi ?>" readonly>
-                                <label for="form9" class="color-highlight">Referensi <strong class="text-danger">
-                                        *</strong></label>
-                                <i class="fa fa-check valid color-green-dark"></i>
-                                <em></em>
                             </div>
-                            <?php if ($jamaah->referensi != 'Agen') : ?>
-                            <div
-                                class="input-style has-borders no-icon input-style-always-active validate-field mt-4 mb-4">
-                                <input name="office" type="tel" class="form-control validate-name upper" id="form10"
-                                    value="<?php echo $jamaah->office ?>" readonly>
-                                <label for="form10" class="color-highlight">Office</label>
-                                <i class="fa fa-check valid color-green-dark"></i>
-                                <em></em>
-                            </div>
-                            <?php else : ?>
-                            <div
-                                class="input-style has-borders no-icon input-style-always-active validate-field mt-4 mb-4">
-                                <input type="hidden" name="id_agen"
-                                    value="<?php echo $jamaah->member[0]->agen->id_agen ?>">
-                                <input name="agen" type="tel" class="form-control validate-name upper" id="form11"
-                                    value="<?php echo $jamaah->member[0]->agen->nama_agen ?>" readonly>
-                                <label for="form11" class="color-highlight">Nama Konsultan</label>
-                                <i class="fa fa-check valid color-green-dark"></i>
-                                <em></em>
+                            <?php if (isset($parent_id)) : ?>
+                            <div class="form-group">
+                                <div
+                                    class="input-style has-borders no-icon input-style-always-active validate-field mt-4 mb-4">
+                                    <input name="referensi" type="tel" class="form-control validate-name upper"
+                                        id="form9" value="<?php echo $jamaah->referensi ?>" readonly>
+                                    <label for="form9" class="color-highlight">Referensi <strong class="text-danger">
+                                            *</strong></label>
+                                    <i class="fa fa-check valid color-green-dark"></i>
+                                    <em></em>
+                                </div>
+                                <?php if ($jamaah->referensi != 'Agen') : ?>
+                                <div
+                                    class="input-style has-borders no-icon input-style-always-active validate-field mt-4 mb-4">
+                                    <input name="office" type="tel" class="form-control validate-name upper" id="form10"
+                                        value="<?php echo $jamaah->office ?>" readonly>
+                                    <label for="form10" class="color-highlight">Office</label>
+                                    <i class="fa fa-check valid color-green-dark"></i>
+                                    <em></em>
+                                </div>
+                                <?php else : ?>
+                                <div
+                                    class="input-style has-borders no-icon input-style-always-active validate-field mt-4 mb-4">
+                                    <input type="hidden" name="id_agen"
+                                        value="<?php echo $jamaah->member[0]->agen->id_agen ?>">
+                                    <input name="agen" type="tel" class="form-control validate-name upper" id="form11"
+                                        value="<?php echo $jamaah->member[0]->agen->nama_agen ?>" readonly>
+                                    <label for="form11" class="color-highlight">Nama Konsultan</label>
+                                    <i class="fa fa-check valid color-green-dark"></i>
+                                    <em></em>
+                                </div>
+                                <?php endif; ?>
                             </div>
                             <?php endif; ?>
                         </div>
-                        <?php endif; ?>
                     </div>
                 </div>
-
                 <?php if (isset($parent_id)) : ?>
                 <div class="card card-style">
                     <div class="content">
@@ -449,7 +457,8 @@
                                 <label for="select" class="color-highlight">Jenis Kelamin <strong class="text-danger">
                                         *</strong></label>
                                 <select name="jenis_kelamin" id="form-9">
-                                    <option class="color-dark-dark" value="" disabled selected>-- Pilih Jenis Kelamin --
+                                    <option class="color-dark-dark" value="" disabled selected>-- Pilih Jenis
+                                        Kelamin --
                                     </option>
                                     <option class="color-dark-dark" value="L">LAKI-LAKI
                                     </option>
@@ -463,7 +472,8 @@
                             </div>
 
                             <div class="input-style has-borders no-icon input-style-always-active validate-field mb-4">
-                                <label class="color-highlight">Referensi <strong class="text-danger"> *</strong></label>
+                                <label class="color-highlight">Referensi <strong class="text-danger">
+                                        *</strong></label>
                                 <select name="referensi" class="form-control" id="slct" onchange="showOnChange(event)">
                                     <option class="color-dark-dark"
                                         value="<?php echo isset($_SESSION['form']['referensi']) ? $_SESSION['form']['referensi'] : ''; ?>"
@@ -537,7 +547,7 @@
                         </div>
                         <?php else : ?>
                         <a href="#" data-menu="menu-option-2"
-                            class="btn btn-full btn-m bg-highlight rounded-s font-13 font-600 mt-4">Berikutnya</a>
+                            class="btn btn-full btn-m bg-highlight rounded-s font-13 font-600 mt-4">Daftar Sekarang</a>
                         <?php endif; ?>
 
                     </div>

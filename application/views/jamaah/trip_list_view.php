@@ -42,7 +42,8 @@
                         <div>
                             <?php if ($paket != null) { ?>
                             <?php foreach ($paket as $pkt) { ?>
-                            <a href="<?php echo base_url() . 'jamaah/detail_paket?id=' . $pkt->id_paket ?>" class="card card-style my-3" aria-label="<?php echo $pkt->nama_paket ?>"
+                            <a href="<?php echo base_url() . 'jamaah/detail_paket?id=' . $pkt->id_paket ?>"
+                                class="card card-style my-3" aria-label="<?php echo $pkt->nama_paket ?>"
                                 data-filter-item
                                 data-filter-name="<?php echo strtolower($pkt->nama_paket . ' ' . $pkt->area_trip) ?>">
                                 <div class="d-flex content">
@@ -94,14 +95,14 @@
                             <img src="<?php echo $p->banner_image != null ? base_url() . $p->banner_image : base_url() . 'asset/appkit/images/default-banner-image.jpg' ?>"
                                 class="img-fluid">
                             <div class="p-2 bg-theme rounded-sm">
-                                <div class="mb-n1">
+                                <!-- <div class="mb-n1">
                                     <?php for ($i = 1; $i <= $p->star; $i++) { ?>
                                     <i class="fa-solid fa-star color-yellow-dark"></i>
                                     <?php } ?>
                                     <?php for ($i = 1; $i <= (5 - $p->star); $i++) { ?>
                                     <i class="fa-solid fa-star color-gray-dark"></i>
                                     <?php } ?>
-                                </div>
+                                </div> -->
                                 <h4 class="font-15 pt-1 line-height-s pb-0 mb-0"><?php echo $p->nama_paket ?></h4>
                                 <!-- <span class="font-10 mb-0">7 Nights - All Inclusive</span> -->
                                 <?php if ($p->default_diskon != 0) { ?>

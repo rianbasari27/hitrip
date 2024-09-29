@@ -1588,4 +1588,19 @@ class Registrasi extends CI_Model
         return $data ;
 
     }
+
+    public function getVerifiedDokumen($id_member) {
+        $member = $this->db->select('paspor_name, paspor_no, paspor_issue_date, paspor_expiry_date, paspor_issuing_city,
+                        paspor_scan, ktp_scan, foto_scan, kk_scan')->where('id_member', $id_member)
+                        ->get('program_member')->row();
+        
+        $dokumen = 1;
+        foreach ($member as $m) {
+            if ($m == null || $m == '') {
+                $dokumen = 0 ;
+                break;
+            }
+        }
+        return $dokumen;
+    }
 }

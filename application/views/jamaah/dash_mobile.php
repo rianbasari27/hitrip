@@ -226,14 +226,14 @@
                                 <img src="<?php echo base_url() . ($p->banner_image != null ? $p->banner_image : 'asset/appkit/images/default-banner-image.jpg') ?>"
                                     class="img-fluid" alt="">
                                 <div class="p-2 bg-theme rounded-sm">
-                                    <div class="mb-n1">
+                                    <!-- <div class="mb-n1">
                                         <?php for ($i = 1; $i <= $p->star; $i++) { ?>
                                         <i class="fa-solid fa-star color-yellow-dark"></i>
                                         <?php } ?>
                                         <?php for ($i = 1; $i <= (5 - $p->star); $i++) { ?>
                                         <i class="fa-solid fa-star color-gray-dark"></i>
                                         <?php } ?>
-                                    </div>
+                                    </div> -->
                                     <h4 class="font-15 pt-1 line-height-s pb-0 mb-0"><?php echo $p->nama_paket ?></h4>
                                     <!-- <span class="font-10 mb-0">7 Nights - All Inclusive</span> -->
                                     <?php if ($p->default_diskon != 0) { ?>
@@ -260,14 +260,14 @@
                         <img src="<?php echo base_url() . ($p->banner_image != null ? $p->banner_image : 'asset/appkit/images/default-banner-image.jpg') ?>"
                             class="card-img-top" alt="">
                         <div class="card-body bg-theme rounded-sm">
-                            <div class="mb-n1">
+                            <!-- <div class="mb-n1">
                                 <?php for ($i = 1; $i <= $p->star; $i++) { ?>
                                 <i class="fa-solid fa-star color-yellow-dark"></i>
                                 <?php } ?>
                                 <?php for ($i = 1; $i <= (5 - $p->star); $i++) { ?>
                                 <i class="fa-solid fa-star color-gray-dark"></i>
                                 <?php } ?>
-                            </div>
+                            </div> -->
                             <h4 class="card-title font-16 pt-1 line-height-s pb-0 mb-n1"><?php echo $p->nama_paket ?>
                             </h4>
                             <!-- <span class="font-10 mb-0">7 Nights - All Inclusive</span> -->

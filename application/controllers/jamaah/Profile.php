@@ -23,6 +23,7 @@ class Profile extends CI_Controller
         }
         $this->load->model('registrasi');
         $data = $this->registrasi->getUser($_SESSION['id_user']);
+        $data->updateDokumen = $this->registrasi->getVerifiedDokumen($data->member[0]->id_member);
         $this->load->view('jamaah/profile_view', $data);
     }
 
@@ -52,6 +53,50 @@ class Profile extends CI_Controller
             redirect(base_url('jamaah/profile'));
         }
         
+    }
+
+    public function edit_data() {
+        $this->load->model('registrasi');
+        $data = $this->registrasi->getUser($_SESSION['id_user']);
+        if (!isset($data->member[0])){
+            $this->alert->toastAlert('red', 'Anda belum terdaftar pada program');
+            redirect($_SERVER['HTTP_REFERER']);
+        }
+        // echo '<pre>';
+        // print_r($data);
+        // exit();
+        $this->load->view('jamaah/edit_data_view', $data->member[0]);
+    }
+
+    public function proses_edit_data() {
+        $this->form_validation->set_rules('id_member', 'id_member', 'required|trim|numeric');
+        if ($this->form_validation->run() == FALSE) {
+            $this->alert->toastAlert('red', 'Anda belum terdaftar pada program');
+            redirect(base_url() . 'jamaah/profile');
+        }
+        $data = $_POST;
+        if (!empty($_FILES['paspor_scan']['name'])) {
+            $data['files']['paspor_scan'] = $_FILES['paspor_scan'];
+        }
+        if (!empty($_FILES['ktp_scan']['name'])) {
+            $data['files']['ktp_scan'] = $_FILES['ktp_scan'];
+        }
+        if (!empty($_FILES['foto_scan']['name'])) {
+            $data['files']['foto_scan'] = $_FILES['foto_scan'];
+        }
+        if (!empty($_FILES['kk_scan']['name'])) {
+            $data['files']['kk_scan'] = $_FILES['kk_scan'];
+        }
+
+        $this->load->model('registrasi');
+        $result = $this->registrasi->updateMember($data);
+        if ($result) {
+            $this->alert->toastAlert('green', 'Data berhasil diupdate');
+            redirect(base_url() . 'jamaah/profile');
+        } else {
+            $this->alert->toastAlert('red', 'Mohon maaf, terjadi kesalahan pada database');
+            redirect($_SERVER['HTTP_REFERER']);
+        }
     }
 
     public function pic_ganti() {
